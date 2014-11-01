@@ -13,7 +13,9 @@ gem 'sdoc', '~> 0.4.0',         group: :doc
 gem 'spring',                   group: :development
 
 
+gem 'annotate'
 gem 'capistrano-rails',         group: :development
+gem 'devise'
 gem 'jquery-turbolinks'
 gem 'quiet_assets'
 gem 'ruby-units'
