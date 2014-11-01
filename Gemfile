@@ -16,6 +16,7 @@ gem 'spring',                   group: :development
 gem 'capistrano-rails',         group: :development
 gem 'jquery-turbolinks'
 gem 'quiet_assets'
+gem 'ruby-units'
 gem 'unicorn'
 gem 'unicorn-rails'
 
