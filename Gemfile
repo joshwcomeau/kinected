@@ -24,13 +24,18 @@ gem 'unicorn-rails'
 
 
 group :development, :test do 
-  gem 'rspec-rails' 
   gem 'factory_girl_rails' 
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'rspec-rails' 
 end 
 
 group :test do 
-  gem 'faker' 
   gem 'capybara' 
+  gem 'capybara-webkit'  
+  gem 'database_cleaner'
+  gem 'faker'   
   gem 'guard-rspec' 
   gem 'launchy' 
+  gem 'selenium-webdriver'
 end

@@ -21,6 +21,12 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   it "gets saved with a valid email and password" do
-    user = User.new(email: )
+    user = User.new(email: 'james@dean.com', password: '12345678')
+    expect(user.save).to eq(true)
+  end
+
+  it "doesn't get saved when the password is too short" do
+    user = User.new(email: 'james@dean.com', password: '123')
+    expect(user.save).to eq(false)
   end
 end
