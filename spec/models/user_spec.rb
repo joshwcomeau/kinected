@@ -69,7 +69,12 @@ RSpec.describe User, :type => :model do
     expect(admin.role).to eq("admin")
   end
 
-  it "sends a confirmation email upon successful signup" do
+  it "can save associated ethnicities" do
+    user = build(:user)
+    user.ethnicities << Ethnicity.create(name: 'Asian')
+    user.ethnicities << Ethnicity.create(name: 'White')
 
+    expect(user.save).to eq(true)
+    expect(user.ethnicities.count).to eq(2)
   end
 end
