@@ -23,6 +23,10 @@
     <%= f.date_field :birthdate %>
   </div>
 
+  <div>
+    <%= collection_check_boxes(:user, :ethnicity_ids, Ethnicity.all, :id, :name) %>
+  </div>
+
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
