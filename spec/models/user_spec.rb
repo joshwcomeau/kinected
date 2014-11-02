@@ -48,6 +48,7 @@ RSpec.describe User, :type => :model do
   it "doesn't get saved when the password is too short" do
     user = build(:user, password: '123')
     expect(user.save).to eq(false)
+    expect(user.errors[:password]).to include("is too short (minimum is 8 characters)")
   end
 
   it "doesn't get saved when the email isn't unique" do
@@ -55,6 +56,7 @@ RSpec.describe User, :type => :model do
     user2 = build(:user, email: 'john@doe.com')
 
     expect(user2.save).to eq(false)
+    expect(user2.errors[:email]).to include("has already been taken")
   end
 
   it "has a default role of 'dater', and can be set to 'concierge' or 'admin'" do
