@@ -29,4 +29,8 @@ RSpec.describe User, :type => :model do
     user = User.new(email: 'james@dean.com', password: '123')
     expect(user.save).to eq(false)
   end
+
+  it "sends a confirmation email upon successful signup" do
+    
+  end
 end

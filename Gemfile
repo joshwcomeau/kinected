@@ -16,6 +16,7 @@ gem 'spring',                   group: :development
 gem 'annotate'
 gem 'capistrano-rails',         group: :development
 gem 'devise'
+gem 'geocoder'
 gem 'jquery-turbolinks'
 gem 'quiet_assets'
 gem 'ruby-units'
