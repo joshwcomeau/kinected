@@ -15,10 +15,13 @@ gem 'spring',                   group: :development
 
 gem 'annotate'
 gem 'capistrano-rails',         group: :development
+gem 'carrierwave'
 gem 'devise'
 gem 'geocoder'
 gem 'jquery-turbolinks'
+gem 'neat'                              # Bourbon grid system.
 gem 'quiet_assets'
+gem 'rmagick', require: 'RMagick' 
 gem 'ruby-units'
 gem 'unicorn'
 gem 'unicorn-rails'

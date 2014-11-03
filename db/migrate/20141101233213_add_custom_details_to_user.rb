@@ -29,7 +29,5 @@ class AddCustomDetailsToUser < ActiveRecord::Migration
     add_column :users, :work_industry, :integer
     add_column :users, :wants_kids, :integer
     add_column :users, :relationship_status, :integer
-
-    # To add: Photos, Ethnicities via has_many association
   end
 end

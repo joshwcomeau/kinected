@@ -1,0 +1,28 @@
+// Some basic project-wide styles
+
+@import 'variables';
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: $navy;
+}
+
+.wrapper {
+  @include outer-container;
+
+  // main sidebar
+  & > aside {
+    @include span-columns(3);
+
+    background: lighten($navy, 10%);
+    border-radius: 0.5rem 0 0 0.5rem;
+    margin-top: 0.5rem;
+    height: 400px;
+
+  }
+
+  // main content
+  & > section {
+    @include span-columns(9);
+  }
+}
