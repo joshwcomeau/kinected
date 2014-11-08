@@ -13,33 +13,31 @@ gem 'sdoc', '~> 0.4.0',         group: :doc
 gem 'spring',                   group: :development
 
 
-gem 'annotate'
-gem 'capistrano-rails',         group: :development
-gem 'carrierwave'
-gem 'devise'
-gem 'geocoder'
-gem 'jquery-turbolinks'
-gem 'neat'                              # Bourbon grid system.
-gem 'quiet_assets'
-gem 'rmagick', require: 'RMagick' 
-gem 'ruby-units'
-gem 'unicorn'
-gem 'unicorn-rails'
-
+gem 'annotate'                                                # Provides Schema-like annotations on the models' rb files.
+gem 'capistrano-rails',         group: :development           # Deployment. Probably going to be removed.
+gem 'carrierwave'                                             # File and image processing and storing, wraps rmagick.
+gem 'devise'                                                  # User authentication.
+gem 'geocoder'                                                # Gets latitude and longitude from postal codes.
+gem 'jquery-turbolinks'                                       # Makes $(document).ready() play nice with Turbolinks.
+gem 'neat'                                                    # Bourbon grid system. Installs bourbon gem as well, as a dependency.
+gem 'puma'                                                    # App server. Use this instead of WEBrick.
+gem 'quiet_assets'                                            # Hides asset stuff from the console.
+gem 'rmagick', require: 'RMagick'                             # Image processing for resizing and conversion and such.
+gem 'ruby-units'                                              # IGNORE THE DEPRECATION WARNING ON BUNDLE. I'm just using it to convert cm to ft/in
 
 group :development, :test do 
-  gem 'factory_girl_rails' 
-  gem 'pry'
-  gem 'pry-byebug'
-  gem 'rspec-rails' 
+  gem 'factory_girl_rails'          # Provides factories for quick creation during tests.
+  gem 'faker'                       # Provides quick data for seeds and tests
+  gem 'pry'                         # Alternative console, allows for JS-style breakpoints.
+  gem 'pry-byebug'                  # A Pry augmentor, provides convenience methods like 'next'.
+  gem 'rspec-rails'                 # Testing framework. Better than what's included with Rails.
 end 
 
 group :test do 
-  gem 'capybara' 
-  gem 'capybara-webkit'  
-  gem 'database_cleaner'
-  gem 'faker'   
-  gem 'guard-rspec' 
-  gem 'launchy' 
-  gem 'selenium-webdriver'
+  gem 'capybara'                    # Used for feature (browser-based) tests.
+  gem 'capybara-webkit'             # Allows feature tests to run in a headless webkit state. Faster, but you can't see the magic.
+  gem 'database_cleaner'            # Wipes the database between tests.
+  gem 'guard-rspec'                 # Watches files for automated test running.
+  gem 'launchy'                     # Launches a browser to show the state of a feature test. Useful for debugging
+  gem 'selenium-webdriver'          # Allows feature tests to run in the browser. Slower, but you can see the magic.
 end
