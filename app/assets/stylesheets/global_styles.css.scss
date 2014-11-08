@@ -13,16 +13,29 @@ body {
   // main sidebar
   & > aside {
     @include span-columns(3);
+    @include omega;
 
-    background: lighten($navy, 10%);
-    border-radius: 0.5rem 0 0 0.5rem;
-    margin-top: 0.5rem;
-    height: 400px;
+    h2 {
+      color: $green;
+      font-size: 2rem;
+      text-align: center;
+    }
 
+    nav {
+      background: lighten($navy, 10%);
+      border-radius: 0.5rem 0 0 0.5rem;
+      margin-top: 2.5rem;
+      height: 400px;  
+    }
+
+    
   }
 
   // main content
   & > section {
     @include span-columns(9);
+    background: #f3f5f9;
+    margin-top: 0.5rem;
+    height: 800px;
   }
 }
