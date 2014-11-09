@@ -46,7 +46,7 @@
   .registration-paragraph {
     text-align: justify;
   }
-  input {
+  input, button {
     color: #000;
   }
   input[type=radio] {
@@ -124,14 +124,44 @@
     font-weight: 400;
     padding: 0.4rem;
 
-
-
     .form-label {
       line-height: 34px;
     }
-
   }
 
+  .next-button-div {
+    width: 90%;
+    margin: 0 auto;
+    text-align: right;
+
+    button {
+      font-weight: 700;
+      color: #FFF;
+      background: $teal;
+      border-radius: 3px;
+      border: 0;
+      cursor: pointer;
+      vertical-align: middle;
+      outline: 0;
+      font-size: 1.2em;
+      background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0)),to(rgba(0,0,0,.1)));
+      background-image: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
+      background-image: -moz-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
+      background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
+      // border-top: 1px solid lighten($teal, 5%);
+      // border-bottom: 2px solid darken($teal, 10%); 
+      // box-shadow: 0 1 0 1px rgba(255,255,255,.2) inset;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+    }
+  }
+
+  .help-block {
+    margin: 0;
+    margin-top: 0.4rem;
+    text-align: center;
+    color: #F44;
+    font-size: 0.9em;
+  }
 
 }
 .full-width {
@@ -145,13 +175,25 @@
   margin-right: 3%;
 }
 .third-width {
-  width: 33%;
+  width: 34%;
 }
 .third-width-spaced {
   width: 30%;
   margin-right: 3%;
 }
-// Form row for non-mobile
+
+// Mobile styles
+@media screen and (min-width: 300px) {
+  .next-button-div {
+    padding: 1rem 0;
+    button {
+      width: 100%;
+      padding: 0.5rem 2rem;
+    }
+  }
+}
+
+// Non-mobile styles
 @media screen and (min-width:480px) {
   .form-row {
     display: flex;
@@ -163,6 +205,14 @@
     }
     .form-input {
       flex: 1;
+    }
+  }
+
+  .next-button-div  {
+
+    button {
+      width: auto !important;
+      padding: 0.5rem 4rem;
     }
   }
 }
