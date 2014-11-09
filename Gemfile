@@ -14,7 +14,7 @@ gem 'spring',                   group: :development
 
 gem 'angularjs-rails'                                         # Simple Angular wrapper for Rails
 gem 'annotate'                                                # Provides Schema-like annotations on the models' rb files.
-gem 'capistrano-rails',         group: :development           # Deployment. Probably going to be removed.
+# gem 'capistrano-rails',         group: :development           # Deployment. Probably going to be removed.
 gem 'carrierwave'                                             # File and image processing and storing, wraps rmagick.
 gem 'devise'                                                  # User authentication.
 gem 'geocoder'                                                # Gets latitude and longitude from postal codes.
@@ -40,4 +40,8 @@ group :test do
   gem 'guard-rspec'                 # Watches files for automated test running.
   gem 'launchy'                     # Launches a browser to show the state of a feature test. Useful for debugging
   gem 'selenium-webdriver'          # Allows feature tests to run in the browser. Slower, but you can see the magic.
+end
+
+group :production do
+  gem 'shelly-dependencies'         # Convenience gem that sets up dependencies or deploying to ShellyCloud
 end
