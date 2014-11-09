@@ -14,7 +14,6 @@ gem 'spring',                   group: :development
 
 gem 'angularjs-rails'                                         # Simple Angular wrapper for Rails
 gem 'annotate'                                                # Provides Schema-like annotations on the models' rb files.
-# gem 'capistrano-rails',         group: :development           # Deployment. Probably going to be removed.
 gem 'carrierwave'                                             # File and image processing and storing, wraps rmagick.
 gem 'devise'                                                  # User authentication.
 gem 'geocoder'                                                # Gets latitude and longitude from postal codes.
