@@ -23,6 +23,8 @@ gem 'puma'                                                    # App server. Use 
 gem 'quiet_assets'                                            # Hides asset stuff from the console.
 gem 'rmagick', require: 'RMagick'                             # Image processing for resizing and conversion and such.
 gem 'ruby-units'                                              # IGNORE THE DEPRECATION WARNING ON BUNDLE. I'm just using it to convert cm to ft/in
+gem 'underscore-rails'                                        # Simple wrapper for the Underscore JS library.
+
 
 group :development, :test do 
   gem 'factory_girl_rails'          # Provides factories for quick creation during tests.
