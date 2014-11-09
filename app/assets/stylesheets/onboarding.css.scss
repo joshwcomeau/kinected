@@ -49,6 +49,38 @@
   input {
     color: #000;
   }
+  input[type=radio] {
+    display: none;
+  }  
+  input[type=text], input[type=email], input[type=number] {
+    font-weight: 300;
+    border: 1px solid #555;
+    border-radius: 3px;
+    padding: 0.4rem;
+    outline: none;
+
+    &.ng-valid.ng-dirty {
+      border-bottom: 3px solid #93AE29;
+    }
+    &.ng-invalid.ng-dirty {
+      border-bottom: 3px solid #D41E18;
+    }
+  }
+  .sex-select {
+    text-align: center;
+    display: inline-block;
+    background: lighten($verydarkgrey, 6%);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &.selected {
+      background: #93AE29 !important;
+      color: #222;
+      transition: 0.2s;
+    }
+  }
 
   .form-section-heading {
     color: #F4EFEF;
@@ -86,13 +118,17 @@
   }
   .form-row {
     font-weight: 400;
-    padding: 0.6rem;
+    padding: 0.4rem;
+
+
 
     .form-label {
 
     }
 
   }
+
+
 }
 .full-width {
   width: 100%;
@@ -100,9 +136,16 @@
 .half-width {
   width: 50%;
 }
-.half-width-first {
-  width: 48%;
-  margin-right: 2%;
+.half-width-spaced {
+  width: 47%;
+  margin-right: 3%;
+}
+.third-width {
+  width: 33%;
+}
+.third-width-spaced {
+  width: 30%;
+  margin-right: 3%;
 }
 // Form row for non-mobile
 @media screen and (min-width:480px) {

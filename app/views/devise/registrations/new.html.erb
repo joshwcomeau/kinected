@@ -7,7 +7,7 @@
   </div>
 </header>
 
-<div class="onboard-wrapper">
+<div class="onboard-wrapper" ng-controller="UserRegistrationController as user">
   <p class="registration-paragraph">You can register for an account below, we just need some basic information from you. More introductory text goes here, talking about maybe the fee involved, or the perks of signing up?</p>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -19,20 +19,28 @@
     <fieldset>
       <div class="form-row">
         <div class="form-label"><%= f.label :first_name, "Your Name" %></div>
-        <div class="form-input"><%= f.text_field :first_name, autofocus: true, placeholder: 'First Name', class: 'half-width-first' %><%= f.text_field :last_name, placeholder: 'Last Name', class: 'half-width' %></div> 
+        <div class="form-input">
+          <%= f.text_field :first_name, autofocus: true, placeholder: 'First Name', class: 'half-width-spaced', "ng-model" => 'user.first_name' %><!--  
+       --><%= f.text_field :last_name, placeholder: 'Last Name', class: 'half-width', "ng-model" => 'user.last_name' %>
+        </div> 
+      </div>
+
+      <div class="form-row">
+        <div class="form-label">Your Birthdate</div>
+        <div class="form-input">
+          <%= number_field_tag "birthdate_month", nil, class: 'third-width-spaced', placeholder: 'MM', in: 1..12, "ng-model" => 'user.birthdate.month' %><!--  
+       --><%= number_field_tag "birthdate_day", nil, class: 'third-width-spaced', placeholder: 'DD', in: 1..31, "ng-model" => 'user.birthdate.day' %><!--  
+       --><%= number_field_tag "birthdate_year", nil, class: 'third-width', placeholder: 'YYYY', in: 1901..2014, "ng-model" => 'user.birthdate.year' %><!--  
+       -->
+        </div>
       </div>
 
       <div class="form-row">
         <div class="form-label">Your Gender</div>
         <div class="form-input">
-          <%= f.radio_button :sex, "male" %><%= f.label :sex_male, "Male" %>
-          <%= f.radio_button :sex, "female" %><%= f.label :sex_female, "Female" %>
+          <%= f.radio_button :sex, "male", "ng-model" => 'user.sex' %><%= f.label :sex_male, "Male", class: 'half-width-spaced sex-select', 'ng-class' => '{selected: user.sex==="male"}' %><!--
+       --><%= f.radio_button :sex, "female", "ng-model" => 'user.sex' %><%= f.label :sex_female, "Female", class: 'half-width sex-select', 'ng-class' => '{selected: user.sex==="female"}' %>
         </div> 
-      </div>
-
-      <div class="form-row">
-        <div class="form-label"><%= f.label :birthdate, "Date of Birth" %></div>
-        <div class="form-input"><%= f.date_field :birthdate, class: 'full-width' %></div>
       </div>
 
       <div class="form-row">
