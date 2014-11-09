@@ -4,7 +4,12 @@
 
 body {
   font-family: 'Lato', sans-serif;
-  background: $navy;
+  font-weight: 300;
+  padding: 0;
+}
+
+.bg-teal {
+  background: shade($teal, 10%);
 }
 
 .wrapper {
@@ -22,10 +27,8 @@ body {
     }
 
     nav {
-      background: lighten($navy, 10%);
-      border-radius: 0.5rem 0 0 0.5rem;
       margin-top: 2.5rem;
-      height: 400px;  
+      min-height: 400px;  
     }
 
     

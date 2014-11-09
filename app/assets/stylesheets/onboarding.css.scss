@@ -1,0 +1,76 @@
+// The sign-up process is its own thing, pretty much.
+
+@import 'variables';
+
+.onboarding_body {
+  background: $verydarkgrey;
+  color: #EEE;
+
+  .bg-teal {
+    padding: 2rem 0 1rem 0;
+    border-bottom: 4px solid shade($teal, 40%)
+  }
+
+  // The teal header, above the registration form.
+  header {
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+      padding: 0;
+      padding-bottom: 1.2rem;
+    }
+
+    h3 {
+      margin: 0 0 1.5rem 0;
+      color: #6DD1C5; 
+      font-size: 1.2em;
+      line-height: 1.5em;
+    }
+
+    strong {
+      color: #FAD08D;
+    }
+  }
+
+  // Two of these exist: Inside the teal header, and below it, wrapping main content.
+  .onboard-wrapper {
+    // For mobile and tablet views we want it to take up pretty much the whole width.
+    // For large laptops and desktops, we want it to be a fixed, centered chunk.
+    width: 100%;
+    max-width: 900px;   
+    position: relative;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+
+  input {
+    color: #000;
+  }
+
+  .form-section-heading {
+    color: #F4EFEF;
+    line-height: 42px;
+    font-size: 1.5em;
+
+
+    // Every section heading is going to have a circled number prefacing it. We're doing it with a 
+    // before pseudoelement.
+    &:before {
+      content: attr(data-number);
+      position: relative;
+      width: 32px;
+      height: 32px;
+      line-height: 30px;
+      display: block;
+      float: left;
+      margin-right: 1rem;
+      padding: 5px;
+      text-align: center;
+      font-weight: bold;
+
+      border: 1px solid #9CB1B6;
+      border-radius: 100%;
+    }
+  }
+}

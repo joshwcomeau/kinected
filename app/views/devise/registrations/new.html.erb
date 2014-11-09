@@ -1,33 +1,48 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div>
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<header class="bg-teal">
+  <div class="onboard-wrapper">
+    <h1>Welcome Aboard!</h1>
+    <h3>
+      <strong>Congrats!</strong> We've determined that you're an ideal candidate for Kinected.
+    </h3>
   </div>
+</header>
 
-  <div>
-    <%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+<div class="onboard-wrapper">
+  <p>You can register for an account below, we just need some basic information from you. More introductory text goes here, talking about maybe the fee involved, or the perks of signing up?</p>
 
-  <div>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+  <h4 class="form-section-heading" data-number="1">Basic Information</h4>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div>
-    <%= f.label :birthdate %><br>
-    <%= f.date_field :birthdate %>
-  </div>
+    <p class="form_sentence">
+      
+    </p>
+    <div>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true %>
+    </div>
 
-  <div>
-    <%= collection_check_boxes(:user, :ethnicity_ids, Ethnicity.all, :id, :name) %>
-  </div>
+    <div>
+      <%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
 
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+    <div>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div>
+      <%= f.label :birthdate %><br>
+      <%= f.date_field :birthdate %>
+    </div>
+
+    <div>
+      <%= collection_check_boxes(:user, :ethnicity_ids, Ethnicity.all, :id, :name) %>
+    </div>
+
+    <div><%= f.submit "Sign up" %></div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>
