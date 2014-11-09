@@ -36,6 +36,10 @@ function UserRegistrationController() {
 UserRegistrationController.prototype.validateStep = function(step_num, e) {
   var step = "step"+step_num;
 
+  // First, deal with stopping the default form submission if the form isn't valid
+  if ( e && this.registration_form.$invalid ) { e.preventDefault(); }
+
+
   // Reset our validation flag. We can't use Angular's built-in one, because we're using
   // a multi-stage form. We're not actually submitting the form, just a fieldset.
   this.state_status[step].valid = true;
@@ -47,11 +51,9 @@ UserRegistrationController.prototype.validateStep = function(step_num, e) {
   // Mark this form as having been submitted
   this.state_status[step].submitted = true;
 
-  // Is this the final step?
-  if ( this.current_step === this.num_of_steps ) {
-    // If it's invalid, prevent the default (submitting) behavior.
-    if ( this.registration_form.$invalid ) { e.preventDefault(); }
-  } else {
+
+
+  if ( this.current_step !== this.num_of_steps ) {
     // If this step is valid, let's progress to the next.
     if ( this.state_status[step].valid ) {
       this.current_step++;

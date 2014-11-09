@@ -4,7 +4,7 @@ describe ProfilePhotoUploader do
   include CarrierWave::Test::Matchers
 
   before do
-    @sample_path = '/Users/house/work/kinected/app/assets/images/samples/sample1.jpg'
+    @sample_path = '/Users/joshu/work/kinected/app/assets/images/samples/sample1.jpg'
     @photo = ProfilePhoto.create
     ProfilePhotoUploader.enable_processing = true
     @uploader = ProfilePhotoUploader.new(@photo, :photo_object)
