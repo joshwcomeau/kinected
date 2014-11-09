@@ -47,4 +47,5 @@ class User < ActiveRecord::Base
 
 
   enum role: [ :dater, :concierge, :admin ]
+  enum sex: [ :male, :female ]
 end

@@ -2,6 +2,10 @@
 
 @import 'variables';
 
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Lato', sans-serif;
   font-weight: 300;

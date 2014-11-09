@@ -22,13 +22,13 @@
 
     h3 {
       margin: 0 0 1.5rem 0;
-      color: #6DD1C5; 
+      color: lighten(#6DD1C5, 10%); 
       font-size: 1.2em;
       line-height: 1.5em;
     }
 
     strong {
-      color: #FAD08D;
+      color: $gold;
     }
   }
 
@@ -37,13 +37,15 @@
     // For mobile and tablet views we want it to take up pretty much the whole width.
     // For large laptops and desktops, we want it to be a fixed, centered chunk.
     width: 100%;
-    max-width: 900px;   
+    max-width: 700px;   
     position: relative;
     margin: 0 auto;
     padding: 1rem;
   }
 
-
+  .registration-paragraph {
+    text-align: justify;
+  }
   input {
     color: #000;
   }
@@ -51,7 +53,7 @@
   .form-section-heading {
     color: #F4EFEF;
     line-height: 42px;
-    font-size: 1.5em;
+    font-size: 1.3em;
 
 
     // Every section heading is going to have a circled number prefacing it. We're doing it with a 
@@ -59,8 +61,8 @@
     &:before {
       content: attr(data-number);
       position: relative;
-      width: 32px;
-      height: 32px;
+      width: 42px;
+      height: 42px;
       line-height: 30px;
       display: block;
       float: left;
@@ -68,9 +70,53 @@
       padding: 5px;
       text-align: center;
       font-weight: bold;
+      color: $gold;
 
       border: 1px solid #9CB1B6;
       border-radius: 100%;
     }
   }
+  fieldset {
+    border: 0;
+    width: 90%;
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin: 0 auto;
+    background: lighten($verydarkgrey, 10%);
+  }
+  .form-row {
+    font-weight: 400;
+    padding: 0.6rem;
+
+    .form-label {
+
+    }
+
+  }
 }
+.full-width {
+  width: 100%;
+}
+.half-width {
+  width: 50%;
+}
+.half-width-first {
+  width: 48%;
+  margin-right: 2%;
+}
+// Form row for non-mobile
+@media screen and (min-width:480px) {
+  .form-row {
+    display: flex;
+
+    .form-label {
+      padding-right: 1rem;
+      text-align: right;
+      flex-basis: 160px;
+    }
+    .form-input {
+      flex: 1;
+    }
+  }
+}
+
