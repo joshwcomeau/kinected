@@ -82,4 +82,4 @@ production:
   <<: *default
   database: kinected_production
   username: kinected
-  password: <%= ENV['KINECTED_DATABASE_PASSWORD'] %>
+  password: <%= Rails.application.secrets.postgresql_pass %>
