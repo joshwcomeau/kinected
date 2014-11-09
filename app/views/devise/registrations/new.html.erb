@@ -78,13 +78,13 @@
         <div class="form-row">
           <div class="form-label"><%= f.label :password_confirmation, "Confirm Password" %></div>
           <div class="form-input"><%= f.password_field :password_confirmation, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password_confirmation", "ng-minlength" => 8, "ng-maxlength" => 30 %>
-            <p ng-show="user.registration_form['user[password_confirmation]'].$invalid &amp;&amp; user.state_status.step2.submitted" class="help-block">Please enter the same password again. This is to prevent typos.</p>
+            <p ng-show="user.mismatched_passwords &amp;&amp; user.state_status.step2.submitted" class="help-block">Please enter the same password again. This is to prevent typos.</p>
           </div>
         </div>
 
       </fieldset>
 
-      <div><%= f.submit "Sign up" %></div>
+      <div><%= f.submit "Register" %></div>
     </div>
 
   <% end %>

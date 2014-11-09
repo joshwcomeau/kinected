@@ -31,6 +31,7 @@ function UserRegistrationController() {
       valid:      true
     }
   }
+  this.mismatched_passwords = false;
 }
 
 UserRegistrationController.prototype.validateStep = function(step_num, e) {
@@ -43,6 +44,7 @@ UserRegistrationController.prototype.validateStep = function(step_num, e) {
   // Reset our validation flag. We can't use Angular's built-in one, because we're using
   // a multi-stage form. We're not actually submitting the form, just a fieldset.
   this.state_status[step].valid = true;
+  this.mismatched_passwords = false;
 
 
   // In the HTML, error messages are shown if step_1_submitted is true, and step_1_valid is false.
@@ -66,6 +68,14 @@ function checkRequiredFields(fields, step, context) {
   _.each(fields, function(element, index, list) {
     if ( context.registration_form[element].$invalid ) {
       context.state_status[step].valid = false;
+    }
+    // Additional things that Angular can't figure out on its own
+    // Password confirmation must match
+    if ( _.indexOf(fields, "user[password]") !== -1 ) {
+      if ( context.registration_form["user[password]"].$viewValue !== context.registration_form["user[password_confirmation]"].$viewValue ) {
+        context.state_status[step].valid = false;
+        context.mismatched_passwords = true;
+      }
     }
   });
 
