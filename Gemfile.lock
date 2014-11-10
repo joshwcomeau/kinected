@@ -90,6 +90,8 @@ GEM
     faker (1.4.3)
       i18n (~> 0.5)
     ffi (1.9.5)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     geocoder (1.2.4)
     guard (2.6.1)
@@ -263,6 +265,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
+  font-awesome-rails
   geocoder
   guard-rspec
   jbuilder (~> 2.0)

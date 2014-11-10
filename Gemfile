@@ -16,6 +16,7 @@ gem 'angularjs-rails'                                         # Simple Angular w
 gem 'annotate'                                                # Provides Schema-like annotations on the models' rb files.
 gem 'carrierwave'                                             # File and image processing and storing, wraps rmagick.
 gem 'devise'                                                  # User authentication.
+gem 'font-awesome-rails'                                      # Custom icon pack.
 gem 'geocoder'                                                # Gets latitude and longitude from postal codes.
 gem 'jquery-turbolinks'                                       # Makes $(document).ready() play nice with Turbolinks.
 gem 'neat'                                                    # Bourbon grid system. Installs bourbon gem as well, as a dependency.
