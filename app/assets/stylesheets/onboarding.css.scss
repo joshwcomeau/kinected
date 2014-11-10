@@ -129,6 +129,7 @@
     .form-label {
       line-height: 34px;
     }
+
   }
 
   .next-button-div {
@@ -190,6 +191,14 @@
       padding: 0.5rem 2rem;
     }
   }
+
+  .form-photo-cell {
+    text-align: center;
+    
+    img {
+      width: 75%;
+    }
+  }
 }
 
 // Non-mobile styles
@@ -210,7 +219,15 @@
   .next-button-div button, .submit-button-div input {
     width: auto !important;
     padding: 0.5rem 4rem !important;
-
   }
+
+  .form-photo-cell {
+    text-align: left;
+    flex: 1;
+    img {
+      width: 95%;
+    }
+  }
+
 }
 
