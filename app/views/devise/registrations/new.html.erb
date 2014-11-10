@@ -52,7 +52,6 @@
       <div class="next-button-div" ng-show="user.current_step < 2"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(1)" %></div>
     </div>
 
-
     <div class="step-2" ng-show="user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid">
       <h4 class="form-section-heading" data-number="2"><%= fetch_content(:header_2) %></h4>
       
@@ -67,18 +66,20 @@
           <%= fields_for :profile_photo do |p| %>
             <%= p.file_field :photo_object, id: 'photo-object-field', class: 'hide', "ng-file-select" => "onFileSelect($files)", "ng-model" => "user.image_src" %>
             <!-- Custom file selector -->
-            <a class="upload-photo-button" onclick="$('input[id=photo-object-field]').click();">
-              Upload Image
-            </a>
+            <p class="center">
+              <a class="upload-photo-button" onclick="$('input[id=photo-object-field]').click();">
+                <%= fa_icon "cloud-upload", text: "Upload Image" %>
+              </a>
+            </p>
           <% end %>
 
-          <p class="small-and-light"><%= fetch_content(:photo_skip) %></p>
+          <p class="small-and-light center"><%= fetch_content(:photo_skip) %></p>
         </div>
 
       </fieldset>
       
       <div class="next-button-div" ng-show="user.current_step < 3">
-        <%= button_tag "Skip", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)", "ng-unless" => "user.image_src"  %>
+        <%= button_tag "Skip", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)", "ng-if" => "!user.image_src"  %>
         <%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)", "ng-if" => "user.image_src" %>
       </div>
 
