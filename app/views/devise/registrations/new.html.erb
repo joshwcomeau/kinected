@@ -1,14 +1,12 @@
 <header class="bg-teal">
   <div class="onboard-wrapper">
-    <h1>Welcome Aboard!</h1>
-    <h3>
-      <strong>Congrats!</strong> We've determined that you're an ideal candidate for Kinected.
-    </h3>
+    <h1><%= fetch_content(:big_title) %></h1>
+    <h3><%= fetch_content(:subtitle, :raw) %></h3>
   </div>
 </header>
 
 <div class="onboard-wrapper" ng-controller="UserRegistrationController as user">
-  <p class="registration-paragraph">You can register for an account below, we just need some basic information from you. More introductory text goes here, talking about maybe the fee involved, or the perks of signing up?</p>
+  <p class="registration-paragraph"><%= fetch_content(:intro_paragraph) %></p>
 
   <%= form_for(resource, {as: resource_name, url: registration_path(resource_name), html: {name: 'user.registration_form', novalidate: true, "ng-submit" => 'user.validateStep(3, $event)', multipart: true}}) do |f| %>
     <%= devise_error_messages! %>
@@ -55,8 +53,7 @@
     </div>
 
 
-<!-- user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid -->
-    <div class="step-2">
+    <div class="step-2" ng-show="user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid">
       <h4 class="form-section-heading" data-number="2">Upload Profile Photo</h4>
       
       <fieldset>

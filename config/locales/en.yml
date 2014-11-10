@@ -20,4 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  registrations:
+    new:
+      big_title: "Welcome Aboard!"
+      subtitle: "<strong>Congrats!</strong> We've determined that you're an ideal candidate for Kinected!"
+      intro_paragraph: "You can register for an account below, we just need some basic information from you. More introductory text goes here, talking about maybe the fee involved, or the perks of signing up?"
