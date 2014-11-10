@@ -6,19 +6,19 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   padding: 0;
+  height: 100%;
 }
 
 .wrapper {
-  @include outer-container;
+  position: relative;
+  min-height: 100%;
 
   // main sidebar
   & > aside {
-    @include span-columns(3);
-    @include omega;
 
     h2 {
       color: $green;
@@ -36,15 +36,25 @@ body {
 
   // main content
   & > section {
-    @include span-columns(9);
     background: #f3f5f9;
     margin-top: 0.5rem;
     height: 800px;
   }
 }
 
+footer {
+  width:100%;
+  height:$footer-height;
+  position:absolute;
+  bottom:0;
+  left:0;
+}
+
 
 // Convenience classes
+.footer-padding {
+  padding-bottom: $footer-padding;
+}
 .bg-teal {
   background: shade($teal, 10%);
 }
@@ -68,4 +78,21 @@ body {
 
 .light-gray {
   color: #BBB;
+}
+.full-width {
+  width: 100%;
+}
+.half-width {
+  width: 50%;
+}
+.half-width-spaced {
+  width: 47%;
+  margin-right: 3%;
+}
+.third-width {
+  width: 34%;
+}
+.third-width-spaced {
+  width: 30%;
+  margin-right: 3%;
 }

@@ -1,124 +1,128 @@
-<header class="bg-teal">
-  <div class="onboard-wrapper">
-    <h1><%= fetch_content(:big_title) %></h1>
-    <h3><%= fetch_content(:subtitle, :raw) %></h3>
-  </div>
-</header>
-
-<div class="onboard-wrapper" ng-controller="UserRegistrationController as user">
-  <p class="registration-paragraph"><%= fetch_content(:intro_paragraph) %></p>
-
-  <%= form_for(resource, {as: resource_name, url: registration_path(resource_name), html: {name: 'user.registration_form', novalidate: true, "ng-submit" => 'user.validateStep(3, $event)', multipart: true}}) do |f| %>
-    <%= devise_error_messages! %>
-
-
-    <div class="step-1">
-      <h4 class="form-section-heading" data-number="1"><%= fetch_content(:header_1) %></h4>
-      
-      <fieldset>
-        <div class="form-row">
-          <div class="form-label"><%= f.label :first_name, "Your Name" %></div>
-          <div class="form-input">
-            <%= f.text_field :first_name, autofocus: true, placeholder: 'First Name', required: true, class: 'half-width-spaced', "ng-model" => 'user.first_name' %><!--  
-         --><%= f.text_field :last_name, placeholder: 'Last Name', required: true, class: 'half-width', "ng-model" => 'user.last_name' %>
-            <p ng-show="(user.registration_form['user[first_name]'].$invalid || user.registration_form['user[last_name]'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_name) %></p>
-          </div> 
-        </div>
-
-        <div class="form-row">
-          <div class="form-label">Your Birthdate</div>
-          <div class="form-input">
-            <%= number_field_tag "birthdate_month", nil, class: 'third-width-spaced', placeholder: 'MM', in: 1..12, required: true, "ng-model" => 'user.birthdate.month' %><!--  
-         --><%= number_field_tag "birthdate_day", nil, class: 'third-width-spaced', placeholder: 'DD', in: 1..31, required: true, "ng-model" => 'user.birthdate.day' %><!--  
-         --><%= number_field_tag "birthdate_year", nil, class: 'third-width', placeholder: 'YYYY', in: 1901..2014, required: true, "ng-model" => 'user.birthdate.year' %>
-            <p ng-show="(user.registration_form['birthdate_month'].$invalid || user.registration_form['birthdate_day'].$invalid || user.registration_form['birthdate_year'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_birthdate) %></p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-label">Your Gender</div>
-          <div class="form-input">
-            <%= f.radio_button :sex, "male", required: true, "ng-model" => 'user.sex' %><%= f.label :sex_male, "Male", class: 'half-width-spaced sex-select', 'ng-class' => '{selected: user.sex==="male"}' %><!--
-         --><%= f.radio_button :sex, "female", required: true, "ng-model" => 'user.sex' %><%= f.label :sex_female, "Female", class: 'half-width sex-select', 'ng-class' => '{selected: user.sex==="female"}' %>
-            <p ng-show="user.registration_form['user[sex]'].$invalid &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_gender) %></p>
-          </div> 
-        </div>
-
-        <div class="form-row" style="display: none;">
-          <%= collection_check_boxes(:user, :ethnicity_ids, Ethnicity.all, :id, :name) %>
-        </div>
-
-      </fieldset>
-      <div class="next-button-div" ng-show="user.current_step < 2"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(1)" %></div>
+<div class="wrapper">
+  
+  <header class="bg-teal">
+    <div class="onboard-wrapper">
+      <h1><%= fetch_content(:big_title) %></h1>
+      <h3><%= fetch_content(:subtitle, :raw) %></h3>
     </div>
+  </header>
 
-    <div class="step-2" ng-show="user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid">
-      <h4 class="form-section-heading" data-number="2"><%= fetch_content(:header_2) %></h4>
-      
-      <fieldset>
+  <div class="onboard-wrapper footer-padding" ng-controller="UserRegistrationController as user">
+    <p class="registration-paragraph"><%= fetch_content(:intro_paragraph) %></p>
 
-        <div class="form-photo-cell">
-          <div class="image-holder" onclick="$('input[id=photo-object-field]').click();" ng-hide="user.image_src"></div>
-          <img ng-src="{{user.image_src}}" ng-show="user.image_src" class="image-upload-preview">
-        </div>
-        <div class="form-input">
-          <p class="no-top-margin"><%= fetch_content(:photo_explanation) %></p>
-          <%= fields_for :profile_photo do |p| %>
-            <%= p.file_field :photo_object, id: 'photo-object-field', class: 'hide', "ng-file-select" => "onFileSelect($files)", "ng-model" => "user.image_src" %>
-            <!-- Custom file selector -->
-            <p class="center">
-              <a class="upload-photo-button" onclick="$('input[id=photo-object-field]').click();">
-                <%= fa_icon "cloud-upload", text: "Upload Image" %>
-              </a>
-            </p>
-          <% end %>
+    <%= form_for(resource, {as: resource_name, url: registration_path(resource_name), html: {name: 'user.registration_form', novalidate: true, "ng-submit" => 'user.validateStep(3, $event)', multipart: true}}) do |f| %>
+      <%= devise_error_messages! %>
 
-          <p class="small-and-light center light-gray"><%= fetch_content(:photo_skip) %></p>
-        </div>
 
-      </fieldset>
-      
-      <div class="next-button-div" ng-show="user.current_step < 3">
-        <%= button_tag "Skip", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)", "ng-if" => "!user.image_src"  %>
-        <%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)", "ng-if" => "user.image_src" %>
+      <div class="step-1">
+        <h4 class="form-section-heading" data-number="1"><%= fetch_content(:header_1) %></h4>
+        
+        <fieldset>
+          <div class="form-row">
+            <div class="form-label"><%= f.label :first_name, "Your Name" %></div>
+            <div class="form-input">
+              <%= f.text_field :first_name, autofocus: true, placeholder: 'First Name', required: true, class: 'half-width-spaced', "ng-model" => 'user.first_name' %><!--  
+           --><%= f.text_field :last_name, placeholder: 'Last Name', required: true, class: 'half-width', "ng-model" => 'user.last_name' %>
+              <p ng-show="(user.registration_form['user[first_name]'].$invalid || user.registration_form['user[last_name]'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_name) %></p>
+            </div> 
+          </div>
+
+          <div class="form-row">
+            <div class="form-label">Your Birthdate</div>
+            <div class="form-input">
+              <%= number_field_tag "birthdate_month", nil, class: 'third-width-spaced', placeholder: 'MM', in: 1..12, required: true, "ng-model" => 'user.birthdate.month' %><!--  
+           --><%= number_field_tag "birthdate_day", nil, class: 'third-width-spaced', placeholder: 'DD', in: 1..31, required: true, "ng-model" => 'user.birthdate.day' %><!--  
+           --><%= number_field_tag "birthdate_year", nil, class: 'third-width', placeholder: 'YYYY', in: 1901..2014, required: true, "ng-model" => 'user.birthdate.year' %>
+              <p ng-show="(user.registration_form['birthdate_month'].$invalid || user.registration_form['birthdate_day'].$invalid || user.registration_form['birthdate_year'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_birthdate) %></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label">Your Gender</div>
+            <div class="form-input">
+              <%= f.radio_button :sex, "male", required: true, "ng-model" => 'user.sex' %><%= f.label :sex_male, "Male", class: 'half-width-spaced sex-select', 'ng-class' => '{selected: user.sex==="male"}' %><!--
+           --><%= f.radio_button :sex, "female", required: true, "ng-model" => 'user.sex' %><%= f.label :sex_female, "Female", class: 'half-width sex-select', 'ng-class' => '{selected: user.sex==="female"}' %>
+              <p ng-show="user.registration_form['user[sex]'].$invalid &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_gender) %></p>
+            </div> 
+          </div>
+
+          <div class="form-row" style="display: none;">
+            <%= collection_check_boxes(:user, :ethnicity_ids, Ethnicity.all, :id, :name) %>
+          </div>
+
+        </fieldset>
+        <div class="next-button-div" ng-show="user.current_step < 2"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(1)" %></div>
       </div>
 
-    </div>
+      <div class="step-2" ng-show="user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid">
+        <h4 class="form-section-heading" data-number="2"><%= fetch_content(:header_2) %></h4>
+        
+        <fieldset>
 
-    <div class="step-3" ng-show="user.state_status.step2.submitted &amp;&amp; user.state_status.step2.valid">
-      <h4 class="form-section-heading" data-number="3"><%= fetch_content(:header_3) %></h4>
+          <div class="form-photo-cell">
+            <div class="image-holder" onclick="$('input[id=photo-object-field]').click();" ng-hide="user.image_src"></div>
+            <img ng-src="{{user.image_src}}" ng-show="user.image_src" class="image-upload-preview">
+          </div>
+          <div class="form-input">
+            <p class="no-top-margin"><%= fetch_content(:photo_explanation) %></p>
+            <%= fields_for :profile_photo do |p| %>
+              <%= p.file_field :photo_object, id: 'photo-object-field', class: 'hide', "ng-file-select" => "onFileSelect($files)", "ng-model" => "user.image_src" %>
+              <!-- Custom file selector -->
+              <p class="center">
+                <a class="upload-photo-button" onclick="$('input[id=photo-object-field]').click();">
+                  <%= fa_icon "cloud-upload", text: "Upload Image" %>
+                </a>
+              </p>
+            <% end %>
+
+            <p class="small-and-light center light-gray"><%= fetch_content(:photo_skip) %></p>
+          </div>
+
+        </fieldset>
+        
+        <div class="next-button-div" ng-show="user.current_step < 3">
+          <%= button_tag "Skip", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)", "ng-if" => "!user.image_src"  %>
+          <%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)", "ng-if" => "user.image_src" %>
+        </div>
+
+      </div>
+
+      <div class="step-3" ng-show="user.state_status.step2.submitted &amp;&amp; user.state_status.step2.valid">
+        <h4 class="form-section-heading" data-number="3"><%= fetch_content(:header_3) %></h4>
+        
+        <fieldset>
+          <div class="form-row">
+            <div class="form-label"><%= f.label :email %></div>
+            <div class="form-input">
+              <%= f.email_field :email, required: true, class: 'full-width', "ng-model" => "user.email" %>
+              <p ng-show="user.registration_form['user[email]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block"><%= fetch_content(:error_email) %></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label"><%= f.label :password %></div>
+            <div class="form-input">
+              <%= f.password_field :password, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password", "ng-minlength" => 8, "ng-maxlength" => 30 %>
+              <p ng-show="user.registration_form['user[password]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block"><%= fetch_content(:error_password) %></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label"><%= f.label :password_confirmation, "Confirm Password" %></div>
+            <div class="form-input"><%= f.password_field :password_confirmation, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password_confirmation", "ng-minlength" => 8, "ng-maxlength" => 30 %>
+              <p ng-show="user.mismatched_passwords &amp;&amp; user.state_status.step3.submitted" class="help-block"><%= fetch_content(:error_password_confirmation) %></p>
+            </div>
+          </div>
+
+        </fieldset>
+
+        <div class="submit-button-div"><%= f.submit "Register", class: 'submit-button' %></div>
+
+      </div>
       
-      <fieldset>
-        <div class="form-row">
-          <div class="form-label"><%= f.label :email %></div>
-          <div class="form-input">
-            <%= f.email_field :email, required: true, class: 'full-width', "ng-model" => "user.email" %>
-            <p ng-show="user.registration_form['user[email]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block"><%= fetch_content(:error_email) %></p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-label"><%= f.label :password %></div>
-          <div class="form-input">
-            <%= f.password_field :password, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password", "ng-minlength" => 8, "ng-maxlength" => 30 %>
-            <p ng-show="user.registration_form['user[password]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block"><%= fetch_content(:error_password) %></p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-label"><%= f.label :password_confirmation, "Confirm Password" %></div>
-          <div class="form-input"><%= f.password_field :password_confirmation, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password_confirmation", "ng-minlength" => 8, "ng-maxlength" => 30 %>
-            <p ng-show="user.mismatched_passwords &amp;&amp; user.state_status.step3.submitted" class="help-block"><%= fetch_content(:error_password_confirmation) %></p>
-          </div>
-        </div>
-
-      </fieldset>
-
-      <div class="submit-button-div"><%= f.submit "Register", class: 'submit-button' %></div>
-
-    </div>
-    
 
 
-  <% end %>
+    <% end %>
+  </div>
+  <%= render partial: 'layouts/logged_out_footer' %>
 </div>
