@@ -10,7 +10,7 @@
 <div class="onboard-wrapper" ng-controller="UserRegistrationController as user">
   <p class="registration-paragraph">You can register for an account below, we just need some basic information from you. More introductory text goes here, talking about maybe the fee involved, or the perks of signing up?</p>
 
-  <%= form_for(resource, {as: resource_name, url: registration_path(resource_name), html: {name: 'user.registration_form', novalidate: true, "ng-submit" => 'user.validateStep(2, $event)'}}) do |f| %>
+  <%= form_for(resource, {as: resource_name, url: registration_path(resource_name), html: {name: 'user.registration_form', novalidate: true, "ng-submit" => 'user.validateStep(3, $event)'}}) do |f| %>
     <%= devise_error_messages! %>
 
 
@@ -52,45 +52,10 @@
 
       </fieldset>
       <div class="next-button-div" ng-show="user.current_step < 2"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(1)" %></div>
-
-
     </div>
 
     <div class="step-2" ng-show="user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid">
-      <h4 class="form-section-heading" data-number="2">Account Information</h4>
-      
-      <fieldset>
-        <div class="form-row">
-          <div class="form-label"><%= f.label :email %></div>
-          <div class="form-input">
-            <%= f.email_field :email, required: true, class: 'full-width', "ng-model" => "user.email" %>
-            <p ng-show="user.registration_form['user[email]'].$invalid &amp;&amp; user.state_status.step2.submitted" class="help-block">Please enter a valid email (eg. john@gmail.com).</p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-label"><%= f.label :password %></div>
-          <div class="form-input">
-            <%= f.password_field :password, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password", "ng-minlength" => 8, "ng-maxlength" => 30 %>
-            <p ng-show="user.registration_form['user[password]'].$invalid &amp;&amp; user.state_status.step2.submitted" class="help-block">Passwords must be at least 8 characters, and no more than 30.</p>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-label"><%= f.label :password_confirmation, "Confirm Password" %></div>
-          <div class="form-input"><%= f.password_field :password_confirmation, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password_confirmation", "ng-minlength" => 8, "ng-maxlength" => 30 %>
-            <p ng-show="user.mismatched_passwords &amp;&amp; user.state_status.step2.submitted" class="help-block">Please enter the same password again. This is to prevent typos.</p>
-          </div>
-        </div>
-
-      </fieldset>
-
-      <div class="next-button-div" ng-show="user.current_step < 3"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)" %></div>
-    </div>
-    
-    <!-- user.state_status.step2.submitted &amp;&amp; user.state_status.step2.valid -->
-    <div class="step-3" >
-      <h4 class="form-section-heading" data-number="3">Upload Profile Photo</h4>
+      <h4 class="form-section-heading" data-number="2">Upload Profile Photo</h4>
       
       <fieldset>
 
@@ -113,11 +78,48 @@
           <p class="small-and-light">If you want, you can skip this part for now.</p>
         </div>
 
+      </fieldset>
+      
+      <div class="next-button-div" ng-show="user.current_step < 3">
+        <%= button_tag "Skip and Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)" %>
+      </div>
+
+    </div>
+
+    <div class="step-3" ng-show="user.state_status.step2.submitted &amp;&amp; user.state_status.step2.valid">
+      <h4 class="form-section-heading" data-number="3">Account Information</h4>
+      
+      <fieldset>
+        <div class="form-row">
+          <div class="form-label"><%= f.label :email %></div>
+          <div class="form-input">
+            <%= f.email_field :email, required: true, class: 'full-width', "ng-model" => "user.email" %>
+            <p ng-show="user.registration_form['user[email]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block">Please enter a valid email (eg. john@gmail.com).</p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-label"><%= f.label :password %></div>
+          <div class="form-input">
+            <%= f.password_field :password, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password", "ng-minlength" => 8, "ng-maxlength" => 30 %>
+            <p ng-show="user.registration_form['user[password]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block">Passwords must be at least 8 characters, and no more than 30.</p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-label"><%= f.label :password_confirmation, "Confirm Password" %></div>
+          <div class="form-input"><%= f.password_field :password_confirmation, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password_confirmation", "ng-minlength" => 8, "ng-maxlength" => 30 %>
+            <p ng-show="user.mismatched_passwords &amp;&amp; user.state_status.step3.submitted" class="help-block">Please enter the same password again. This is to prevent typos.</p>
+          </div>
+        </div>
 
       </fieldset>
 
       <div class="submit-button-div"><%= f.submit "Register", class: 'submit-button' %></div>
+
     </div>
+    
+
 
   <% end %>
 </div>

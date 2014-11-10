@@ -14,14 +14,14 @@ function UserRegistrationController() {
       ]
     },
     step2: {
-      required_fields: [
-        'user[email]', 'user[password]', 'user[password_confirmation]'
-      ]
-    },
-    step3: {
       // There arent any fields, but because we've generalized the method we need
       // to pass in an array, this field can't be undefined or nil.
       required_fields: []   
+    },
+    step3: {
+      required_fields: [
+        'user[email]', 'user[password]', 'user[password_confirmation]'
+      ]
     }
   };
 
@@ -31,6 +31,10 @@ function UserRegistrationController() {
       valid:      true
     },
     step2: {
+      submitted:  false,
+      valid:      true
+    },
+    step3: {
       submitted:  false,
       valid:      true
     }

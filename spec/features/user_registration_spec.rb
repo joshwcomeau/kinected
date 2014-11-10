@@ -32,7 +32,12 @@ feature 'User registrations' do
     find_button("Continue").click
 
     expect(page).to have_selector(".step-2", visible: true)
+    expect(page).not_to have_selector(".step-3", visible: true)
 
+    # Step 2: Photo upload. For now, let's skip it.
+    find_button("Skip and Continue").click
+
+    expect(page).to have_selector(".step-3", visible: true)
     # Let's enter a bogus email and two slightly different passwords
     fill_in "user[email]",                  with: 'james@dean..com'
     fill_in "user[password]",               with: 'abcd1234'
@@ -43,9 +48,18 @@ feature 'User registrations' do
     find_button("Register").click
     expect(page).to have_css(".help-block", count: 2)
 
-    # Alright, let's wrap it up. Fill it in with good data, and submit it
+    # Proper data for step 3
     fill_in "user[email]",                  with: 'james@dean.com'
     fill_in "user[password_confirmation]",  with: 'abcd1234'
+
+    # Let's make sure that we can't submit the form with bogus data in earlier steps
+    fill_in "birthdate_month",  with: 23
+    find_button("Register").click
+
+    expect(page).to have_css(".help-block", count: 1)
+
+    # ok, good to go
+    fill_in "birthdate_month",  with: 04
     find_button("Register").click
 
     expect(current_path).to eq("/")
