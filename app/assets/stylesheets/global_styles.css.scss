@@ -12,14 +12,6 @@ body {
   padding: 0;
 }
 
-.bg-teal {
-  background: shade($teal, 10%);
-}
-
-
-.no-top-margin {
-  margin-top: 0px !important;
-}
 .wrapper {
   @include outer-container;
 
@@ -49,4 +41,23 @@ body {
     margin-top: 0.5rem;
     height: 800px;
   }
+}
+
+
+// Convenience classes
+.bg-teal {
+  background: shade($teal, 10%);
+}
+
+.no-top-margin {
+  margin-top: 0px !important;
+}
+
+.small-and-light {
+  font-size: 0.85em;
+  font-weight: 300;
+}
+
+.hide {
+  display: none !important;
 }

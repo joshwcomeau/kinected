@@ -51,7 +51,7 @@
         </div>
 
       </fieldset>
-      <div class="next-button-div" ng-show="user.current_step < 2"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(1)", "ng-class" => "ready: user.state_status.step1.valid" %></div>
+      <div class="next-button-div" ng-show="user.current_step < 2"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(1)" %></div>
 
 
     </div>
@@ -93,16 +93,26 @@
       <h4 class="form-section-heading" data-number="3">Upload Profile Photo</h4>
       
       <fieldset>
-        <div class="form-row">
-          <div class="form-photo-cell">
-            <div class="image-holder"></div>
-          </div>
-          <div class="form-input">
-            <p class="no-top-margin">Let's start by uploading your first profile picture. Pictures are mandatory to use the site, you won't be seen or be able to interact with users until you have at least 1!</p>
 
-            <p>If you want, you can skip this part for now.</p>
-          </div>
+        <div class="form-photo-cell">
+          <div class="image-holder" onclick="$('input[id=photo-object-field]').click();" ng-hide="user.image_src"></div>
+          <img ng-src="{{user.image_src}}" ng-show="user.image_src" class="image-upload-preview">
         </div>
+        <div class="form-input">
+          <p class="no-top-margin">Let's start by uploading your first profile picture. Pictures are mandatory to use the site, you won't be seen or be able to interact with users until you have at least 1!</p>
+
+          <%= f.fields_for :profile_photos do |p| %>
+
+            <%= p.file_field :photo_object, id: 'photo-object-field', class: 'hide', "ng-file-select" => "onFileSelect($files)", "ng-model" => "user.image_src" %>
+            <!-- Custom file selector -->
+            <a class="upload-photo-button" onclick="$('input[id=photo-object-field]').click();">
+              Upload Image
+            </a>
+          <% end %>
+
+          <p class="small-and-light">If you want, you can skip this part for now.</p>
+        </div>
+
 
       </fieldset>
 

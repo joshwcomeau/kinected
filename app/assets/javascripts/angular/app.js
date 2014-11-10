@@ -37,6 +37,7 @@ function UserRegistrationController() {
   };
   
   this.mismatched_passwords = false;
+  this.image_src = '';
 }
 
 UserRegistrationController.prototype.validateStep = function(step_num, e) {
