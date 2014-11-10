@@ -51,11 +51,12 @@
         </div>
 
       </fieldset>
-      <div class="next-button-div" ng-show="user.current_step < 2"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(1)" %></div>
+      <div class="next-button-div" ng-show="user.current_step < 2"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(1)", "ng-class" => "ready: user.state_status.step1.valid" %></div>
+
 
     </div>
 
-    <div class="step-2">
+    <div class="step-2" ng-show="user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid">
       <h4 class="form-section-heading" data-number="2">Account Information</h4>
       
       <fieldset>
@@ -81,6 +82,18 @@
             <p ng-show="user.mismatched_passwords &amp;&amp; user.state_status.step2.submitted" class="help-block">Please enter the same password again. This is to prevent typos.</p>
           </div>
         </div>
+
+      </fieldset>
+
+      <div class="next-button-div" ng-show="user.current_step < 3"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(2)" %></div>
+    </div>
+    
+
+    <div class="step-3" ng-show="user.state_status.step2.submitted &amp;&amp; user.state_status.step2.valid">
+      <h4 class="form-section-heading" data-number="3">Upload Profile Photo</h4>
+      
+      <fieldset>
+        
 
       </fieldset>
 

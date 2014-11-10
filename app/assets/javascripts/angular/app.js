@@ -4,10 +4,9 @@ app.controller('UserRegistrationController', UserRegistrationController);
 
 function UserRegistrationController() {
   this.current_step = 1;
-  this.num_of_steps = 2;
+  this.num_of_steps = 3;
   this.state_info = {
     step1: {
-      index: 1,
       required_fields: [
         'user[first_name]', 'birthdate_month',
         'user[last_name]',  'birthdate_day',
@@ -15,12 +14,17 @@ function UserRegistrationController() {
       ]
     },
     step2: {
-      index: 2,
       required_fields: [
         'user[email]', 'user[password]', 'user[password_confirmation]'
       ]
+    },
+    step3: {
+      // There arent any fields, but because we've generalized the method we need
+      // to pass in an array, this field can't be undefined or nil.
+      required_fields: []   
     }
-  }
+  };
+
   this.state_status = {
     step1: {
       submitted:  false,
@@ -30,7 +34,8 @@ function UserRegistrationController() {
       submitted:  false,
       valid:      true
     }
-  }
+  };
+  
   this.mismatched_passwords = false;
 }
 
