@@ -16,6 +16,10 @@ body {
   background: shade($teal, 10%);
 }
 
+
+.no-top-margin {
+  margin-top: 0px !important;
+}
 .wrapper {
   @include outer-container;
 
