@@ -13,7 +13,7 @@
 
 
     <div class="step-1">
-      <h4 class="form-section-heading" data-number="1">Basic Information</h4>
+      <h4 class="form-section-heading" data-number="1"><%= fetch_content(:header_1) %></h4>
       
       <fieldset>
         <div class="form-row">
@@ -21,7 +21,7 @@
           <div class="form-input">
             <%= f.text_field :first_name, autofocus: true, placeholder: 'First Name', required: true, class: 'half-width-spaced', "ng-model" => 'user.first_name' %><!--  
          --><%= f.text_field :last_name, placeholder: 'Last Name', required: true, class: 'half-width', "ng-model" => 'user.last_name' %>
-            <p ng-show="(user.registration_form['user[first_name]'].$invalid || user.registration_form['user[last_name]'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block">Please enter your first and last name.</p>
+            <p ng-show="(user.registration_form['user[first_name]'].$invalid || user.registration_form['user[last_name]'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_name) %></p>
           </div> 
         </div>
 
@@ -31,7 +31,7 @@
             <%= number_field_tag "birthdate_month", nil, class: 'third-width-spaced', placeholder: 'MM', in: 1..12, required: true, "ng-model" => 'user.birthdate.month' %><!--  
          --><%= number_field_tag "birthdate_day", nil, class: 'third-width-spaced', placeholder: 'DD', in: 1..31, required: true, "ng-model" => 'user.birthdate.day' %><!--  
          --><%= number_field_tag "birthdate_year", nil, class: 'third-width', placeholder: 'YYYY', in: 1901..2014, required: true, "ng-model" => 'user.birthdate.year' %>
-            <p ng-show="(user.registration_form['birthdate_month'].$invalid || user.registration_form['birthdate_day'].$invalid || user.registration_form['birthdate_year'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block">Your birthday must be entered in the format MM - DD - YYYY.</p>
+            <p ng-show="(user.registration_form['birthdate_month'].$invalid || user.registration_form['birthdate_day'].$invalid || user.registration_form['birthdate_year'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_birthdate) %></p>
           </div>
         </div>
 
@@ -40,7 +40,7 @@
           <div class="form-input">
             <%= f.radio_button :sex, "male", required: true, "ng-model" => 'user.sex' %><%= f.label :sex_male, "Male", class: 'half-width-spaced sex-select', 'ng-class' => '{selected: user.sex==="male"}' %><!--
          --><%= f.radio_button :sex, "female", required: true, "ng-model" => 'user.sex' %><%= f.label :sex_female, "Female", class: 'half-width sex-select', 'ng-class' => '{selected: user.sex==="female"}' %>
-            <p ng-show="user.registration_form['user[sex]'].$invalid &amp;&amp; user.state_status.step1.submitted" class="help-block">Please click/tap on your gender.</p>
+            <p ng-show="user.registration_form['user[sex]'].$invalid &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_gender) %></p>
           </div> 
         </div>
 
@@ -54,7 +54,7 @@
 
 
     <div class="step-2" ng-show="user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid">
-      <h4 class="form-section-heading" data-number="2">Upload Profile Photo</h4>
+      <h4 class="form-section-heading" data-number="2"><%= fetch_content(:header_2) %></h4>
       
       <fieldset>
 
@@ -63,7 +63,7 @@
           <img ng-src="{{user.image_src}}" ng-show="user.image_src" class="image-upload-preview">
         </div>
         <div class="form-input">
-          <p class="no-top-margin">Let's start by uploading your first profile picture. Pictures are mandatory to use the site, you won't be seen or be able to interact with users until you have at least 1!</p>
+          <p class="no-top-margin"><%= fetch_content(:photo_explanation) %></p>
           <%= fields_for :profile_photo do |p| %>
             <%= p.file_field :photo_object, id: 'photo-object-field', class: 'hide', "ng-file-select" => "onFileSelect($files)", "ng-model" => "user.image_src" %>
             <!-- Custom file selector -->
@@ -72,7 +72,7 @@
             </a>
           <% end %>
 
-          <p class="small-and-light">If you want, you can skip this part for now.</p>
+          <p class="small-and-light"><%= fetch_content(:photo_skip) %></p>
         </div>
 
       </fieldset>
@@ -85,14 +85,14 @@
     </div>
 
     <div class="step-3" ng-show="user.state_status.step2.submitted &amp;&amp; user.state_status.step2.valid">
-      <h4 class="form-section-heading" data-number="3">Account Information</h4>
+      <h4 class="form-section-heading" data-number="3"><%= fetch_content(:header_3) %></h4>
       
       <fieldset>
         <div class="form-row">
           <div class="form-label"><%= f.label :email %></div>
           <div class="form-input">
             <%= f.email_field :email, required: true, class: 'full-width', "ng-model" => "user.email" %>
-            <p ng-show="user.registration_form['user[email]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block">Please enter a valid email (eg. john@gmail.com).</p>
+            <p ng-show="user.registration_form['user[email]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block"><%= fetch_content(:error_email) %></p>
           </div>
         </div>
 
@@ -100,14 +100,14 @@
           <div class="form-label"><%= f.label :password %></div>
           <div class="form-input">
             <%= f.password_field :password, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password", "ng-minlength" => 8, "ng-maxlength" => 30 %>
-            <p ng-show="user.registration_form['user[password]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block">Passwords must be at least 8 characters, and no more than 30.</p>
+            <p ng-show="user.registration_form['user[password]'].$invalid &amp;&amp; user.state_status.step3.submitted" class="help-block"><%= fetch_content(:error_password) %></p>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-label"><%= f.label :password_confirmation, "Confirm Password" %></div>
           <div class="form-input"><%= f.password_field :password_confirmation, required: true, autocomplete: "off", class: 'full-width', "ng-model" => "password_confirmation", "ng-minlength" => 8, "ng-maxlength" => 30 %>
-            <p ng-show="user.mismatched_passwords &amp;&amp; user.state_status.step3.submitted" class="help-block">Please enter the same password again. This is to prevent typos.</p>
+            <p ng-show="user.mismatched_passwords &amp;&amp; user.state_status.step3.submitted" class="help-block"><%= fetch_content(:error_password_confirmation) %></p>
           </div>
         </div>
 
