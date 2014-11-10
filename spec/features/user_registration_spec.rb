@@ -21,7 +21,12 @@ feature 'User registrations' do
 
     expect(page).not_to have_css(".help-block") # No showing errors until I click the button
     find_button("Continue").click
+
+    # Let's check to see we're getting the right errors
     expect(page).to have_css(".help-block", count: 2)
+    expect(page).to have_content(I18n.t("registrations.new.error_birthdate"))
+    expect(page).to have_content(I18n.t("registrations.new.error_gender"))
+
 
     # Let's be sure we're not showing step2 prematurely.
     expect(page).to have_selector(".step-2", visible: false)         
@@ -57,7 +62,10 @@ feature 'User registrations' do
     # We're expecting 2 errors from this
     expect(page).not_to have_css(".help-block")
     find_button("Register").click
+
     expect(page).to have_css(".help-block", count: 2)
+    expect(page).to have_content(I18n.t("registrations.new.error_email"))
+    expect(page).to have_content(I18n.t("registrations.new.error_password_confirmation"))
 
     # Proper data for step 3
     fill_in "user[email]",                  with: 'james@dean.com'
@@ -68,6 +76,8 @@ feature 'User registrations' do
     find_button("Register").click
 
     expect(page).to have_css(".help-block", count: 1)
+    expect(page).to have_content(I18n.t("registrations.new.error_birthdate"))
+    
 
     # ok, good to go
     fill_in "birthdate_month",  with: 04
