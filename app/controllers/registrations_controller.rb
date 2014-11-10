@@ -15,6 +15,10 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
+    if params[:profile_photo]
+      resource.profile_photos << ProfilePhoto.new(profile_photo_params)
+    end
+
     # Let's grab the 3 date fields from the params, use it to create a Date, and attach it to resource.
     date_string = "#{params[:birthdate_year]}-#{params[:birthdate_month]}-#{params[:birthdate_day]}"
     date_obj    = Date.strptime(date_string, "%Y-%m-%d")
@@ -52,6 +56,9 @@ class RegistrationsController < Devise::RegistrationsController
     )
   end
 
+  def profile_photo_params
+    params.require(:profile_photo).permit(:photo_object)
+  end
   # def account_update_params
   #   params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password)
   # end

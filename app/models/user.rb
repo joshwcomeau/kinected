@@ -35,6 +35,8 @@
 #  work_industry          :integer
 #  wants_kids             :integer
 #  relationship_status    :integer
+#  first_name             :string(255)
+#  last_name              :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -44,8 +46,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :ethnicities
   
-  has_many :photos
-  accepts_nested_attributes_for :photos, allow_destroy: true
+  has_many :profile_photos
 
   enum role: [ :dater, :concierge, :admin ]
   enum sex:  [ :male, :female ]

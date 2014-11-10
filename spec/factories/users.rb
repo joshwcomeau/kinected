@@ -35,6 +35,8 @@
 #  work_industry          :integer
 #  wants_kids             :integer
 #  relationship_status    :integer
+#  first_name             :string(255)
+#  last_name              :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

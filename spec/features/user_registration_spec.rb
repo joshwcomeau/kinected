@@ -5,8 +5,8 @@ require 'rails_helper'
 
 feature 'User registrations' do
   before(:all) do
-    Capybara.current_driver = :selenium # Slow, visual driver
-    # Capybara.current_driver = :webkit   # Quick, headless driver
+    # Capybara.current_driver = :selenium # Slow, visual driver
+    Capybara.current_driver = :webkit   # Quick, headless driver
   end
 
   scenario "I can register for an account, and any typos are noted" do
@@ -34,10 +34,21 @@ feature 'User registrations' do
     expect(page).to have_selector(".step-2", visible: true)
     expect(page).not_to have_selector(".step-3", visible: true)
 
-    # Step 2: Photo upload. For now, let's skip it.
-    find_button("Skip and Continue").click
+    
+    # Step 2: Photo upload. 
+    # Let's check if the button says we can skip it.
+    expect(page).to have_button("Skip")
 
+    # Let's upload a photo!
+    execute_script("$('#photo-object-field').show()")
+    attach_file("photo-object-field", "/Users/Shared/sample1.jpg")
+
+    find_button("Continue").click
+
+
+    # Step 3: Account details
     expect(page).to have_selector(".step-3", visible: true)
+
     # Let's enter a bogus email and two slightly different passwords
     fill_in "user[email]",                  with: 'james@dean..com'
     fill_in "user[password]",               with: 'abcd1234'
@@ -65,6 +76,11 @@ feature 'User registrations' do
     expect(current_path).to eq("/")
     expect(User.last.email).to eq("james@dean.com")
     expect(User.last.birthdate).to eq("1984-04-04".to_date)
+
+    # Check that it saved profile photo
+    expect(User.last.profile_photos.count).to eq(1)
+    expect(User.last.profile_photos.last.photo_object.url).to eq("/uploads/profile_photo/photo_object/#{User.last.id}/sample1.jpg")
+
   end
 
   after(:all) do
