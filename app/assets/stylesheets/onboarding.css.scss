@@ -1,12 +1,14 @@
 // The sign-up process is its own thing, pretty much.
 
 @import 'variables';
+@import 'mixins';
 
 .onboarding_body {
   background: $verydarkgrey;
   color: #EEE;
 
   .bg-teal {
+    @include bg_teal;
     padding: 2rem 0 1rem 0;
     border-bottom: 4px solid shade($teal, 40%)
   }
@@ -135,23 +137,19 @@
     text-align: right;
 
     button {
-      font-weight: 700;
-      color: #FFF;
       background: $teal;
-      border-radius: 3px;
-      border: 0;
-      cursor: pointer;
-      vertical-align: middle;
-      outline: 0;
-      font-size: 1.2em;
-      background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0)),to(rgba(0,0,0,.1)));
-      background-image: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
-      background-image: -moz-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
-      background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
-      // border-top: 1px solid lighten($teal, 5%);
-      // border-bottom: 2px solid darken($teal, 10%); 
-      // box-shadow: 0 1 0 1px rgba(255,255,255,.2) inset;
-      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+      text-shadow: 0.5px 0.5px 0px shade($teal, 20%), 1px 1px 0px shade($teal, 20%);
+      @include onboard_button;
+    }
+  }
+
+  .submit-button-div {
+    @extend .next-button-div;
+
+    input {
+      background: shade($green, 5%);
+      text-shadow: 0.5px 0.5px 0px shade($green, 20%), 1px 1px 0px shade($green, 20%);
+      @include onboard_button;
     }
   }
 
@@ -184,9 +182,10 @@
 
 // Mobile styles
 @media screen and (min-width: 300px) {
-  .next-button-div {
+  .next-button-div, .submit-button-div {
     padding: 1rem 0;
-    button {
+    
+    button, input {
       width: 100%;
       padding: 0.5rem 2rem;
     }
@@ -208,12 +207,10 @@
     }
   }
 
-  .next-button-div  {
+  .next-button-div button, .submit-button-div input {
+    width: auto !important;
+    padding: 0.5rem 4rem !important;
 
-    button {
-      width: auto !important;
-      padding: 0.5rem 4rem;
-    }
   }
 }
 
