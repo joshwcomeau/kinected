@@ -46,8 +46,19 @@ footer {
   width:100%;
   height:$footer-height;
   position:absolute;
+  z-index: 3;
   bottom:0;
   left:0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+li {
+  display: inline-block;
+  padding: 0 0.5rem;
 }
 
 // Material Design UI checkboxes
@@ -119,9 +130,6 @@ footer {
 .footer-padding {
   padding-bottom: $footer-padding;
 }
-.bg-teal {
-  background: shade($teal, 10%);
-}
 
 .no-top-margin {
   margin-top: 0px !important;
@@ -142,6 +150,9 @@ footer {
 
 .center {
   text-align: center;
+}
+.justify {
+  text-align: justify;
 }
 
 .light-gray {

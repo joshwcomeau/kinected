@@ -2,6 +2,13 @@
   background: $teal;
 }
 
+@mixin center_wrapper ($width) {
+    width: 100%;
+    max-width: $width;   
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+}
 
 @mixin onboard_button {
   font-weight: 700;
