@@ -54,6 +54,10 @@ RSpec.describe RegistrationsController, :type => :controller do
     it "returns 302 Redirected status" do
       expect(response.status).to eq(302)
     end
+
+    it "acknowledges the success with a flash message" do
+      expect(flash[:notice]).to eq(I18n.t ("devise.registrations.signed_up"))
+    end
   end
 
 
