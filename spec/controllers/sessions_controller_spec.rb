@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe RegistrationsController, :type => :controller do
+RSpec.describe SessionsController, :type => :controller do
   before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
@@ -12,7 +12,7 @@ RSpec.describe RegistrationsController, :type => :controller do
       expect(assigns[:user]).to be_a_new(User)
     end 
 
-    it "renders the signup form" do
+    it "renders the login form" do
       expect(response).to render_template(:new)
     end 
 
@@ -21,40 +21,29 @@ RSpec.describe RegistrationsController, :type => :controller do
     end
   end
 
-
   describe "POST :create" do
     before(:each) do
-      post :create, {
-        birthdate_year: '1986', 
-        birthdate_month: '05', 
-        birthdate_day: '29',
-
-        user: { 
-          email: 'john@doe.com', 
-          password: '12345678', 
-          sex: 'male',
-          first_name: 'John',
-          last_name: 'Doe'
-        }
-      }
+      create(:user, email: 'john@doe.com', password: '12345678')
     end
-
-    it "persists the user data we pass in" do
-      expect(assigns[:user]).to eq(User.last)
-    end
-
-    it "signs us in automatically" do
+    
+    it "logs a user in with good credentials" do
+      post :create, user: { email: 'john@doe.com', password: '12345678' }
       expect(warden.authenticated?(:user)).to eq(true)
     end
-
-    it "redirects to the root path" do
+    
+    it "does not log a user in with bogus credentials" do
+      post :create, user: { email: 'john@doe.com', password: 'abcdefgh' }
+      expect(warden.authenticated?(:user)).to eq(false)
+    end
+    
+    it "redirects us to root after logging in" do
+      post :create, user: { email: 'john@doe.com', password: '12345678' }
       expect(response).to redirect_to(root_path)
     end
 
     it "returns 302 Redirected status" do
       expect(response.status).to eq(302)
     end
+
   end
-
-
 end

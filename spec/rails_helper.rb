@@ -30,8 +30,13 @@ RSpec.configure do |config|
   # Use FactoryGirl
   config.include FactoryGirl::Syntax::Methods
 
+  # Fix Devise (maybe it stubs methods? Not sure, but its necessary)
+  config.include Devise::TestHelpers, type: :controller
 
- config.before(:suite) do
+  # Custom support modules
+  config.include ControllerHelpers, :type => :controller
+
+  config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
