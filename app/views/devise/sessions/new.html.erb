@@ -1,22 +1,48 @@
-<div class="teal-stripe"></div>
-<div class="very-narrow-wrapper login-wrapper">
-  <h2 class="no-top-margin">Sign In</h2>
+<div class="wrapper">
+  <div class="teal-stripe"></div>
+  <div class="very-narrow-wrapper login-wrapper">
+    <h2 class="no-top-margin">Sign In</h2>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div>
-    <%= f.email_field :email, autofocus: true, placeholder: 'Your Email Address' %></div>
+    <section>
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
 
-    <div>
-      <%= f.password_field :password, autocomplete: "off", placeholder: 'Your Password' %></div>
+      <%= yield %>
+    </section>
 
-    <% if devise_mapping.rememberable? -%>
-      <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-    <% end -%>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div>
+      <%= f.email_field :email, autofocus: true, placeholder: 'Your Email Address' %></div>
 
-    <div><%= f.submit "Log in" %></div>
-  <% end %>
+      <div>
+        <%= f.password_field :password, autocomplete: "off", placeholder: 'Your Password' %>
+      </div>
 
-  <%= render "devise/shared/links" %>
+      <% if devise_mapping.rememberable? -%>
+        <div><label>
+          <!-- The actual checkbox, hidden -->
+          <%= f.check_box :remember_me, class: 'hide', 'ng-model' => 'user.remember' %>
+
+          <!-- Our fancy Material-UI box -->
+          <div class="mui-checkbox" ng-class="{'mui-checked': user.remember}">
+            <div class="box"></div> 
+            <div class="check"></div>
+          </div> 
+          <span ng-if="!user.remember">Remember Me?</span>
+          <span ng-if="user.remember">We'll Remember</span>
+        </label></div>
+      <% end -%>
+
+      <div class="some-top-margin"><button class="login-btn"><%= fa_icon "arrow-circle-right" %> Log In</button></div>
+    <% end %>
+
+    <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'password-forget-link' %><br />
+
+  </div>
+
+  <%= render partial: 'layouts/logged_out_footer' %>
 </div>
-
-<%= render partial: 'layouts/logged_out_footer' %>

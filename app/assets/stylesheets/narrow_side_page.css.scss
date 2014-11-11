@@ -7,6 +7,10 @@
   background: $verydarkgrey;
   color: #EEE;
 
+  a {
+    color: $gold;
+  }
+
   .teal-header {
     @include bg_teal;
     padding: 2rem 0 1rem 0;
@@ -51,6 +55,7 @@
   .login-wrapper {
     @extend .very-narrow-wrapper;
     top: 4rem;
+    margin-bottom: 4rem; // Annoying fix for short displays.
     text-align: center;
 
       h2 {
@@ -202,7 +207,7 @@
     button {
       background: $teal;
       text-shadow: 0.5px 0.5px 0px shade($teal, 20%), 1px 1px 0px shade($teal, 20%);
-      @include onboard_button;
+      @include gradient_button;
     }
   }
 
@@ -212,8 +217,20 @@
     input {
       background: shade($green, 5%);
       text-shadow: 0.5px 0.5px 0px shade($green, 20%), 1px 1px 0px shade($green, 20%);
-      @include onboard_button;
+      @include gradient_button;
     }
+  }
+
+  .login-btn {
+    @include gradient_button;
+    background: shade($green, 5%);
+    text-shadow: 0.5px 0.5px 0px shade($green, 20%), 1px 1px 0px shade($green, 20%);
+  }
+
+  .password-forget-link {
+    font-size: 0.85em;
+    display: block;
+    margin-top: 2rem;
   }
 
   .help-block {
@@ -224,6 +241,10 @@
     font-size: 0.9em;
   }
 
+  .footer-spacing {
+    position: relative;
+    height: $footer-padding;
+  }
   footer {
     text-align: center;
     background: #1C1C1C;

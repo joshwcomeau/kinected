@@ -10,7 +10,7 @@
     margin: 0 auto;
 }
 
-@mixin onboard_button {
+@mixin gradient_button {
   font-weight: 700;
   color: #FFF;
   border-radius: 3px;
@@ -19,6 +19,7 @@
   vertical-align: middle;
   outline: 0;
   font-size: 1.2em;
+  padding: 0.5rem 3rem;
   background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0)),to(rgba(0,0,0,.1)));
   background-image: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
   background-image: -moz-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
