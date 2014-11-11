@@ -1,0 +1,57 @@
+// Convenience classes
+.no-top-margin {
+  margin-top: 0px !important;
+}
+.some-top-margin {
+  margin-top: 1rem;
+}
+.lots-of-top-margin {
+  margin-top: 2.5rem;
+}
+
+.small-and-light {
+  font-size: 0.85em;
+  font-weight: 300;
+}
+
+.auto-line-spacing {
+  line-height: 1.3rem !important;
+}
+
+.hide {
+  display: none;
+}
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.center {
+  text-align: center;
+}
+.justify {
+  text-align: justify;
+}
+
+.light-gray {
+  color: #BBB;
+}
+.full-width {
+  width: 100%;
+}
+.half-width {
+  width: 50%;
+}
+.half-width-spaced {
+  width: 47%;
+  margin-right: 3%;
+}
+.third-width {
+  width: 34%;
+}
+.third-width-spaced {
+  width: 30%;
+  margin-right: 3%;
+}
