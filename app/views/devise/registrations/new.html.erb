@@ -46,8 +46,26 @@
             </div> 
           </div>
 
-          <div class="form-row" style="display: none;">
-            <%= collection_check_boxes(:user, :ethnicity_ids, Ethnicity.all, :id, :name) %>
+          <div class="form-row">
+            <div class="form-label auto-line-spacing">
+              Your Ethnicity<br><span class="small-and-light">Check all that apply</span>
+            </div>
+            <div class="form-input">
+              <%= collection_check_boxes(:user, :ethnicity_ids, Ethnicity.all, :id, :name) do |e| %>
+                <!-- Get our ng-model name from rails -->
+                <% ng_model_name = "#{e.object.name.downcase.gsub(/[^0-9a-z]/i, '')}" %>
+                <label>
+                  <!-- The actual checkbox, hidden -->
+                  <%= e.check_box(class: 'hide', 'ng-model' => ng_model_name) %>
+
+                  <!-- Our fancy Material-UI box -->
+                  <div class="mui-checkbox" ng-class="{'mui-checked': <%= ng_model_name %>}">
+                    <div class="box"></div> 
+                    <div class="check"></div>
+                  </div> <%= e.label %>
+                </label>
+              <% end %>
+            </div>
           </div>
 
         </fieldset>
