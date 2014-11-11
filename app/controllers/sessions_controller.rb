@@ -1,15 +1,12 @@
-class RegistrationsController < Devise::RegistrationsController
+class SessionsController < Devise::RegistrationsController
   
-  # GET /users/sign_up
+# GET /resource/sign_in
   def new
-    build_resource({})
-    @validatable = devise_mapping.validatable?
-    if @validatable
-      @minimum_password_length = resource_class.password_length.min
-    end
-    # All of the above is straight-up copied from the Devise::Registrations controller. 
-    respond_with self.resource, layout: 'narrow_side_page'    
+    self.resource = resource_class.new(sign_in_params)
+    clean_up_passwords(resource)
+    respond_with(resource, serialize_options(resource), layout: 'narrow_side_page')
   end
+
 
   # POST /users
   def create
@@ -30,11 +27,11 @@ class RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
-        respond_with resource, location: after_sign_up_path_for(resource), layout: 'narrow_side_page' 
+        respond_with resource, location: after_sign_up_path_for(resource), layout: 'onboarding' 
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
         expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource), layout: 'narrow_side_page' 
+        respond_with resource, location: after_inactive_sign_up_path_for(resource), layout: 'onboarding' 
       end
     else
       clean_up_passwords resource
@@ -42,7 +39,7 @@ class RegistrationsController < Devise::RegistrationsController
       if @validatable
         @minimum_password_length = resource_class.password_length.min
       end
-    respond_with self.resource, layout: 'narrow_side_page'    
+    respond_with self.resource, layout: 'onboarding'    
     end
   end
 
