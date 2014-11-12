@@ -48,6 +48,31 @@ class User < ActiveRecord::Base
   
   has_many :profile_photos, dependent: :destroy
 
+
+  # PERMISSIONS. The relationships that dictate who can chat with who.
+  # Self referential association (http://railscasts.com/episodes/163-self-referential-association?view=asciicast)
+  
+  # Who I want to message
+  has_many :permissions  
+  has_many :targets, through: :permissions
+
+  # Who wants to message me
+  has_many :inverse_permissions, class_name: 'Permission', foreign_key: 'target_user_id'
+  has_many :inverse_target_users, through: :inverse_permissions, source: :user
+
+  # MESSAGES. Similar to permissions.
+  has_many :messages_sent, class_name: 'Message', foreign_key: 'user_id'
+  has_many :recipients, through: :messages_sent
+  
+  has_many :messages_received, class_name: 'Message', foreign_key: 'recipient_id'
+  has_many :senders, through: :messages_received, source: :user
+
+
   enum role: [ :dater, :concierge, :admin ]
   enum sex:  [ :male, :female ]
+
+  # Can I chat with a given user?
+  def can_chat_with(user)
+
+  end
 end
