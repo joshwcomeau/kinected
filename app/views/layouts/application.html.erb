@@ -10,17 +10,8 @@
 </head>
 <body>
 <div class="wrapper with-sidebar">
-  <!-- Sidebar -->
-  <aside>
-    <h1>Kinected</h1>
-    <nav>
-      <ul>
-        <li>Browse</li>
-        <li>Inbox</li>
-        <li>Concierge</li>
-      </ul>
-    </nav>
-  </aside>
+
+  <%= render partial: 'layouts/sidebar' %>
 
   <section>
     <% if notice %>
@@ -30,14 +21,13 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
 
+
     <%= yield %>
+    
+
+    <%= render partial: 'layouts/footer' %>
+    
   </section>
-
-  <!-- Main content -->
-
 </div>
-
-
-
 </body>
 </html>

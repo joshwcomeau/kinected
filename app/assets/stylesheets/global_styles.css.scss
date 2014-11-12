@@ -18,9 +18,10 @@ html, body {
   position: relative;
   min-height: 100%;
   &.with-sidebar {
+    height: 100%; // The 'section' a few lines below takes care of min-height, for footer placement
     padding-left: $sidebar-width;
   }
-  
+
   // main sidebar
   & > aside {
     width: $sidebar-width;
@@ -46,9 +47,10 @@ html, body {
 
   // main content
   & > section {
+    position: relative;
     background: #f3f5f9;
     padding: 30px;
-    min-height: 800px;
+    min-height: 100%;
   }
 }
 
