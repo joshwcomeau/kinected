@@ -89,7 +89,7 @@ feature 'User registrations' do
 
     # Check that it saved profile photo
     expect(User.last.profile_photos.count).to eq(1)
-    expect(User.last.profile_photos.last.photo_object.url).to eq("/uploads/profile_photo/photo_object/#{User.last.id}/sample1.jpg")
+    expect(User.last.profile_photos.last.photo_object.url).to eq("/uploads/profile_photo/photo_object/#{User.last.profile_photos.first.id}/sample1.jpg")
 
   end
 

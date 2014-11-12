@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :ethnicities
   
-  has_many :profile_photos
+  has_many :profile_photos, dependent: :destroy
 
   enum role: [ :dater, :concierge, :admin ]
   enum sex:  [ :male, :female ]

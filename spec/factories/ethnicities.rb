@@ -9,8 +9,9 @@
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
-
+NAMES = %w( African/Black Asian Latino/Latina White European Indian )
 FactoryGirl.define do
   factory :ethnicity do
+    name         { NAMES.sample }
   end
 end
