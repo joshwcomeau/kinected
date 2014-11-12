@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112142033) do
+ActiveRecord::Schema.define(version: 20141112145904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,13 @@ ActiveRecord::Schema.define(version: 20141112142033) do
     t.integer  "user_id"
     t.integer  "recipient_id"
     t.string   "body",         limit: 200
-    t.integer  "status"
+    t.integer  "status",                   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "messages", ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "permissions", force: true do |t|
     t.integer  "user_id"
@@ -42,6 +45,9 @@ ActiveRecord::Schema.define(version: 20141112142033) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "permissions", ["target_user_id"], name: "index_permissions_on_target_user_id", using: :btree
+  add_index "permissions", ["user_id"], name: "index_permissions_on_user_id", using: :btree
 
   create_table "profile_photos", force: true do |t|
     t.string   "photo_object"

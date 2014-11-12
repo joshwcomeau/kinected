@@ -6,7 +6,7 @@
 #  user_id      :integer
 #  recipient_id :integer
 #  body         :string(200)
-#  status       :integer
+#  status       :integer          default(0)
 #  created_at   :datetime
 #  updated_at   :datetime
 #
