@@ -5,10 +5,10 @@ class AddCustomDetailsToUser < ActiveRecord::Migration
     add_column :users, :country, :string
     add_column :users, :postal_code, :string
 
-    # Sex, Role (dater, concierge, admin) and Status (pending, active, banned) are stored as ints, with enum
+    # Role (dater, concierge, admin), Status (pending, active, banned) and Sex are stored as ints, with enum
     add_column :users, :sex, :integer, default: 0
-    add_column :users, :role, :integer, default: 0
     add_column :users, :status, :integer, default: 0
+    add_column :users, :role, :integer
 
     # Geocoded lat/long
     add_column :users, :latitude, :float

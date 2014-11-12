@@ -15,6 +15,14 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
+    # Stop people from toying with the hidden 'role' param
+
+    if role_is_fraudulent
+      flash.now[:error] = "Sorry, there was an unexpected problem"
+      render :new
+      return false
+    end
+
     if params[:profile_photo]
       resource.profile_photos << ProfilePhoto.new(profile_photo_params)
     end
@@ -50,7 +58,7 @@ class RegistrationsController < Devise::RegistrationsController
  
   def sign_up_params
     params.require(:user).permit(
-      :email, :password, :password_confirmation, :birthdate, :country, :postal_code, :sex, :self_summary, :height, :income,
+      :email, :password, :password_confirmation, :birthdate, :country, :postal_code, :sex, :self_summary, :height, :income, :role,
       :num_of_kids, :body_type, :smoking, :drinking, :religion, :education, :work_industry, :wants_kids, :relationship_status,
       :first_name, :last_name, ethnicity_ids: []
     )
@@ -58,6 +66,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   def profile_photo_params
     params.require(:profile_photo).permit(:photo_object)
+  end
+
+  def role_is_fraudulent
+    params[:user] && params[:user][:role] && params[:user][:role] != 'dater'
   end
   # def account_update_params
   #   params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password)

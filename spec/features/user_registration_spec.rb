@@ -87,6 +87,9 @@ feature 'User registrations' do
     expect(User.last.email).to eq("james@dean.com")
     expect(User.last.birthdate).to eq("1984-04-04".to_date)
 
+    # Check that it stored our role as dater
+    expect(User.last.role).to eq("dater")
+
     # Check that it saved profile photo
     expect(User.last.profile_photos.count).to eq(1)
     expect(User.last.profile_photos.last.photo_object.url).to eq("/uploads/profile_photo/photo_object/#{User.last.profile_photos.first.id}/sample1.jpg")

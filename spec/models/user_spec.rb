@@ -19,8 +19,8 @@
 #  country                :string(255)
 #  postal_code            :string(255)
 #  sex                    :integer          default(0)
-#  role                   :integer          default(0)
 #  status                 :integer          default(0)
+#  role                   :integer
 #  latitude               :float
 #  longitude              :float
 #  self_summary           :text

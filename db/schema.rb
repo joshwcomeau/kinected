@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 20141112145904) do
     t.string   "country"
     t.string   "postal_code"
     t.integer  "sex",                    default: 0
-    t.integer  "role",                   default: 0
     t.integer  "status",                 default: 0
+    t.integer  "role"
     t.float    "latitude"
     t.float    "longitude"
     t.text     "self_summary"

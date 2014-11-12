@@ -19,8 +19,8 @@
 #  country                :string(255)
 #  postal_code            :string(255)
 #  sex                    :integer          default(0)
-#  role                   :integer          default(0)
 #  status                 :integer          default(0)
+#  role                   :integer
 #  latitude               :float
 #  longitude              :float
 #  self_summary           :text
@@ -49,6 +49,7 @@ FactoryGirl.define do
     country       "Canada"
     postal_code   "M5V 2R2"
     height        188
+    role          0
 
     factory :user_with_messages do
       ignore do

@@ -134,7 +134,10 @@
 
         </fieldset>
 
-        <div class="submit-button-div"><%= f.submit "Register", class: 'submit-button' %></div>
+        <div class="submit-button-div">
+          <%= f.hidden_field :role, value: "dater" %>
+          <%= f.submit "Register", class: 'submit-button' %>
+        </div>
 
       </div>
       
