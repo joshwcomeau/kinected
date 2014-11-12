@@ -17,6 +17,8 @@ html, body {
 .wrapper {
   position: relative;
   min-height: 100%;
+  z-index: 2;
+
   &.with-sidebar {
     height: 100%; // The 'section' a few lines below takes care of min-height, for footer placement
     padding-left: $sidebar-width;
@@ -25,7 +27,7 @@ html, body {
   // main sidebar
   & > aside {
     width: $sidebar-width;
-    z-index: 10;
+    z-index: 3;
     position: fixed;
     left: 0;
     height: 100%;

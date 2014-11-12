@@ -12,19 +12,20 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',         group: :doc
 gem 'spring',                   group: :development
 
-gem 'angularjs-rails'                                         # Simple Angular wrapper for Rails
-gem 'annotate'                                                # Provides Schema-like annotations on the models' rb files.
-gem 'carrierwave'                                             # File and image processing and storing, wraps rmagick.
-gem 'devise'                                                  # User authentication.
-gem 'font-awesome-rails'                                      # Custom icon pack.
-gem 'geocoder'                                                # Gets latitude and longitude from postal codes.
-gem 'jquery-turbolinks'                                       # Makes $(document).ready() play nice with Turbolinks.
-gem 'neat'                                                    # Bourbon grid system. Installs bourbon gem as well, as a dependency.
-gem 'puma'                                                    # App server. Use this instead of WEBrick.
-gem 'quiet_assets'                                            # Hides asset stuff from the console.
-gem 'rmagick', require: 'RMagick'                             # Image processing for resizing and conversion and such.
-gem 'ruby-units'                                              # IGNORE THE DEPRECATION WARNING ON BUNDLE. I'm just using it to convert cm to ft/in
-gem 'underscore-rails'                                        # Simple wrapper for the Underscore JS library.
+gem 'angularjs-rails'               # Simple Angular wrapper for Rails
+gem 'annotate'                      # Provides Schema-like annotations on the models' rb files.
+gem 'cancancan', '~> 1.9'           # User authorization, controlling who can do what.
+gem 'carrierwave'                   # File and image processing and storing, wraps rmagick.
+gem 'devise'                        # User authentication.
+gem 'font-awesome-rails'            # Custom icon pack.
+gem 'geocoder'                      # Gets latitude and longitude from postal codes.
+gem 'jquery-turbolinks'             # Makes $(document).ready() play nice with Turbolinks.
+gem 'neat'                          # Bourbon grid system. Installs bourbon gem as well, as a dependency.
+gem 'puma'                          # App server. Use this instead of WEBrick.
+gem 'quiet_assets'                  # Hides asset stuff from the console.
+gem 'rmagick', require: 'RMagick'   # Image processing for resizing and conversion and such.
+gem 'ruby-units'                    # IGNORE THE DEPRECATION WARNING ON BUNDLE. I'm just using it to convert cm to ft/in
+gem 'underscore-rails'              # Simple wrapper for the Underscore JS library.
 
 
 group :development, :test do 

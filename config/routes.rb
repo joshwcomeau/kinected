@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' }
-  root 'dashboard#index'
+  
+  authenticated do
+    root :to => 'dashboard#index', as: :authenticated
+  end
+
+  root :to => 'sales#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
