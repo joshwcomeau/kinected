@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   has_many :inverse_target_users, through: :inverse_permissions, source: :user
 
   # MESSAGES. Similar to permissions.
-  has_many :messages_sent, foreign_key: 'user_id'
+  has_many :messages_sent, class_name: 'Message', foreign_key: 'user_id'
   has_many :recipients, through: :messages_sent
   
   has_many :messages_received, class_name: 'Message', foreign_key: 'recipient_id'
@@ -82,5 +82,9 @@ class User < ActiveRecord::Base
       sent:     self.messages_sent,
       received: self.messages_received
     }
+  end
+
+  def default_profile_photo
+    self.profile_photos.find_by(primary: true)
   end
 end

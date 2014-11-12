@@ -1,1 +1,14 @@
 <h2>Messages Index</h2>
+
+<h4>Inbox:</h4>
+<table>
+  <% @inbox.each do |m| %>
+    <tr>
+      <td>
+        <%= m.user.default_profile_photo %>
+      </td>
+      <td><%= m.body %></td>
+      <td><%= m.status %></td>
+    </tr>
+  <% end %>
+</table>
