@@ -20,5 +20,6 @@ RSpec.describe Message, :type => :model do
 
   it "contains a valid sender and receiver" do
     expect(@msg.user).to be_a(User)
+    expect(@msg.recipient).to be_a(User)
   end
 end

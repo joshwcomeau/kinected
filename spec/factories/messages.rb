@@ -15,7 +15,9 @@
 
 FactoryGirl.define do
   factory :message do
+    body "Whee, this is msg contents"
     user
     association :recipient, factory: :user
+
   end
 end

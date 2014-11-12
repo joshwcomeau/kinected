@@ -49,5 +49,17 @@ FactoryGirl.define do
     country       "Canada"
     postal_code   "M5V 2R2"
     height        188
+
+    factory :user_with_messages do
+      ignore do
+        recipient { create(:user) }
+      end
+
+      after(:create) do |user, evaluator|
+        create(:message, user: user, recipient: evaluator.recipient)
+      end
+
+
+    end
   end
 end
