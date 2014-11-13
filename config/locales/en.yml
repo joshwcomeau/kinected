@@ -28,6 +28,7 @@ en:
       header_1: "Basic Information"
       header_2: "Upload Profile Photo"
       header_3: "Account Information"
+      display_name_explanation: "Your Display Name is what other users will see. Your first/last name is kept secret."
       photo_explanation: "Let's start by uploading your first profile picture. Pictures are mandatory to use the site, you won't be seen or be able to interact with users until you have at least 1!"
       photo_skip: "If you want, you can skip this part for now."
       error_name: "Please enter your first and last name."

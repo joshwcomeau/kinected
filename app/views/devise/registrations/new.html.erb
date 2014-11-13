@@ -28,6 +28,17 @@
           </div>
 
           <div class="form-row">
+            <div class="form-label hint--bottom hint--success hint--rounded" data-hint="<%= fetch_content(:display_name_explanation) %>">
+              <%= f.label :display_name, "Display Name" %>
+              <span class="tooltip"><%= fa_icon 'question-circle' %></span>
+            </div>
+            <div class="form-input">
+              <%= f.text_field :display_name, required: true, class: 'full-width', "ng-model" => 'user.display_name' %>
+              <p ng-show="(user.registration_form['user[display_name]'].$invalid || user.registration_form['user[last_name]'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_name) %></p>
+            </div> 
+          </div>
+
+          <div class="form-row">
             <div class="form-label">Your Birthdate</div>
             <div class="form-input">
               <%= number_field_tag "birthdate_month", nil, class: 'third-width-spaced', placeholder: 'MM', in: 1..12, required: true, "ng-model" => 'user.birthdate.month' %><!--  

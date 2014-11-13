@@ -37,6 +37,7 @@
 #  relationship_status    :integer
 #  first_name             :string(255)
 #  last_name              :string(255)
+#  display_name           :string(255)
 #
 
 require 'rails_helper'
