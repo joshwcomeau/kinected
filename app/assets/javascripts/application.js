@@ -16,4 +16,6 @@
 //= require turbolinks
 //= require underscore
 //= require angular
+//= require firebase
+//= require angularfire.min
 //= require_tree .

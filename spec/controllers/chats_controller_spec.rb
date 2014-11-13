@@ -53,11 +53,7 @@ RSpec.describe ChatsController, :type => :controller do
         it "returns 200 OK status" do
           expect(response.status).to eq(200)
         end
-
-
       end
     end
-    
-
   end
 end

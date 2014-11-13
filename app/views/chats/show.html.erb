@@ -1,2 +1,16 @@
 <h2>Chat</h2>
 <p>Between <%= current_user.display_name %> and <%= @other_user.display_name %></p>
+
+<div class="chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>">
+  <ul>
+    <li ng-repeat="msg in chat.messages">
+      <h4>{{msg.message}}</h4>
+      <p>From {{msg.sender}}</p>
+    </li>
+  </ul>
+
+  <form ng-submit="chat.pushMessage(this)">
+    <input type="text" id="chat-message-input" ng-model="chat.current_input" placeholder="Type a message">
+    <input type="submit">
+  </form>
+</div>

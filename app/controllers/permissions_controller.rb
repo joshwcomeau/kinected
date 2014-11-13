@@ -1,5 +1,6 @@
 class PermissionsController < ApplicationController
   load_and_authorize_resource
+  
   # POST /permissions
   def create
     if @permission.save
