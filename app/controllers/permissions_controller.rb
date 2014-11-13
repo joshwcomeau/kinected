@@ -12,6 +12,6 @@ class PermissionsController < ApplicationController
 
   private
   def permission_params
-    params.require(:permission).permit(:user_id, :target_user_id, :status)
+    params.require(:permission).permit(:user_id, :target_user_id, :status, :message_id)
   end
 end

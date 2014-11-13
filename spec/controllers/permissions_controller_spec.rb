@@ -65,7 +65,7 @@ RSpec.describe PermissionsController, :type => :controller do
       end
 
       it "responds with either 200 OK or 302 REDIRECTED" do
-        expect(response.status).to eq(200 || 302)
+        expect([200, 302]).to include(response.status)
       end
     end
   end

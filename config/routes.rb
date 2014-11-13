@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # For now, Im allowing all routes. Will be more specific later.
   resources :permissions
   resources :messages, except: [:new, :edit]
-  resources :chats
+  resources :chats, only: [:show]
   resources :daters, only: [:show]
 
   # The priority is based upon order of creation: first created -> highest priority.
