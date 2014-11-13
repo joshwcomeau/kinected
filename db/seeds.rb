@@ -15,17 +15,19 @@ Ethnicity.create([
 ])
 
 @user1 = User.create({
-  first_name: 'Josh',
-  last_name:  'James',
-  email:      'joshwcomeau@gmail.com',
-  password:   'wootage1',
-  sex:        'male',
-  role:       'dater'
+  first_name:   'Josh',
+  last_name:    'James',
+  display_name: 'Joshua V',
+  email:        'joshwcomeau@gmail.com',
+  password:     'wootage1',
+  sex:          'male',
+  role:         'dater'
 })
 
 @user2 = User.create({
   first_name: 'Tina',
   last_name:  'Fey',
+  display_name: 'Teefay',
   email:      'tina@gmail.com',
   password:   'wootage1',
   sex:        'female',
@@ -35,6 +37,7 @@ Ethnicity.create([
 @user3 = User.create({
   first_name: 'Dan',
   last_name:  'Carlin',
+  display_name: 'CarlinMan1337',
   email:      'dan@gmail.com',
   password:   'wootage1',
   sex:        'male',
@@ -44,6 +47,7 @@ Ethnicity.create([
 @user4 = User.create({
   first_name: 'Jesusa',
   last_name:  'L',
+  display_name: 'Jesus_is_coming_xxx',
   email:      'jc@gmail.com',
   password:   'wootage1',
   sex:        'female',

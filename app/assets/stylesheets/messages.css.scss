@@ -8,9 +8,16 @@
 
   table {
     width: 100%;
+    background: #EEE;    
+
     td {
-      padding: 0.25rem;
+      background: #FFF;
+      padding: 6px;
       border-right: 1px dotted #CCC;
+      border-bottom: 2px solid #EEE;
+    }
+    td:last-of-type {
+      border-right: 0px;
     }
   }
 
@@ -22,5 +29,16 @@
     height: $message-thumbnail-size;
     background-size: cover;
     border-radius: 5px;
+  }
+
+  .user_name {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 400;
+    color: $teal;
+  }
+  .message_preview {
+    font-size: 0.75em;
+    margin-top: 0.5rem;
   }
 }

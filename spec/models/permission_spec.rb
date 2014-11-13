@@ -7,6 +7,7 @@
 #  target_user_id :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  status         :integer
 #
 
 require 'rails_helper'

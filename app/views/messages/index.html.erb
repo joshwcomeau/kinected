@@ -2,7 +2,7 @@
 
 <div class="message-wrapper">
   <section class="received">
-    <h4>Received</h4>
+    <h3>Received</h3>
     <table>
       <% @inbox.each do |m| %>
         <tr>
@@ -12,17 +12,24 @@
             </div>
           </td>
           <td>
-            
-            <%= m.body %>
+            <h4 class="user_name"><%= m.user.display_name %></h4>
+            <p class="message_preview"><%= m.body %></p>
           </td>
-          <td><%= m.status %></td>
+          <td>
+            <%= form_for Permission.new do |p| %>
+              <%= p.hidden_field :user_id, value: current_user.id %>
+              <%= p.hidden_field :target_user_id, value: m.user.id %>
+              <%= p.hidden_field :status, value: 1 %>
+              <%= p.submit "Accept And Chat" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </table>
   </section> 
 
   <section class="received">
-    <h4>Sent</h4>
+    <h3>Sent</h3>
     <table>
       <% @outbox.each do |m| %>
         <tr>
