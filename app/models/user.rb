@@ -46,9 +46,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   has_and_belongs_to_many :ethnicities
-  
   has_many :profile_photos, dependent: :destroy
-
 
   # PERMISSIONS. The relationships that dictate who can chat with who.
   # Self referential association (http://railscasts.com/episodes/163-self-referential-association?view=asciicast)
@@ -68,9 +66,9 @@ class User < ActiveRecord::Base
   has_many :messages_received, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :senders, through: :messages_received, source: :user
 
-
   enum role: [ :dater, :concierge, :admin ]
   enum sex:  [ :male, :female ]
+
 
   # Can I chat with a given user?
   def can_chat_with(user)
@@ -82,7 +80,11 @@ class User < ActiveRecord::Base
     Message.where("user_id = :user or recipient_id = :user", user: id)
   end
 
-  def default_profile_photo
-    self.profile_photos.find_by(primary: true).photo_object
+  def primary_profile_photo
+    self.profile_photos.find_by(primary: true).try(:photo_object) || ProfilePhoto.new.photo_object
+  end
+
+  def primary_profile_photo_thumb
+    self.profile_photos.find_by(primary: true).try(:photo_object).try(:thumb) || ProfilePhoto.new.photo_object
   end
 end

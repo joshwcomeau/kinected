@@ -1,6 +1,6 @@
 # Destroy everything
 
-if Rails.env.production?
+unless Rails.env.production?
   User.destroy_all
   Ethnicity.destroy_all
   Message.destroy_all

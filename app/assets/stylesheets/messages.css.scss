@@ -2,8 +2,6 @@
 @import 'mixins';
 
 .message-wrapper {
-  @include outer-container;
-
   .received, .sent {
     @include span-columns(6);
   }
