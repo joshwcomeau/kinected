@@ -1,0 +1,28 @@
+@import 'variables';
+@import 'mixins';
+
+.message-wrapper {
+  @include outer-container;
+
+  .received, .sent {
+    @include span-columns(6);
+  }
+
+  table {
+    width: 100%;
+    td {
+      padding: 0.25rem;
+      border-right: 1px dotted #CCC;
+    }
+  }
+
+  .message-thumbnail-cell {
+    width: $message-thumbnail-size;
+  }
+  .message-thumbnail {
+    width: $message-thumbnail-size;
+    height: $message-thumbnail-size;
+    background-size: cover;
+    border-radius: 5px;
+  }
+}

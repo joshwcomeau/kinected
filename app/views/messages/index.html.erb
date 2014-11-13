@@ -1,14 +1,41 @@
 <h2>Messages Index</h2>
 
-<h4>Inbox:</h4>
-<table>
-  <% @inbox.each do |m| %>
-    <tr>
-      <td>
-        <%= image_tag m.user.default_profile_photo.thumb %>
-      </td>
-      <td><%= m.body %></td>
-      <td><%= m.status %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="message-wrapper">
+  <section class="received">
+    <h4>Received</h4>
+    <table>
+      <% @inbox.each do |m| %>
+        <tr>
+          <td class="message-thumbnail-cell">
+            <div class="message-thumbnail" style="background-image:url(<%= asset_path m.user.default_profile_photo.thumb %>);">
+              <%= image_tag 'spacer.gif', class: 'full-width-and-height' %>
+            </div>
+          </td>
+          <td>
+            
+            <%= m.body %>
+          </td>
+          <td><%= m.status %></td>
+        </tr>
+      <% end %>
+    </table>
+  </section> 
+
+  <section class="received">
+    <h4>Sent</h4>
+    <table>
+      <% @outbox.each do |m| %>
+        <tr>
+          <td class="message-thumbnail-cell">
+            <div class="message-thumbnail" style="background-image:url(<%= asset_path m.user.default_profile_photo.thumb %>);">
+              <%= image_tag 'spacer.gif', class: 'full-width-and-height' %>
+            </div>
+          </td>
+          <td><%= m.body %></td>
+          <td><%= m.status %></td>
+        </tr>
+      <% end %>
+    </table>
+  </section>  
+
+</div>

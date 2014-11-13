@@ -21,6 +21,7 @@ RSpec.describe MessagesController, :type => :controller do
         # Create some messages
         @message1 = create(:message)
         @message2 = create(:message)
+        @message3 = create(:message)
         @user.messages_received << @message1
         @user.messages_sent     << @message2
         
@@ -48,6 +49,14 @@ RSpec.describe MessagesController, :type => :controller do
       it "returns the message I sent to another user" do
         expect(assigns[:outbox].first).to eq(@message2)
       end
+
+      it "assigns the @messages instance variable to a relation" do
+        expect(assigns[:messages]).to be_a ActiveRecord::Relation
+      end
+
+      it "returns 2 messages, and not any others" do
+        expect(assigns[:messages].count).to eq(2)
+      end      
     end
   end
 
