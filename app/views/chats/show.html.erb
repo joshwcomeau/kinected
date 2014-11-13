@@ -1,15 +1,16 @@
 <h2>Chat</h2>
 <p>Between <%= current_user.display_name %> and <%= @other_user.display_name %></p>
 
-<div class="chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>">
+<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>">
   <ul>
-    <li ng-repeat="msg in chat.messages">
+    <li class="chat-message" ng-repeat="msg in chat.messages" ng-class="[chat.fromSelf(msg) ? 'right' : 'left']">
       <h4>{{msg.message}}</h4>
       <p>From {{msg.sender}}</p>
+      <p style="opacity: 0.7" class="small-and-light">{{ msg.created_at | date:'h:mma, MMMM d yyyy' }}</p>
     </li>
   </ul>
 
-  <form ng-submit="chat.pushMessage(this)">
+  <form ng-submit="chat.pushMessage()" style="clear: both;">
     <input type="text" id="chat-message-input" ng-model="chat.current_input" placeholder="Type a message">
     <input type="submit">
   </form>

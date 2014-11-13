@@ -11,14 +11,17 @@ function ChatsController($scope, $attrs, $firebase) {
 ChatsController.$inject = ['$scope', '$attrs', '$firebase']
 
 
-ChatsController.prototype.pushMessage = function(form_obj) {
-  console.log(form_obj)
+ChatsController.prototype.pushMessage = function() {
   this.messages.$add({
-    sender:   this.sender,
-    receiver: this.receiver,
-    message:  this.current_input
+    sender:     this.sender,
+    receiver:   this.receiver,
+    message:    this.current_input,
+    created_at: Firebase.ServerValue.TIMESTAMP
   });
 };
+
+ChatsController.prototype.fromSelf = function(message) { return message.sender == this.sender; };
+
 
 
 var app = angular.module('kinected');

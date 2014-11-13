@@ -38,6 +38,35 @@
   <section class="received">
     <h3>Sent</h3>
     <table>
+      <% @outbox.each do |m| %>
+        <tr>
+          <td class="message-thumbnail-cell">
+            <div class="message-thumbnail" style="background-image:url(<%= asset_path m.user.primary_profile_photo_thumb %>);">
+              <%= image_tag 'spacer.gif', class: 'full-width-and-height' %>
+            </div>
+          </td>
+          <td>
+            <h4 class="user_name"><%= m.user.display_name %></h4>
+            <p class="message_preview"><%= m.body %></p>
+          </td>
+          <td>
+            <% if m.has_been_accepted? %>
+              <%= link_to "Go To Chat", chat_path(m.user) %>
+            <% elsif m.has_been_rejected? %>
+              Rejected. <%= link_to "Undo" %>
+            <% else %>
+              <%= form_for Permission.new do |p| %>
+                <%= p.hidden_field :user_id, value: current_user.id %>
+                <%= p.hidden_field :target_user_id, value: m.user.id %>
+                <%= p.hidden_field :message_id, value: m.id %>
+                <%= p.hidden_field :status, value: 'allowed' %>
+                <%= p.submit "Accept And Chat" %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+
     </table>
   </section>  
 
