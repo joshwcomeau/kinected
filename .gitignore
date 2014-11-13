@@ -17,3 +17,6 @@
 
 # Ignore secrets, as it holds all of our secret keys
 /config/secrets.yml
+
+# Remove dumb DS_Store
+.DS_Store
