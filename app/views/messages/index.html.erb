@@ -5,7 +5,7 @@
   <% @inbox.each do |m| %>
     <tr>
       <td>
-        <%= m.user.default_profile_photo %>
+        <%= image_tag m.user.default_profile_photo.thumb %>
       </td>
       <td><%= m.body %></td>
       <td><%= m.status %></td>

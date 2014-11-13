@@ -78,13 +78,10 @@ class User < ActiveRecord::Base
 
   # Will return a hash containing two relations (hopefully)
   def messages
-    {
-      sent:     self.messages_sent,
-      received: self.messages_received
-    }
+    Message.where("user_id = :user or recipient_id = :user", user: id)
   end
 
   def default_profile_photo
-    self.profile_photos.find_by(primary: true)
+    self.profile_photos.find_by(primary: true).photo_object
   end
 end
