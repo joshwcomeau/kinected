@@ -1,0 +1,2 @@
+class DatersController < ApplicationController
+end

@@ -8,6 +8,7 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  status         :integer
+#  message_id     :integer
 #
 
 require 'rails_helper'

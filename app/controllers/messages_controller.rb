@@ -3,8 +3,8 @@ class MessagesController < ApplicationController
   
   # GET /messages
   def index
-    @outbox = current_user.messages_sent
-    @inbox  = current_user.messages_received
+    @outbox = current_user.messages_sent.includes(:permissions)
+    @inbox  = current_user.messages_received.includes(:permissions)
   end
 
   # GET /messages/:id

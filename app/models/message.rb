@@ -16,6 +16,8 @@ class Message < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipient, class_name: 'User'
 
+  has_many :permissions # Specifically, it can have up to 2. One for the sender, one for the receiver.
+
   validates :user_id, presence: true
   validates :recipient_id, presence: true
   validates :body, presence: true, length: { maximum: 200 }

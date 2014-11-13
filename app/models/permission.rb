@@ -8,11 +8,17 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  status         :integer
+#  message_id     :integer
 #
 
 class Permission < ActiveRecord::Base
   belongs_to :user
   belongs_to :target_user, class_name: 'User'
+  belongs_to :message
+
+  validates :user_id, presence: true
+  validates :target_user_id, presence: true
+  validates :status, presence: true
 
   enum status: [:blocked, :allowed]
 end

@@ -16,11 +16,14 @@
             <p class="message_preview"><%= m.body %></p>
           </td>
           <td>
-            <%= form_for Permission.new do |p| %>
-              <%= p.hidden_field :user_id, value: current_user.id %>
-              <%= p.hidden_field :target_user_id, value: m.user.id %>
-              <%= p.hidden_field :status, value: 1 %>
-              <%= p.submit "Accept And Chat" %>
+            <% unless m.permissions.any? %>
+              <%= form_for Permission.new do |p| %>
+                <%= p.hidden_field :user_id, value: current_user.id %>
+                <%= p.hidden_field :target_user_id, value: m.user.id %>
+                <%= p.hidden_field :message_id, value: m.id %>
+                <%= p.hidden_field :status, value: 'allowed' %>
+                <%= p.submit "Accept And Chat" %>
+              <% end %>
             <% end %>
           </td>
         </tr>

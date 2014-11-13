@@ -2,7 +2,12 @@ class PermissionsController < ApplicationController
   load_and_authorize_resource
   # POST /permissions
   def create
-
+    if @permission.save
+      flash[:notice] = "Success! You can now chat with this user"
+    else
+      flash[:error] = "Sorry, we could not save your request."
+    end
+    redirect_to messages_path
   end
 
   private
