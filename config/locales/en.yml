@@ -32,6 +32,7 @@ en:
       photo_explanation: "Let's start by uploading your first profile picture. Pictures are mandatory to use the site, you won't be seen or be able to interact with users until you have at least 1!"
       photo_skip: "If you want, you can skip this part for now."
       error_name: "Please enter your first and last name."
+      error_display_name: "Please enter a display name."
       error_birthdate: "Your birthday must be entered in the format MM - DD - YYYY."
       error_gender: "Please click/tap on your gender."
       error_email: "Please enter a valid email (eg. john@gmail.com)."

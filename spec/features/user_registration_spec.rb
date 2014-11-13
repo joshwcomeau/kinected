@@ -13,11 +13,12 @@ feature 'User registrations' do
     visit "/users/sign_up"
 
     # Let's input an invalid birthday and forget to select our gender at first
-    fill_in "user[first_name]", with: 'James'
-    fill_in "user[last_name]",  with: 'Dean'
-    fill_in "birthdate_month",  with: 23
-    fill_in "birthdate_day",    with: 04
-    fill_in "birthdate_year",   with: 1984
+    fill_in "user[first_name]",   with: 'James'
+    fill_in "user[last_name]",    with: 'Dean'
+    fill_in "user[display_name]", with: 'DaBadass'
+    fill_in "birthdate_month",    with: 23
+    fill_in "birthdate_day",      with: 04
+    fill_in "birthdate_year",     with: 1984
 
     expect(page).not_to have_css(".help-block") # No showing errors until I click the button
     find_button("Continue").click

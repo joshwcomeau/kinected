@@ -34,7 +34,7 @@
             </div>
             <div class="form-input">
               <%= f.text_field :display_name, required: true, class: 'full-width', "ng-model" => 'user.display_name' %>
-              <p ng-show="(user.registration_form['user[display_name]'].$invalid || user.registration_form['user[last_name]'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_name) %></p>
+              <p ng-show="user.registration_form['user[display_name]'].$invalid &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_display_name) %></p>
             </div> 
           </div>
 
