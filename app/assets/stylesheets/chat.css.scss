@@ -16,9 +16,16 @@
 
     &.right {
       float: right;
+      .chat-thumbnail { float: right; }
     }
     &.left {
       float: left;
+      .chat-thumbnail { float: left; }
+    }
+
+    .chat-thumbnail {
+      width: 55px;
+      height: 55px;
     }
   }
 }

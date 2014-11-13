@@ -4,6 +4,7 @@
 <div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>">
   <ul>
     <li class="chat-message" ng-repeat="msg in chat.messages" ng-class="[chat.fromSelf(msg) ? 'right' : 'left']">
+      <img ng-src="{{msg.thumbnail}}" alt="{{msg.sender}}'s photo" class="chat-thumbnail">
       <h4>{{msg.message}}</h4>
       <p>From {{msg.sender}}</p>
       <p style="opacity: 0.7" class="small-and-light">{{ msg.created_at | date:'h:mma, MMMM d yyyy' }}</p>
