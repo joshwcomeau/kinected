@@ -18,6 +18,7 @@ feature 'User login' do
     find_button("Log In").click
 
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
+    expect(current_path).to eq("/")
   end
 
   scenario "I can't sign in with bogus info" do
