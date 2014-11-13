@@ -8,7 +8,8 @@ RSpec.describe MessagesController, :type => :controller do
   describe "GET :index" do
     describe "without being logged in" do
       it "doesn't let us" do
-        expect { get :index }.to raise_exception(CanCan::AccessDenied)
+        get :index 
+        expect(flash[:alert]).to eq("You are not authorized to access this page.")
       end   
     end
     
