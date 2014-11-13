@@ -16,7 +16,11 @@
             <p class="message_preview"><%= m.body %></p>
           </td>
           <td>
-            <% unless m.permissions.any? %>
+            <% if m.has_been_accepted? %>
+              <%= link_to "Go To Chat" %>
+            <% elsif m.has_been_rejected? %>
+              Rejected. <%= link_to "Undo" %>
+            <% else %>
               <%= form_for Permission.new do |p| %>
                 <%= p.hidden_field :user_id, value: current_user.id %>
                 <%= p.hidden_field :target_user_id, value: m.user.id %>

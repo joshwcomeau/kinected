@@ -22,4 +22,16 @@ RSpec.describe Message, :type => :model do
     expect(@msg.user).to be_a(User)
     expect(@msg.recipient).to be_a(User)
   end
+
+  it "creates a Permission afterwards" do
+    expect(@msg.permissions.count).to eq(1)
+  end
+
+  it "permission has the right attributes" do
+    permission = @msg.permissions.first
+    expect(permission.user_id).to         eq(@msg.user_id)
+    expect(permission.target_user_id).to  eq(@msg.recipient_id)
+    expect(permission.status).to          eq("allowed")
+    expect(permission.message_id).to      eq(@msg.id)
+  end
 end
