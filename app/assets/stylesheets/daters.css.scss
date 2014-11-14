@@ -1,3 +1,145 @@
-// Place all the styles related to the Daters controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.dater-profile-wrapper {
+
+  .first-row {
+    .profile-photo-container {
+      padding: 1rem;
+      border-right: 1px dotted #AAA;
+      border-bottom: 1px dotted #AAA;
+
+      img {
+        width: 100%;
+        max-height: 100%;
+      }
+
+
+    }
+    .title-area {
+      position: relative;
+      background: #EEE;
+
+      .title-text { 
+        position: absolute;
+        left: 1rem;
+        bottom: 1rem;
+      }
+
+      .title-actions {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+      }
+    }
+  }
+  .second-row {
+
+    .about-dater {
+      
+    }
+    .quick-stats {
+      padding: 0.5rem;
+      background: #BBB;
+      font-size: 0.9rem;
+
+
+      h3 {
+        color: $teal;
+        border-bottom: 1px solid #999;
+        background: #EEE;
+        padding: 0.5rem;
+        font-size: 1.35rem;
+        margin: 0;
+        border-radius: 8px 8px 0 0;
+      }
+
+      li {
+        overflow: auto;
+        display: block;
+        padding: 0.5rem;
+        border-bottom: 1px dotted #AAA;
+
+        &:nth-child(even) {
+          background: #DDD;
+        }
+        &:nth-child(odd) {
+          background: #CCC;
+        }
+      }
+
+      .stat-label {
+        float: left;
+        font-weight: bold;
+      }
+
+      .stat-value {
+        text-align: right;
+        float: right;
+      }
+
+      .not-specified {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+
+.message-modal {
+  textarea {
+    width: 100%;
+    height: 120px;
+    padding: 0.5rem;
+  }
+
+  footer {
+    text-align: right;
+    padding: 1rem 1.2rem !important;
+    input[type=submit] {
+      @include gradient_button;
+      background: $teal;
+    }
+  }
+
+  .modal-close {
+    cursor: default;
+  }
+}
+
+// Mobile styles
+@media screen and (max-width: 480px) {
+  .first-row {
+    .profile-photo-container {
+      img {
+        width: 100%;
+        max-height: 100%;
+      }
+
+
+    }
+    .title-area {
+    }
+  }
+}
+
+// Non-mobile styles
+@media screen and (min-width: 481px) {
+  .first-row {
+    display: flex;
+
+    .profile-photo-container {
+      flex-basis: 250px;
+    }
+    .title-area {
+      flex: 1;
+    }
+  }
+  .second-row {
+    display: flex;
+
+    .about-dater {
+      flex: 1;
+    }
+    .quick-stats {
+      flex-basis: 300px;
+    }
+  }
+}

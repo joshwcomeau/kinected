@@ -18,4 +18,5 @@
 //= require angular
 //= require firebase
 //= require angularfire.min
+//= require modal
 //= require_tree .

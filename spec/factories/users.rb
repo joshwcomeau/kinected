@@ -50,7 +50,8 @@ FactoryGirl.define do
     country       "Canada"
     postal_code   "M5V 2R2"
     height        188
-    role          0
+    sex           0 # male
+    role          0 # dater
 
     factory :user_with_messages do
       ignore do

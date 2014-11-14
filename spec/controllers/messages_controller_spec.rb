@@ -6,37 +6,35 @@ RSpec.describe MessagesController, :type => :controller do
   end
 
   describe "GET :index" do
-    describe "without being logged in" do
+    before(:all) do
+      @user = create(:user)
+      @other_user = create(:user)
+
+      # Create some messages
+      @message1 = create(:message)
+      @message2 = create(:message)
+      @message3 = create(:message)
+      @user.messages_received << @message1
+      @user.messages_sent     << @message2
+      
+      
+    end    
+    context "when not logged in" do
       it "doesn't let us" do
         get :index 
         expect(flash[:alert]).to eq("You are not authorized to access this page.")
       end   
     end
     
-    describe "while logged in" do
-      before(:all) do
-        @user = create(:user)
-        @other_user = create(:user)
-
-        # Create some messages
-        @message1 = create(:message)
-        @message2 = create(:message)
-        @message3 = create(:message)
-        @user.messages_received << @message1
-        @user.messages_sent     << @message2
-        
-        
-      end
-
+    context "when logged in" do
       before(:each) do 
         sign_in :user, @user
         get :index 
       end
-    
 
-      it "renders the index view" do
-        expect(response).to render_template(:index)
-      end 
+      it {
+        is_expected.to render_template(:index)
+      }
 
       it "returns 200 OK status" do
         expect(response.status).to eq(200)
@@ -60,6 +58,34 @@ RSpec.describe MessagesController, :type => :controller do
     end
   end
 
+  describe "POST :create" do
+    context "when requesting JSON" do
+      before(:all) do
+        Message.destroy_all
+        @user = create(:user)
+        @other_user = create(:user)
+      end
 
+      before(:each) do
+        sign_in :user, @user 
+        xhr :post, :create, { message: {
+          user_id:      @user.id,
+          recipient_id: @other_user.id,
+          body:         'Why hello there!'
+        }, format: :json }
+      end
+
+      it "should persist the created message" do
+        expect(Message.count).to eq(1)
+      end 
+
+      it "should respond with JSON" do
+        json = JSON.parse(response.body)
+        expect(json).to be_a Hash
+        expect(json["result"]).to eq(true)
+      end
+
+    end
+  end
 
 end
