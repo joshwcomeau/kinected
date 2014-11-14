@@ -1,7 +1,7 @@
 <h2>Chat</h2>
 <p>Between <%= current_user.display_name %> and <%= @other_user.display_name %></p>
 
-<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>">
+<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>" data-room-id="<%= get_room_id(current_user, @other_user) %>">
   <ul>
     <li class="chat-message" ng-repeat="msg in chat.messages" ng-class="[chat.fromSelf(msg) ? 'right' : 'left']">
       <img ng-src="{{msg.thumbnail}}" alt="{{msg.sender}}'s photo" class="chat-thumbnail">

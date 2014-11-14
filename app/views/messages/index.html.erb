@@ -5,7 +5,7 @@
     <h3>Received</h3>
     <table>
       <% @inbox.each do |m| %>
-        <tr>
+        <tr class="inbox-message-row">
           <td class="message-thumbnail-cell">
             <div class="message-thumbnail" style="background-image:url(<%= asset_path m.user.primary_profile_photo_thumb %>);">
               <%= image_tag 'spacer.gif', class: 'full-width-and-height' %>
@@ -17,7 +17,7 @@
           </td>
           <td>
             <% if m.has_been_accepted? %>
-              <%= link_to "Go To Chat", chat_path(m.user) %>
+              <%= link_to "Go To Chat", chat_path(m.user), class: 'chat-link' %>
             <% elsif m.has_been_rejected? %>
               Rejected. <%= link_to "Undo" %>
             <% else %>
@@ -26,7 +26,7 @@
                 <%= p.hidden_field :target_user_id, value: m.user.id %>
                 <%= p.hidden_field :message_id, value: m.id %>
                 <%= p.hidden_field :status, value: 'allowed' %>
-                <%= p.submit "Accept And Chat" %>
+                <%= p.submit "Accept", class: 'accept-button' %>
               <% end %>
             <% end %>
           </td>

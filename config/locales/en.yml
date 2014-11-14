@@ -38,3 +38,9 @@ en:
       error_email: "Please enter a valid email (eg. john@gmail.com)."
       error_password: "Passwords must be at least 8 characters, and no more than 30."
       error_password_confirmation: "Please enter the same password again. This is to prevent typos."
+
+  flash_messages:
+    permissions:
+      create:
+        success: "Success! You can now chat with this user"
+        failure: "Sorry, we could not save your request."

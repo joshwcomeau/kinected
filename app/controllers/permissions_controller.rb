@@ -4,9 +4,9 @@ class PermissionsController < ApplicationController
   # POST /permissions
   def create
     if @permission.save
-      flash[:notice] = "Success! You can now chat with this user"
+      flash[:notice] = I18n.t "flash_messages.permissions.create.success"
     else
-      flash[:error] = "Sorry, we could not save your request."
+      flash[:error] = I18n.t "flash_messages.permissions.create.failure"
     end
     redirect_to messages_path
   end

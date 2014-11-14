@@ -87,4 +87,5 @@ class User < ActiveRecord::Base
   def primary_profile_photo_thumb
     self.profile_photos.find_by(primary: true).try(:photo_object).try(:thumb) || ProfilePhoto.new.photo_object
   end
+
 end
