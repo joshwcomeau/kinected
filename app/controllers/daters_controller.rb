@@ -4,6 +4,8 @@ class DatersController < ApplicationController
   # GET /daters
   def index
     @users = current_user.get_valid_matches
+    @first_dater = current_user.get_first_valid_match
+    @message = Message.new
   end
 
   # GET /daters/:id

@@ -1,12 +1,12 @@
 <div class="dater-profile-wrapper">
   <div class="first-row">
     <div class="profile-photo-container">
-      <%= image_tag @dater.primary_profile_photo_thumb %>
+      <%= image_tag @first_dater.primary_profile_photo_thumb %>
     </div>
 
     <header class="title-area">
       <div class="title-text">
-        <h1><%= @dater.display_name %></h1>
+        <h1><%= @first_dater.display_name %></h1>
         <h3>Toronto, ON • 28 Years Old • Woman</h3>
       </div>
       <div class="title-actions">
@@ -99,9 +99,6 @@
       </ul>
     </div>
   </div>
-  
-  <%= link_to "Next User", browse_path(num: 1) %>
-
 </div>
 
 <!-- Message Modal -->
@@ -115,7 +112,7 @@
       <footer>
         <div class="character-count">{{200-profile.message.input.length}}</div>
         <%= m.hidden_field :user_id, value: current_user.id %>
-        <%= m.hidden_field :recipient_id, value: @dater.id %>
+        <%= m.hidden_field :recipient_id, value: @first_dater.id %>
         <%= m.submit "Send" %>
       </footer>
     </div>

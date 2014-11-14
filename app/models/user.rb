@@ -103,9 +103,17 @@ class User < ActiveRecord::Base
 
   # We're returning a JSON object that contains the minimal data needed to sort and retrieve matches.
   # We need their id, age, last login time, created_at time, etc. 
+
+  def get_desired_sex
+    sex == 'male' ? 1 : 0 # We only need to grab members of the opposite sex.
+  end
+
   def get_valid_matches
-    desired_sex = sex == 'male' ? 1 : 0 # We only need to grab members of the opposite sex.
-    User.matched_daters(desired_sex).map { |u| u.slice(:id, :birthdate, :last_sign_in_at, :created_at) }
+    User.matched_daters(get_desired_sex).map { |u| u.slice(:id, :birthdate, :last_sign_in_at, :created_at) }
+  end
+
+  def get_first_valid_match
+    User.matched_daters(get_desired_sex).recently_logged_in.first
   end
 
 end

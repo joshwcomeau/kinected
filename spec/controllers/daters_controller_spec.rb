@@ -40,6 +40,10 @@ RSpec.describe DatersController, :type => :controller do
         expect(assigns[:users].first).to be_a Hash
       end
 
+      it "assigns the @first_dater variable" do
+        expect(assigns[:first_dater]).to eq(@lady2)
+      end
+
       it "renders the show view" do
         expect(response).to render_template(:index)
       end
@@ -47,8 +51,6 @@ RSpec.describe DatersController, :type => :controller do
       it "returns 200 OK status" do
         expect(response.status).to eq(200)
       end
-
-
     end
   end
 

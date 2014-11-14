@@ -83,7 +83,7 @@ RSpec.describe User, :type => :model do
     expect(user.ethnicities.count).to eq(2)
   end
 
-  describe ".get_valid_matches" do
+  describe "match functions" do
     before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female, last_sign_in_at: 7.hours.ago, birthdate: 18.years.ago)
@@ -92,13 +92,23 @@ RSpec.describe User, :type => :model do
       @lady4 = create(:user, sex: :female, last_sign_in_at: 3.days.ago,  birthdate: 32.years.ago)
       @man1  = create(:user, sex: :male,   last_sign_in_at: 6.days.ago,  birthdate: 22.years.ago)
     end
+  
 
-    it "returns the right number of objects" do
-      expect(@me.get_valid_matches.count).to eq(4)
+    describe ".get_valid_matches" do
+      it "returns the right number of objects" do
+        expect(@me.get_valid_matches.count).to eq(4)
+      end
+
+      it "returns the right data" do
+        expect(@me.get_valid_matches.first.keys).to eq(["id", "birthdate", "last_sign_in_at", "created_at"])
+      end
     end
 
-    it "returns the right data" do
-      expect(@me.get_valid_matches.first.keys).to eq(["id", "birthdate", "last_sign_in_at", "created_at"])
+    describe ".get_first_valid_match" do
+      it "returns the right match" do
+        expect(@me.get_first_valid_match).to eq(@lady2)
+      end
     end
+
   end
 end
