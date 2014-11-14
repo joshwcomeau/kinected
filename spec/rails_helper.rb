@@ -37,8 +37,8 @@ RSpec.configure do |config|
   config.include FeatureHelpers, :type => :feature
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.before(:each) do
@@ -69,4 +69,5 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+  config.order = "random"
 end

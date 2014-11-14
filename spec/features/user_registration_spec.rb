@@ -98,6 +98,7 @@ feature 'User registrations' do
   end
 
   after(:all) do
+    User.destroy_all
     Capybara.use_default_driver
   end
 end

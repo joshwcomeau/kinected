@@ -12,6 +12,8 @@ feature 'Accept message' do
       recipient_id: @user.id,
       body: 'Hey there partner'
     })
+
+
   end
 
   scenario "to start a new chat" do
@@ -53,6 +55,8 @@ feature 'Accept message' do
 
   after(:all) do
     User.destroy_all # Not sure why this is necessary, database_cleaner isnt working.
+    Permission.destroy_all
     Capybara.use_default_driver
+
   end
 end
