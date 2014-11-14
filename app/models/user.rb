@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
 
   scope :matched_daters, ->(sex) { where(role: 0, sex: sex) }
   scope :between_ages, ->(min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
-  scope :recently_logged_in, -> { order("last_sign_in_at ASC") }
+  scope :recently_logged_in, -> { order("last_sign_in_at DESC") }
 
   # Can I chat with a given user?
   def can_chat_with(user)
@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
     self.profile_photos.find_by(primary: true).try(:photo_object).try(:thumb) || ProfilePhoto.new.photo_object
   end
 
-  def self.find_next_user(num, sex, options={})
+  def find_next_user(num=0, options={})
     desired_sex = sex == 'male' ? 1 : 0
     min_age = options[:min_age] || 18
     max_age = options[:max_age] || 99

@@ -8,13 +8,13 @@ RSpec.describe DatersController, :type => :controller do
   describe "GET :browse" do
     before(:all) do
       @me    = create(:user, sex: :male)
-      @lady1 = create(:user, sex: :female)
-      @lady2 = create(:user, sex: :female)
+      @lady1 = create(:user, sex: :female, last_sign_in_at: 6.days.ago)
+      @lady2 = create(:user, sex: :female, last_sign_in_at: 3.hours.ago)
     end
 
     context "when not signed in" do
       before(:each) { get :browse }
-      
+
       it "doesn't let us" do
         expect(flash[:alert]).to eq("You are not authorized to access this page.")
       end   
@@ -27,7 +27,15 @@ RSpec.describe DatersController, :type => :controller do
     end
 
     context "when signed in" do
-      
+      before(:each) do 
+        sign_in @me
+        get :browse 
+      end
+
+      it "shows me the second lady's profile page" do
+        expect(response).to redirect_to(dater_path(id: @lady2.id))
+      end
+
     end
   end
 

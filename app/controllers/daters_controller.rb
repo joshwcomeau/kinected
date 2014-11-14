@@ -9,7 +9,7 @@ class DatersController < ApplicationController
   # GET /browse
   # Essentially 'show', but for a filtered user
   def browse
-    @user = User.find_next_user(0)
+    @user = current_user.find_next_user()
     redirect_to dater_path(@user)
   end
 

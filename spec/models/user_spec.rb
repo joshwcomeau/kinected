@@ -82,4 +82,35 @@ RSpec.describe User, :type => :model do
     expect(user.save).to eq(true)
     expect(user.ethnicities.count).to eq(2)
   end
+
+  describe ".find_next_user" do
+    before(:all) do
+      @me    = create(:user, sex: :male)
+      @lady1 = create(:user, sex: :female, last_sign_in_at: 7.hours.ago, birthdate: 18.years.ago)
+      @lady2 = create(:user, sex: :female, last_sign_in_at: 1.hours.ago, birthdate: 27.years.ago)
+      @lady3 = create(:user, sex: :female, last_sign_in_at: 3.hours.ago, birthdate: 57.years.ago)
+      @lady4 = create(:user, sex: :female, last_sign_in_at: 3.days.ago,  birthdate: 32.years.ago)
+      @man1  = create(:user, sex: :male,   last_sign_in_at: 6.days.ago,  birthdate: 22.years.ago)
+    end
+
+    context "when no filtering options" do
+      it "returns the first user" do
+        expect(@me.find_next_user).to eq(@lady2)
+      end
+
+      it "returns the second user" do
+        expect(@me.find_next_user(1)).to eq(@lady3)
+      end
+    end
+
+    context "when filtering for age" do
+      it "returns the first appropriate user" do
+        expect(@me.find_next_user(0, {min_age: 18, max_age: 20})).to eq(@lady1)
+      end
+
+      it "returns the second appropriate user" do
+        expect(@me.find_next_user(1, {min_age: 30, max_age: 60})).to eq(@lady4)
+      end
+    end
+  end
 end
