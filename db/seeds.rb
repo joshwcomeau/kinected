@@ -21,7 +21,8 @@ Ethnicity.create([
   email:        'joshwcomeau@gmail.com',
   password:     'wootage1',
   sex:          'male',
-  role:         'dater'
+  role:         'dater',
+  birthdate:    28.years.ago
 })
 
 @user2 = User.create({
@@ -31,7 +32,8 @@ Ethnicity.create([
   email:      'tina@gmail.com',
   password:   'wootage1',
   sex:        'female',
-  role:       'dater'
+  role:       'dater',
+  birthdate:  21.years.ago
 })
 
 @user3 = User.create({
@@ -41,7 +43,8 @@ Ethnicity.create([
   email:      'dan@gmail.com',
   password:   'wootage1',
   sex:        'male',
-  role:       'dater'
+  role:       'dater',
+  birthdate:  48.years.ago
 })
 
 @user4 = User.create({
@@ -51,13 +54,25 @@ Ethnicity.create([
   email:      'jc@gmail.com',
   password:   'wootage1',
   sex:        'female',
-  role:       'dater'
+  role:       'dater',
+  birthdate:  18.years.ago
+})
+
+@concierge1 = User.create({
+  first_name: 'Miss',
+  last_name:  'Manager',
+  display_name: 'MissManagurrr',
+  email:      'concierge@gmail.com',
+  password:   'wootage1',
+  sex:        'female',
+  role:       'concierge'
 })
 
 @user1.profile_photos << ProfilePhoto.create
 @user2.profile_photos << ProfilePhoto.create
 @user3.profile_photos << ProfilePhoto.create
 @user4.profile_photos << ProfilePhoto.create
+@concierge1.profile_photos << ProfilePhoto.create
 
 # Let's make some messages
 Message.create([

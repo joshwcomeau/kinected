@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :chats, only: [:show]
   resources :daters, only: [:show]
 
+  # Browse path for finding filtered users
+  get '/browse' => 'daters#browse'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

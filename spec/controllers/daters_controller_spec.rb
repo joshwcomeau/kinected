@@ -5,6 +5,32 @@ RSpec.describe DatersController, :type => :controller do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
+  describe "GET :browse" do
+    before(:all) do
+      @me    = create(:user, sex: :male)
+      @lady1 = create(:user, sex: :female)
+      @lady2 = create(:user, sex: :female)
+    end
+
+    context "when not signed in" do
+      before(:each) { get :browse }
+      
+      it "doesn't let us" do
+        expect(flash[:alert]).to eq("You are not authorized to access this page.")
+      end   
+      it "responds with a 302 REDIRECT status" do
+        expect(response.status).to eq(302)
+      end      
+      it "redirects us to the homepage" do
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context "when signed in" do
+      
+    end
+  end
+
   describe "GET :show" do
     before(:all) do
       @me   = create(:user, sex: :male)
