@@ -106,13 +106,14 @@
 
 <!-- Message Modal -->
 <section class="modal--show message-modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
-  <%= form_for @message, remote: true do |m| %>
+  <%= form_for @message do |m| %>
     <div class="modal-inner">
       <header id="modal-label"><h3>Send a Message</h3></header>
       <div class="modal-content">
-        <%= m.text_area :body, placeholder: 'Send this user a message' %>
+        <%= m.text_area :body, placeholder: 'Send this user a message', "ng-model" => "profile.message.input", maxlength: 200 %>
       </div>
       <footer>
+        <div class="character-count">{{200-profile.message.input.length}}</div>
         <%= m.hidden_field :user_id, value: current_user.id %>
         <%= m.hidden_field :recipient_id, value: @dater.id %>
         <%= m.submit "Send" %>
@@ -122,47 +123,3 @@
     <a href="#!" class="modal-close" title="Close this modal" data-close="Close" data-dismiss="modal">?</a>
   <% end %>
 </section>
-#  user_id      :integer
-#  recipient_id :integer
-#  body         :string(200)
-#  status       :integer          default(0)
-
-<!-- 
-#  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :inet
-#  last_sign_in_ip        :inet
-#  created_at             :datetime
-#  updated_at             :datetime
-#  birthdate              :date
-#  country                :string(255)
-#  postal_code            :string(255)
-#  sex                    :integer          default(0)
-#  status                 :integer          default(0)
-#  role                   :integer
-#  latitude               :float
-#  longitude              :float
-#  self_summary           :text
-#  height                 :integer
-#  income                 :integer
-#  num_of_kids            :integer
-#  body_type              :integer
-#  smoking                :integer
-#  drinking               :integer
-#  religion               :integer
-#  education              :integer
-#  work_industry          :integer
-#  wants_kids             :integer
-#  relationship_status    :integer
-#  first_name             :string(255)
-#  last_name              :string(255)
-#  display_name           :string(255)
- -->
-

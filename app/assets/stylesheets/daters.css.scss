@@ -99,6 +99,13 @@
     }
   }
 
+  .character-count {
+    float: left;
+    font-size: 2rem;
+    line-height: 1.2em;
+    opacity: 0.4;
+  }
+
   .modal-close {
     cursor: default;
   }
