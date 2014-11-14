@@ -19,13 +19,12 @@ class ChatsController < ApplicationController
     })
 
     if my_perm && !their_perm
-      redirect_to root_url, alert: "Sorry, it appears as though this user does not wish to chat with you at this time."
+      redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_their_permission")
     elsif their_perm && !my_perm
       # Shouldn't be possible to get to this branch unless they type in the ID in the URL.
-      redirect_to root_url, alert: "I've blocked this user. To unblock them, find their message in the Messages page and click 'unblock'"
+      redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_my_permission")
     elsif !my_perm && !their_perm
-      redirect_to root_url, alert: "You are not authorized to view this page."
+      redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_both_permissions")
     end
-
   end
 end

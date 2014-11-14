@@ -44,3 +44,8 @@ en:
       create:
         success: "Success! You can now chat with this user"
         failure: "Sorry, we could not save your request."
+    chats:
+      show:
+        missing_their_permission: "Sorry, it appears as though this user does not wish to chat with you at this time."
+        missing_my_permission: "I've blocked this user. To unblock them, find their message in the Messages page and click 'unblock'"
+        missing_both_permissions: "You are not authorized to view this page."
