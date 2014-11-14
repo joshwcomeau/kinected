@@ -34,7 +34,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
 
   # Custom support modules
-  config.include ControllerHelpers, :type => :controller
+  config.include FeatureHelpers, :type => :feature
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

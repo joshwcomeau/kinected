@@ -8,25 +8,18 @@ feature 'User login' do
     @user = create(:user, email: 'john@doe.com')
   end
 
-  before(:each) do
-    visit "/users/sign_in"    
-  end
-
   scenario "I can sign in as a previously created user" do
-    fill_in "user[email]",    with: 'john@doe.com'
-    fill_in "user[password]", with: '12345678'
-    find_button("Log In").click
+    log_into_site('john@doe.com', '12345678')
 
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
     expect(current_path).to eq("/")
   end
 
   scenario "I can't sign in with bogus info" do
-    fill_in "user[email]",    with: 'johnadoe.com'
-    fill_in "user[password]", with: 'wheee'
-    find_button("Log In").click
+    log_into_site('john@doe.com', 'wheee')
 
     expect(page).to have_content(I18n.t("devise.failure.invalid"))
+    expect(current_path).to eq(new_user_session_path)
   end
 
   after(:all) do
