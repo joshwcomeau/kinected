@@ -17,6 +17,7 @@ gem 'annotate'                      # Provides Schema-like annotations on the mo
 gem 'cancancan', '~> 1.9'           # User authorization, controlling who can do what.
 gem 'carrierwave'                   # File and image processing and storing, wraps rmagick.
 gem 'devise'                        # User authentication.
+gem 'firebase_token_generator'      # Creates firebase token
 gem 'font-awesome-rails'            # Custom icon pack.
 gem 'geocoder'                      # Gets latitude and longitude from postal codes.
 gem 'jquery-turbolinks'             # Makes $(document).ready() play nice with Turbolinks.
