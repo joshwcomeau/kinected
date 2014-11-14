@@ -83,7 +83,7 @@ RSpec.describe User, :type => :model do
     expect(user.ethnicities.count).to eq(2)
   end
 
-  describe ".find_next_user" do
+  describe ".get_valid_matches" do
     before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female, last_sign_in_at: 7.hours.ago, birthdate: 18.years.ago)
@@ -93,24 +93,12 @@ RSpec.describe User, :type => :model do
       @man1  = create(:user, sex: :male,   last_sign_in_at: 6.days.ago,  birthdate: 22.years.ago)
     end
 
-    context "when no filtering options" do
-      it "returns the first user" do
-        expect(@me.find_next_user).to eq(@lady2)
-      end
-
-      it "returns the second user" do
-        expect(@me.find_next_user(1)).to eq(@lady3)
-      end
+    it "returns the right number of objects" do
+      expect(@me.get_valid_matches.count).to eq(4)
     end
 
-    context "when filtering for age" do
-      it "returns the first appropriate user" do
-        expect(@me.find_next_user(0, {min_age: 18, max_age: 20})).to eq(@lady1)
-      end
-
-      it "returns the second appropriate user" do
-        expect(@me.find_next_user(1, {min_age: 30, max_age: 60})).to eq(@lady4)
-      end
+    it "returns the right data" do
+      expect(@me.get_valid_matches.first.keys).to eq(["id", "birthdate", "last_sign_in_at", "created_at"])
     end
   end
 end

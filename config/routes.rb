@@ -12,10 +12,9 @@ Rails.application.routes.draw do
   resources :permissions
   resources :messages, except: [:new, :edit]
   resources :chats, only: [:show]
-  resources :daters, only: [:show]
+  resources :daters, only: [:index, :show]
 
   # Browse path for finding filtered users
-  get '/browse' => 'daters#browse'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

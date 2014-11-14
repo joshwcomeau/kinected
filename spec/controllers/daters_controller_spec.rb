@@ -5,7 +5,7 @@ RSpec.describe DatersController, :type => :controller do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
-  describe "GET :browse" do
+  describe "GET :index" do
     before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female, last_sign_in_at: 6.days.ago)
@@ -13,7 +13,7 @@ RSpec.describe DatersController, :type => :controller do
     end
 
     context "when not signed in" do
-      before(:each) { get :browse }
+      before(:each) { get :index }
 
       it "doesn't let us" do
         expect(flash[:alert]).to eq("You are not authorized to access this page.")
@@ -29,12 +29,25 @@ RSpec.describe DatersController, :type => :controller do
     context "when signed in" do
       before(:each) do 
         sign_in @me
-        get :browse 
+        get :index 
       end
 
-      it "shows me the second lady's profile page" do
-        expect(response).to redirect_to(dater_path(id: @lady2.id))
+      it "assigns the @users variable" do
+        expect(assigns[:users]).to be_a Array
       end
+
+      it "populates @users with a bunch of hashes" do
+        expect(assigns[:users].first).to be_a Hash
+      end
+
+      it "renders the show view" do
+        expect(response).to render_template(:index)
+      end
+
+      it "returns 200 OK status" do
+        expect(response.status).to eq(200)
+      end
+
 
     end
   end
