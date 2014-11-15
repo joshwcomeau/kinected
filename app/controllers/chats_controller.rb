@@ -18,13 +18,13 @@ class ChatsController < ApplicationController
       status:         1
     })
 
-    # if my_perm && !their_perm
-    #   redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_their_permission")
-    # elsif their_perm && !my_perm
-    #   # Shouldn't be possible to get to this branch unless they type in the ID in the URL.
-    #   redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_my_permission")
-    # elsif !my_perm && !their_perm
-    #   redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_both_permissions")
-    # end
+    if my_perm && !their_perm
+      redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_their_permission")
+    elsif their_perm && !my_perm
+      # Shouldn't be possible to get to this branch unless they type in the ID in the URL.
+      redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_my_permission")
+    elsif !my_perm && !their_perm
+      redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_both_permissions")
+    end
   end
 end

@@ -6,7 +6,7 @@ RSpec.describe ChatsController, :type => :controller do
   end
 
   describe "GET :show" do
-    before(:all) do
+    before(:each) do
       @me   = create(:user)
       @them = create(:user)
     end

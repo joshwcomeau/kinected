@@ -6,7 +6,7 @@ RSpec.describe MessagesController, :type => :controller do
   end
 
   describe "GET :index" do
-    before(:all) do
+    before(:each) do
       @user = create(:user)
       @other_user = create(:user)
 
@@ -60,8 +60,7 @@ RSpec.describe MessagesController, :type => :controller do
 
   describe "POST :create" do
     context "when requesting JSON" do
-      before(:all) do
-        Message.destroy_all
+      before(:each) do
         @user = create(:user)
         @other_user = create(:user)
       end

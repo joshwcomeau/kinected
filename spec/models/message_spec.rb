@@ -36,7 +36,7 @@ RSpec.describe Message, :type => :model do
   end
 
   describe ".has_been_accepted?" do
-    before(:all) do
+    before(:each) do
       @me   = create(:user)
       @them = create(:user)
       @msg  = create(:message, user_id: @me.id, recipient_id: @them.id)

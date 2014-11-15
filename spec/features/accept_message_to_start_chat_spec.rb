@@ -54,9 +54,9 @@ feature 'Accept message' do
   end
 
   after(:all) do
-    User.destroy_all # Not sure why this is necessary, database_cleaner isnt working.
-    Permission.destroy_all
     Capybara.use_default_driver
-
+    User.destroy_all
+    Message.destroy_all
+    Permission.destroy_all
   end
 end

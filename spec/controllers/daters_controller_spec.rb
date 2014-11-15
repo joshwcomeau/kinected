@@ -6,8 +6,7 @@ RSpec.describe DatersController, :type => :controller do
   end
 
   describe "GET :index" do
-    before(:all) do
-      User.destroy_all
+    before(:each) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female, last_sign_in_at: 6.days.ago)
       @lady2 = create(:user, sex: :female, last_sign_in_at: 3.hours.ago)
@@ -56,7 +55,7 @@ RSpec.describe DatersController, :type => :controller do
   end
 
   describe "GET :show" do
-    before(:all) do
+    before(:each) do
       @me   = create(:user, sex: :male)
       @them = create(:user, sex: :female)
 

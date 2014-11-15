@@ -23,7 +23,7 @@ feature 'User login' do
   end
 
   after(:all) do
-    User.destroy_all # Not sure why this is necessary, database_cleaner isnt working.
     Capybara.use_default_driver
+    User.destroy_all
   end
 end
