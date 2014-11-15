@@ -7,7 +7,7 @@
     </div>
   </header>
 
-  <div class="narrow-wrapper" ng-controller="UserRegistrationController as user">
+  <div class="narrow-wrapper" ng-controller="UserRegistrationController as user" style="display: none;">
     <p class="justify"><%= fetch_content(:intro_paragraph) %></p>
 
     <%= form_for(resource, {as: resource_name, url: registration_path(resource_name), html: {name: 'user.registration_form', novalidate: true, "ng-submit" => 'user.validateStep(3, $event)', multipart: true}}) do |f| %>

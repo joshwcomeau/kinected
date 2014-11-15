@@ -70,6 +70,10 @@ class User < ActiveRecord::Base
   enum sex:  [ :male, :female ]
 
 
+  scope :matched_daters,      ->(sex) { where(role: 0, sex: sex) }
+  scope :between_ages,        ->(min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
+  scope :recently_logged_in,  -> { order("last_sign_in_at DESC") }
+
   # Can I chat with a given user?
   def can_chat_with(user)
 
@@ -86,6 +90,30 @@ class User < ActiveRecord::Base
 
   def primary_profile_photo_thumb
     self.profile_photos.find_by(primary: true).try(:photo_object).try(:thumb) || ProfilePhoto.new.photo_object
+  end
+
+  # --> OUTDATED <--
+  # def find_next_user(num=0, options={})
+  #   desired_sex = sex == 'male' ? 1 : 0
+  #   min_age = options[:min_age] || 18
+  #   max_age = options[:max_age] || 99
+  #   valid_users = User.matched_daters(desired_sex).between_ages(min_age, max_age).recently_logged_in
+  #   valid_users[num]
+  # end
+
+  # We're returning a JSON object that contains the minimal data needed to sort and retrieve matches.
+  # We need their id, age, last login time, created_at time, etc. 
+
+  def get_desired_sex
+    sex == 'male' ? 1 : 0 # We only need to grab members of the opposite sex.
+  end
+
+  def get_valid_matches
+    User.matched_daters(get_desired_sex).map { |u| u.slice(:id, :birthdate, :last_sign_in_at, :created_at) }
+  end
+
+  def get_first_valid_match
+    User.matched_daters(get_desired_sex).recently_logged_in.first
   end
 
 end

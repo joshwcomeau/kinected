@@ -65,4 +65,15 @@ FactoryGirl.define do
 
     end
   end
+
+  factory :concierge, class: User do
+    email         { Faker::Internet.free_email }
+    password      "12345678"
+    birthdate     Date.today - 21.years
+    country       "Canada"
+    postal_code   "M5V 2R2"
+    height        188
+    sex           0 # male
+    role          1 # concierge
+  end
 end

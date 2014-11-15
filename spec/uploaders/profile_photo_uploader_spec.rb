@@ -18,8 +18,8 @@ describe ProfilePhotoUploader do
   end
 
   context 'the thumb version' do
-    it "should scale down a larger image to be exactly 300 by 300 pixels" do
-      expect(@uploader.thumb).to have_dimensions(300, 300)
+    it "should scale down a larger image to be exactly 250 by 250 pixels" do
+      expect(@uploader.thumb).to have_dimensions(250, 250)
     end
   end
 

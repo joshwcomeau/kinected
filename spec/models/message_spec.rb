@@ -34,4 +34,20 @@ RSpec.describe Message, :type => :model do
     expect(permission.status).to          eq("allowed")
     expect(permission.message_id).to      eq(@msg.id)
   end
+
+  describe ".has_been_accepted?" do
+    before(:all) do
+      @me   = create(:user)
+      @them = create(:user)
+      @msg  = create(:message, user_id: @me.id, recipient_id: @them.id)
+    end
+
+    it "returns false when there's no response to the message" do
+      expect(@msg.has_been_accepted?).to eq(false)
+    end
+
+    it "returns true when the user accepts the message" do
+      @msg.permissions.create(user_id: @them.id, target_user_id: @me.id, status: 1)
+    end
+  end
 end
