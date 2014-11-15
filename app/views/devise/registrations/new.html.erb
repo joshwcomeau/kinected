@@ -23,7 +23,7 @@
             <div class="form-input">
               <%= f.text_field :first_name, autofocus: true, placeholder: 'First Name', required: true, class: 'half-width-spaced', "ng-model" => 'user.first_name' %><!--  
            --><%= f.text_field :last_name, placeholder: 'Last Name', required: true, class: 'half-width', "ng-model" => 'user.last_name' %>
-              <p ng-show="(user.registration_form['user[first_name]'].$invalid || user.registration_form['user[last_name]'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_name) %></p>
+              <p ng-cloak ng-show="(user.registration_form['user[first_name]'].$invalid || user.registration_form['user[last_name]'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_name) %></p>
             </div> 
           </div>
 
@@ -34,7 +34,7 @@
             </div>
             <div class="form-input">
               <%= f.text_field :display_name, required: true, class: 'full-width', "ng-model" => 'user.display_name' %>
-              <p ng-show="user.registration_form['user[display_name]'].$invalid &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_display_name) %></p>
+              <p ng-cloak ng-show="user.registration_form['user[display_name]'].$invalid &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_display_name) %></p>
             </div> 
           </div>
 
@@ -44,7 +44,7 @@
               <%= number_field_tag "birthdate_month", nil, class: 'third-width-spaced', placeholder: 'MM', in: 1..12, required: true, "ng-model" => 'user.birthdate.month' %><!--  
            --><%= number_field_tag "birthdate_day", nil, class: 'third-width-spaced', placeholder: 'DD', in: 1..31, required: true, "ng-model" => 'user.birthdate.day' %><!--  
            --><%= number_field_tag "birthdate_year", nil, class: 'third-width', placeholder: 'YYYY', in: 1901..2014, required: true, "ng-model" => 'user.birthdate.year' %>
-              <p ng-show="(user.registration_form['birthdate_month'].$invalid || user.registration_form['birthdate_day'].$invalid || user.registration_form['birthdate_year'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_birthdate) %></p>
+              <p ng-cloak ng-show="(user.registration_form['birthdate_month'].$invalid || user.registration_form['birthdate_day'].$invalid || user.registration_form['birthdate_year'].$invalid ) &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_birthdate) %></p>
             </div>
           </div>
 
@@ -53,7 +53,7 @@
             <div class="form-input">
               <%= f.radio_button :sex, "male", required: true, "ng-model" => 'user.sex' %><%= f.label :sex_male, "Male", class: 'half-width-spaced sex-select', 'ng-class' => '{selected: user.sex==="male"}' %><!--
            --><%= f.radio_button :sex, "female", required: true, "ng-model" => 'user.sex' %><%= f.label :sex_female, "Female", class: 'half-width sex-select', 'ng-class' => '{selected: user.sex==="female"}' %>
-              <p ng-show="user.registration_form['user[sex]'].$invalid &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_gender) %></p>
+              <p ng-cloak ng-show="user.registration_form['user[sex]'].$invalid &amp;&amp; user.state_status.step1.submitted" class="help-block"><%= fetch_content(:error_gender) %></p>
             </div> 
           </div>
 
@@ -83,7 +83,7 @@
         <div class="next-button-div" ng-show="user.current_step < 2"><%= button_tag "Continue", type: "button", class: 'next-button', "ng-click" => "user.validateStep(1)" %></div>
       </div>
 
-      <div class="step-2" ng-show="user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid">
+      <div class="step-2" ng-cloak ng-show="user.state_status.step1.submitted &amp;&amp; user.state_status.step1.valid">
         <h4 class="form-section-heading" data-number="2"><%= fetch_content(:header_2) %></h4>
         
         <fieldset>
@@ -116,7 +116,7 @@
 
       </div>
 
-      <div class="step-3" ng-show="user.state_status.step2.submitted &amp;&amp; user.state_status.step2.valid">
+      <div class="step-3" ng-cloak ng-show="user.state_status.step2.submitted &amp;&amp; user.state_status.step2.valid">
         <h4 class="form-section-heading" data-number="3"><%= fetch_content(:header_3) %></h4>
         
         <fieldset>
