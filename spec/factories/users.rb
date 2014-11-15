@@ -46,12 +46,24 @@ FactoryGirl.define do
   factory :user do
     email         { Faker::Internet.free_email }
     password      "12345678"
-    birthdate     Date.today - 21.years
+    birthdate     { Date.today - Random.rand(18..50).years }
     country       "Canada"
     postal_code   "M5V 2R2"
-    height        188
-    sex           0 # male
+    height        { Random.rand(120..200) }
+    sex           { Random.rand(0..1) } # male
     role          0 # dater
+    self_summary  { Faker::Lorem.paragraphs }
+    num_of_kids   { Random.rand(0..3) }
+    body_type     { Random.rand(0..4) }
+    smoking       { Random.rand(0..1) }
+    drinking      { Random.rand(0..1) }
+    religion      { Random.rand(0..10) }
+    education     { Random.rand(0..4) }
+    work_industry { Random.rand(0..20) }
+    wants_kids    { Random.rand(0..1) }
+    first_name    { Faker::Name.first_name }
+    last_name     { Faker::Name.last_name }
+    display_name  { Faker::Internet.user_name }
 
     factory :user_with_messages do
       ignore do

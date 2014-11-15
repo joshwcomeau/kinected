@@ -116,4 +116,12 @@ class User < ActiveRecord::Base
     User.matched_daters(get_desired_sex).recently_logged_in.first
   end
 
+  def format_for_angular
+    {
+      user: self,
+      profile_photos: self.profile_photos,
+      ethnicities: self.ethnicities
+    }
+  end
+
 end

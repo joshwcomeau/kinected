@@ -2,6 +2,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var app = angular.module('kinected');
 
   app.factory('grabInitialProfileDetails', function(){
-    return <%= @user.to_json.html_safe %>;
+    return <%= @user.format_for_angular.to_json.html_safe %>;
   });
 });
