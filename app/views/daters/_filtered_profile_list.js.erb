@@ -1,0 +1,7 @@
+document.addEventListener("DOMContentLoaded", function(event) { 
+  var app = angular.module('kinected');
+
+  app.factory('filteredProfileList', function(){
+    return <%= @users.to_json.html_safe %>;
+  });
+});

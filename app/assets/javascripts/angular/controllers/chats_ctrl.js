@@ -4,9 +4,6 @@ function ChatsController($scope, $attrs, $firebase) {
   this.roomID     = $attrs.roomId;
   this.thumbnail  = $attrs.thumbnail; 
 
-  console.log(this.roomID)
-  console.log($attrs)
-
   var firebase_string = "https://kinected.firebaseio.com/chats/"+this.roomID;
   var ref = new Firebase(firebase_string);
   var sync = $firebase(ref);

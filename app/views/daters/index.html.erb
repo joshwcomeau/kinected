@@ -4,5 +4,6 @@
 
 
 <script>
-  var id_list = <%= @id_list.to_json %>;
+  <%= render "filtered_profile_list.js.erb" %>
+  <%= render "grab_initial_profile_details.js.erb" %>
 </script>

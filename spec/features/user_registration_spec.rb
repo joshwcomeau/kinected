@@ -85,8 +85,15 @@ feature 'User registrations' do
     find_button("Register").click
 
     expect(current_path).to eq("/")
-    expect(User.last.email).to eq("james@dean.com")
+
+    # Check that it persisted all fields
+    expect(User.last.first_name).to eq("James")
+    expect(User.last.last_name).to eq("Dean")
+    expect(User.last.display_name).to eq("DaBadass")
     expect(User.last.birthdate).to eq("1984-04-04".to_date)
+    
+    expect(User.last.email).to eq("james@dean.com")
+
 
     # Check that it stored our role as dater
     expect(User.last.role).to eq("dater")
