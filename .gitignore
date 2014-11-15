@@ -15,6 +15,9 @@
 /log/*.log
 /tmp
 
+# Ignore the uploaded files
+/public/uploads
+
 # Ignore secrets, as it holds all of our secret keys
 /config/secrets.yml
 

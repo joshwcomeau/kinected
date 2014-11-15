@@ -60,7 +60,7 @@ class RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(
       :email, :password, :password_confirmation, :birthdate, :country, :postal_code, :sex, :self_summary, :height, :income, :role,
       :num_of_kids, :body_type, :smoking, :drinking, :religion, :education, :work_industry, :wants_kids, :relationship_status,
-      :first_name, :last_name, ethnicity_ids: []
+      :first_name, :last_name, :display_name, ethnicity_ids: []
     )
   end
 

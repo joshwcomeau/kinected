@@ -28,7 +28,7 @@ gem 'ruby-units'                    # IGNORE THE DEPRECATION WARNING ON BUNDLE. 
 gem 'underscore-rails'              # Simple wrapper for the Underscore JS library.
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'                   # File and image processing and storing, wraps rmagick.
-
+gem 'carrierwave-processing'        # Adds quality, strip, colorspace and blur to carrierwave
 
 group :development, :test do 
   gem 'factory_girl_rails'          # Provides factories for quick creation during tests.
