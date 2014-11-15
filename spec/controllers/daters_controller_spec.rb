@@ -7,6 +7,7 @@ RSpec.describe DatersController, :type => :controller do
 
   describe "GET :index" do
     before(:all) do
+      User.destroy_all
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female, last_sign_in_at: 6.days.ago)
       @lady2 = create(:user, sex: :female, last_sign_in_at: 3.hours.ago)
@@ -40,8 +41,8 @@ RSpec.describe DatersController, :type => :controller do
         expect(assigns[:users].first).to be_a Hash
       end
 
-      it "assigns the @first_dater variable" do
-        expect(assigns[:first_dater]).to eq(@lady2)
+      it "assigns the @user variable" do
+        expect(assigns[:user]).to eq(@lady2)
       end
 
       it "renders the show view" do

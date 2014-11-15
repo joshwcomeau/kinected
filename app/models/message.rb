@@ -31,7 +31,7 @@ class Message < ActiveRecord::Base
 
 
   def has_been_accepted?
-    self.permissions.count == 2 && self.permissions.last.status == 'allowed'
+    self.permissions.count == 2 && self.permissions.first.status == 'allowed' && self.permissions.last.status == 'allowed'
     
   end
 
