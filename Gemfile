@@ -7,7 +7,6 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
-gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',         group: :doc
 gem 'spring',                   group: :development
@@ -19,7 +18,6 @@ gem 'devise'                        # User authentication.
 gem 'firebase_token_generator'      # Creates firebase token
 gem 'font-awesome-rails'            # Custom icon pack.
 gem 'geocoder'                      # Gets latitude and longitude from postal codes.
-gem 'jquery-turbolinks'             # Makes $(document).ready() play nice with Turbolinks.
 gem 'neat'                          # Bourbon grid system. Installs bourbon gem as well, as a dependency.
 gem 'puma'                          # App server. Use this instead of WEBrick.
 gem 'quiet_assets'                  # Hides asset stuff from the console.
