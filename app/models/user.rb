@@ -92,6 +92,10 @@ class User < ActiveRecord::Base
     self.profile_photos.find_by(primary: true).try(:photo_object).try(:thumb) || ProfilePhoto.new.photo_object
   end
 
+  def primary_profile_photo_blurred_thumb
+    self.profile_photos.find_by(primary: true).try(:photo_object).try(:blurred_thumb) || ProfilePhoto.new.photo_object
+  end
+
 
 
   # --> OUTDATED <--
@@ -111,10 +115,8 @@ class User < ActiveRecord::Base
   end
 
   def get_valid_matches
-    User.matched_daters(get_desired_sex).map { |u| u.slice(:id, :birthdate, :last_sign_in_at, :created_at) }
+    User.matched_daters(get_desired_sex)
   end
 
-  def get_first_valid_match
-    User.matched_daters(get_desired_sex).recently_logged_in.first
-  end
+
 end

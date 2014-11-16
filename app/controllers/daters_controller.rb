@@ -5,7 +5,7 @@ class DatersController < ApplicationController
   def index
     # Let's overwrite the default loaded daters
     @daters = current_user.get_valid_matches
-    @dater = User.find(@daters.first[:id])
+    @dater = User.first
     @message = Message.new
   end
 

@@ -64,14 +64,54 @@ RSpec.describe DatersHelper, :type => :helper do
 
     describe "formatted times" do
       it "formats in words their time since joining the site" do
-        expect(@user[:joined]).to eq("less than a minute")
+        expect(@user[:joined_ago]).to eq("less than a minute")
+      end
+      it "returns milliseconds since epoch" do
+        expect(@user[:joined_num]).to eq(@rails_user.created_at.to_i * 1000)
       end
     end
 
-
+    after(:all) do
+      User.destroy_all
+    end
   end
 
-  after(:all) do
-    User.destroy_all
+  describe "#format_user_list_for_angular" do
+    before(:all) do
+      @me     = create(:user, sex: 'male')
+      @girl1  = create(:user, sex: 'female')
+      @girl2  = create(:user, sex: 'female')
+      @girl3  = create(:user, sex: 'female')
+      @girl4  = create(:user, sex: 'female')
+      @girl5  = create(:user, sex: 'female')
+      @users  = format_user_list_for_angular(@me.get_valid_matches)
+    end
+
+    it "gets the right number of users" do
+      expect(@users.count).to eq(5)
+    end
+
+    describe "the first user" do
+      subject { @users.first }
+      it "pulls out their ID" do
+        expect(subject[:id]).to eq(@girl1.id)
+      end
+
+      it "grabs their blurred thumb URL" do
+        expect(subject[:thumb]).to eq(@girl1.profile_photos.find_by(primary: true).photo_object.blurred_thumb.url)
+      end
+
+      it "grabs their last seen date" do
+
+      end
+
+      it "grabs their last seen string" do
+
+      end
+    end
+
+    after(:all) do
+      User.destroy_all
+    end
   end
 end

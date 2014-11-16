@@ -4,7 +4,7 @@ function ProfileController($scope, $attrs, filteredProfileList, grabInitialProfi
 
 
   console.log(this.profile);
-  console.log(this.profiles == null);
+  console.log(this.profiles);
 }
 
 ProfileController.$inject = ['$scope', '$attrs', 'filteredProfileList', 'grabInitialProfileDetails']
