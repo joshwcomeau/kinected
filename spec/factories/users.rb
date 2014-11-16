@@ -52,7 +52,7 @@ FactoryGirl.define do
     height        { Random.rand(120..200) }
     sex           { Random.rand(0..1) } # male
     role          0 # dater
-    self_summary  { Faker::Lorem.paragraphs }
+    self_summary  { Faker::Lorem.paragraph }
     num_of_kids   { Random.rand(0..3) }
     body_type     { Random.rand(0..4) }
     smoking       { Random.rand(0..1) }

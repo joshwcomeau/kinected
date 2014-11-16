@@ -66,8 +66,8 @@ class User < ActiveRecord::Base
   has_many :messages_received, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :senders, through: :messages_received, source: :user
 
-  enum role: [ :dater, :concierge, :admin ]
-  enum sex:  [ :male, :female ]
+  enum role:          [ :dater, :concierge, :admin ]
+  enum sex:           [ :male, :female ]
 
 
   scope :matched_daters,      ->(sex) { where(role: 0, sex: sex) }

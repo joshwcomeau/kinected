@@ -13,4 +13,13 @@
 class ProfilePhoto < ActiveRecord::Base
   belongs_to :user
   mount_uploader :photo_object, ProfilePhotoUploader
+
+  before_save :unset_other_primary
+
+  def unset_other_primary
+    if primary && user_id
+      former_primary = self.user.profile_photos.find_by(primary: true)
+      former_primary.update(primary: false) if former_primary
+    end
+  end
 end

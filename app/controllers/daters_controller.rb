@@ -3,8 +3,9 @@ class DatersController < ApplicationController
   
   # GET /daters
   def index
-    @users = current_user.get_valid_matches
-    @user = current_user.get_first_valid_match
+    # Let's overwrite the default loaded daters
+    @daters = current_user.get_valid_matches
+    @dater = User.find(@daters.first.id)
     @message = Message.new
   end
 
