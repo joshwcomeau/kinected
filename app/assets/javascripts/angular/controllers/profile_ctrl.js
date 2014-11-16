@@ -1,9 +1,9 @@
 function ProfileController($scope, $attrs, filteredProfileList, grabInitialProfileDetails) {
   this.profiles = filteredProfileList;
-  this.user     = grabInitialProfileDetails;
+  this.profile     = grabInitialProfileDetails;
 
 
-  console.log(this.user);
+  console.log(this.profile);
   console.log(this.profiles == null);
 }
 

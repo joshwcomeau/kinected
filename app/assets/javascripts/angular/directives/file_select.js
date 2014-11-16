@@ -1,5 +1,3 @@
-var app = angular.module('kinected');
-  
 app.directive("ngFileSelect", function(fileReader, $timeout) {
   return {
     scope: {

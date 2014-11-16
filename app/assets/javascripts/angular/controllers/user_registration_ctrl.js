@@ -1,7 +1,3 @@
-var app = angular.module('kinected');
-
-app.controller('UserRegistrationController', UserRegistrationController);
-
 function UserRegistrationController() {
   this.current_step = 1;
   this.num_of_steps = 3;
@@ -88,5 +84,6 @@ function checkRequiredFields(fields, step, context) {
       }
     }
   });
-
 }
+
+app.controller('UserRegistrationController', UserRegistrationController);

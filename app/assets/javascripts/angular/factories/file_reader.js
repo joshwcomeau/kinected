@@ -1,5 +1,3 @@
-var app = angular.module('kinected');
-
 app.factory("fileReader", function($q, $log) {
   var onLoad = function(reader, deferred, scope) {
     return function() {

@@ -1,13 +1,13 @@
-<div class="dater-profile-wrapper" ng-controller="ProfileController as profile">
+<div class="dater-profile-wrapper" ng-controller="ProfileController as user">
   <div class="first-row">
     <div class="profile-photo-container">
-      <img ng-src="{{profile.user.primary_profile_photo.photo_object.thumb.url}}">
+      <img ng-src="{{user.profile.primary_profile_photo.photo_object.thumb.url}}">
     </div>
 
     <header class="title-area">
       <div class="title-text">
-        <h1>{{profile.user.display_name}}</h1>
-        <h3>Toronto, ON • 28 Years Old • Woman</h3>
+        <h1>{{user.profile.display_name}}</h1>
+        <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | ageFilter}} Years Old • Woman</h3>
       </div>
       <div class="title-actions">
         <a href="#message-modal">Send a Message</a>

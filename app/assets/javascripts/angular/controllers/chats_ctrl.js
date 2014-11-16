@@ -29,7 +29,4 @@ ChatsController.prototype.pushMessage = function() {
 
 ChatsController.prototype.fromSelf = function(message) { return message.sender == this.sender; };
 
-
-
-var app = angular.module('kinected');
 app.controller('ChatsController', ['$scope', '$attrs', '$firebase', ChatsController]);
