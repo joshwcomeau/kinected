@@ -27,6 +27,6 @@ RSpec.describe ProfilePhoto, :type => :model do
     @user.profile_photos << ProfilePhoto.new(photo_object: File.open("/users/Shared/sample2.jpg"))
     @second_photo = @user.profile_photos.second
     expect(@second_photo.primary).to eq(true)
-    expect(@first_photo.primary).to eq(false)
+    expect(@first_photo.reload.primary).to eq(false)
   end
 end
