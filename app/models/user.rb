@@ -92,6 +92,8 @@ class User < ActiveRecord::Base
     self.profile_photos.find_by(primary: true).try(:photo_object).try(:thumb) || ProfilePhoto.new.photo_object
   end
 
+
+
   # --> OUTDATED <--
   # def find_next_user(num=0, options={})
   #   desired_sex = sex == 'male' ? 1 : 0
@@ -117,11 +119,11 @@ class User < ActiveRecord::Base
   end
 
   def format_for_angular
-    {
-      user: self,
-      profile_photos: self.profile_photos,
-      ethnicities: self.ethnicities
-    }
+    user = self.attributes
+    user[:primary_profile_photo] = self.profile_photos.find_by(primary: true)
+    user[:profile_photos] = self.profile_photos.where.not(primary: true)
+    user[:ethnicities]    = self.ethnicities
+    user
   end
 
 end

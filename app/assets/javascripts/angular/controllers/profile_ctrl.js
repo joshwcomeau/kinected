@@ -1,10 +1,10 @@
 function ProfileController($scope, $attrs, filteredProfileList, grabInitialProfileDetails) {
   this.profiles = filteredProfileList;
-  this.profile  = grabInitialProfileDetails;
+  this.user     = grabInitialProfileDetails;
 
 
-  console.log(this.profile);
-  console.log(this.profiles);
+  console.log(this.user);
+  console.log(this.profiles == null);
 }
 
 ProfileController.$inject = ['$scope', '$attrs', 'filteredProfileList', 'grabInitialProfileDetails']

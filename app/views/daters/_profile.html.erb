@@ -1,12 +1,12 @@
 <div class="dater-profile-wrapper" ng-controller="ProfileController as profile">
   <div class="first-row">
     <div class="profile-photo-container">
-      <%= image_tag @dater.primary_profile_photo_thumb %>
+      <img ng-src="{{profile.user.primary_profile_photo.photo_object.thumb.url}}">
     </div>
 
     <header class="title-area">
       <div class="title-text">
-        <h1><%= @dater.display_name %></h1>
+        <h1>{{profile.user.display_name}}</h1>
         <h3>Toronto, ON • 28 Years Old • Woman</h3>
       </div>
       <div class="title-actions">
@@ -120,3 +120,9 @@
     <a href="#!" class="modal-close" title="Close this modal" data-close="Close" data-dismiss="modal">?</a>
   <% end %>
 </section>
+
+<script>
+  // These two factories get loaded to manage users.
+  <%= render "filtered_profile_list.js.erb" %>
+  <%= render "grab_initial_profile_details.js.erb" %>
+</script>
