@@ -33,7 +33,9 @@
   .second-row {
 
     .about-dater {
-      
+      p {
+        white-space: pre; // Turns \n into <br/>, essentially.
+      }
     }
     .quick-stats {
       padding: 0.5rem;

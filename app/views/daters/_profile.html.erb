@@ -5,7 +5,7 @@
     </div>
 
     <header class="title-area">
-      <div class="title-text">
+      <div class="title-text" ng-cloak>
         <h1>{{user.profile.display_name}}</h1>
         <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | ageFilter}} Years Old • Woman</h3>
       </div>
@@ -20,10 +20,7 @@
       <h2>About This User</h2>
 
       <h4>Self-Summary</h4>
-      <p>Hi :)</p>
-      <p>I guess I would describe myself as a homebody, but I do love dining out, museums and movies (horror movies are my favourite!). I’m not really into the club/bar scene, and I don’t drink, but I do love music and dancing. I love to cook...and eat! Indian is by far my favourite and I like a good Cantonese Chowmein or Thai Red Curry! I love long walks, as cliché as that sounds, especially in the Spring or Fall. I could spend all day at a beach, esp if I have a good book. Reading is my go-to… I read anything from Mitch Albom to Veronica Roth. I have zero tolerance for homophobia / sexism / cacomorphobia. I'm terrible at Math! I can't paint to save my life but I love it :) and I think kindness is a really underrated trait.</p>
-      <p>I’m really close to my family, I place a lot of value in education, and I try my best to have a positive outlook on any situation :).</p>
-      <p>(The Other Ethnicity is: Canadian-Trini / Indo-Caribbean)</p>
+      <p>{{user.profile.self_summary}}</p>
       
       <h4>I'm really good at</h4>
       <p>Cooking!<br>dancing<br>left turns :)</p>

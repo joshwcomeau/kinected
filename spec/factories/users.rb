@@ -48,6 +48,8 @@ FactoryGirl.define do
     password      "12345678"
     birthdate     { Date.today - Random.rand(18..50).years }
     country       "Canada"
+    city          "Toronto"
+    state         "Ontario"
     postal_code   "M5V 2R2"
     height        { Random.rand(120..200) }
     sex           { Random.rand(0..1) } # male
@@ -65,6 +67,11 @@ FactoryGirl.define do
     last_name     { Faker::Name.last_name }
     display_name  { Faker::Internet.user_name }
 
+    after(:create) do |user|
+      # Attach a profile photo
+      create_list(:profile_photo, 3, user_id: user.id)
+    end
+
     factory :user_with_messages do
       ignore do
         recipient { create(:user) }
@@ -73,8 +80,6 @@ FactoryGirl.define do
       after(:create) do |user, evaluator|
         create(:message, user: user, recipient: evaluator.recipient)
       end
-
-
     end
   end
 

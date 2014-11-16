@@ -117,13 +117,4 @@ class User < ActiveRecord::Base
   def get_first_valid_match
     User.matched_daters(get_desired_sex).recently_logged_in.first
   end
-
-  def format_for_angular
-    user = self.attributes
-    user[:primary_profile_photo] = self.profile_photos.find_by(primary: true)
-    user[:profile_photos] = self.profile_photos.where.not(primary: true)
-    user[:ethnicities]    = self.ethnicities
-    user
-  end
-
 end
