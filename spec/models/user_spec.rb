@@ -101,14 +101,18 @@ RSpec.describe User, :type => :model do
         expect(@me.get_valid_matches.count).to eq(4)
       end
 
-      it "returns the right data" do
-        expect(@me.get_valid_matches.first.keys).to eq(["id", "birthdate", "last_sign_in_at", "created_at"])
+      it "returns the right kind of data" do
+        expect(@me.get_valid_matches.first).to be_a User
       end
     end
 
-    describe ".get_first_valid_match" do
-      it "returns the right match" do
-        expect(@me.get_first_valid_match).to eq(@lady2)
+    describe ".get_desired_sex" do
+      it "returns the right sex for @me" do
+        expect(@me.get_desired_sex).to eq(1)
+      end
+
+      it "returns the right sex for @lady1" do
+        expect(@lady1.get_desired_sex).to eq(0)
       end
     end
 

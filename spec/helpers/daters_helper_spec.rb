@@ -98,7 +98,7 @@ RSpec.describe DatersHelper, :type => :helper do
       end
 
       it "grabs their blurred thumb URL" do
-        expect(subject[:thumb]).to eq(@girl1.profile_photos.find_by(primary: true).photo_object.blurred_thumb.url)
+        expect(subject[:blurred_thumb]).to eq(@girl1.profile_photos.find_by(primary: true).photo_object.blurred_thumb.url)
       end
 
       it "grabs their last seen date" do

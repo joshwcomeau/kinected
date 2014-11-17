@@ -32,16 +32,16 @@ RSpec.describe DatersController, :type => :controller do
         get :index 
       end
 
-      it "assigns the @users variable" do
-        expect(assigns[:users]).to be_a Array
+      it "assigns the @daters variable" do
+        expect(assigns[:daters]).to be_a ActiveRecord::Relation
       end
 
-      it "populates @users with a bunch of hashes" do
-        expect(assigns[:users].first).to be_a Hash
+      it "populates @daters with a bunch of users" do
+        expect(assigns[:daters].first).to be_a User
       end
 
-      it "assigns the @user variable" do
-        expect(assigns[:user]).to eq(@lady2)
+      it "assigns the @dater variable" do
+        expect(assigns[:dater]).to be_a User
       end
 
       it "renders the show view" do

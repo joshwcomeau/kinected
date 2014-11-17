@@ -15,18 +15,16 @@ require 'rails_helper'
 RSpec.describe ProfilePhoto, :type => :model do
   before(:each) do
     @user = create(:user)
-    @user.profile_photos << ProfilePhoto.new(photo_object: File.open("/users/Shared/sample1.jpg"))
-    @first_photo = @user.profile_photos.first
+    @new_photo = ProfilePhoto.create(photo_object: File.open("/users/Shared/sample1.jpg"), user_id: @user.id)
   end
 
   it "sets the uploaded photo to 'primary'" do
-    expect(@first_photo.primary).to eq(true)
+    expect(@new_photo.primary).to eq(true)
   end
 
   it "revokes primary status from old photos upon new upload" do
-    @user.profile_photos << ProfilePhoto.new(photo_object: File.open("/users/Shared/sample2.jpg"))
-    @second_photo = @user.profile_photos.second
-    expect(@second_photo.primary).to eq(true)
-    expect(@first_photo.reload.primary).to eq(false)
+    @even_newer_photo = ProfilePhoto.create(photo_object: File.open("/users/Shared/sample2.jpg"), user_id: @user.id)
+    expect(@even_newer_photo.primary).to eq(true)
+    expect(@new_photo.reload.primary).to eq(false)
   end
 end
