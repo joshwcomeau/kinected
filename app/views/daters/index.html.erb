@@ -1,3 +1,27 @@
-<h2>Browsing Matches</h2>
+<div ng-controller="ProfileController as user" class="dater-profile-wrapper">
+  <h2>Browsing Matches</h2>
 
-<%= render partial: 'profile' %>
+  <%= render partial: 'profile' %>
+
+  <div class="third-row">
+    <div style="float: left">Order: Recently joined</div>
+    <div style="float: right"><button ng-click="user.goToNextMatch()" class="next-match-button">Next Match</button></div>
+    
+    <div class="filmstrip" ng-cloak>
+      <ul class="filmstrip-ul">
+        <li class="previous-spot">
+          <img ng-src="{{user.previousProfile.blurred_thumb}}">
+        </li>
+
+        <li ng-repeat="dater in user.profiles" data-id="{{dater.id}}" data-joined="{{dater.joined}}" data-last-seen="{{dater.last_seen}}" ng-class="{selected: dater.id === user.selectedProfile }" ng-if="$index >= user.selectedProfileIndex">
+          <img ng-src="{{dater.id === user.selectedProfile ? dater.active_thumb : dater.blurred_thumb}}">
+        </li>
+      </ul> 
+    </div>
+  </div>
+</div>
+
+<script>
+  // this factory grabs an array of hashes containing basic information about other matches.
+  <%= render "filtered_profile_list.js.erb" %>
+</script>

@@ -18,7 +18,7 @@ class DatersController < ApplicationController
         # Go with the implied render
       end
       format.json do
-        @dater = User.find(params[:id]).get_full_match_data
+        render json: User.find(params[:id]).get_full_match_data
       end
     end
   end

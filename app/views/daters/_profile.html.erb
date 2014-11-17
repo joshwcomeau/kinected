@@ -1,120 +1,102 @@
-<div class="dater-profile-wrapper" ng-controller="ProfileController as user">
-  <div class="first-row">
-    <div class="profile-photo-container">
-      <img ng-src="{{user.profile.primary_profile_photo.photo_object.thumb.url}}">
-    </div>
 
-    <header class="title-area">
-      <div class="title-text" ng-cloak>
-        <h1>{{user.profile.display_name}}</h1>
-        <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | dateToAge}} Years Old • {{user.profile.sex}}</h3>
-      </div>
-      <div class="title-actions">
-        <a href="#message-modal">Send a Message</a>
-      </div>
-    </header>
+<div class="first-row">
+  <div class="profile-photo-container">
+    <img ng-src="{{user.profile.primary_profile_photo.photo_object.thumb.url}}">
   </div>
-  
-  <div class="second-row">
-    <div class="about-dater">
-      <h2>About This User</h2>
 
-      <h4>Self-Summary</h4>
-      <p class="pre-wrap">{{user.profile.self_summary}}</p>
-      
-      <h4>I'm really good at</h4>
-      <p>Cooking!<br>dancing<br>left turns :)</p>
+  <header class="title-area">
+    <div class="title-text" ng-cloak>
+      <h1>{{user.profile.display_name}}</h1>
+      <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | dateToAge}} Years Old • {{user.profile.sex}}</h3>
+    </div>
+    <div class="title-actions">
+      <a href="#message-modal">Send a Message</a>
+    </div>
+  </header>
+</div>
+
+<div class="second-row">
+  <div class="about-dater">
+    <h2>About This User</h2>
+
+    <h4>Self-Summary</h4>
+    <p class="pre-wrap">{{user.profile.self_summary}}</p>
+    
+    <h4>I'm really good at</h4>
+    <p>Cooking!<br>dancing<br>left turns :)</p>
 
 <!--       <h4>Favorite books, movies, shows, music and food</h4>
-      <p>Movies: Hannibal, Sweet Home Alabama, The Exorcist, The Shining, The Notebook, The Mummy, Fast and Furious, Lord of the Rings, Bad Boys, My Girl, Harry Potter... the list goes on</p>
+    <p>Movies: Hannibal, Sweet Home Alabama, The Exorcist, The Shining, The Notebook, The Mummy, Fast and Furious, Lord of the Rings, Bad Boys, My Girl, Harry Potter... the list goes on</p>
 
-      <p>Some of my favorite books are: Born Confused, The Mortal Instruments, The Space Between Us, Divergent, The Five People you Meet in Heaven, The Perks of Being a Wallflower etc.</p>
+    <p>Some of my favorite books are: Born Confused, The Mortal Instruments, The Space Between Us, Divergent, The Five People you Meet in Heaven, The Perks of Being a Wallflower etc.</p>
 
-      <p>TV: Suits, Criminal Minds, Game of Thrones, Saving Hope, Orange is the New Black, Master Chef, Catfish *ahem*, Revenge, Once Upon a Time, The Mentalist ...</p>
+    <p>TV: Suits, Criminal Minds, Game of Thrones, Saving Hope, Orange is the New Black, Master Chef, Catfish *ahem*, Revenge, Once Upon a Time, The Mentalist ...</p>
 
-      <p>I like all types of music ... except Heavy Metal and Rap :P</p>
- -->    </div>
+    <p>I like all types of music ... except Heavy Metal and Rap :P</p>
+-->    </div>
 
-    <div class="quick-stats">
-      <h3>Quick Stats</h3>
-      <ul>
-        <li>
-          <div class="stat-label">Last Seen:</div>
-          <div class="stat-value" ng-if="user.profile.last_seen_ago">{{user.profile.last_seen_ago}}</div>
-          <div class="stat-value not-specified" ng-if="!user.profile.last_seen_ago">Not Specified</div>
-        </li>
-        <li>
-          <div class="stat-label">Distance:</div>
-          <div class="stat-value" ng-if="user.profile.distance">{{user.profile.distance}}</div>
-          <div class="stat-value not-specified" ng-if="!user.profile.distance">Not Specified</div>
-        </li>
-        <li>
-          <div class="stat-label">Ethnicity:</div>
-          <div class="stat-value pre-wrap" ng-if="user.profile.eth_string">{{user.profile.eth_string}}</div>
-          <div class="stat-value not-specified" ng-if="!user.profile.eth_string">Not Specified</div>
-        </li>
-        <li>
-          <div class="stat-label">Height:</div>
-          <div class="stat-value pre-wrap" ng-if="user.profile.height_ft">
-            {{user.profile.height_ft}} ({{user.profile.height_cm}})
-          </div>
-          <div class="stat-value not-specified" ng-if="!user.profile.height_ft">Not Specified</div>          
-        </li>
-        <li>
-          <div class="stat-label">Body Type:</div>
-          <div class="stat-value" ng-if="user.profile.body_type">{{user.profile.body_type}}</div>
-          <div class="stat-value not-specified" ng-if="!user.profile.body_type">Not Specified</div>          
+  <div class="quick-stats">
+    <h3>Quick Stats</h3>
+    <ul>
+      <li>
+        <div class="stat-label">Last Seen:</div>
+        <div class="stat-value" ng-if="user.profile.last_seen_ago">{{user.profile.last_seen_ago}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.last_seen_ago">Not Specified</div>
+      </li>
+      <li>
+        <div class="stat-label">Distance:</div>
+        <div class="stat-value" ng-if="user.profile.distance">{{user.profile.distance}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.distance">Not Specified</div>
+      </li>
+      <li>
+        <div class="stat-label">Ethnicity:</div>
+        <div class="stat-value pre-wrap" ng-if="user.profile.eth_string">{{user.profile.eth_string}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.eth_string">Not Specified</div>
+      </li>
+      <li>
+        <div class="stat-label">Height:</div>
+        <div class="stat-value pre-wrap" ng-if="user.profile.height_ft">
+          {{user.profile.height_ft}} ({{user.profile.height_cm}})
+        </div>
+        <div class="stat-value not-specified" ng-if="!user.profile.height_ft">Not Specified</div>          
+      </li>
+      <li>
+        <div class="stat-label">Body Type:</div>
+        <div class="stat-value" ng-if="user.profile.body_type">{{user.profile.body_type}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.body_type">Not Specified</div>          
 
-        </li>
-        <li>
-          <div class="stat-label">Work Industry:</div>
-          <div class="stat-value" ng-if="user.profile.work_industry">{{user.profile.work_industry}}</div>
-          <div class="stat-value not-specified" ng-if="!user.profile.work_industry">Not Specified</div>          
-        </li>
-        <li>
-          <div class="stat-label">Religion:</div>
-          <div class="stat-value" ng-if="user.profile.religion">{{user.profile.religion}}</div>
-          <div class="stat-value not-specified" ng-if="!user.profile.religion">Not Specified</div>          
-        </li>
-        <li>
-          <div class="stat-label">Smoker:</div>
-          <div class="stat-value" ng-if="user.profile.smoking">{{user.profile.smoking}}</div>
-          <div class="stat-value not-specified" ng-if="!user.profile.smoking">Not Specified</div>          
-        </li>
-        <li>
-          <div class="stat-label">Drinker:</div>
-          <div class="stat-value" ng-if="user.profile.drinking">{{user.profile.drinking}}</div>
-          <div class="stat-value not-specified" ng-if="!user.profile.drinking">Not Specified</div>          
-        </li>
-        <li>
-          <div class="stat-label">Education:</div>
-          <div class="stat-value" ng-if="user.profile.education">{{user.profile.education}}</div>
-          <div class="stat-value not-specified" ng-if="!user.profile.education">Not Specified</div>          
-        </li>
-        <li>
-          <div class="stat-label">Kids:</div>
-          <div class="stat-value" ng-if="user.profile.num_of_kids != null">{{user.profile.num_of_kids}}</div>
-          <div class="stat-value not-specified" ng-if="user.profile.num_of_kids == null">Not Specified</div>          
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="third-row">
-    <div style="float: left">Order: Recently joined</div>
-    <div style="float: right"><button ng-click="user.goToNextMatch()">Next Match</button></div>
-    
-    <div class="filmstrip" ng-cloak>
-      <ul class="filmstrip-ul">
-        <li class="previous-spot">
-          <img ng-src="{{user.previousProfile.blurred_thumb}}">
-        </li>
-
-        <li ng-repeat="dater in user.profiles" data-id="{{dater.id}}" data-joined="{{dater.joined}}" data-last-seen="{{dater.last_seen}}" ng-class="{selected: dater.id === user.selectedProfile }" ng-if="$index >= user.selectedProfileIndex">
-          <img ng-src="{{dater.id === user.selectedProfile ? dater.active_thumb : dater.blurred_thumb}}">
-        </li>
-      </ul> 
-    </div>
+      </li>
+      <li>
+        <div class="stat-label">Work Industry:</div>
+        <div class="stat-value" ng-if="user.profile.work_industry">{{user.profile.work_industry}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.work_industry">Not Specified</div>          
+      </li>
+      <li>
+        <div class="stat-label">Religion:</div>
+        <div class="stat-value" ng-if="user.profile.religion">{{user.profile.religion}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.religion">Not Specified</div>          
+      </li>
+      <li>
+        <div class="stat-label">Smoker:</div>
+        <div class="stat-value" ng-if="user.profile.smoking">{{user.profile.smoking}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.smoking">Not Specified</div>          
+      </li>
+      <li>
+        <div class="stat-label">Drinker:</div>
+        <div class="stat-value" ng-if="user.profile.drinking">{{user.profile.drinking}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.drinking">Not Specified</div>          
+      </li>
+      <li>
+        <div class="stat-label">Education:</div>
+        <div class="stat-value" ng-if="user.profile.education">{{user.profile.education}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.education">Not Specified</div>          
+      </li>
+      <li>
+        <div class="stat-label">Kids:</div>
+        <div class="stat-value" ng-if="user.profile.num_of_kids != null">{{user.profile.num_of_kids}}</div>
+        <div class="stat-value not-specified" ng-if="user.profile.num_of_kids == null">Not Specified</div>          
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -141,7 +123,6 @@
 </section>
 
 <script>
-  // These two factories get loaded to manage users.
-  <%= render "filtered_profile_list.js.erb" %>
+  // This factory grabs our user's details.
   <%= render "grab_initial_profile_details.js.erb" %>
 </script>

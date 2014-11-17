@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
   var app = angular.module('kinected');
 
-  app.factory('filteredProfileList', function(){
-    return <%= format_user_list_for_angular(@daters).to_json.html_safe %>;
+  app.factory('ProfileList', function(){
+    return <%= @daters.to_json.html_safe %>;
   });
 });

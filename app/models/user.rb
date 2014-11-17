@@ -141,9 +141,11 @@ class User < ActiveRecord::Base
 
     user[:sex]          = self.sex.capitalize
 
-    user_height = Unit("#{self.height} cm")
-    user[:height_cm]    = user_height.to_s(:m)
-    user[:height_ft]    = user_height.to_s(:ft)
+    if self.height
+      user_height = Unit("#{self.height} cm")
+      user[:height_cm]    = user_height.to_s(:m)
+      user[:height_ft]    = user_height.to_s(:ft)
+    end
 
     if self.last_sign_in_at
       user[:last_seen_num]  = time_in_ms(self.last_sign_in_at)
