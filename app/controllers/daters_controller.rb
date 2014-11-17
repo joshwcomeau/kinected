@@ -3,16 +3,24 @@ class DatersController < ApplicationController
   
   # GET /daters
   def index
-    # Let's overwrite the default loaded daters
-    @daters = current_user.get_valid_matches
-    @dater = User.find(@daters.first)
+    # Let's overwrite the default loaded daters with an array of hashes that Angular can use, without unneeded overhead.
+    @daters = current_user.get_list_of_matches
+    @dater = current_user.get_first_match
     @message = Message.new
   end
 
   # GET /daters/:id
   def show
-    @daters = nil
-    @message = Message.new
+    respond_to do |format|
+      format.html do
+        @daters = nil
+        @message = Message.new
+        # Go with the implied render
+      end
+      format.json do
+        @dater = User.find(params[:id]).get_full_match_data
+      end
+    end
   end
 
   

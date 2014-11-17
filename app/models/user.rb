@@ -43,6 +43,7 @@
 #
 
 class User < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
@@ -112,13 +113,71 @@ class User < ActiveRecord::Base
   # We're returning a JSON object that contains the minimal data needed to sort and retrieve matches.
   # We need their id, age, last login time, created_at time, etc. 
 
+
+
+  def get_list_of_matches
+    users = User.matched_daters(get_desired_sex).recently_logged_in
+    format_user_list_for_angular(users)
+  end
+
+  def get_first_match
+    users = User.matched_daters(get_desired_sex).recently_logged_in
+    users.first.get_full_match_data
+  end
+
+
+  def get_full_match_data
+    user = self.attributes
+    user[:primary_profile_photo]  = self.profile_photos.find_by(primary: true)
+    user[:profile_photos]         = self.profile_photos.where.not(primary: true)
+
+    user[:birthdate]    = time_in_ms(self.birthdate)
+    user[:joined_num]   = time_in_ms(self.created_at)
+    user[:joined_ago]   = time_ago_in_words(self.created_at)    
+    user[:updated_num]  = time_in_ms(self.updated_at)
+    user[:updated_ago]  = time_ago_in_words(self.updated_at)
+    user[:ethnicities]  = self.ethnicities  
+    user[:eth_string]   = self.ethnicities.pluck(:name).join("\n")
+
+    user[:sex]          = self.sex.capitalize
+
+    user_height = Unit("#{self.height} cm")
+    user[:height_cm]    = user_height.to_s(:m)
+    user[:height_ft]    = user_height.to_s(:ft)
+
+    if self.last_sign_in_at
+      user[:last_seen_num]  = time_in_ms(self.last_sign_in_at)
+      user[:last_seen_ago]  = time_ago_in_words(self.last_sign_in_at) + " ago"
+    end
+
+    user
+  end
+
+
+  private
+
+  def format_user_list_for_angular(users)
+    users.map do |u| 
+      {
+        id:             u.id,
+        joined:         time_in_ms(u.created_at),
+        last_seen:      time_in_ms(u.last_sign_in_at),
+        blurred_thumb:  u.primary_profile_photo_blurred_thumb.url,
+        active_thumb:   u.primary_profile_photo_thumb.url
+      }
+    end
+  end
+  
   def get_desired_sex
     sex == 'male' ? 1 : 0 # We only need to grab members of the opposite sex.
   end
 
-  def get_valid_matches
-    User.matched_daters(get_desired_sex)
+  def time_in_ms(time)
+    unless time.nil?
+      # We need a time object, not a date object. Birthday is stored as a Date
+      time = time.to_time if time.is_a? Date
+      time.to_i * 1000
+    end
   end
-
 
 end

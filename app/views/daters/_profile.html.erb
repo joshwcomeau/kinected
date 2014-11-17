@@ -131,7 +131,7 @@
       <footer>
         <div class="character-count">{{200-profile.message.input.length}}</div>
         <%= m.hidden_field :user_id, value: current_user.id %>
-        <%= m.hidden_field :recipient_id, value: @dater.id %>
+        <%= m.hidden_field :recipient_id, value: "{{user.profile.id}}" %>
         <%= m.submit "Send" %>
       </footer>
     </div>

@@ -94,27 +94,99 @@ RSpec.describe User, :type => :model do
       @lady4 = create(:user, sex: :female, last_sign_in_at: 3.days.ago,  birthdate: 32.years.ago)
       @man1  = create(:user, sex: :male,   last_sign_in_at: 6.days.ago,  birthdate: 22.years.ago)
     end
-  
 
-    describe ".get_valid_matches" do
-      it "returns the right number of objects" do
-        expect(@me.get_valid_matches.count).to eq(4)
+    describe "#get_list_of_matches" do
+      subject { @me.get_list_of_matches }
+      
+      it { is_expected.to be_a Array }
+      
+      it "returns an array of hashes" do
+        expect(subject.first).to be_a Hash 
       end
 
-      it "returns the right kind of data" do
-        expect(@me.get_valid_matches.first).to be_a User
+      it "returns only the info we need in its hashes" do
+        expect(subject.first.keys).to eq([:id, :joined, :last_seen, :blurred_thumb, :active_thumb])
       end
+
+      it "returns the right number of results" do
+        expect(subject.count).to eq(4)
+      end
+
+      it "orders the results, by default, by their last sign_in date" do
+        expect(subject.first[:id]).to eq(@lady2.id)
+        expect(subject.last[:id]).to  eq(@lady4.id)
+      end
+
+      it "grabs their blurred thumb URL" do
+        expect(subject.first[:blurred_thumb]).to eq(@lady2.profile_photos.find_by(primary: true).photo_object.blurred_thumb.url)
+      end
+
+    end  
+
+    describe "#get_full_match_data" do
+      before(:all) do
+        @rails_user = create(:user)
+        @user = @rails_user.get_full_match_data
+      end
+
+      describe "primary photo" do
+        subject { @user[:primary_profile_photo] }
+
+        it "is a photo" do
+          expect(subject).to be_a ProfilePhoto
+        end
+        it "is primary" do
+          expect(subject.primary).to eq(true)
+        end
+        it "contains a full URL" do
+          expect(subject.photo_object.url).to be_a String
+        end
+        it "contains a thumb URL" do
+          expect(subject.photo_object.thumb.url).to be_a String
+        end
+
+      end
+
+      describe "non-primary photos" do
+        subject { @user[:profile_photos] }
+        
+        it "is a relation" do
+          expect(subject).to be_a ActiveRecord::AssociationRelation
+        end
+
+        it "contains the right number (1 less than total)" do
+          expect(subject.count).to eq(@rails_user.profile_photos.count - 1)
+        end
+
+        it "contains non-primary photos exclusively" do
+          expect(subject.map(&:primary).uniq.count).to eq(1)
+          expect(subject.map(&:primary).uniq.first).to eq(false)
+        end
+
+        it "contains a full URL" do
+          expect(subject.first.photo_object.url).to be_a String
+        end
+        it "contains a thumb URL" do
+          expect(subject.first.photo_object.thumb.url).to be_a String
+        end
+        it "contains a 7thumb URL" do
+          expect(subject.first.photo_object.blurred_thumb.url).to be_a String
+        end
+      end
+
+      describe "formatted times" do
+        it "formats in words their time since joining the site" do
+          expect(@user[:joined_ago]).to eq("less than a minute")
+        end
+        it "returns milliseconds since epoch" do
+          expect(@user[:joined_num]).to eq(@rails_user.created_at.to_i * 1000)
+        end
+      end
+
+      after(:all) do
+        User.destroy_all
+      end
+
     end
-
-    describe ".get_desired_sex" do
-      it "returns the right sex for @me" do
-        expect(@me.get_desired_sex).to eq(1)
-      end
-
-      it "returns the right sex for @lady1" do
-        expect(@lady1.get_desired_sex).to eq(0)
-      end
-    end
-
   end
 end
