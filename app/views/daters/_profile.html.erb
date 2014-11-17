@@ -1,4 +1,3 @@
-
 <div class="first-row">
   <div class="profile-photo-container">
     <img ng-src="{{user.profile.primary_profile_photo.photo_object.thumb.url}}">
@@ -8,6 +7,9 @@
     <div class="title-text" ng-cloak>
       <h1>{{user.profile.display_name}}</h1>
       <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | dateToAge}} Years Old • {{user.profile.sex}}</h3>
+      <div style="float: left">Order: Recently joined</div>
+      <div style="float: right"><button ng-click="user.goToNextMatch()" class="next-match-button">Next Match</button></div>
+
     </div>
     <div class="title-actions">
       <a href="#message-modal">Send a Message</a>
@@ -24,7 +26,6 @@
     
     <h4>I'm really good at</h4>
     <p>Cooking!<br>dancing<br>left turns :)</p>
-    
 
 <!--       <h4>Favorite books, movies, shows, music and food</h4>
     <p>Movies: Hannibal, Sweet Home Alabama, The Exorcist, The Shining, The Notebook, The Mummy, Fast and Furious, Lord of the Rings, Bad Boys, My Girl, Harry Potter... the list goes on</p>
@@ -124,6 +125,6 @@
 </section>
 
 <script>
-  // This factory grabs our user's details.
+  // These two factories get loaded to manage users.
   <%= render "grab_initial_profile_details.js.erb" %>
 </script>

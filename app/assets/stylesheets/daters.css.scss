@@ -1,14 +1,12 @@
 .dater-profile-wrapper {
   overflow-x: hidden;
   background: #f3f5f9;
+  margin-top: 50px;
 
   .first-row {
     .profile-photo-container {
-      padding: 1rem;
-      border-right: 1px dotted #AAA;
-      border-bottom: 1px dotted #AAA;
-
       img {
+        margin-top: -70px;
         width: 100%;
         max-height: 100%;
       }
@@ -100,7 +98,7 @@
     white-space: nowrap;
 
     .filmstrip-ul {
-      margin-left: -40px;
+      margin-left: -51px;
     }
 
     li {
@@ -121,11 +119,9 @@
       &.selected {
         width: 250px;
         height: 250px;
-        margin-top: -10px;
-        margin-bottom: -10px;
         opacity: 1;
         & > img {
-          border-radius: 0;
+          border-radius: 1rem 1rem 0 0;
         }
       }
     }
