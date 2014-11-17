@@ -6,7 +6,7 @@ RSpec.describe DatersController, :type => :controller do
   end
 
   describe "GET :index" do
-    before(:each) do
+    before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female, last_sign_in_at: 6.days.ago)
       @lady2 = create(:user, sex: :female, last_sign_in_at: 3.hours.ago)
@@ -33,15 +33,15 @@ RSpec.describe DatersController, :type => :controller do
       end
 
       it "assigns the @daters variable" do
-        expect(assigns[:daters]).to be_a ActiveRecord::Relation
+        expect(assigns[:daters]).to be_a Array
       end
 
       it "populates @daters with a bunch of users" do
-        expect(assigns[:daters].first).to be_a User
+        expect(assigns[:daters].first).to be_a Hash
       end
 
       it "assigns the @dater variable" do
-        expect(assigns[:dater]).to be_a User
+        expect(assigns[:dater]).to be_a Hash
       end
 
       it "renders the show view" do
@@ -55,7 +55,7 @@ RSpec.describe DatersController, :type => :controller do
   end
 
   describe "GET :show" do
-    before(:each) do
+    before(:all) do
       @me   = create(:user, sex: :male)
       @them = create(:user, sex: :female)
 

@@ -11,7 +11,7 @@
 require 'rails_helper'
 
 RSpec.describe Ethnicity, :type => :model do
-  before(:each) do
+  before(:all) do
     @user = create(:user)
     @ethnicity1 = create(:ethnicity)
     @ethnicity2 = create(:ethnicity)   

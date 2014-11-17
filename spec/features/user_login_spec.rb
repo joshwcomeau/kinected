@@ -24,6 +24,5 @@ feature 'User login' do
 
   after(:all) do
     Capybara.use_default_driver
-    User.destroy_all
   end
 end

@@ -22,7 +22,7 @@ RSpec.describe SessionsController, :type => :controller do
   end
 
   describe "POST :create" do
-    before(:each) do
+    before(:all) do
       create(:user, email: 'john@doe.com', password: '12345678')
     end
 

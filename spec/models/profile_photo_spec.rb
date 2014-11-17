@@ -13,7 +13,7 @@
 require 'rails_helper'
 
 RSpec.describe ProfilePhoto, :type => :model do
-  before(:each) do
+  before(:all) do
     @user = create(:user)
     @new_photo = ProfilePhoto.create(photo_object: File.open("/users/Shared/sample1.jpg"), user_id: @user.id)
   end

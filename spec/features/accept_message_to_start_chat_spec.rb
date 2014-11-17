@@ -55,8 +55,5 @@ feature 'Accept message' do
 
   after(:all) do
     Capybara.use_default_driver
-    User.destroy_all
-    Message.destroy_all
-    Permission.destroy_all
   end
 end

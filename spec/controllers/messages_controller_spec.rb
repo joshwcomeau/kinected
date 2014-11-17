@@ -6,7 +6,7 @@ RSpec.describe MessagesController, :type => :controller do
   end
 
   describe "GET :index" do
-    before(:each) do
+    before(:all) do
       @user = create(:user)
       @other_user = create(:user)
 
@@ -17,10 +17,10 @@ RSpec.describe MessagesController, :type => :controller do
       @user.messages_received << @message1
       @user.messages_sent     << @message2
       
-      
     end    
     context "when not logged in" do
       it "doesn't let us" do
+
         get :index 
         expect(flash[:alert]).to eq("You are not authorized to access this page.")
       end   
@@ -60,7 +60,10 @@ RSpec.describe MessagesController, :type => :controller do
 
   describe "POST :create" do
     context "when requesting JSON" do
-      before(:each) do
+      before(:all) do
+        Message.destroy_all
+        Permission.destroy_all
+        User.destroy_all
         @user = create(:user)
         @other_user = create(:user)
       end

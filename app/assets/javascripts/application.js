@@ -15,6 +15,7 @@
 //= require underscore
 //= require angular
 //= require angular-animate
+//= require angular-resource
 //= require firebase
 //= require angularfire.min
 //= require modal

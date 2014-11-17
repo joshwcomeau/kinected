@@ -86,7 +86,7 @@ RSpec.describe User, :type => :model do
   end
 
   describe "match functions" do
-    before(:each) do
+    before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female, last_sign_in_at: 7.hours.ago, birthdate: 18.years.ago)
       @lady2 = create(:user, sex: :female, last_sign_in_at: 1.hours.ago, birthdate: 27.years.ago)

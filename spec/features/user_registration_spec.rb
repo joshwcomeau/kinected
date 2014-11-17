@@ -5,8 +5,8 @@ require 'rails_helper'
 
 feature 'User registrations' do
   before(:all) do
-    # Capybara.current_driver = :selenium # Slow, visual driver
-    Capybara.current_driver = :webkit   # Quick, headless driver
+    Capybara.current_driver = :selenium # Slow, visual driver
+    # Capybara.current_driver = :webkit   # Quick, headless driver
   end
 
   scenario "I can register for an account, and any typos are noted" do
@@ -105,7 +105,6 @@ feature 'User registrations' do
   end
 
   after(:all) do
-    User.destroy_all
     Capybara.use_default_driver
   end
 end

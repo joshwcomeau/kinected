@@ -48,11 +48,9 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-  
-  # config.after(:all) do
-  #   DatabaseCleaner.clean_with(:truncation)
-  # end
-
+  config.after(:all) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -74,5 +72,5 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-  config.order = "random"
+  # config.order = "random"
 end
