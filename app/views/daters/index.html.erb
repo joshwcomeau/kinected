@@ -1,11 +1,5 @@
 <div ng-controller="ProfileController as user" class="dater-profile-wrapper">
-  <h2>Browsing Matches</h2>
-
-  <%= render partial: 'profile' %>
-
-  <div class="third-row">
-    <div style="float: left">Order: Recently joined</div>
-    <div style="float: right"><button ng-click="user.goToNextMatch()" class="next-match-button">Next Match</button></div>
+    <div class="top-strip">
     
     <div class="filmstrip" ng-cloak>
       <ul class="filmstrip-ul">
@@ -19,6 +13,11 @@
       </ul> 
     </div>
   </div>
+
+  <h2>Browsing Matches</h2>
+
+  <%= render partial: 'profile' %>
+
 </div>
 
 <script>
