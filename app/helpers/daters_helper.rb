@@ -9,11 +9,18 @@ module DatersHelper
     user[:joined_ago]   = time_ago_in_words(user_object.created_at)    
     user[:updated_num]  = time_in_ms(user_object.updated_at)
     user[:updated_ago]  = time_ago_in_words(user_object.updated_at)
-    user[:ethnicities]  = user_object.ethnicities    
+    user[:ethnicities]  = user_object.ethnicities  
+    user[:eth_string]   = user_object.ethnicities.pluck(:name).join("\n")
+
+    user[:sex]          = user_object.sex.capitalize
+
+    user_height = Unit("#{user_object.height} cm")
+    user[:height_cm]    = user_height.to_s(:m)
+    user[:height_ft]    = user_height.to_s(:ft)
 
     if user_object.last_sign_in_at
       user[:last_seen_num]  = time_in_ms(user_object.last_sign_in_at)
-      user[:last_seen_ago]  = time_ago_in_words(user_object.last_sign_in_at)
+      user[:last_seen_ago]  = time_ago_in_words(user_object.last_sign_in_at) + " ago"
     end
 
     user
@@ -21,23 +28,23 @@ module DatersHelper
 
   def format_user_list_for_angular(users)
     users.map do |u| 
-      format_join = time_ago_in_words u.created_at
-      vital_stats = {
-        id:     u.id,
-        thumb:  u.primary_profile_photo_blurred_thumb.url,
-        joined: format_join
+      {
+        id:             u.id,
+        joined:         time_in_ms(u.created_at),
+        last_seen:      time_in_ms(u.last_sign_in_at),
+        blurred_thumb:  u.primary_profile_photo_blurred_thumb.url,
+        active_thumb:   u.primary_profile_photo_thumb.url
       }
-
-      vital_stats[:last_seen] = time_ago_in_words(u.last_sign_in_at) if u.last_sign_in_at
-      vital_stats
     end
 
   end
 
   def time_in_ms(time)
-    # We need a time object, not a date object. Birthday is stored as a Date
-    time = time.to_time if time.is_a? Date
-    time.to_i * 1000
+    unless time.nil?
+      # We need a time object, not a date object. Birthday is stored as a Date
+      time = time.to_time if time.is_a? Date
+      time.to_i * 1000
+    end
   end
 
 end

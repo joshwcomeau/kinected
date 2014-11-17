@@ -1,4 +1,4 @@
-app.filter('ageFilter', function() {
+app.filter('dateToAge', function() {
   // This function is a little clunky and not 100% precise, but it's fast and easy to read.
   return function calculateAge(birthdate) {
     var date_obj, difference_in_ms, epoch_date;

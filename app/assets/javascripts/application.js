@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require angular
+//= require angular-animate
 //= require firebase
 //= require angularfire.min
 //= require modal

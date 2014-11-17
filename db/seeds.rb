@@ -91,6 +91,7 @@ Ethnicity.create([
   wants_kids:     "Maybe"
 })
 @user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
+@user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
 
 
 @user3 = User.create({
@@ -149,6 +150,39 @@ Ethnicity.create([
 @user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
 @user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
 
+10.times do |n|
+  @filler_users = User.create({
+    first_name:     'Jesusa',
+    last_name:      'L',
+    display_name:   'Jesus_is_coming_xxx',
+    email:          "jc#{n}@gmail.com",
+    password:       'wootage1',
+    sex:            'female',
+    role:           'dater',
+    birthdate:      18.years.ago,
+    country:        'Canada',
+    city:           'Scarborough',
+    state:          'Ontario',
+    postal_code:    'M1W 2T0',
+    self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+    num_of_kids:    2,
+    body_type:      "Voluptuous",
+    smoking:        "Never",
+    drinking:       "Never",
+    religion:       "Christian",
+    education:      "Some College",
+    work_industry:  "University",
+    wants_kids:     "Maybe"
+  })
+  @filler_users.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
+  @filler_users.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
+end
+
+User.daters.each do |u|
+  [0,1,2].sample.times do
+    u.ethnicities << Ethnicity.all.sample
+  end
+end
 
 @concierge1 = User.create({
   first_name: 'Miss',

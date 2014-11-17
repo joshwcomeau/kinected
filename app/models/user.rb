@@ -27,17 +27,19 @@
 #  height                 :integer
 #  income                 :integer
 #  num_of_kids            :integer
-#  body_type              :integer
-#  smoking                :integer
-#  drinking               :integer
-#  religion               :integer
-#  education              :integer
-#  work_industry          :integer
-#  wants_kids             :integer
-#  relationship_status    :integer
+#  body_type              :string(255)
+#  smoking                :string(255)
+#  drinking               :string(255)
+#  religion               :string(255)
+#  education              :string(255)
+#  work_industry          :string(255)
+#  wants_kids             :string(255)
+#  relationship_status    :string(255)
 #  first_name             :string(255)
 #  last_name              :string(255)
 #  display_name           :string(255)
+#  city                   :string(255)
+#  state                  :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -69,7 +71,7 @@ class User < ActiveRecord::Base
   enum role:          [ :dater, :concierge, :admin ]
   enum sex:           [ :male, :female ]
 
-
+  scope :daters,              -> { where(role: 0) }
   scope :matched_daters,      ->(sex) { where(role: 0, sex: sex) }
   scope :between_ages,        ->(min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
   scope :recently_logged_in,  -> { order("last_sign_in_at DESC") }
