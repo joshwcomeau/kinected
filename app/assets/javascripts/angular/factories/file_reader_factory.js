@@ -1,4 +1,4 @@
-app.factory("fileReader", function($q, $log) {
+app.factory("fileReader", ["$q", "$log", function($q, $log) {
   var onLoad = function(reader, deferred, scope) {
     return function() {
       scope.$apply(function() {
@@ -44,4 +44,4 @@ app.factory("fileReader", function($q, $log) {
   return {
     readAsDataUrl: readAsDataURL
   };
-});
+}]);
