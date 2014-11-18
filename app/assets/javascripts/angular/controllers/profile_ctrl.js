@@ -5,16 +5,18 @@ function ProfileController($scope, $attrs, ProfileList, ProfileDetails, InitialP
   
   this.selectedProfile = this.profile.id;
   this.selectedProfileIndex = 0;
-
+  this.nextProfile = this.profiles[1];
 }
 
-ProfileController.prototype.goToNextMatch = function(match_index) {
-  // Advance the filmstrip at the bottom
-  this.selectedProfileIndex++;
+ProfileController.prototype.goToMatch = function(increment) {
+  this.selectedProfileIndex += increment;
+
+  // Reset when we've hit the end.
   if ( this.selectedProfileIndex === this.profiles.length ) {
-    this.selectedProfileIndex = 0; // Reset when we've hit the end.
+    this.selectedProfileIndex = 0; 
   }
-  this.previousProfile = this.profiles[this.selectedProfileIndex-1];
+  this.previousProfile = this.profiles[this.selectedProfileIndex - increment];
+  this.nextProfile     = this.profiles[this.selectedProfileIndex + increment];
   
   // Get that user's data from the server
   this.selectedProfile = this.profiles[this.selectedProfileIndex].id;

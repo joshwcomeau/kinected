@@ -1,17 +1,31 @@
 <div ng-controller="ProfileController as user" class="dater-profile-wrapper">
-    <div class="top-strip">
-    
-    <div class="filmstrip" ng-cloak>
-      <ul class="filmstrip-ul">
-        <li class="previous-spot">
-          <img ng-src="{{user.previousProfile.blurred_thumb}}">
-        </li>
+  <div class="top-strip">
+    <div class="control-title-bar">
+      <div class="nav-button previous-button" ng-click="user.goToMatch(-1)">
+        <div class="button-bg l">
+        </div> 
+        <div class="button-icon"><%= fa_icon "arrow-left" %></div>
+      </div>
 
-        <li ng-repeat="dater in user.profiles" data-id="{{dater.id}}" data-joined="{{dater.joined}}" data-last-seen="{{dater.last_seen}}" ng-class="{selected: dater.id === user.selectedProfile }" ng-if="$index >= user.selectedProfileIndex">
-          <img ng-src="{{dater.id === user.selectedProfile ? dater.active_thumb : dater.blurred_thumb}}">
-        </li>
-      </ul> 
+      <h2>Browsing Matches</h2>
+      
+      <div class="nav-button next-button" ng-click="user.goToMatch(1)">
+        <div class="button-bg r">
+        </div> 
+        <div class="button-icon"><%= fa_icon "arrow-right" %></div>
+      </div>
+      
     </div>
+
+    <div class="filter-bar">
+      <label for="order-select">Order by: </label>
+      <select name="order-select" id="order-select">
+        <option value="last_seen" selected>most recent login.</option>  
+        <option value="last_seen">newest members.</option>  
+        <option value="last_seen">random.</option>  
+      </select>
+    </div>
+
   </div>
   <%= render partial: 'profile' %>
 

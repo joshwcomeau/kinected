@@ -1,12 +1,88 @@
 .dater-profile-wrapper {
-  overflow-x: hidden;
+  position: relative;
   background: #f3f5f9;
-  margin-top: 50px;
+  border-radius: $profile-radius;
+  border-bottom: 5px solid #111;
+  border-right: 1px solid #111;
 
+  .top-strip {
+    .control-title-bar {
+      position: relative;
+      background: $navy;
+      color: #FFF;
+      border-radius: 0.8rem 0.8rem 0 0;
+
+      h2 {
+        margin: 0;
+        padding: 0.5rem;
+        line-height: 60px;
+        height: 76px;
+        text-align: center;
+      }
+      .nav-button {
+        padding: 1rem;
+        position: absolute;
+        top: 0;
+        height: 76px;
+        width: 76px;
+        text-align: center;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      .button-bg {
+        position: absolute;
+        background: rgba(0,0,0,0.25);
+        height: 100%;
+        width: 100%;
+        top: 0;
+        z-index: 1;
+        overflow: hidden;
+
+        &.l {
+          left: 0;
+          border-radius: 0.8rem 0 0 0;
+        }
+        &.r {
+          right: 0;
+          border-radius: 0 0.8rem 0 0;
+        }
+      }
+      .button-icon {
+        position: relative;
+        z-index: 2;
+      }
+      .previous-button {
+        left: 0;
+      }
+      .next-button {
+        right: 0;
+      }
+    }
+
+    .filter-bar {
+      background: $teal;
+      padding: 0.3rem;
+      text-align: center;
+
+      label { 
+        display: inline-block;
+      }
+      
+      select {
+        display: inline-block;
+        -webkit-appearance: none;
+        border: 0;
+        border-bottom: 1px solid darken($teal, 20%);
+        border-radius: 0;
+        background: transparent;
+        padding: 0.2rem;
+      }
+    }
+  }
   .first-row {
     .profile-photo-container {
       img {
-        margin-top: -70px;
         width: 100%;
         max-height: 100%;
       }
@@ -39,6 +115,7 @@
       padding: 0.5rem;
       background: #BBB;
       font-size: 0.9rem;
+      border-radius: 0 0 $profile-radius 0;
 
 
       h3 {
@@ -82,51 +159,7 @@
   }
 }
 
-.top-strip {
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  width: 100%;
 
-  .filmstrip {
-    clear: both;
-    position: relative;
-    background: #222;
-    padding: 10px;
-    height: 80px;
-    white-space: nowrap;
-
-    .filmstrip-ul {
-      margin-left: -51px;
-    }
-
-    li {
-      width: 60px;
-      height: 60px;
-      background: rgba(0,0,0,0.2);
-      opacity: 0.6;
-      padding: 0;
-      margin-right: 0.5rem;
-      border-radius: 1rem;
-      vertical-align: top;
-
-      & > img { 
-        width: 100%; 
-        border-radius: 1rem;
-      }
-
-      &.selected {
-        width: 250px;
-        height: 250px;
-        opacity: 1;
-        & > img {
-          border-radius: 1rem 1rem 0 0;
-        }
-      }
-    }
-  }
-}
 
 
 .message-modal {
