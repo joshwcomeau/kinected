@@ -1,7 +1,7 @@
 <div ng-controller="ProfileController as user" class="dater-profile-wrapper">
   <div class="top-strip">
     <div class="control-title-bar">
-      <div class="nav-button previous-button" ng-click="user.goToMatch(-1)">
+      <div class="nav-button previous-button" ng-click="user.goToMatch(-1)" ng-if="user.selectedProfileIndex > 0">
         <div class="button-icon"><%= fa_icon "arrow-left" %></div>
       </div>
 
@@ -15,10 +15,10 @@
 
     <div class="filter-bar">
       <label for="order-select">Order by: </label>
-      <select name="order-select" id="order-select">
+      <select name="order-select" id="order-select" ng-model="user.selectedOrder" ng-change="user.orderMatches()">
         <option value="last_seen" selected>most recent login.</option>  
-        <option value="last_seen">newest members.</option>  
-        <option value="last_seen">random.</option>  
+        <option value="joined">newest members.</option>  
+        <option value="random">random.</option>  
       </select>
     </div>
 
@@ -29,5 +29,5 @@
 
 <script>
   // this factory grabs an array of hashes containing basic information about other matches.
-  <%= render "filtered_profile_list.js.erb" %>
+  <%= render "initial_profile_list.js.erb" %>
 </script>

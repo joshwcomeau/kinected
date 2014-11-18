@@ -4,7 +4,6 @@
   max-width: 1200px;
   border-radius: $profile-radius;
   border-bottom: 5px solid #111;
-  border-right: 1px solid #111;
 
   .loading-overlay {
     width: 100%; 
@@ -35,9 +34,11 @@
     position: relative;
     z-index: 2;
     color: #FFF;
+
     .control-title-bar {
       position: relative;
       background: $navy;
+      border-top: 2px solid lighten($navy, 15%);
       border-radius: 0.8rem 0.8rem 0 0;
       text-shadow: 1px 1px 0px darken($navy, 10%), 2px 2px 0px darken($navy, 10%);
 
@@ -97,6 +98,11 @@
         border-radius: 0;
         background: transparent;
         padding: 0.2rem;
+
+        &:focus {
+          background: lighten($teal, 5%);
+          outline: none;
+        }
       }
     }
   }
