@@ -207,3 +207,25 @@ display: none !important;
 }
 
 
+// Resolutions under 1024px
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    &.with-sidebar {
+      padding-left: $mobile-sidebar-width;
+    }
+
+    & > aside {
+      width: $mobile-sidebar-width;
+
+      .hidden-in-mobile, .nav-text-link {
+        display: none;
+      }
+    }
+
+    .profile-img:hover .edit-profile-mouseover {
+        display: none !important;
+      }
+
+  }
+}
+

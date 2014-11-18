@@ -10,17 +10,22 @@ function ProfileController($scope, $attrs, ProfileList, ProfileDetails, InitialP
 
 ProfileController.prototype.goToMatch = function(increment) {
   this.selectedProfileIndex += increment;
+  this.loading = true;
 
   // Reset when we've hit the end.
   if ( this.selectedProfileIndex === this.profiles.length ) {
     this.selectedProfileIndex = 0; 
   }
-  this.previousProfile = this.profiles[this.selectedProfileIndex - increment];
-  this.nextProfile     = this.profiles[this.selectedProfileIndex + increment];
+  this.previousProfile   = this.profiles[this.selectedProfileIndex - increment];
+  this.nextProfile       = this.profiles[this.selectedProfileIndex + increment];
+  this.selectedProfileId = this.profiles[this.selectedProfileIndex].id;
   
   // Get that user's data from the server
-  this.selectedProfile = this.profiles[this.selectedProfileIndex].id;
-  this.profile = this.factory.get({userId: this.selectedProfile});
+  var user = this;
+  this.factory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
+    user.loading = false;
+    user.profile = result;    
+  });
 };
 
 ProfileController.$inject = ['$scope', '$attrs', 'ProfileList', 'ProfileDetails', 'InitialProfileDetails']
