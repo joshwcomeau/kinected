@@ -244,15 +244,27 @@ display: none !important;
     & > aside {
       width: $mobile-sidebar-width;
 
-      .hidden-in-mobile, .nav-text-link {
+      .hidden-in-mobile, .nav-text-link, .bottom-buttons {
         display: none;
+      }
+      .profile-img-container {
+        padding: 0;
+      }
+      .profile-link {
+        height: auto !important;
+        border-radius: 0 !important;
+
+        img { 
+          border-radius: 0 !important;
+          border: 0 !important;
+        }
+
       }
     }
 
-    .profile-img:hover .edit-profile-mouseover {
-        display: none !important;
-      }
-
+    .profile-link:hover .edit-profile-mouseover {
+      display: none !important;
+    }
   }
 }
 

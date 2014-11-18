@@ -125,14 +125,14 @@ Ethnicity.create([
 @user4 = User.create({
   first_name:     'Jesusa',
   last_name:      'L',
-  display_name:   'Jesus_is_coming_xxx',
+  display_name:   'Angelina Jolly',
   email:          'jc@gmail.com',
   password:       'wootage1',
   sex:            'female',
   role:           'dater',
-  birthdate:      18.years.ago,
+  birthdate:      37.years.ago,
   country:        'Canada',
-  city:           'Scarborough',
+  city:           'London',
   state:          'Ontario',
   postal_code:    'M1W 2T0',
   self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
@@ -152,33 +152,87 @@ Ethnicity.create([
 @user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 @user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
-10.times do |n|
-  @filler_users = User.create({
-    first_name:     'Jesusa',
-    last_name:      'L',
-    display_name:   'Jesus_is_coming_xxx',
-    email:          "jc#{n}@gmail.com",
-    password:       'wootage1',
-    sex:            'female',
-    role:           'dater',
-    birthdate:      18.years.ago,
-    country:        'Canada',
-    city:           'Scarborough',
-    state:          'Ontario',
-    postal_code:    'M1W 2T0',
-    self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
-    num_of_kids:    2,
-    body_type:      "Voluptuous",
-    smoking:        "Never",
-    drinking:       "Never",
-    religion:       "Christian",
-    education:      "Some College",
-    work_industry:  "University",
-    wants_kids:     "Maybe"
-  })
-  @filler_users.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
-  @filler_users.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
-end
+
+@filler_user1 = User.create({
+  first_name:     'Lorraine',
+  last_name:      'L',
+  display_name:   'Strawbessa Bella Fontaine',
+  email:          "sbf@gmail.com",
+  password:       'wootage1',
+  sex:            'female',
+  role:           'dater',
+  birthdate:      22.years.ago,
+  country:        'Canada',
+  city:           'Toronto',
+  state:          'Ontario',
+  postal_code:    'M1W 2T0',
+  self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+  num_of_kids:    2,
+  body_type:      "Voluptuous",
+  smoking:        "Never",
+  drinking:       "Never",
+  religion:       "Christian",
+  education:      "Some College",
+  work_industry:  "University",
+  wants_kids:     "Maybe"
+})
+@filler_user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filler_user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+
+
+@filler_user2 = User.create({
+  first_name:     'Lorraine',
+  last_name:      'L',
+  display_name:   'xXx_FemmeFatale_xXx',
+  email:          "fff@gmail.com",
+  password:       'wootage1',
+  sex:            'female',
+  role:           'dater',
+  birthdate:      19.years.ago,
+  country:        'Canada',
+  city:           'Toronto',
+  state:          'Ontario',
+  postal_code:    'M1W 2T0',
+  self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+  num_of_kids:    2,
+  body_type:      "Voluptuous",
+  smoking:        "Never",
+  drinking:       "Never",
+  religion:       "Christian",
+  education:      "Some College",
+  work_industry:  "University",
+  wants_kids:     "Maybe"
+})
+@filler_user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filler_user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+
+@filler_user3 = User.create({
+  first_name:     'Lorraine',
+  last_name:      'L',
+  display_name:   'CandyWires',
+  email:          "ccw@gmail.com",
+  password:       'wootage1',
+  sex:            'female',
+  role:           'dater',
+  birthdate:      31.years.ago,
+  country:        'Canada',
+  city:           'Toronto',
+  state:          'Ontario',
+  postal_code:    'M1W 2T0',
+  self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+  num_of_kids:    2,
+  body_type:      "Voluptuous",
+  smoking:        "Never",
+  drinking:       "Never",
+  religion:       "Christian",
+  education:      "Some College",
+  work_industry:  "University",
+  wants_kids:     "Maybe"
+})
+@filler_user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filler_user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+
+
 
 User.daters.each do |u|
   [0,1,2].sample.times do
