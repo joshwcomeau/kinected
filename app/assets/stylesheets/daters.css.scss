@@ -108,16 +108,19 @@
   }
   .first-row {
     .profile-photo-container {
+      width: 250px;
+      height: 250px;
       img {
         width: 100%;
-        max-height: 100%;
+        
       }
 
 
     }
     .title-area {
       position: relative;
-      background: #EEE;
+      background: #e9e6dd;
+      border-bottom: 2px solid #c0bbab;
 
       .title-text { 
         position: absolute;
@@ -127,39 +130,96 @@
         h1 {
           font-size: 2.2rem;
           font-family: 'Raleway';
+          margin-bottom: 0.2rem;
+        }
+        h3 {
+          opacity: 0.8;
+          margin: 0;
+          margin-bottom: 2rem;
         }
       }
 
-      .title-actions {
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
+      .interaction-button {
+        font-weight: 700;
+        color: #FFF;
+        border-radius: 3px;
+        border: 0;
+        cursor: pointer;
+        vertical-align: middle;
+        outline: 0;
+        font-size: 1em;
+        padding: 0.5rem 1.5rem;
+        margin-right: 0.5rem;
+        background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0)),to(rgba(0,0,0,.1)));
+        background-image: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
+        background-image: -moz-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
+        background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
+        text-decoration: none;
+
+        &.message {
+          background-color: darken($green, 5%);
+          text-shadow: 1px 1px 0px darken($green, 20%);
+          border-bottom: 3px solid darken($green, 21%);
+        }
+        &.favorite {
+          background-color: darken($gold, 25%);
+          text-shadow: 1px 1px 0px darken($gold, 35%);
+          border-bottom: 3px solid darken($gold, 45%);
+        } 
+        &.block {
+          background-color: $red;
+          text-shadow: 1px 1px 0px darken($red, 15%);
+          border-bottom: 3px solid darken($red, 20%);
+        }
       }
+
     }
   }
   .second-row {
+    
 
     .about-dater {
-      
+      padding: 1.5rem;
+
+      h2 {
+        margin-top: 0;
+        font-family: 'Raleway';
+      }
+
+      h4 {
+        margin-top: 2.5rem;
+
+        span {
+          padding: 0.4rem 3rem 0.4rem 0;
+          border-radius: 1px;
+          border-bottom: 2px solid $teal;  
+        }
+        &:first-of-type {
+          margin-top: 0;
+        }
+      }
+
     }
     .quick-stats {
-      padding: 0.5rem;
-      background: #BBB;
+      padding: 0;
       font-size: 0.9rem;
-      border-radius: 0 0 $profile-radius 0;
+      border-radius: 0 0 0.6rem 0;
+
 
 
       h3 {
         color: $teal;
+        font-family: 'Raleway';
         border-bottom: 1px solid #999;
+        border-left: 1px solid #CCC;
         background: #EEE;
         padding: 0.5rem;
         font-size: 1.35rem;
         margin: 0;
-        border-radius: 8px 8px 0 0;
       }
 
       li {
+        border-left: 1px solid #CCC;
         overflow: auto;
         display: block;
         padding: 0.5rem;

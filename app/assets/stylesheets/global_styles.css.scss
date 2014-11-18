@@ -26,6 +26,7 @@ html, body {
 
   // main sidebar
   & > aside {
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
     header {
       margin: 0;
       font-family: 'Raleway';
@@ -159,12 +160,26 @@ html, body {
 }
 .main-footer {
   width:100%;
+  text-align: center;
+  background: #111;
   height:$footer-height;
   position:absolute;
   z-index: 3;
   bottom:0;
   left:0;
+  padding: 0.5rem;
+
+  a {
+    color: $gold;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 }
+
+
 
 ul {
   margin: 0;

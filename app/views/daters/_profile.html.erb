@@ -11,9 +11,9 @@
     <div class="title-text" ng-cloak>
       <h1>{{user.profile.display_name}}</h1>
       <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | dateToAge}} Years Old • {{user.profile.sex}}</h3>
-    </div>
-    <div class="title-actions">
-      <a href="#message-modal">Send a Message</a>
+      <a class="interaction-button message" href="#message-modal">Send a Message</a>
+      <button class="interaction-button favorite">Add to Favorites</button>
+      <button class="interaction-button block">Block</button>
     </div>
   </header>
 </div>
@@ -22,13 +22,13 @@
   <div class="about-dater">
     <h2>About This User</h2>
 
-    <h4>Self-Summary</h4>
+    <h4><span>Self-Summary</span></h4>
     <p class="pre-wrap">{{user.profile.self_summary}}</p>
     
-    <h4>I'm really good at</h4>
+    <h4><span>I'm really good at</span></h4>
     <p>Cooking!<br>dancing<br>left turns :)</p>
 
-<!--       <h4>Favorite books, movies, shows, music and food</h4>
+    <h4><span>Favorite books, movies, shows, music and food</span></h4>
     <p>Movies: Hannibal, Sweet Home Alabama, The Exorcist, The Shining, The Notebook, The Mummy, Fast and Furious, Lord of the Rings, Bad Boys, My Girl, Harry Potter... the list goes on</p>
 
     <p>Some of my favorite books are: Born Confused, The Mortal Instruments, The Space Between Us, Divergent, The Five People you Meet in Heaven, The Perks of Being a Wallflower etc.</p>
@@ -36,7 +36,7 @@
     <p>TV: Suits, Criminal Minds, Game of Thrones, Saving Hope, Orange is the New Black, Master Chef, Catfish *ahem*, Revenge, Once Upon a Time, The Mentalist ...</p>
 
     <p>I like all types of music ... except Heavy Metal and Rap :P</p>
--->    </div>
+    </div>
 
   <div class="quick-stats">
     <h3>Quick Stats</h3>
