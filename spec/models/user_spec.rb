@@ -86,16 +86,16 @@ RSpec.describe User, :type => :model do
   end
 
   describe "match functions" do
-    before(:all) do
-      @me    = create(:user, sex: :male)
-      @lady1 = create(:user, sex: :female, last_sign_in_at: 7.hours.ago, birthdate: 18.years.ago)
-      @lady2 = create(:user, sex: :female, last_sign_in_at: 1.hours.ago, birthdate: 27.years.ago)
-      @lady3 = create(:user, sex: :female, last_sign_in_at: 3.hours.ago, birthdate: 57.years.ago)
-      @lady4 = create(:user, sex: :female, last_sign_in_at: 3.days.ago,  birthdate: 32.years.ago)
-      @man1  = create(:user, sex: :male,   last_sign_in_at: 6.days.ago,  birthdate: 22.years.ago)
-    end
-
     describe "#get_list_of_matches" do
+      before(:all) do
+        @me    = create(:user, sex: :male)
+        @lady1 = create(:user, sex: :female, last_sign_in_at: 7.hours.ago, birthdate: 18.years.ago)
+        @lady2 = create(:user, sex: :female, last_sign_in_at: 1.hours.ago, birthdate: 27.years.ago)
+        @lady3 = create(:user, sex: :female, last_sign_in_at: 3.hours.ago, birthdate: 57.years.ago)
+        @lady4 = create(:user, sex: :female, last_sign_in_at: 3.days.ago,  birthdate: 32.years.ago)
+        @man1  = create(:user, sex: :male,   last_sign_in_at: 6.days.ago,  birthdate: 22.years.ago)
+      end
+
       subject { @me.get_list_of_matches }
       
       it { is_expected.to be_a Array }
@@ -105,7 +105,7 @@ RSpec.describe User, :type => :model do
       end
 
       it "returns only the info we need in its hashes" do
-        expect(subject.first.keys).to eq([:id, :joined, :last_seen, :blurred_thumb, :active_thumb])
+        expect(subject.first.keys).to eq([:id, :joined, :last_seen])
       end
 
       it "returns the right number of results" do
@@ -117,9 +117,9 @@ RSpec.describe User, :type => :model do
         expect(subject.last[:id]).to  eq(@lady4.id)
       end
 
-      it "grabs their blurred thumb URL" do
-        expect(subject.first[:blurred_thumb]).to eq(@lady2.profile_photos.find_by(primary: true).photo_object.blurred_thumb.url)
-      end
+      # it "grabs their blurred thumb URL" do
+      #   expect(subject.first[:blurred_thumb]).to eq(@lady2.profile_photos.find_by(primary: true).photo_object.blurred_thumb.url)
+      # end
 
     end  
 
