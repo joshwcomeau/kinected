@@ -26,13 +26,23 @@ html, body {
 
   // main sidebar
   & > aside {
+
+    header {
+      padding: 1rem;
+      background: shade($teal, 40%);
+      img {
+        width: 100%;
+        border-radius: 0.5rem;
+      }
+    }
+
     width: $sidebar-width;
     z-index: 3;
     position: fixed;
     left: 0;
     height: 100%;
     overflow-y: auto;
-    background: #CCC;
+    background: shade($teal, 15%);
     color: #FFF;
 
     h2 {
@@ -42,8 +52,21 @@ html, body {
     }
 
     nav {
-      margin-top: 2.5rem;
-      min-height: 400px;  
+      margin-top: 0.5rem;
+      
+      li {
+        display: block;
+      }
+      a {
+        display: block;
+        text-decoration: none;
+        color: #FFF;
+        font-weight: 400;
+        padding: 0.6rem;
+        border-bottom: 1px solid darken($teal, 10%);
+
+      }
+
     }
   }
 

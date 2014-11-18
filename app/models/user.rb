@@ -77,6 +77,9 @@ class User < ActiveRecord::Base
   scope :between_ages,        ->(min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
   scope :recently_logged_in,  -> { order("last_sign_in_at DESC") }
 
+  # geocoded_by :last_sign_in_ip
+  # after_validation :geocode
+  
   # Can I chat with a given user?
   def can_chat_with(user)
 

@@ -16,7 +16,6 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     # Stop people from toying with the hidden 'role' param
-
     if role_is_fraudulent
       flash.now[:error] = "Sorry, there was an unexpected problem"
       render :new

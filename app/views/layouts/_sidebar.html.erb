@@ -1,5 +1,8 @@
 <aside>
-  <h1>Kinected</h1>
+  <header>
+    <%= image_tag current_user.primary_profile_photo_thumb %>
+  </header>
+  <!-- <h1>Kinected</h1> -->
   <nav>
     <ul>
       <li><%= link_to "Browse", daters_path, id: 'sidebar-browse-link' %></li>
