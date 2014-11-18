@@ -85,7 +85,11 @@ RSpec.describe DatersController, :type => :controller do
         end
 
         it "assigns the @user variable" do
-          expect(assigns[:dater]).to eq(@them)
+          expect(assigns[:dater]).to be_a Hash
+        end
+
+        it "creates a hash with the right user's data" do
+          expect(assigns[:dater]["id"]).to eq(@them.id)
         end
 
         it "renders the show view" do
