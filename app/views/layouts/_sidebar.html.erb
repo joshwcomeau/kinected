@@ -5,9 +5,21 @@
   <!-- <h1>Kinected</h1> -->
   <nav>
     <ul>
-      <li><%= link_to "Browse", daters_path, id: 'sidebar-browse-link' %></li>
-      <li><%= link_to "Messages", messages_path, id: 'sidebar-messages-link' %></li>
-      <li>Concierge</li>
+      <li>
+        <%= link_to daters_path, id: 'sidebar-browse-link' do %>
+          <span>Browse</span><%= fa_icon 'users' %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to messages_path, id: 'sidebar-messages-link' do %>
+          <span>Messages</span><%= fa_icon 'paper-plane' %>
+        <% end %>
+      </li>      
+      <li>
+        <%= link_to concierge_path, id: 'sidebar-concierge-link' do %>
+          <span>Concierge</span><%= fa_icon 'bell' %>
+        <% end %>
+      </li>      
     </ul>
   </nav>
 </aside>

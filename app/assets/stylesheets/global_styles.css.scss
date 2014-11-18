@@ -56,6 +56,10 @@ html, body {
       
       li {
         display: block;
+        text-align: right;
+      }
+      span {
+        float: left;
       }
       a {
         display: block;
