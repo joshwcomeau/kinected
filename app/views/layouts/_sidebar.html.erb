@@ -1,8 +1,13 @@
 <aside>
   <header>
-    <%= image_tag current_user.primary_profile_photo_thumb %>
+    <h1>Kinected</h1>
   </header>
-  <!-- <h1>Kinected</h1> -->
+
+  <div class="profile-img">
+    <%= image_tag current_user.primary_profile_photo_thumb %>
+    <div class="edit-profile-mouseover">Edit My Profile</div>
+  </div>
+    
   <nav>
     <ul>
       <li>
@@ -22,4 +27,9 @@
       </li>      
     </ul>
   </nav>
+
+  <div class="bottom-buttons">
+    <button>Make a Match</button>
+    <button>Refer a Friend</button>
+  </div>
 </aside>

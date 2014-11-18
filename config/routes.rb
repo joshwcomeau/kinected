@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   resources :messages, except: [:new, :edit]
   resources :chats, only: [:show]
   resources :daters, only: [:index, :show]
-  resources :concierges
 
   # Singular resource
   resource :concierge, only: [:show]

@@ -26,13 +26,52 @@ html, body {
 
   // main sidebar
   & > aside {
-
     header {
+      margin: 0;
+      font-family: 'Raleway';
+      font-weight: 700;
+      text-align: center;
+      background: #333;
+
+      h1 {
+        padding: 0.6rem 0;
+        margin: 0;
+        text-shadow: 
+          0.5px 0.5px 0px #111,
+          1px 1px 0px #111,
+          1.5px 1.5px 0px #000,
+          2px 2px 0px #000
+        ;
+      }
+    }
+    
+    .profile-img {
+      position: relative;
       padding: 1rem;
       background: shade($teal, 40%);
+      border-top: 1px solid shade($teal, 80%);
+      border-bottom: 3px solid tint($teal, 15%);
+
       img {
         width: 100%;
         border-radius: 0.5rem;
+        border-bottom: 3px solid shade($teal, 80%);
+        border-top: 1px solid tint($teal, 10%);
+      }
+
+      .edit-profile-mouseover {
+        display: none;
+        position: absolute;
+        bottom: 22px;
+        width: 168px;
+        padding: 0.5rem;
+        border-radius: 0 0 0.5rem 0.5rem;
+        text-align: center;
+        background: $green;
+        text-shadow: 1px 1px 0px darken($green, 15%);
+      }
+      &:hover .edit-profile-mouseover {
+        display: block;
       }
     }
 
@@ -57,6 +96,10 @@ html, body {
       li {
         display: block;
         text-align: right;
+
+        &:hover {
+          background: darken($teal, 10%);
+        }
       }
       span {
         float: left;
@@ -69,15 +112,40 @@ html, body {
         padding: 0.6rem;
         border-bottom: 1px solid darken($teal, 10%);
 
+        &:hover {
+          color: $gold;
+        }
       }
-
     }
+    
+    .bottom-buttons {
+      position: absolute;
+      bottom: 1rem;
+      width: 100%;
+      text-align: center;
+
+      button {
+        @include gradient_button;
+        background: #222;
+        width: 168px;
+        padding: 0.5rem;
+        font-size: 1rem;
+        margin: 0.3rem 0;
+
+        &:hover {
+          transition: 0.3s;
+          background: $green;
+          color: #000;
+        }
+      }
+    }
+
   }
 
   // main content
   & > section {
     position: relative;
-    background: $navy;
+    background: #222;
     padding: 30px;
     min-height: 100%;
   }
