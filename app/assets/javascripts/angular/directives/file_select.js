@@ -1,4 +1,4 @@
-app.directive("ngFileSelect", function(fileReader, $timeout) {
+app.directive("ngFileSelect", ["fileReader", "$timeout", function(fileReader, $timeout) {
   return {
     scope: {
       ngModel: '='
@@ -19,4 +19,4 @@ app.directive("ngFileSelect", function(fileReader, $timeout) {
       });
     }
   };
-});
+}]);
