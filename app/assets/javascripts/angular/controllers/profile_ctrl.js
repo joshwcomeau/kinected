@@ -11,7 +11,7 @@ function ProfileController($scope, $attrs, $filter, ProfileDetails, InitialProfi
   var user = this;
   this.orderMatches = function() {
     user.loading = true;
-    user.profiles = $filter('orderBy')(user.profiles, user.selectedOrder);
+    user.profiles = $filter('orderBy')(user.profiles, user.selectedOrder, true);
 
     // Update all our properties to reflect this new order.
     user.selectedProfileIndex = 0;

@@ -11,9 +11,6 @@
     <div class="title-text" ng-cloak>
       <h1>{{user.profile.display_name}}</h1>
       <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | dateToAge}} Years Old • {{user.profile.sex}}</h3>
-      <div style="float: left">Order: Recently joined</div>
-      <div style="float: right"><button ng-click="user.goToNextMatch()" class="next-match-button">Next Match</button></div>
-
     </div>
     <div class="title-actions">
       <a href="#message-modal">Send a Message</a>
