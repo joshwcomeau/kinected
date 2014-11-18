@@ -6,6 +6,8 @@ unless Rails.env.production?
   Message.destroy_all
 end
 
+IMG_LOCATION = Rails.env.production? ? '/home/app/app/current/app/assets/images/samples/' : '/users/Shared/'
+
 Ethnicity.create([
   { name: 'African / Black' },
   { name: 'Asian' },
@@ -15,25 +17,25 @@ Ethnicity.create([
 ])
 
 @images = [
-  File.open('/users/Shared/sample1.jpg'),
-  File.open('/users/Shared/sample2.jpg'),
-  File.open('/users/Shared/sample3.jpg'),
-  File.open('/users/Shared/sample4.jpg'),
-  File.open('/users/Shared/sample5.jpg'),
-  File.open('/users/Shared/sample6.jpg'),
-  File.open('/users/Shared/sample7.jpg'),
-  File.open('/users/Shared/sample8.jpg'),
-  File.open('/users/Shared/sample9.jpg'),
-  File.open('/users/Shared/sample10.jpg'),
-  File.open('/users/Shared/sample11.jpg'),
-  File.open('/users/Shared/sample12.jpg'),
-  File.open('/users/Shared/sample13.jpg'),
-  File.open('/users/Shared/sample14.jpg'),
-  File.open('/users/Shared/sample15.jpg'),
-  File.open('/users/Shared/sample16.jpg'),
-  File.open('/users/Shared/sample17.jpg'),
-  File.open('/users/Shared/sample18.jpg'),
-  File.open('/users/Shared/sample19.jpg')
+  File.open("#{IMG_LOCATION}/sample1.jpg"),
+  File.open("#{IMG_LOCATION}/sample2.jpg"),
+  File.open("#{IMG_LOCATION}/sample3.jpg"),
+  File.open("#{IMG_LOCATION}/sample4.jpg"),
+  File.open("#{IMG_LOCATION}/sample5.jpg"),
+  File.open("#{IMG_LOCATION}/sample6.jpg"),
+  File.open("#{IMG_LOCATION}/sample7.jpg"),
+  File.open("#{IMG_LOCATION}/sample8.jpg"),
+  File.open("#{IMG_LOCATION}/sample9.jpg"),
+  File.open("#{IMG_LOCATION}/sample10.jpg"),
+  File.open("#{IMG_LOCATION}/sample11.jpg"),
+  File.open("#{IMG_LOCATION}/sample12.jpg"),
+  File.open("#{IMG_LOCATION}/sample13.jpg"),
+  File.open("#{IMG_LOCATION}/sample14.jpg"),
+  File.open("#{IMG_LOCATION}/sample15.jpg"),
+  File.open("#{IMG_LOCATION}/sample16.jpg"),
+  File.open("#{IMG_LOCATION}/sample17.jpg"),
+  File.open("#{IMG_LOCATION}/sample18.jpg"),
+  File.open("#{IMG_LOCATION}/sample19.jpg")
 ]
 
 @user1 = User.create({
