@@ -3,35 +3,40 @@ function ProfileController($scope, $attrs, $filter, ProfileDetails, InitialProfi
   this.profiles = InitialProfileList;
 
   this.user_factory  = ProfileDetails;
+  this.orderBy       = $filter('orderBy');
 
   this.selectedProfileIndex = 0;
   this.selectedOrder = 'last_seen';
-  this.nextProfile = this.profiles[1];
-
-  var user = this;
-  this.orderMatches = function() {
-    user.loading = true;
-    user.profiles = $filter('orderBy')(user.profiles, user.selectedOrder, true);
-
-    // Update all our properties to reflect this new order.
-    user.selectedProfileIndex = 0;
-    user.selectedProfileId    = user.profiles[user.selectedProfileIndex].id;
-    user.previousProfile      = null;
-    user.nextProfile          = user.profiles[user.selectedProfileIndex+1];
-
-    // Fetch this data from the server
-    user.user_factory.get({userId: user.selectedProfileId}).$promise.then(function(result) {
-      user.loading = false;
-      user.profile = result;    
-    });
-
-  };
+  this.nextProfile = this.profiles[1]; 
 }
 
-ProfileController.prototype.goToMatch = function(increment) {
-  this.selectedProfileIndex += increment;
+ProfileController.prototype.orderMatches = function() {
+  this.loading = true;
+  if (this.selectedOrder === 'random') {
+    this.profiles = this.shuffle(this.profiles);
+  } else {
+    this.profiles = this.orderBy(this.profiles, this.selectedOrder, true);  
+  }
   
 
+  // Update all our properties to reflect this new order.
+  this.selectedProfileIndex = 0;
+  this.selectedProfileId    = this.profiles[this.selectedProfileIndex].id;
+  this.previousProfile      = null;
+  this.nextProfile          = this.profiles[this.selectedProfileIndex+1];
+
+  // Fetch this data from the server
+  var user = this;    
+  this.user_factory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
+    user.loading = false;
+    user.profile = result;    
+  });
+};
+
+ProfileController.prototype.goToMatch = function(increment) {
+  this.loading = true;
+  this.selectedProfileIndex += increment;
+  
   // Reset when we've hit the end.
   if ( this.selectedProfileIndex === this.profiles.length ) {
     this.selectedProfileIndex = 0; 
@@ -47,6 +52,21 @@ ProfileController.prototype.goToMatch = function(increment) {
     user.loading = false;
     user.profile = result;    
   });
+};
+
+ProfileController.prototype.shuffle = function(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
 };
 
 ProfileController.$inject = ['$scope', '$attrs', '$filter', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails']
