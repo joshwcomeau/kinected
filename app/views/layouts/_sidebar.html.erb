@@ -3,9 +3,11 @@
     <h1>K<span class="hidden-in-mobile">inected</span></h1>
   </header>
 
-  <div class="profile-img">
-    <%= image_tag current_user.primary_profile_photo_thumb %>
-    <div class="edit-profile-mouseover">Edit My Profile</div>
+  <div class="profile-img-container">
+    <%= link_to dater_path(id: current_user.id), class: 'profile-link' do %>
+      <%= image_tag current_user.primary_profile_photo_thumb %>
+      <div class="edit-profile-mouseover">Edit My Profile</div>
+    <% end %>
   </div>
     
   <nav>
@@ -24,7 +26,12 @@
         <%= link_to concierge_path, id: 'sidebar-concierge-link' do %>
           <span class="nav-text-link">Concierge</span><%= fa_icon 'bell' %>
         <% end %>
-      </li>      
+      </li>  
+      <li>
+        <%= link_to concierge_path, id: 'sidebar-settings-link' do %>
+          <span class="nav-text-link">Settings</span><%= fa_icon 'gear' %>
+        <% end %>
+      </li>       
     </ul>
   </nav>
 

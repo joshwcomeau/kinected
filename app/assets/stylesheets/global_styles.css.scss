@@ -26,7 +26,16 @@ html, body {
 
   // main sidebar
   & > aside {
+    width: $sidebar-width;
+    z-index: 3;
+    position: fixed;
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
+    background: shade($teal, 15%);
+    color: #FFF;    
     box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+
     header {
       margin: 0;
       font-family: 'Raleway';
@@ -46,44 +55,42 @@ html, body {
       }
     }
     
-    .profile-img {
+    .profile-img-container {
       position: relative;
       padding: 1rem;
       background: shade($teal, 40%);
       border-top: 1px solid shade($teal, 80%);
       border-bottom: 3px solid tint($teal, 15%);
+      
+      .profile-link {
+        color: #FFF;
+        text-decoration: none;
+        
+        img {
+          width: 100%;
+          border-radius: 0.5rem;
+          border-bottom: 3px solid shade($teal, 80%);
+          border-top: 1px solid tint($teal, 10%);
+        }
 
-      img {
-        width: 100%;
-        border-radius: 0.5rem;
-        border-bottom: 3px solid shade($teal, 80%);
-        border-top: 1px solid tint($teal, 10%);
-      }
-
-      .edit-profile-mouseover {
-        display: none;
-        position: absolute;
-        bottom: 22px;
-        width: 168px;
-        padding: 0.5rem;
-        border-radius: 0 0 0.5rem 0.5rem;
-        text-align: center;
-        background: $green;
-        text-shadow: 1px 1px 0px darken($green, 15%);
-      }
-      &:hover .edit-profile-mouseover {
-        display: block;
+        .edit-profile-mouseover {
+          display: none;
+          position: absolute;
+          bottom: 22px;
+          width: 168px;
+          padding: 0.5rem;
+          border-radius: 0 0 0.5rem 0.5rem;
+          text-align: center;
+          background: $green;
+          text-shadow: 1px 1px 0px darken($green, 15%);
+        }
+        &:hover .edit-profile-mouseover {
+          display: block;
+        }
       }
     }
 
-    width: $sidebar-width;
-    z-index: 3;
-    position: fixed;
-    left: 0;
-    height: 100%;
-    overflow-y: auto;
-    background: shade($teal, 15%);
-    color: #FFF;
+
 
     h2 {
       color: $green;
