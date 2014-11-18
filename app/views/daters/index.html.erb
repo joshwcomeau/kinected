@@ -1,4 +1,4 @@
-<div ng-controller="ProfileController as user" class="dater-profile-wrapper">
+<div ng-controller="ProfileController as user" class="dater-profile-wrapper" ng-cloak>
   <div class="top-strip">
     <div class="control-title-bar">
       <div class="nav-button previous-button" ng-click="user.goToMatch(-1)" ng-if="user.selectedProfileIndex > 0">
@@ -26,8 +26,3 @@
   <%= render partial: 'profile' %>
 
 </div>
-
-<script>
-  // this factory grabs an array of hashes containing basic information about other matches.
-  <%= render "initial_profile_list.js.erb" %>
-</script>

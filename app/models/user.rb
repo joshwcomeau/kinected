@@ -73,8 +73,8 @@ class User < ActiveRecord::Base
   enum sex:           [ :male, :female ]
 
   scope :daters,              -> { where(role: 0) }
-  scope :matched_daters,      ->(sex) { where(role: 0, sex: sex) }
-  scope :between_ages,        ->(min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
+  scope :matched_daters,      -> (sex) { where(role: 0, sex: sex) }
+  scope :between_ages,        -> (min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
   scope :recently_logged_in,  -> { order("last_sign_in_at DESC") }
 
   # geocoded_by :last_sign_in_ip
@@ -166,10 +166,7 @@ class User < ActiveRecord::Base
       {
         id:             u.id,
         joined:         time_in_ms(u.created_at),
-        last_seen:      time_in_ms(u.last_sign_in_at),
-        blurred_thumb:  u.primary_profile_photo_blurred_thumb.url,
-        active_thumb:   u.primary_profile_photo_thumb.url
-      }
+        last_seen:      time_in_ms(u.last_sign_in_at)      }
     end
   end
   

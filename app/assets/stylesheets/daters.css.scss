@@ -190,7 +190,12 @@
   }
 }
 
-
+// Show-page only styles
+.rounded-top .profile-photo-container {
+  img {
+    border-radius: $profile-radius 0 0 0;
+  }
+}
 
 
 .message-modal {

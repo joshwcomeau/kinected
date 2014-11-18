@@ -14,6 +14,7 @@ class DatersController < ApplicationController
     respond_to do |format|
       format.html do
         @daters = nil
+        @dater  = User.find(params[:id]).get_full_match_data
         @message = Message.new
         # Go with the implied render
       end

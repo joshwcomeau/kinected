@@ -7,13 +7,14 @@ function ProfileController($scope, $attrs, $filter, ProfileDetails, InitialProfi
 
   this.selectedProfileIndex = 0;
   this.selectedOrder = 'last_seen';
-  this.nextProfile = this.profiles[1]; 
+  if ( this.profiles ) this.nextProfile = this.profiles[1]; 
+
 }
 
 ProfileController.prototype.orderMatches = function() {
   this.loading = true;
   if (this.selectedOrder === 'random') {
-    this.profiles = this.shuffle(this.profiles);
+    this.profiles = shuffle(this.profiles);
   } else {
     this.profiles = this.orderBy(this.profiles, this.selectedOrder, true);  
   }
@@ -54,20 +55,6 @@ ProfileController.prototype.goToMatch = function(increment) {
   });
 };
 
-ProfileController.prototype.shuffle = function(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex ;
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-};
 
 ProfileController.$inject = ['$scope', '$attrs', '$filter', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails']
 
