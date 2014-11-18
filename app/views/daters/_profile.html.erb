@@ -3,8 +3,9 @@
 </div>
 
 <div class="first-row">
-  <div class="profile-photo-container">
+  <div class="profile-photo-container" ng-click="user.togglePhotos()">
     <img ng-src="{{user.profile.primary_profile_photo.photo_object.thumb.url}}">
+    <div class="view-all">View All Photos</div>
   </div>
 
   <header class="title-area">
@@ -18,7 +19,7 @@
   </header>
 </div>
 
-<div class="second-row">
+<div class="second-row" ng-show="!user.viewingPhotos">
   <div class="about-dater">
     <h2>About This User</h2>
 
@@ -101,6 +102,19 @@
       </li>
     </ul>
   </div>
+</div>
+
+<div class="photo-row" ng-show="user.viewingPhotos">
+  <div class="photo-header">
+    <h2>{{user.profile.display_name}}'s Photos</h2>
+    <p><a ng-click="user.togglePhotos()"><%= fa_icon 'angle-left' %>&nbsp;&nbsp;&nbsp;Return to Profile</a></p>
+  </div>
+  <ul>
+    <li ng-repeat="photo in user.profile.profile_photos | orderBy:reverse">
+      <img ng-src="{{photo.photo_object.url}}" alt="">
+      <p ng-if="photo.caption">{{photo.caption}}</p>
+    </li>
+  </ul>
 </div>
 
 

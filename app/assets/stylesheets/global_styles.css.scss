@@ -56,15 +56,19 @@ html, body {
     }
     
     .profile-img-container {
-      position: relative;
       padding: 1rem;
       background: shade($teal, 40%);
       border-top: 1px solid shade($teal, 80%);
       border-bottom: 3px solid tint($teal, 15%);
       
       .profile-link {
+        display: block;
+        position: relative;
         color: #FFF;
         text-decoration: none;
+        overflow: hidden;
+        height: 171px;
+        border-radius: 0.5rem;
         
         img {
           width: 100%;
@@ -74,18 +78,19 @@ html, body {
         }
 
         .edit-profile-mouseover {
-          display: none;
           position: absolute;
-          bottom: 22px;
+          bottom: -50px;
           width: 168px;
           padding: 0.5rem;
           border-radius: 0 0 0.5rem 0.5rem;
           text-align: center;
-          background: $green;
+          background: darken($green, 5%);
           text-shadow: 1px 1px 0px darken($green, 15%);
+          transition: 0.2s;
         }
         &:hover .edit-profile-mouseover {
-          display: block;
+          bottom: 0;
+          transition: 0.5s;
         }
       }
     }
@@ -174,7 +179,7 @@ html, body {
   z-index: 3;
   bottom:0;
   left:0;
-  padding: 0.5rem;
+  padding: 1rem;
 
   a {
     color: $gold;

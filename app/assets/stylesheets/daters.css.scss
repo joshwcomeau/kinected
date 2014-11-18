@@ -108,14 +108,33 @@
   }
   .first-row {
     .profile-photo-container {
+      position: relative;
       width: 250px;
       height: 250px;
+      overflow: hidden;
+      cursor: pointer;
+      
       img {
         width: 100%;
-        
+      }
+      
+      .view-all {
+        position: absolute;
+        width: 100%;
+        bottom: -50px;
+        left: 0;
+        text-align: center;
+        padding: 0.5rem 0 0.8rem 0;
+        background: $navy;
+        border-top: 2px solid lighten($navy, 15%);
+        color: #FFF;
+        transition: 0.2s;
       }
 
-
+      &:hover .view-all {
+        transition: 0.5s;
+        bottom: 0;
+      }
     }
     .title-area {
       position: relative;
@@ -248,12 +267,72 @@
       }
     }
   }
+  .photo-row {
+    padding: 1rem;
+    
+    .photo-header {
+      position: relative;
+      margin: 0 auto 1.5rem auto;
+      overflow: auto;
+      border-bottom: 2px solid #666;
+
+      h2 {
+        text-align: center;
+        font-family: 'Raleway';
+        line-height: 50px;
+        margin: 0;
+        padding: 0;
+        color: $teal;
+      }
+      p {
+        position: absolute;
+        left: 0;
+        top: 0;
+        line-height: 50px;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        color: $green;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    ul {
+      clear: both;
+    }
+
+    li {
+
+      text-align: center;
+      margin: 0 auto;
+      max-width: 700px;
+      border-bottom: 1px solid #AAA;
+      padding: 0.25rem 0;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    img {
+      border-radius: 5px;
+      border-top: 1px solid #CCC;
+      border-bottom: 3px solid #444;
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
+    }
+  }
 }
 
 // Show-page only styles
-.rounded-top .profile-photo-container {
-  img {
-    border-radius: $profile-radius 0 0 0;
+.rounded-top {
+  .profile-photo-container {
+    img {
+      border-radius: $profile-radius 0 0 0;
+    }
+  }
+  .title-area {
+    border-radius: 0 $profile-radius 0 0;
   }
 }
 

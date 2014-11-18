@@ -147,21 +147,17 @@ RSpec.describe User, :type => :model do
 
       end
 
-      describe "non-primary photos" do
+      describe "all photos" do
         subject { @user[:profile_photos] }
         
         it "is a relation" do
-          expect(subject).to be_a ActiveRecord::AssociationRelation
+          expect(subject).to be_a ActiveRecord::Associations::CollectionProxy
         end
 
-        it "contains the right number (1 less than total)" do
-          expect(subject.count).to eq(@rails_user.profile_photos.count - 1)
+        it "contains the right number" do
+          expect(subject.count).to eq(@rails_user.profile_photos.count)
         end
 
-        it "contains non-primary photos exclusively" do
-          expect(subject.map(&:primary).uniq.count).to eq(1)
-          expect(subject.map(&:primary).uniq.first).to eq(false)
-        end
 
         it "contains a full URL" do
           expect(subject.first.photo_object.url).to be_a String

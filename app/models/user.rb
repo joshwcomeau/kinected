@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
   def get_full_match_data
     user = self.attributes
     user[:primary_profile_photo]  = self.profile_photos.find_by(primary: true)
-    user[:profile_photos]         = self.profile_photos.where.not(primary: true)
+    user[:profile_photos]         = self.profile_photos
 
     user[:birthdate]    = time_in_ms(self.birthdate)
     user[:joined_num]   = time_in_ms(self.created_at)

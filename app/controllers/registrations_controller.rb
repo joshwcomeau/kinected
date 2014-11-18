@@ -70,7 +70,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def profile_photo_params
-    params.require(:profile_photo).permit(:photo_object)
+    params.require(:profile_photo).permit(:photo_object, :caption)
   end
 
   def role_is_fraudulent

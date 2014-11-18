@@ -62,9 +62,9 @@ Ethnicity.create([
   work_industry:  "Software Developer",
   wants_kids:     "No"
 })
-@user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-@user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-@user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
+@user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
 
 
@@ -92,8 +92,8 @@ Ethnicity.create([
   work_industry:  "Retail",
   wants_kids:     "Maybe"
 })
-@user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-@user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
+@user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
 
 @user3 = User.create({
@@ -119,8 +119,8 @@ Ethnicity.create([
   work_industry:  "Radio Personality",
   wants_kids:     "Yes"
 })
-@user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-@user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
+@user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
 @user4 = User.create({
   first_name:     'Jesusa',
@@ -145,12 +145,12 @@ Ethnicity.create([
   work_industry:  "University",
   wants_kids:     "Maybe"
 })
-@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
+@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
 10.times do |n|
   @filler_users = User.create({
@@ -176,8 +176,8 @@ Ethnicity.create([
     work_industry:  "University",
     wants_kids:     "Maybe"
   })
-  @filler_users.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
-  @filler_users.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
+  @filler_users.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+  @filler_users.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 end
 
 User.daters.each do |u|
