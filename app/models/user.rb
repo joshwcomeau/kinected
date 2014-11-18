@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
   
   # Who I want to message
   has_many :permissions  
-  has_many :targets, through: :permissions
+  has_many :target_users, through: :permissions
 
   # Who wants to message me
   has_many :inverse_permissions, class_name: 'Permission', foreign_key: 'target_user_id'
@@ -68,6 +68,15 @@ class User < ActiveRecord::Base
   
   has_many :messages_received, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :senders, through: :messages_received, source: :user
+
+  # FAVORITES. Again, similar to permissions & messages.
+  has_many :favorites
+  has_many :target_users, through: :favorites
+
+  has_many :inverse_favorites, class_name: 'Favorite', foreign_key: 'target_user_id'
+  has_many :inverse_target_users, through: :inverse_favorites, source: :user
+  
+
 
   enum role:          [ :dater, :concierge, :admin ]
   enum sex:           [ :male, :female ]
