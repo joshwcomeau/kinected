@@ -26,6 +26,12 @@ class RegistrationsController < Devise::RegistrationsController
       resource.profile_photos << ProfilePhoto.new(profile_photo_params)
     end
 
+    # Let's update lat/long if Geocoder was able to nab it.
+    if request.location.latitude != '0.0' && request.location.longitude != '0.0'
+      resource.latitude  = request.location.latitude 
+      resource.longitude = request.location.longitude
+    end
+
     # Let's grab the 3 date fields from the params, use it to create a Date, and attach it to resource.
     date_string = "#{params[:birthdate_year]}-#{params[:birthdate_month]}-#{params[:birthdate_day]}"
     date_obj    = Date.strptime(date_string, "%Y-%m-%d")
