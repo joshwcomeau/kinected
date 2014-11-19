@@ -11,17 +11,26 @@ function ProfileController($scope, $attrs, $filter, ProfileDetails, InitialProfi
   this.selectedProfileIndex = 0;
   this.selectedOrder = 'last_seen';
 
+  this.viewingPhotos  = false;
+  this.editingSummary = false;
 
 
-  this.viewingPhotos = false;
+  // Switch to an 'editing' field. use something like "if user.editing == 'summary'", and set editing to nil when you click save.
+
+
+
+
   if ( this.profiles ) this.nextProfile = this.profiles[1]; 
 }
 
 ProfileController.prototype.togglePhotos = function() {
-  console.log(this.profile.profile_photos);
-  this.viewingPhotos = !this.viewingPhotos
+  this.viewingPhotos = !this.viewingPhotos;
   
   // Add some stuff here for handling 'back' button, to undo it
+}
+
+ProfileController.prototype.toggleSelfSummary = function() {
+  this.editingSummary = !this.editingSummary;
 }
 
 ProfileController.prototype.update = function() {

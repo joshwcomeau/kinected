@@ -251,9 +251,14 @@
         margin-top: 0;
         font-family: 'Raleway';
       }
-
+      .about-textarea {
+        width: 100%;
+      }
+      
       .about-section {
         margin-top: 2.5rem;
+
+
 
         &.editable {
           margin: 0 -1rem;
