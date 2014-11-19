@@ -9,7 +9,7 @@
   </div>
 
   <header class="title-area">
-    <div class="title-text" ng-cloak>
+    <div class="title-text" ng-cloak ng-class="{editable: user.isMe}">
       <h1>{{user.profile.display_name}}</h1>
       <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | dateToAge}} Years Old • {{user.profile.sex}}</h3>
       <a class="interaction-button message" href="#message-modal">Send a Message</a>
@@ -59,9 +59,7 @@
       </li>
       <li>
         <div class="stat-label">Height:</div>
-        <div class="stat-value pre-wrap" ng-if="user.profile.height_ft">
-          {{user.profile.height_ft}} ({{user.profile.height_cm}})
-        </div>
+        <div class="stat-value" ng-if="user.profile.height_ft">{{user.profile.height_ft}} ({{user.profile.height_cm}})</div>
         <div class="stat-value not-specified" ng-if="!user.profile.height_ft">Not Specified</div>          
       </li>
       <li>

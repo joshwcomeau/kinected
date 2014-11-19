@@ -1,12 +1,17 @@
 function ProfileController($scope, $attrs, $filter, ProfileDetails, InitialProfileList, InitialProfileDetails) {
   this.profile  = InitialProfileDetails;
   this.profiles = InitialProfileList;
+  this.isMe     = $attrs['myProfile'] == this.profile.id; // Not using === because attrs is a string, whereas this.profile.id is an int.
 
-  this.user_factory  = ProfileDetails;
+  console.log(this.isMe);
+
+  this.userFactory  = ProfileDetails;
   this.orderBy       = $filter('orderBy');
 
   this.selectedProfileIndex = 0;
   this.selectedOrder = 'last_seen';
+
+
 
   this.viewingPhotos = false;
   if ( this.profiles ) this.nextProfile = this.profiles[1]; 
@@ -36,7 +41,7 @@ ProfileController.prototype.orderMatches = function() {
 
   // Fetch this data from the server
   var user = this;    
-  this.user_factory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
+  this.userFactory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
     user.loading = false;
     user.profile = result;    
   });
@@ -57,7 +62,7 @@ ProfileController.prototype.goToMatch = function(increment) {
   
   // Get that user's data from the server
   var user = this;
-  this.user_factory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
+  this.userFactory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
     user.loading = false;
     user.profile = result;    
   });
