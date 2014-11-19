@@ -32,6 +32,8 @@
         Self summary
       </span></h4>
       <p class="pre-wrap">{{user.profile.self_summary}}</p>
+      <textarea ng-model="user.profile.self_summary" name="self-summary" id="edit-self-summary" cols="30" rows="10"></textarea>
+      <button ng-click="user.update()"></button>
     </section>
     
     <section class="about-section" ng-class="{editable: user.isMe}">

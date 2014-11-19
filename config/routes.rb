@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :permissions
   resources :messages, except: [:new, :edit]
   resources :chats, only: [:show]
-  resources :daters, only: [:index, :show]
+  resources :daters, only: [:index, :show, :update]
 
   # Singular resource
   resource :concierge, only: [:show]

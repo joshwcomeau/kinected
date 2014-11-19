@@ -5,7 +5,7 @@ function ProfileController($scope, $attrs, $filter, ProfileDetails, InitialProfi
 
   console.log(this.isMe);
 
-  this.userFactory  = ProfileDetails;
+  this.userFactory   = ProfileDetails;
   this.orderBy       = $filter('orderBy');
 
   this.selectedProfileIndex = 0;
@@ -22,6 +22,24 @@ ProfileController.prototype.togglePhotos = function() {
   this.viewingPhotos = !this.viewingPhotos
   
   // Add some stuff here for handling 'back' button, to undo it
+}
+
+ProfileController.prototype.update = function() {
+  var user = this;
+  
+  // Lets start with the obligatory 'get' request
+  var user = this.userFactory.get({userId: this.profile.id});
+
+  // Now lets update it
+  this.userFactory.update({userId: this.profile.id}, this.profile)
+  // this.updateFactory.put({userId: this.selectedProfileId}).$promise.then(function(result) {
+  //   user.loading = false;
+  //   user.profile = result;    
+
+  //   console.log(result);
+  //   console.log(user.profile.self_summary);
+    
+  // });
 }
 
 ProfileController.prototype.orderMatches = function() {

@@ -31,15 +31,17 @@
   }
 
   .edit-icon {
-    color: darken(#e9e6dd, 40%);
+    opacity: 0.5;
     position: absolute;
   }
   .edit-icon.title {
+    color: darken(#e9e6dd, 40%);
     right: 1rem;
     top: 1rem;
     font-size: 1.35em;
   }
   .edit-icon.subtitle {
+    color: #666;
     right: 0.1rem;
     top: 0.2rem;
     font-size: 1.2em;
@@ -55,7 +57,10 @@
     padding: 1rem;
     border-radius: 5px;
     &:hover {
-      .edit-icon { color: $teal; }
+      .edit-icon { 
+        opacity: 1;
+        color: $teal; 
+      }
     }
   }
   .top-strip {

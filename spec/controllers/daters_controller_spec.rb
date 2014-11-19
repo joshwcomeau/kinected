@@ -5,7 +5,48 @@ RSpec.describe DatersController, :type => :controller do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
-  describe "GET :index" do
+  describe "PATCH :update" do
+    before(:all) do
+      @me    = create(:user, sex: :male)
+    end
+
+    context "when not signed in" do
+      before(:each) do
+        @me.self_summary = "lalala, updated summary"
+        patch :update, {id: @me.id, user: @me}, {"Accept" => "application/json"}
+        
+      end
+
+      it "responds with a flash alert" do
+        expect(flash[:alert]).to eq("You are not authorized to access this page.")
+      end   
+      it "responds with a 302 REDIRECT status" do
+        expect(response.status).to eq(302)
+      end      
+      it "doesn't update the database" do
+        expect(User.first.self_summary).not_to eq("lalala, updated summary")
+      end
+    end
+
+    context "when signed in" do
+      before(:each) do
+        sign_in @me
+      end
+
+      # it "Updates the summary" do
+      #   @me.self_summary = "lalala, updated summary"
+      #   patch :update, @me
+        
+      #   expect(User.first.self_summary).to eq("lalala, updated summary")
+      # end
+
+      # it "Doesn't update an unpermitted param" do
+
+      # end
+    end
+  end
+
+  xdescribe "GET :index" do
     before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female, last_sign_in_at: 6.days.ago)
@@ -54,7 +95,7 @@ RSpec.describe DatersController, :type => :controller do
     end
   end
 
-  describe "GET :show" do
+  xdescribe "GET :show" do
     before(:all) do
       @me   = create(:user, sex: :male)
       @them = create(:user, sex: :female)
