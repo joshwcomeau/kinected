@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature 'Browse' do
   before(:all) do
-    # Capybara.current_driver = :selenium # Slow, visual driver
-    Capybara.current_driver = :webkit   # Quick, headless driver
+    Capybara.current_driver = :selenium # Slow, visual driver
+    # Capybara.current_driver = :webkit   # Quick, headless driver
 
     @user  = create(:user, sex: :male, email: 'john@doe.com')
     @lady1 = create(:user, display_name: 'beatrice', sex: :female, last_sign_in_at: 2.hours.ago, created_at: 4.weeks.ago)
@@ -20,6 +20,7 @@ feature 'Browse' do
 
     find("#sidebar-browse-link").click
     expect(current_path).to eq(daters_path)
+    sleep 2
 
     # The default sort is 'last sign in'. Let's make sure they're ordered accordingly. First Janicee, then Beatrice
     expect(page).to have_content("janiceee")
@@ -36,12 +37,21 @@ feature 'Browse' do
     expect(page).to have_content("janiceee")
   end
 
+  scenario "Making sure appropriate actions do/dont exist" do
+    log_into_site('john@doe.com', '12345678')
+    expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
+    expect(current_path).to eq("/")
+    find("#sidebar-browse-link").click
+    expect(current_path).to eq(daters_path)
+  end
+
   scenario "Test photo view" do
     log_into_site('john@doe.com', '12345678')
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
     expect(current_path).to eq("/")
     find("#sidebar-browse-link").click
     expect(current_path).to eq(daters_path)
+    sleep 2
 
     find(".profile-photo-container").click
     sleep 0.1
