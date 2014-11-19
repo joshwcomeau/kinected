@@ -36,6 +36,24 @@ feature 'Browse' do
     expect(page).to have_content("janiceee")
   end
 
+  scenario "Test photo view" do
+    log_into_site('john@doe.com', '12345678')
+    expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
+    expect(current_path).to eq("/")
+    find("#sidebar-browse-link").click
+    expect(current_path).to eq(daters_path)
+
+    find(".profile-photo-container").click
+    expect(page).not_to have_css(".about-dater")
+    expect(page).to have_css(".photo-header")
+    expect(page).to have_css(".full-profile-photo", count: 2)
+
+    find(".return-to-profile").click
+    expect(page).not_to have_css(".photo-header")
+    expect(page).to have_css(".about-dater")
+
+  end
+
   after(:all) do
     Capybara.use_default_driver
   end

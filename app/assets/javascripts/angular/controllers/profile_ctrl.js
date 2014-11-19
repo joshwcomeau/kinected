@@ -44,6 +44,10 @@ ProfileController.prototype.orderMatches = function() {
   this.userFactory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
     user.loading = false;
     user.profile = result;    
+
+    console.log(user.selectedProfileId);
+    console.log(user.selectedProfileIndex);
+    console.log(user.profiles);
   });
 };
 

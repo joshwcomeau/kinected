@@ -109,7 +109,7 @@
   </div>
   <ul>
     <li ng-repeat="photo in user.profile.profile_photos | orderBy:reverse">
-      <img ng-src="{{photo.photo_object.url}}" alt="">
+      <img ng-src="{{photo.photo_object.url}}" class="full-profile-photo">
       <p ng-if="photo.caption">{{photo.caption}}</p>
     </li>
   </ul>

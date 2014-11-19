@@ -15,6 +15,6 @@
 FactoryGirl.define do
   factory :profile_photo do
     photo_object { File.open("/users/Shared/sample#{Random.rand(1..18)}.jpg") }
-    caption { Faker::Lorem.paragraph }
+    caption { Faker::Lorem.sentence }
   end
 end
