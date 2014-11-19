@@ -30,6 +30,30 @@
     }
   }
 
+  .edit-icon {
+    color: darken(#e9e6dd, 40%);
+  }
+  .edit-icon.title {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.35em;
+  }
+  .edit-icon.subtitle {
+    position: absolute;
+    right: 0.1rem;
+    top: 0.2rem;
+    font-size: 1.2em;
+  }
+
+  .editable {
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 5px;
+    &:hover {
+      .edit-icon { color: $teal; }
+    }
+  }
   .top-strip {
     position: relative;
     z-index: 2;
@@ -149,18 +173,13 @@
         &.editable {
           left: 0.5rem;
           bottom: 0.5rem;
-          padding: 1rem;
-          border-radius: 5px;
-
+          
           &:hover {
             background: rgba(255,255,255,0.5);
             border-bottom: 3px solid darken(#e9e6dd, 10%);
             border-top: 1px solid #FFF;
+          }
 
-          }
-          & .interaction-button {
-            display: none;
-          }
           & h3 {
             margin-bottom: 0rem;
           }
@@ -169,6 +188,7 @@
         h1 {
           font-size: 2.2rem;
           font-family: 'Raleway';
+          margin-top: 0;
           margin-bottom: 0.2rem;
         }
         h3 {
@@ -225,10 +245,23 @@
         font-family: 'Raleway';
       }
 
-      h4 {
+      .about-section {
         margin-top: 2.5rem;
 
+        &.editable {
+          margin: 0 -1rem;
+          h4 {
+            margin-top: 0;
+          }
+          &:hover {
+            border-bottom: 3px solid #BBB;
+            border-top: 1px solid #FFF;
+            background: #EEE;
+          }
+        }
+
         span {
+          position: relative;
           padding: 0.4rem 3rem 0.4rem 0;
           border-radius: 1px;
           border-bottom: 2px solid $teal;  

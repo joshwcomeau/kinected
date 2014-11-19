@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature 'Browse' do
   before(:all) do
-    Capybara.current_driver = :selenium # Slow, visual driver
-    # Capybara.current_driver = :webkit   # Quick, headless driver
+    # Capybara.current_driver = :selenium # Slow, visual driver
+    Capybara.current_driver = :webkit   # Quick, headless driver
 
     @user  = create(:user, sex: :male, email: 'john@doe.com')
     @lady1 = create(:user, display_name: 'beatrice', sex: :female, last_sign_in_at: 2.hours.ago, created_at: 4.weeks.ago)
@@ -44,9 +44,10 @@ feature 'Browse' do
     expect(current_path).to eq(daters_path)
 
     find(".profile-photo-container").click
+    sleep 0.1
     expect(page).not_to have_css(".about-dater")
     expect(page).to have_css(".photo-header")
-    expect(page).to have_css(".full-profile-photo", count: 2)
+    expect(page).to have_css(".full-profile-photo")
 
     find(".return-to-profile").click
     expect(page).not_to have_css(".photo-header")

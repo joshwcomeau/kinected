@@ -10,11 +10,14 @@
 
   <header class="title-area">
     <div class="title-text" ng-cloak ng-class="{editable: user.isMe}">
+      <pencil region="title"></pencil>
       <h1>{{user.profile.display_name}}</h1>
       <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | dateToAge}} Years Old • {{user.profile.sex}}</h3>
-      <a class="interaction-button message" href="#message-modal">Send a Message</a>
-      <button class="interaction-button favorite">Add to Favorites</button>
-      <button class="interaction-button block">Block</button>
+      <div ng-if="!user.isMe">
+        <a class="interaction-button message" href="#message-modal">Send a Message</a>
+        <button class="interaction-button favorite">Add to Favorites</button>
+        <button class="interaction-button block">Block</button>
+      </div>
     </div>
   </header>
 </div>
@@ -23,21 +26,36 @@
   <div class="about-dater">
     <h2>About This User</h2>
 
-    <h4><span>Self-Summary</span></h4>
-    <p class="pre-wrap">{{user.profile.self_summary}}</p>
+    <section class="about-section" ng-class="{editable: user.isMe}">
+      <h4><span>
+        <pencil region="subtitle"></pencil>
+        Self summary
+      </span></h4>
+      <p class="pre-wrap">{{user.profile.self_summary}}</p>
+    </section>
     
-    <h4><span>I'm really good at</span></h4>
-    <p>Cooking!<br>dancing<br>left turns :)</p>
+    <section class="about-section" ng-class="{editable: user.isMe}">
+      <h4><span>
+        <pencil region="subtitle"></pencil>
+        I'm really good at...
+      </span></h4>      
+      <p>Cooking!<br>dancing<br>left turns :)</p>
+    </section>
 
-    <h4><span>Favorite books, movies, shows, music and food</span></h4>
-    <p>Movies: Hannibal, Sweet Home Alabama, The Exorcist, The Shining, The Notebook, The Mummy, Fast and Furious, Lord of the Rings, Bad Boys, My Girl, Harry Potter... the list goes on</p>
+    <section class="about-section" ng-class="{editable: user.isMe}">
+      <h4><span>
+        <pencil region="subtitle"></pencil>
+        Favorite books, movies, music, TV shows, and food
+      </span></h4>      
+      <p>Movies: Hannibal, Sweet Home Alabama, The Exorcist, The Shining, The Notebook, The Mummy, Fast and Furious, Lord of the Rings, Bad Boys, My Girl, Harry Potter... the list goes on</p>
 
-    <p>Some of my favorite books are: Born Confused, The Mortal Instruments, The Space Between Us, Divergent, The Five People you Meet in Heaven, The Perks of Being a Wallflower etc.</p>
+      <p>Some of my favorite books are: Born Confused, The Mortal Instruments, The Space Between Us, Divergent, The Five People you Meet in Heaven, The Perks of Being a Wallflower etc.</p>
 
-    <p>TV: Suits, Criminal Minds, Game of Thrones, Saving Hope, Orange is the New Black, Master Chef, Catfish *ahem*, Revenge, Once Upon a Time, The Mentalist ...</p>
+      <p>TV: Suits, Criminal Minds, Game of Thrones, Saving Hope, Orange is the New Black, Master Chef, Catfish *ahem*, Revenge, Once Upon a Time, The Mentalist ...</p>
 
-    <p>I like all types of music ... except Heavy Metal and Rap :P</p>
-    </div>
+      <p>I like all types of music ... except Heavy Metal and Rap :P</p>
+    </section>
+  </div>
 
   <div class="quick-stats">
     <h3>Quick Stats</h3>
@@ -105,7 +123,7 @@
 <div class="photo-row" ng-show="user.viewingPhotos">
   <div class="photo-header">
     <h2>{{user.profile.display_name}}'s Photos</h2>
-    <p><a ng-click="user.togglePhotos()"><%= fa_icon 'angle-left' %>&nbsp;&nbsp;&nbsp;Return to Profile</a></p>
+    <p><a class="return-to-profile" ng-click="user.togglePhotos()"><%= fa_icon 'angle-left' %>&nbsp;&nbsp;&nbsp;Return to Profile</a></p>
   </div>
   <ul>
     <li ng-repeat="photo in user.profile.profile_photos | orderBy:reverse">
