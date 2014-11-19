@@ -26,16 +26,17 @@
   <div class="about-dater">
     <h2>About This User</h2>
 
-    <section class="about-section" ng-class="{editable: user.isMe}" ng-click="user.toggleSelfSummary()">
-      <h4><span>
+    <section class="about-section flash" ng-class="{editable: user.isMe}">
+      <h4><span ng-click="user.editSection('self_summary')">
         <pencil region="subtitle"></pencil>
         Self summary
       </span></h4>
-      {{user.is_editing}}
-      <p class="pre-wrap" ng-show="!user.editingSummary">{{user.profile.self_summary}}</p>
-      <div ng-show="user.editingSummary">
+
+      <p class="pre-wrap" ng-hide="user.editing === 'self_summary'" ng-click="user.editSection('self_summary')">{{user.profile.self_summary}}</p>
+      <div ng-show="user.editing === 'self_summary'">
         <textarea auto-grow ng-model="user.profile.self_summary" name="self-summary" id="edit-self-summary" class="about-textarea"></textarea>
-        <button ng-click="user.update()">Save</button>
+        <button class="interaction-button save" ng-click="user.update()">{{ user.saving ? "Saving..." : "Save" }}</button>
+        <button class="interaction-button block" ng-click="user.editSection()">Cancel</button>
       </div>
 
     </section>

@@ -12,13 +12,9 @@ function ProfileController($scope, $attrs, $filter, ProfileDetails, InitialProfi
   this.selectedOrder = 'last_seen';
 
   this.viewingPhotos  = false;
-  this.editingSummary = false;
-
-
-  // Switch to an 'editing' field. use something like "if user.editing == 'summary'", and set editing to nil when you click save.
-
-
-
+  this.editing = null;
+  this.saving  = null;
+  this.loading = null;  
 
   if ( this.profiles ) this.nextProfile = this.profiles[1]; 
 }
@@ -29,26 +25,23 @@ ProfileController.prototype.togglePhotos = function() {
   // Add some stuff here for handling 'back' button, to undo it
 }
 
-ProfileController.prototype.toggleSelfSummary = function() {
-  this.editingSummary = !this.editingSummary;
+ProfileController.prototype.editSection = function(section) {
+  if (this.editing !== section) {
+    this.editing = section;
+  }
+  console.log(this.editing);
 }
 
 ProfileController.prototype.update = function() {
   var user = this;
-  
-  // Lets start with the obligatory 'get' request
-  var user = this.userFactory.get({userId: this.profile.id});
+  this.saving = true;
+  this.userFactory.update({userId: this.profile.id}, this.profile).$promise.then(function(result) {
+    user.editing = null;
+    user.saving  = null;
+    // flash 
+    $(".editing").addClass("flash");
+  });
 
-  // Now lets update it
-  this.userFactory.update({userId: this.profile.id}, this.profile)
-  // this.updateFactory.put({userId: this.selectedProfileId}).$promise.then(function(result) {
-  //   user.loading = false;
-  //   user.profile = result;    
-
-  //   console.log(result);
-  //   console.log(user.profile.self_summary);
-    
-  // });
 }
 
 ProfileController.prototype.orderMatches = function() {

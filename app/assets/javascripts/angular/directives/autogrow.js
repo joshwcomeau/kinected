@@ -1,4 +1,4 @@
-angular.module('autoGrow', []).directive('autoGrow', function() {
+app.directive('autoGrow', function() {
     return function(scope, element, attr) {
         var minHeight, paddingLeft, paddingRight, $shadow = null;
  
