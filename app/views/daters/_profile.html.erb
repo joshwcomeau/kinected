@@ -32,7 +32,7 @@
         Self summary
       </span></h4>
 
-      <p class="pre-wrap" ng-hide="user.editing === 'self_summary'" ng-click="user.editSection('self_summary')">{{user.profile.self_summary}}</p>
+      <p class="pre-wrap" ng-class="{cursor: user.isMe}" ng-hide="user.editing === 'self_summary'" ng-click="user.editSection('self_summary')">{{user.profile.self_summary}}</p>
       <div ng-show="user.editing === 'self_summary'">
         <textarea auto-grow ng-model="user.profile.self_summary" name="self-summary" id="edit-self-summary" class="about-textarea"></textarea>
         <button class="interaction-button save" ng-click="user.update()">{{ user.saving ? "Saving..." : "Save" }}</button>

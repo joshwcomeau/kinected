@@ -51,7 +51,7 @@ Ethnicity.create([
   city:           'Mississauga',
   state:          'Ontario',
   postal_code:    'L8P 2R4',
-  self_summary:   "I'm a personable, open-minded guy who is finding his footing in the gay community, looking for interesting experiences, and burying his head in a textbook at a venue near you!\n\nI have a wide range of interests, which may include (but is not limited to) cool stuff that you like™... so message me about absolutely anything. We can make a conversation out of it.\n\nI'm also here to go on dates and bob for apples. And I'm all out of apples.",
+  self_summary:   "What is one even supposed to write in these things? I'm an ENFP, hoping to find an INFJ, though I'm open to meeting anyone with common interests.\nI suppose I should mention that I'm looking for someone to spend time with and get to know over time. I'm coming out of a long-term relationship so I'm not ready for big commitments right now, but I'm not into flings either...complicated =__=\nLet me just put the worst of me out there. I'm insecure about myself, more so than the average person. I have a temper and sometimes I scare myself. I can be bossy and very convincing when I argue. I can also be a sore loser. However, I will usually realise my mistakes (hindsight is always 20/20) and apologise. Another thing about me is that once I like someone, I am fiercely loyal and loving.\nI probably shouldn't even be on this site because of the emotional wreck I am right now, but I just need to feel like there are actual human people out there who want to meet me. Maybe one of them will stay and not abandon me...sad, right?",
   height:         188,
   num_of_kids:    0,
   body_type:      "Average",
@@ -110,6 +110,7 @@ Ethnicity.create([
   state:          'Ontario',  
   postal_code:    'M1P 4P0',
   self_summary:   "Taking life one step at a time.\nIt makes more sense to me to get to know each other more if we actually chat rather than filling these out, so just ask me. (:\nInstagram: mister_kayy\nTwitter: @Mister_kayy",
+  height:         176,
   num_of_kids:    2,
   body_type:      "A few extra pounds",
   smoking:        "Yes",
@@ -136,6 +137,7 @@ Ethnicity.create([
   state:          'Ontario',
   postal_code:    'M1W 2T0',
   self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+  height:         173,
   num_of_kids:    2,
   body_type:      "Voluptuous",
   smoking:        "Never",
@@ -167,6 +169,7 @@ Ethnicity.create([
   state:          'Ontario',
   postal_code:    'M1W 2T0',
   self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+  height:         123,
   num_of_kids:    2,
   body_type:      "Voluptuous",
   smoking:        "Never",
@@ -194,6 +197,7 @@ Ethnicity.create([
   state:          'Ontario',
   postal_code:    'M1W 2T0',
   self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+  height:         191,
   num_of_kids:    2,
   body_type:      "Voluptuous",
   smoking:        "Never",
@@ -220,6 +224,7 @@ Ethnicity.create([
   state:          'Ontario',
   postal_code:    'M1W 2T0',
   self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+  height:         131,
   num_of_kids:    2,
   body_type:      "Voluptuous",
   smoking:        "Never",
@@ -235,7 +240,7 @@ Ethnicity.create([
 
 
 User.daters.each do |u|
-  [0,1,2].sample.times do
+  [1,3].sample.times do
     u.ethnicities << Ethnicity.all.sample
   end
 end
