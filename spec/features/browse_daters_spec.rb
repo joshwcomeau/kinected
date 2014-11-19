@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Browse' do
+feature 'Browse Section. ' do
   before(:all) do
     Capybara.current_driver = :selenium # Slow, visual driver
     # Capybara.current_driver = :webkit   # Quick, headless driver
@@ -13,7 +13,7 @@ feature 'Browse' do
   end
 
 
-  scenario "Filter profiles by most recent login and newest users" do
+  xscenario "Filter profiles by most recent login and newest users" do
     log_into_site('john@doe.com', '12345678')
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
     expect(current_path).to eq("/")
@@ -37,7 +37,7 @@ feature 'Browse' do
     expect(page).to have_content("janiceee")
   end
 
-  scenario "Making sure appropriate actions do/dont exist" do
+  xscenario "Making sure appropriate actions do/dont exist" do
     log_into_site('john@doe.com', '12345678')
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
     expect(current_path).to eq("/")
@@ -45,13 +45,13 @@ feature 'Browse' do
     expect(current_path).to eq(daters_path)
   end
 
-  scenario "Test photo view" do
+  xscenario "Test photo view" do
     log_into_site('john@doe.com', '12345678')
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
     expect(current_path).to eq("/")
     find("#sidebar-browse-link").click
     expect(current_path).to eq(daters_path)
-    sleep 2
+
 
     find(".profile-photo-container").click
     sleep 0.1
