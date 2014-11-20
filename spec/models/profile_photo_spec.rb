@@ -19,12 +19,12 @@ RSpec.describe ProfilePhoto, :type => :model do
   end
 
   it "sets the uploaded photo to 'primary'" do
-    expect(@new_photo.primary).to eq(true)
+    expect(@new_photo.primary_photo).to eq(true)
   end
 
   it "revokes primary status from old photos upon new upload" do
     @even_newer_photo = ProfilePhoto.create(photo_object: File.open("/users/Shared/sample2.jpg"), user_id: @user.id)
-    expect(@even_newer_photo.primary).to eq(true)
-    expect(@new_photo.reload.primary).to eq(false)
+    expect(@even_newer_photo.primary_photo).to eq(true)
+    expect(@new_photo.reload.primary_photo).to eq(false)
   end
 end

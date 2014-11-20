@@ -117,9 +117,6 @@ RSpec.describe User, :type => :model do
         expect(subject.last[:id]).to  eq(@lady4.id)
       end
 
-      # it "grabs their blurred thumb URL" do
-      #   expect(subject.first[:blurred_thumb]).to eq(@lady2.profile_photos.find_by(primary: true).photo_object.blurred_thumb.url)
-      # end
 
     end  
 
@@ -136,7 +133,7 @@ RSpec.describe User, :type => :model do
           expect(subject).to be_a ProfilePhoto
         end
         it "is primary" do
-          expect(subject.primary).to eq(true)
+          expect(subject.primary_photo).to eq(true)
         end
         it "contains a full URL" do
           expect(subject.photo_object.url).to be_a String

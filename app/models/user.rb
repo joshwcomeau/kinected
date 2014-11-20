@@ -100,15 +100,15 @@ class User < ActiveRecord::Base
   end
 
   def primary_profile_photo
-    self.profile_photos.find_by(primary: true).try(:photo_object) || ProfilePhoto.new.photo_object
+    self.profile_photos.find_by(primary_photo: true).try(:photo_object) || ProfilePhoto.new.photo_object
   end
 
   def primary_profile_photo_thumb
-    self.profile_photos.find_by(primary: true).try(:photo_object).try(:thumb) || ProfilePhoto.new.photo_object
+    self.profile_photos.find_by(primary_photo: true).try(:photo_object).try(:thumb) || ProfilePhoto.new.photo_object
   end
 
   def primary_profile_photo_blurred_thumb
-    self.profile_photos.find_by(primary: true).try(:photo_object).try(:blurred_thumb) || ProfilePhoto.new.photo_object
+    self.profile_photos.find_by(primary_photo: true).try(:photo_object).try(:blurred_thumb) || ProfilePhoto.new.photo_object
   end
 
 
@@ -140,7 +140,7 @@ class User < ActiveRecord::Base
 
   def get_full_match_data
     user = self.attributes
-    user[:primary_profile_photo]  = self.profile_photos.find_by(primary: true)
+    user[:primary_profile_photo]  = self.profile_photos.find_by(primary_photo: true)
     user[:profile_photos]         = self.profile_photos
 
     user[:birthdate]    = time_in_ms(self.birthdate)
