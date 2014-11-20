@@ -158,7 +158,7 @@ class User < ActiveRecord::Base
     user[:sex]          = self.sex.capitalize
 
     if self.height
-      user_height = Unit("#{self.height} cm")
+      user_height         = Unit("#{self.height} cm")
       user[:height_cm]    = user_height.to_s(:m)
       user[:height_ft]    = user_height.to_s(:ft)
     end
@@ -173,6 +173,8 @@ class User < ActiveRecord::Base
       user[:answers_attributes] << {body: a.body, id: a.id, question_body: a.question.body}
     end
     user[:answers_attributes].shuffle!
+
+    user[:unanswered_questions] = Question.all.map(&:body) - self.questions.map(&:body)
 
     user
   end

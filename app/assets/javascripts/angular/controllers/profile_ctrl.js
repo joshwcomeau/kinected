@@ -1,6 +1,10 @@
 function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, InitialProfileList, InitialProfileDetails) {
   this.profile  = InitialProfileDetails;
   this.profiles = InitialProfileList;
+
+  // We're creating a 'master' clone. This clone will only update on SAVED changes. This clone is what's displayed to the user.
+  this.master   = angular.copy(this.profile);
+  
   this.isMe     = $attrs['myProfile'] == this.profile.id; // Not using === because attrs is a string, whereas this.profile.id is an int.
 
   console.log(this.profile);
@@ -12,6 +16,7 @@ function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, I
   this.selectedOrder = 'last_seen';
 
   this.viewingPhotos  = false;
+  this.showAll = false;
   this.editing = null;
   this.saving  = null;
   this.loading = null;  
@@ -33,14 +38,21 @@ ProfileController.prototype.editSection = function(section) {
   console.log(this.editing);
 }
 
+ProfileController.prototype.cancelUpdate = function() {
+  // Since we've canceled, let's 'reset' our copy from the master data.
+  angular.copy(this.master, this.profile);
+  this.editing = null;
+}
+
 ProfileController.prototype.update = function() {
   var user = this;
+  
   this.saving = true;
   this.userFactory.update({userId: this.profile.id}, this.profile).$promise.then(function(result) {
     user.editing = null;
     user.saving  = null;
-    // flash 
-    $(".editing").addClass("flash");
+    // Now that we know it's saved, let's update the local copy so the user sees these changes.
+    angular.copy(this.profile, this.master);
   });
 
 }

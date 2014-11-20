@@ -36,10 +36,10 @@
 
 <div class="second-row" ng-show="!user.viewingPhotos">
   <div class="dater-questions">
-    <p class="see-all-q"><a href="" class="see-all-q-link">Show all questions</a></p><h2>Questions</h2>
+    <p class="see-all-q"><a class="see-all-q-link" ng-click="user.showAll = true" ng-if="!user.isMe">Show all questions</a></p><h2>Questions</h2>
 
 
-    <section class="question" ng-repeat="q in user.profile.answers_attributes">
+    <section class="question" ng-repeat="q in user.profile.answers_attributes" ng-show="user.isMe || ($index < 3 || user.showAll)">
       <h4><span ng-click="user.editSection(q.id)">
         <pencil region="subtitle"></pencil>
         {{q.question_body}}
@@ -48,7 +48,7 @@
       <div ng-show="user.editing === q.id">
         <textarea auto-grow ng-model="user.profile.answers_attributes[$index].body" name="self-summary" id="edit-self-summary" class="about-textarea"></textarea>
         <button class="interaction-text-button save" ng-click="user.update()">{{ user.saving ? "Saving..." : "Save" }}</button>
-        <button class="interaction-text-button block" ng-click="user.editSection()">Cancel</button>
+        <button class="interaction-text-button block" ng-click="user.cancelUpdate()">Cancel</button>
       </div>
     </section>
 <!--     <section class="about-section" ng-class="{editable: user.isMe}">
