@@ -1,4 +1,4 @@
-function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, InitialProfileList, InitialProfileDetails) {
+function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, InitialProfileList, InitialProfileDetails, Favorite) {
   this.profile  = InitialProfileDetails;
   this.profiles = InitialProfileList;
 
@@ -9,8 +9,10 @@ function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, I
 
   console.log(this.profile);
 
-  this.userFactory   = ProfileDetails;
-  this.orderBy       = $filter('orderBy');
+  this.userFactory      = ProfileDetails;
+  this.favoriteFactory  = Favorite;
+  this.isFavorited      = false;
+  this.orderBy          = $filter('orderBy');
 
   this.selectedProfileIndex = 0;
   this.selectedOrder = 'last_seen';
@@ -24,18 +26,11 @@ function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, I
   if ( this.profiles ) this.nextProfile = this.profiles[1]; 
 }
 
-ProfileController.prototype.togglePhotos = function() {
-  this.viewingPhotos = !this.viewingPhotos;
-  
-  // Add some stuff here for handling 'back' button, to undo it
-}
-
 
 ProfileController.prototype.editSection = function(section) {
   if (this.editing !== section) {
     this.editing = section;
   }
-  console.log(this.editing);
 }
 
 ProfileController.prototype.cancelUpdate = function() {
@@ -54,7 +49,11 @@ ProfileController.prototype.update = function() {
     // Now that we know it's saved, let's update the local copy so the user sees these changes.
     angular.copy(this.profile, this.master);
   });
+}
 
+ProfileController.prototype.favorite = function() {
+  this.isFavorited = !this.isFavorited;
+  console.log(this.isFavorited)
 }
 
 ProfileController.prototype.orderMatches = function() {
@@ -106,7 +105,7 @@ ProfileController.prototype.goToMatch = function(increment) {
 };
 
 
-ProfileController.$inject = ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails']
+ProfileController.$inject = ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails', 'Favorite']
 
 var app = angular.module('kinected');
-app.controller('ProfileController', ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails', ProfileController]);
+app.controller('ProfileController', ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails', 'Favorite', ProfileController]);

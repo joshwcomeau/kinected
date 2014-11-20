@@ -103,6 +103,9 @@
         border-bottom: 3px solid darken($gold, 40%);
         transition: 0.2s;
       }
+      &.favorited {
+        color: $gold;
+      }
     } 
     &.block {
       background-color: $red;
@@ -208,7 +211,6 @@
       position: relative;
       width: 100%;
       overflow: hidden;
-      cursor: pointer;
       white-space: nowrap;
 
       img {
@@ -464,6 +466,22 @@
     cursor: default;
   }
 }
+
+.image-modal {
+  text-align: center;
+
+  .modal-inner {transition: 1s;}
+  img {
+
+    border-radius: 0.5rem;
+  }
+  .selected-photo-caption {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9em;
+  }
+}
+
+
 
 // Mobile styles
 @media screen and (max-width: 480px) {

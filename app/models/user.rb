@@ -145,7 +145,7 @@ class User < ActiveRecord::Base
 
   def get_full_match_data
     user = self.attributes
-    user[:profile_photos]         = self.profile_photos.order("primary_photo DESC").map { |p| p.photo_object }
+    user[:profile_photos]         = self.profile_photos.order("primary_photo DESC")
 
     user[:birthdate]    = time_in_ms(self.birthdate)
     user[:joined_num]   = time_in_ms(self.created_at)
