@@ -77,6 +77,9 @@ class User < ActiveRecord::Base
   has_many :inverse_target_users, through: :inverse_favorites, source: :user
   
 
+  has_many :answers
+  has_many :questions, through: :answers
+
 
   enum role:          [ :dater, :concierge, :admin ]
   enum sex:           [ :male, :female ]
