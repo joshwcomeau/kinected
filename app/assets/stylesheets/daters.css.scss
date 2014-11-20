@@ -261,7 +261,7 @@
     }
   }
   .second-row {
-    .about-dater {
+    .dater-questions {
       padding: 1.5rem;
 
       h2 {
@@ -287,11 +287,8 @@
         text-decoration: none;
       }      
       
-      .about-section {
+      .question {
         margin-top: 2.5rem;
-
-
-
 
         &.editable {
           margin: 0 -1rem;
@@ -476,7 +473,7 @@
   .second-row {
     display: flex;
 
-    .about-dater {
+    .dater-questions {
       flex: 1;
     }
     .quick-stats {

@@ -35,11 +35,23 @@
 </div>
 
 <div class="second-row" ng-show="!user.viewingPhotos">
-  <div class="about-dater">
+  <div class="dater-questions">
     <p class="see-all-q"><a href="" class="see-all-q-link">Show all questions</a></p><h2>Questions</h2>
 
 
-    <section class="about-section flash" ng-class="{editable: user.isMe}">
+    <section class="question" ng-repeat="q in user.profile.answers_attributes">
+      <h4><span ng-click="user.editSection(q.id)">
+        <pencil region="subtitle"></pencil>
+        {{q.question_body}}
+      </span></h4>
+      <p class="pre-wrap" ng-class="{cursor: user.isMe}" ng-hide="user.editing === q.id" ng-click="user.editSection(q.id)">{{q.body}}</p>
+      <div ng-show="user.editing === q.id">
+        <textarea auto-grow ng-model="user.profile.answers_attributes[$index].body" name="self-summary" id="edit-self-summary" class="about-textarea"></textarea>
+        <button class="interaction-text-button save" ng-click="user.update()">{{ user.saving ? "Saving..." : "Save" }}</button>
+        <button class="interaction-text-button block" ng-click="user.editSection()">Cancel</button>
+      </div>
+    </section>
+<!--     <section class="about-section" ng-class="{editable: user.isMe}">
       <h4><span ng-click="user.editSection('self_summary')">
         <pencil region="subtitle"></pencil>
         If I could travel anywhere, I'd go to...
@@ -69,7 +81,7 @@
       </span></h4>      
       <p>Dye my hair purple!</p>
     </section>
-
+ -->
     
   </div>
 

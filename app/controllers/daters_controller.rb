@@ -34,7 +34,7 @@ class DatersController < ApplicationController
   private
 
   def dater_params
-    params.require(:dater).permit(:self_summary)
+    params.require(:dater).permit(:self_summary, answers_attributes: [:id, :body])
   end
   
 end

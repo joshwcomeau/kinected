@@ -80,6 +80,8 @@ class User < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   has_many :questions, through: :answers
 
+  accepts_nested_attributes_for :answers
+
 
   enum role:          [ :dater, :concierge, :admin ]
   enum sex:           [ :male, :female ]
@@ -166,11 +168,11 @@ class User < ActiveRecord::Base
       user[:last_seen_ago]  = time_ago_in_words(self.last_sign_in_at) + " ago"
     end
 
-    user[:questions] = []
+    user[:answers_attributes] = []
     self.answers.each do |a|
-      user[:questions] << {question: a.question.body, answer: a.body}
+      user[:answers_attributes] << {body: a.body, id: a.id, question_body: a.question.body}
     end
-    user[:questions].shuffle!
+    user[:answers_attributes].shuffle!
 
     user
   end
