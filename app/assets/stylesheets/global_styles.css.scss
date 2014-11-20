@@ -113,6 +113,9 @@ html, body {
         &:hover {
           background: darken($teal, 10%);
         }
+        &:last-of-type a {
+          border-bottom: 0px;
+        }
       }
       span {
         float: left;
@@ -161,6 +164,102 @@ html, body {
     background: #222;
     padding: 30px;
     min-height: 100%;
+  }
+
+
+  // Mobile header
+  .mobile-header {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    margin: 0;
+    text-align: left;
+    color: #FFF;
+
+    .top-bit {
+      height: 56px;
+      background: $teal;
+      position: relative;
+      z-index: 2;
+      border-bottom: 3px solid darken($teal, 12%);
+    }
+
+    h1 {
+      font-family: 'Raleway';
+      font-weight: 700;      
+      padding: 0.6rem 1rem;
+      margin: 0;
+      text-shadow: 
+        0.5px 0.5px 0px #111,
+        1px 1px 0px #111,
+        1.5px 1.5px 0px #000,
+        2px 2px 0px #000
+      ;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      cursor: pointer;
+      font-size: 1.75em;
+      line-height: 53px;
+      height: 53px;
+      padding: 0 1rem;
+      right: 0;
+      color: tint($teal, 60%);
+      background: rgba(0,0,0,0.2);
+
+      &.selected {
+        background: #333;
+        color: #FFF;
+        transition: 0.4s;
+      }
+    }
+
+    nav {
+      position: absolute;
+      width: 100%;
+      top: -200px;
+      z-index: 1;
+      background: darken($teal, 5%);
+      transition: 0.2s;
+
+      &.selected {
+        top: 56px;
+        transition: 0.5s;
+      }
+      
+      li {
+        display: block;
+        text-align: right;
+
+        &:hover {
+          background: darken($teal, 8%);
+        }
+        &:last-of-type a {
+          border-bottom: 0px;
+        }
+      }
+      span {
+        float: left;
+      }
+      a {
+        display: block;
+        text-decoration: none;
+        color: #FFF;
+        font-weight: 400;
+        padding: 0.6rem;
+        border-bottom: 1px solid darken($teal, 11%);
+
+        &:hover {
+          color: $gold;
+        }
+
+
+      }
+    }
+
   }
 }
 
@@ -268,3 +367,19 @@ display: none !important;
   }
 }
 
+// Phone resolutions (480px and under)
+@media screen and (max-width: 480px) {
+  .wrapper {
+    &.with-sidebar {
+      padding-left: 0;
+    }
+
+    & > aside {
+      display: none;
+    }
+
+    .mobile-header {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+<div class="mobile-header" ng-controller="NavigationController as nav">
+  <div class="top-bit">
+    <div class="menu-toggle" ng-click="nav.toggle()" ng-class="{selected: nav.opened}"><%= fa_icon "bars" %></div>
+    <h1>Kinected</h1>
+  </div>
+  <nav ng-class="{selected: nav.opened}">
+    <ul>
+      <%= render partial: 'layouts/main_nav_links' %>
+    </ul>
+  </nav>
+</div>

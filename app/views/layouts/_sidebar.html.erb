@@ -12,29 +12,10 @@
     
   <nav>
     <ul>
-      <li>
-        <%= link_to daters_path, id: 'sidebar-browse-link' do %>
-          <span class="nav-text-link">Browse</span><%= fa_icon 'users' %>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to messages_path, id: 'sidebar-messages-link' do %>
-          <span class="nav-text-link">Messages</span><%= fa_icon 'paper-plane' %>
-        <% end %>
-      </li>      
-      <li>
-        <%= link_to concierge_path, id: 'sidebar-concierge-link' do %>
-          <span class="nav-text-link">Concierge</span><%= fa_icon 'bell' %>
-        <% end %>
-      </li>  
-      <li>
-        <%= link_to concierge_path, id: 'sidebar-settings-link' do %>
-          <span class="nav-text-link">Settings</span><%= fa_icon 'gear' %>
-        <% end %>
-      </li>       
+      <%= render partial: 'layouts/main_nav_links' %>
     </ul>
   </nav>
-
+  
   <div class="bottom-buttons">
     <button>Make a Match</button>
     <button>Invite a Friend</button>
