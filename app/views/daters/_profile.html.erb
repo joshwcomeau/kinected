@@ -4,7 +4,7 @@
 
 <div class="first-row">
   <div class="profile-photo-container" ng-click="user.togglePhotos()">
-    <img ng-src="{{user.profile.primary_profile_photo.photo_object.thumb.url}}">
+    <img ng-repeat="photo in user.profile.profile_photos" ng-src="{{photo.photo_object.thumb.url}}" ng-hide="user.slideshowPosition !== $index">
     <div class="view-all">View All Photos</div>
   </div>
 

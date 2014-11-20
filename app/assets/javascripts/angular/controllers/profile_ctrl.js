@@ -1,4 +1,4 @@
-function ProfileController($scope, $attrs, $filter, ProfileDetails, InitialProfileList, InitialProfileDetails) {
+function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, InitialProfileList, InitialProfileDetails) {
   this.profile  = InitialProfileDetails;
   this.profiles = InitialProfileList;
   this.isMe     = $attrs['myProfile'] == this.profile.id; // Not using === because attrs is a string, whereas this.profile.id is an int.
@@ -17,6 +17,17 @@ function ProfileController($scope, $attrs, $filter, ProfileDetails, InitialProfi
   this.loading = null;  
 
   if ( this.profiles ) this.nextProfile = this.profiles[1]; 
+
+  // Slideshow stuffs
+  this.slideshowPosition = 0;
+  var user = this;
+  if ( this.profile.profile_photos.length > 1 ) {
+    $interval(function() {
+      user.slideshowPosition++;
+      user.slideshowPosition = user.slideshowPosition % user.profile.profile_photos.length;
+      console.log(user.slideshowPosition);
+    }, 1000);
+  }
 }
 
 ProfileController.prototype.togglePhotos = function() {
@@ -24,6 +35,7 @@ ProfileController.prototype.togglePhotos = function() {
   
   // Add some stuff here for handling 'back' button, to undo it
 }
+
 
 ProfileController.prototype.editSection = function(section) {
   if (this.editing !== section) {
@@ -93,7 +105,7 @@ ProfileController.prototype.goToMatch = function(increment) {
 };
 
 
-ProfileController.$inject = ['$scope', '$attrs', '$filter', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails']
+ProfileController.$inject = ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails']
 
 var app = angular.module('kinected');
-app.controller('ProfileController', ['$scope', '$attrs', '$filter', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails', ProfileController]);
+app.controller('ProfileController', ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails', ProfileController]);
