@@ -2,12 +2,13 @@
 #
 # Table name: profile_photos
 #
-#  id           :integer          not null, primary key
-#  photo_object :string(255)
-#  primary      :boolean          default(TRUE)
-#  user_id      :integer
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id            :integer          not null, primary key
+#  photo_object  :string(255)
+#  primary_photo :boolean          default(TRUE)
+#  user_id       :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  caption       :string(255)
 #
 
 class ProfilePhoto < ActiveRecord::Base
@@ -17,7 +18,7 @@ class ProfilePhoto < ActiveRecord::Base
   before_save :unset_other_primary
 
   def unset_other_primary
-    if primary && self.user
+    if primary_photo && self.user
       former_primary = self.user.profile_photos.find_by(primary_photo: true)
       former_primary.update(primary_photo: false) if former_primary
     end
