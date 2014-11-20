@@ -4,7 +4,18 @@
 
 <div class="first-row">
   <div class="profile-photo-container">
-    <img ng-repeat="photo in user.profile.profile_photos" ng-src="{{photo.photo_object.rectangle_thumb.url}}"><%= image_tag "default_profile_photo_rect_dark.png" %>
+    <img ng-repeat="photo in user.profile.profile_photos" ng-src="{{photo.photo_object.rectangle_thumb.url}}"><%= image_tag "default_profile_photo_rect_dark.png" %><%= image_tag "default_profile_photo_rect_dark.png" %><%= image_tag "default_profile_photo_rect_dark.png" %>
+    
+    <!-- Image Modal -->
+    <section class="modal--show message-modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+      <div class="modal-inner">
+        <div class="modal-content">
+          <img ng-src="{{photo.photo_object.url}}" alt="">
+        </div>
+      </div>
+
+      <a href="#!" class="modal-close" title="Close this modal" data-close="Close" data-dismiss="modal">?</a>
+    </section>
   </div>
 
 
@@ -14,30 +25,30 @@
       <pencil region="title"></pencil>
       <h1>{{user.profile.display_name}}</h1>
       <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | dateToAge}} Years Old • {{user.profile.sex}}</h3>
-      <div ng-if="!user.isMe">
-        <a class="interaction-button message" href="#message-modal">Send a Message</a>
-        <button class="interaction-button favorite">Add to Favorites</button>
-        <button class="interaction-button block">Block</button>
-      </div>
+    </div>
+    <div class="title-actions" ng-if="!user.isMe">
+      <a class="interaction-icon-button message raleway" href="#message-modal">K</a>
+      <button class="interaction-icon-button favorite"><%= fa_icon "star" %></button>
+      <button class="interaction-icon-button block"><%= fa_icon "ban" %></button>
     </div>
   </header>
 </div>
 
 <div class="second-row" ng-show="!user.viewingPhotos">
   <div class="about-dater">
-    <h2>About This User</h2>
+    <h2>Questions</h2>
 
     <section class="about-section flash" ng-class="{editable: user.isMe}">
       <h4><span ng-click="user.editSection('self_summary')">
         <pencil region="subtitle"></pencil>
-        Self summary
+        If I could travel anywhere, I'd go to...
       </span></h4>
 
-      <p class="pre-wrap" ng-class="{cursor: user.isMe}" ng-hide="user.editing === 'self_summary'" ng-click="user.editSection('self_summary')">{{user.profile.self_summary}}</p>
+      <p class="pre-wrap" ng-class="{cursor: user.isMe}" ng-hide="user.editing === 'self_summary'" ng-click="user.editSection('self_summary')">I think Id like to go to France! I hear its lovely this time of year.</p>
       <div ng-show="user.editing === 'self_summary'">
         <textarea auto-grow ng-model="user.profile.self_summary" name="self-summary" id="edit-self-summary" class="about-textarea"></textarea>
-        <button class="interaction-button save" ng-click="user.update()">{{ user.saving ? "Saving..." : "Save" }}</button>
-        <button class="interaction-button block" ng-click="user.editSection()">Cancel</button>
+        <button class="interaction-text-button save" ng-click="user.update()">{{ user.saving ? "Saving..." : "Save" }}</button>
+        <button class="interaction-text-button block" ng-click="user.editSection()">Cancel</button>
       </div>
 
     </section>
@@ -53,16 +64,12 @@
     <section class="about-section" ng-class="{editable: user.isMe}">
       <h4><span>
         <pencil region="subtitle"></pencil>
-        Favorite books, movies, music, TV shows, and food
+        I've always wanted to...
       </span></h4>      
-      <p>Movies: Hannibal, Sweet Home Alabama, The Exorcist, The Shining, The Notebook, The Mummy, Fast and Furious, Lord of the Rings, Bad Boys, My Girl, Harry Potter... the list goes on</p>
-
-      <p>Some of my favorite books are: Born Confused, The Mortal Instruments, The Space Between Us, Divergent, The Five People you Meet in Heaven, The Perks of Being a Wallflower etc.</p>
-
-      <p>TV: Suits, Criminal Minds, Game of Thrones, Saving Hope, Orange is the New Black, Master Chef, Catfish *ahem*, Revenge, Once Upon a Time, The Mentalist ...</p>
-
-      <p>I like all types of music ... except Heavy Metal and Rap :P</p>
+      <p>Dye my hair purple!</p>
     </section>
+
+    <button class="interaction-button message">See All</button>
   </div>
 
   <div class="quick-stats" ng-class="{editable: user.isMe}">
@@ -78,7 +85,7 @@
         <div class="stat-value" ng-if="user.profile.distance">{{user.profile.distance}}</div>
         <div class="stat-value not-specified" ng-if="!user.profile.distance">Not Specified</div>
       </li>
-      <li>
+<!--       <li>
         <div class="stat-label">Ethnicity:</div>
         <div class="stat-value pre-wrap" ng-if="user.profile.eth_string">{{user.profile.eth_string}}</div>
         <div class="stat-value not-specified" ng-if="!user.profile.eth_string">Not Specified</div>
@@ -94,12 +101,12 @@
         <div class="stat-value not-specified" ng-if="!user.profile.body_type">Not Specified</div>          
 
       </li>
-      <li>
+ -->      <li>
         <div class="stat-label">Work Industry:</div>
         <div class="stat-value" ng-if="user.profile.work_industry">{{user.profile.work_industry}}</div>
         <div class="stat-value not-specified" ng-if="!user.profile.work_industry">Not Specified</div>          
       </li>
-      <li>
+<!--       <li>
         <div class="stat-label">Religion:</div>
         <div class="stat-value" ng-if="user.profile.religion">{{user.profile.religion}}</div>
         <div class="stat-value not-specified" ng-if="!user.profile.religion">Not Specified</div>          
@@ -123,7 +130,7 @@
         <div class="stat-label">Kids:</div>
         <div class="stat-value" ng-if="user.profile.num_of_kids != null">{{user.profile.num_of_kids}}</div>
         <div class="stat-value not-specified" ng-if="user.profile.num_of_kids == null">Not Specified</div>          
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>
@@ -142,26 +149,6 @@
 </div>
 
 
-
-<!-- Message Modal -->
-<section class="modal--show message-modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
-  <%= form_for @message do |m| %>
-    <div class="modal-inner">
-      <header id="modal-label"><h3>Send a Message</h3></header>
-      <div class="modal-content">
-        <%= m.text_area :body, placeholder: 'Send this user a message', "ng-model" => "profile.message.input", maxlength: 200 %>
-      </div>
-      <footer>
-        <div class="character-count">{{200-profile.message.input.length}}</div>
-        <%= m.hidden_field :user_id, value: current_user.id %>
-        <%= m.hidden_field :recipient_id, value: "{{user.profile.id}}" %>
-        <%= m.submit "Send" %>
-      </footer>
-    </div>
-
-    <a href="#!" class="modal-close" title="Close this modal" data-close="Close" data-dismiss="modal">?</a>
-  <% end %>
-</section>
 
 <script>
   // These two factories get loaded to manage users.
