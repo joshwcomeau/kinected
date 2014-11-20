@@ -3,7 +3,7 @@ function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, I
   this.profiles = InitialProfileList;
   this.isMe     = $attrs['myProfile'] == this.profile.id; // Not using === because attrs is a string, whereas this.profile.id is an int.
 
-  console.log(this.isMe);
+  console.log(this.profile);
 
   this.userFactory   = ProfileDetails;
   this.orderBy       = $filter('orderBy');

@@ -4,6 +4,7 @@ unless Rails.env.production?
   User.destroy_all
   Ethnicity.destroy_all
   Message.destroy_all
+  Question.destroy_all
 end
 
 IMG_LOCATION = Rails.env.production? ? '/home/app/app/current/app/assets/images/samples/' : '/users/Shared/'
@@ -14,6 +15,14 @@ Ethnicity.create([
   { name: 'Latino' },
   { name: 'Indian' },
   { name: 'White' },
+])
+
+Question.create([
+  { body: 'If I had 24 hours left to live, I would...'},
+  { body: 'I\'ve always wanted to...'},
+  { body: 'If I could travel anywhere, I\'d go to...'},
+  { body: 'I\'m really good at...'},
+  { body: 'I\'m really bad at...'}
 ])
 
 @images = [
@@ -37,6 +46,8 @@ Ethnicity.create([
   File.open("#{IMG_LOCATION}/sample18.jpg"),
   File.open("#{IMG_LOCATION}/sample19.jpg")
 ]
+
+
 
 @user1 = User.create({
   first_name:     'Josh',
@@ -65,7 +76,6 @@ Ethnicity.create([
 @user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 @user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 @user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
-
 
 
 @user2 = User.create({
@@ -243,6 +253,11 @@ User.daters.each do |u|
   [1,3].sample.times do
     u.ethnicities << Ethnicity.all.sample
   end
+  u.answers.create(question_id: Question.first.id,  body: 'I would spend time with the people most important to me.')
+  u.answers.create(question_id: Question.second.id, body: "go fishing. my dad would always go but he wouldnt take me")
+  u.answers.create(question_id: Question.third.id,  body: "I have always wanted to visit Paris.")
+  u.answers.create(question_id: Question.fourth.id, body: "I'm the best pingpong player youve eer heard of. Won 15 straight matches in little pingpong league.")
+  u.answers.create(question_id: Question.fifth.id,  body: "I have no faults, I am a perfect specimen.")
 end
 
 @concierge1 = User.create({

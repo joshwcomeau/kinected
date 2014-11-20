@@ -55,29 +55,29 @@ class User < ActiveRecord::Base
   # Self referential association (http://railscasts.com/episodes/163-self-referential-association?view=asciicast)
   
   # Who I want to message
-  has_many :permissions  
-  has_many :target_users, through: :permissions
+  has_many :permissions, dependent: :destroy
+  has_many :target_users, through: :permissions, dependent: :destroy
 
   # Who wants to message me
   has_many :inverse_permissions, class_name: 'Permission', foreign_key: 'target_user_id'
   has_many :inverse_target_users, through: :inverse_permissions, source: :user
 
   # MESSAGES. Similar to permissions.
-  has_many :messages_sent, class_name: 'Message', foreign_key: 'user_id'
-  has_many :recipients, through: :messages_sent
+  has_many :messages_sent, class_name: 'Message', foreign_key: 'user_id', dependent: :destroy
+  has_many :recipients, through: :messages_sent, dependent: :destroy
   
   has_many :messages_received, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :senders, through: :messages_received, source: :user
 
   # FAVORITES. Again, similar to permissions & messages.
-  has_many :favorites
-  has_many :target_users, through: :favorites
+  has_many :favorites, dependent: :destroy
+  has_many :target_users, through: :favorites, dependent: :destroy
 
   has_many :inverse_favorites, class_name: 'Favorite', foreign_key: 'target_user_id'
   has_many :inverse_target_users, through: :inverse_favorites, source: :user
   
 
-  has_many :answers
+  has_many :answers, dependent: :destroy
   has_many :questions, through: :answers
 
 
@@ -165,6 +165,12 @@ class User < ActiveRecord::Base
       user[:last_seen_num]  = time_in_ms(self.last_sign_in_at)
       user[:last_seen_ago]  = time_ago_in_words(self.last_sign_in_at) + " ago"
     end
+
+    user[:questions] = []
+    self.answers.each do |a|
+      user[:questions] << {question: a.question.body, answer: a.body}
+    end
+    user[:questions].shuffle!
 
     user
   end
