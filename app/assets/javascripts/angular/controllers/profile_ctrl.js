@@ -17,17 +17,6 @@ function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, I
   this.loading = null;  
 
   if ( this.profiles ) this.nextProfile = this.profiles[1]; 
-
-  // Slideshow stuffs
-  this.slideshowPosition = 0;
-  var user = this;
-  if ( this.profile.profile_photos.length > 1 ) {
-    $interval(function() {
-      user.slideshowPosition++;
-      user.slideshowPosition = user.slideshowPosition % user.profile.profile_photos.length;
-      console.log(user.slideshowPosition);
-    }, 1000);
-  }
 }
 
 ProfileController.prototype.togglePhotos = function() {

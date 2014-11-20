@@ -3,10 +3,11 @@
 </div>
 
 <div class="first-row">
-  <div class="profile-photo-container" ng-click="user.togglePhotos()">
-    <img ng-repeat="photo in user.profile.profile_photos" ng-src="{{photo.photo_object.thumb.url}}" ng-hide="user.slideshowPosition !== $index">
-    <div class="view-all">View All Photos</div>
+  <div class="profile-photo-container">
+    <img ng-repeat="photo in user.profile.profile_photos" ng-src="{{photo.photo_object.rectangle_thumb.url}}"><%= image_tag "default_profile_photo_rect_dark.png" %>
   </div>
+
+
 
   <header class="title-area">
     <div class="title-text" ng-cloak ng-class="{editable: user.isMe}">

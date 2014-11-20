@@ -199,42 +199,27 @@
   .first-row {
     .profile-photo-container {
       position: relative;
-      width: 250px;
-      height: 250px;
+      width: 100%;
       overflow: hidden;
       cursor: pointer;
-      
-      img {
-        width: 100%;
-      }
-      
-      .view-all {
-        position: absolute;
-        width: 100%;
-        bottom: -50px;
-        left: 0;
-        text-align: center;
-        padding: 0.5rem 0 0.8rem 0;
-        background: $navy;
-        border-top: 2px solid lighten($navy, 15%);
-        color: #FFF;
-        transition: 0.2s;
-      }
+      white-space: nowrap;
 
-      &:hover .view-all {
-        transition: 0.5s;
-        bottom: 0;
+      img {
+        width: 33.334%;
       }
     }
+
     .title-area {
       position: relative;
       background: #e9e6dd;
       border-bottom: 2px solid #c0bbab;
+      min-height: 150px;
 
       .title-text { 
         position: absolute;
         left: 1rem;
         bottom: 1rem;
+
 
         &.editable {
           left: 0.5rem;
@@ -458,32 +443,10 @@
 
 // Mobile styles
 @media screen and (max-width: 480px) {
-  .first-row {
-    .profile-photo-container {
-      img {
-        width: 100%;
-        max-height: 100%;
-      }
-
-
-    }
-    .title-area {
-    }
-  }
 }
 
 // Non-mobile styles
 @media screen and (min-width: 481px) {
-  .first-row {
-    display: flex;
-
-    .profile-photo-container {
-      flex-basis: 250px;
-    }
-    .title-area {
-      flex: 1;
-    }
-  }
   .second-row {
     display: flex;
 

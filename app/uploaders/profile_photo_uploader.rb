@@ -34,6 +34,10 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [@@thumb_size, @@thumb_size]
   end
 
+  version :rectangle_thumb do
+    process resize_to_fill: [400, 300]
+  end
+
   version :blurred_thumb do
     process resize_to_fill: [@@thumb_size, @@thumb_size]
     process blur:           [18, 8]
