@@ -20,7 +20,7 @@ class ProfilePhoto < ActiveRecord::Base
   def unset_other_primary
     if primary_photo && self.user
       former_primary = self.user.profile_photos.find_by(primary_photo: true)
-      former_primary.update(primary_photo: false) if former_primary
+      former_primary.update(primary_photo: false) if former_primary && former_primary != self
     end
   end
 end

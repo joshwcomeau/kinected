@@ -144,7 +144,7 @@ class User < ActiveRecord::Base
 
     user[:birthdate]    = time_in_ms(self.birthdate)
     user[:joined_num]   = time_in_ms(self.created_at)
-    user[:joined_ago]   = time_ago_in_words(self.created_at)    
+    user[:joined_ago]   = time_ago_in_words(self.created_at) + " ago"  
     user[:updated_num]  = time_in_ms(self.updated_at)
     user[:updated_ago]  = time_ago_in_words(self.updated_at)
     user[:ethnicities]  = self.ethnicities  
@@ -191,3 +191,4 @@ class User < ActiveRecord::Base
   end
 
 end
+

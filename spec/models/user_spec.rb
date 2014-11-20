@@ -126,50 +126,36 @@ RSpec.describe User, :type => :model do
         @user = @rails_user.get_full_match_data
       end
 
-      describe "primary photo" do
-        subject { @user[:primary_profile_photo] }
-
-        it "is a photo" do
-          expect(subject).to be_a ProfilePhoto
-        end
-        it "is primary" do
-          expect(subject.primary_photo).to eq(true)
-        end
-        it "contains a full URL" do
-          expect(subject.photo_object.url).to be_a String
-        end
-        it "contains a thumb URL" do
-          expect(subject.photo_object.thumb.url).to be_a String
-        end
-
-      end
 
       describe "all photos" do
         subject { @user[:profile_photos] }
         
-        it "is a relation" do
-          expect(subject).to be_a ActiveRecord::Associations::CollectionProxy
+        it "is an array of photos" do
+          expect(subject).to be_a Array
         end
 
         it "contains the right number" do
           expect(subject.count).to eq(@rails_user.profile_photos.count)
         end
 
+        it "contains the primary photo first" do
+          expect(subject.first.url).to eq(@rails_user.profile_photos.find_by(primary_photo: true).photo_object.url)
+        end
 
         it "contains a full URL" do
-          expect(subject.first.photo_object.url).to be_a String
+          expect(subject.first.url).to be_a String
         end
         it "contains a thumb URL" do
-          expect(subject.first.photo_object.thumb.url).to be_a String
+          expect(subject.first.thumb.url).to be_a String
         end
         it "contains a 7thumb URL" do
-          expect(subject.first.photo_object.blurred_thumb.url).to be_a String
+          expect(subject.first.blurred_thumb.url).to be_a String
         end
       end
 
       describe "formatted times" do
         it "formats in words their time since joining the site" do
-          expect(@user[:joined_ago]).to eq("less than a minute")
+          expect(@user[:joined_ago]).to eq("less than a minute ago")
         end
         it "returns milliseconds since epoch" do
           expect(@user[:joined_num]).to eq(@rails_user.created_at.to_i * 1000)

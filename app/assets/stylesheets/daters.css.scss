@@ -266,14 +266,30 @@
 
       h2 {
         margin-top: 0;
+        margin-bottom: 8px;
         font-family: 'Raleway';
       }
       .about-textarea {
         width: 100%;
       }
+      .see-all-q {
+        float: right;
+        line-height: 2rem;
+        margin-top: 0;
+        font-size: 0.95em;
+      }
+      .see-all-q-link {
+        font-weight: 400;
+        padding: 0.5rem 1rem;
+        background: darken($green, 8%);
+        color: #FFF;
+        border-radius: 5px;
+        text-decoration: none;
+      }      
       
       .about-section {
         margin-top: 2.5rem;
+
 
 
 

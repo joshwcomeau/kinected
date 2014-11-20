@@ -24,7 +24,7 @@
     <div class="title-text" ng-cloak ng-class="{editable: user.isMe}">
       <pencil region="title"></pencil>
       <h1>{{user.profile.display_name}}</h1>
-      <h3>{{user.profile.city}}, {{user.profile.state}} • {{user.profile.birthdate | dateToAge}} Years Old • {{user.profile.sex}}</h3>
+      <h3>{{user.profile.birthdate | dateToAge}} year-old {{user.profile.work_industry}} from {{user.profile.city}}, {{user.profile.state}}</h3>
     </div>
     <div class="title-actions" ng-if="!user.isMe">
       <a class="interaction-icon-button message raleway" href="#message-modal">K</a>
@@ -36,7 +36,8 @@
 
 <div class="second-row" ng-show="!user.viewingPhotos">
   <div class="about-dater">
-    <h2>Questions</h2>
+    <p class="see-all-q"><a href="" class="see-all-q-link">Show all questions</a></p><h2>Questions</h2>
+
 
     <section class="about-section flash" ng-class="{editable: user.isMe}">
       <h4><span ng-click="user.editSection('self_summary')">
@@ -69,12 +70,17 @@
       <p>Dye my hair purple!</p>
     </section>
 
-    <button class="interaction-button message">See All</button>
+    
   </div>
 
   <div class="quick-stats" ng-class="{editable: user.isMe}">
-    <h3><pencil region="stats"></pencil>Quick Stats</h3>
+    <h3><pencil region="stats"></pencil>Activity</h3>
     <ul>
+      <li>
+        <div class="stat-label">Join Date:</div>
+        <div class="stat-value" ng-if="user.profile.joined_ago">{{user.profile.joined_ago}}</div>
+        <div class="stat-value not-specified" ng-if="!user.profile.joined_ago">Not Specified</div>
+      </li>
       <li>
         <div class="stat-label">Last Seen:</div>
         <div class="stat-value" ng-if="user.profile.last_seen_ago">{{user.profile.last_seen_ago}}</div>
