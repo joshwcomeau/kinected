@@ -84,10 +84,11 @@ class User < ActiveRecord::Base
 
 
   enum role:          [ :dater, :concierge, :admin ]
-  enum sex:           [ :male, :female ]
+  enum sex:           [ :female, :male ]
 
   scope :daters,              -> { where(role: 0) }
   scope :matched_daters,      -> (sex) { where(role: 0, sex: sex) }
+  scope :not_blocked_by,      -> (user) { includes(:inverse_permissions).where(permissions: {target_user_id: nil}) }
   scope :between_ages,        -> (min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
   scope :recently_logged_in,  -> { order("last_sign_in_at DESC") }
 
@@ -133,12 +134,12 @@ class User < ActiveRecord::Base
 
 
   def get_list_of_matches
-    users = User.matched_daters(get_desired_sex).recently_logged_in
+    users = User.matched_daters(get_desired_sex).not_blocked_by(self).recently_logged_in
     format_user_list_for_angular(users)
   end
 
   def get_first_match
-    users = User.matched_daters(get_desired_sex).recently_logged_in
+    users = User.matched_daters(get_desired_sex).not_blocked_by(self).recently_logged_in
     users.first.get_full_match_data(self)
   end
 
@@ -194,7 +195,7 @@ class User < ActiveRecord::Base
   end
   
   def get_desired_sex
-    sex == 'male' ? 1 : 0 # We only need to grab members of the opposite sex.
+    sex == 'male' ? 0 : 1 # We only need to grab members of the opposite sex.
   end
 
   def time_in_ms(time)
