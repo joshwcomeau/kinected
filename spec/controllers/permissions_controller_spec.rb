@@ -42,7 +42,7 @@ RSpec.describe PermissionsController, :type => :controller do
       end   
     end
     
-    describe "valid - creating an 'allowed' permission" do
+    describe "valid - creating an 'allowed' permission over HTTP" do
       before(:each) do
         sign_in :user, @user1
         post :create, {
@@ -66,6 +66,31 @@ RSpec.describe PermissionsController, :type => :controller do
 
       it "responds with either 200 OK or 302 REDIRECTED" do
         expect([200, 302]).to include(response.status)
+      end
+    end
+
+    describe "valid - creating permission over AJAX" do
+      before(:each) do
+        sign_in :user, @user1
+        xhr :post, :create, {
+          permission: { 
+            user_id:        @user1.id, 
+            target_user_id: @user2.id,
+            status:         'allowed'
+          }, format: "json"
+        }
+      end
+
+      it "responds with a json object" do
+        expect(JSON.parse(response.body)).to be_a Hash
+      end
+
+      it "responds with 'true'" do
+        expect(JSON.parse(response.body)["result"]).to eq(true)
+      end
+
+      it "persists the permission" do
+        expect(Permission.count).to eq(1)
       end
     end
   end
