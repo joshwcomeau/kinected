@@ -37,7 +37,7 @@
 
   }
   .edit-icon.title {
-    color: darken(#e9e6dd, 40%);
+    color: darken($beige, 40%);
     right: 1rem;
     top: 1rem;
     font-size: 1.35em;
@@ -72,7 +72,7 @@
   .no-matches {
     position: relative;
     padding: 2rem;
-    background: #e9e6dd;
+    background: $beige;
     border-radius: 0 0 20px 20px;
 
     h2 {
@@ -175,7 +175,7 @@
 
     .title-area {
       position: relative;
-      background: #e9e6dd;
+      background: $beige;
       border-bottom: 2px solid #c0bbab;
       min-height: 100px;
 

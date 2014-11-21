@@ -8,5 +8,5 @@ NavigationController.prototype.toggle = function() {
   console.log("click")
 }
 
-NavigationController.$inject = ['$scope', '$attrs', '$firebase']
-app.controller('NavigationController', ['$scope', '$attrs', '$firebase', NavigationController]);
+NavigationController.$inject = ['$scope', '$attrs']
+app.controller('NavigationController', ['$scope', '$attrs', NavigationController]);

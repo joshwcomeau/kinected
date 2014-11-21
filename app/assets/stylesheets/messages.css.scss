@@ -3,11 +3,54 @@
 
 .message-wrapper {
   overflow: auto;
+  max-width: 1200px;
   
-  .received, .sent {
-    @include span-columns(6);
+  .messages-title-bar {
+    position: relative;
+    background: $navy;
+    border-top: 2px solid lighten($navy, 15%);
+    border-radius: 0.8rem 0.8rem 0 0;
+    padding-left: 1rem;
+    text-shadow: 1px 1px 0px darken($navy, 10%), 2px 2px 0px darken($navy, 10%);
+
+    h2 {
+      color: #FFF;
+      margin: 0;
+      padding: 0.5rem;
+      font-size: 2.3em;
+      line-height: 60px;
+      height: 76px;
+    }
   }
 
+  .messages-box {
+    background: $beige;
+    padding: 1rem;
+    border-bottom: 5px solid darken($beige, 40%);
+    border-radius: 0 0 6px 6px;
+  }
+  
+  nav {
+    background: $teal;
+    border-bottom: 3px solid darken($teal, 12%);
+    text-shadow: 1px 1px 1px darken($teal, 12%);
+    color: #FFF;
+
+    ul {
+      margin-left: 1.25rem;
+    }
+    li {
+      padding: 0.7rem 1.25rem;
+      margin-bottom: -3px;
+      cursor: pointer;
+
+      &.selected {
+        background: $green;
+        border-bottom: 3px solid darken($green, 12%);
+        text-shadow: 1px 1px 1px darken($green, 12%);
+      }
+    }
+  }
   table {
     width: 100%;
     background: #EEE;    

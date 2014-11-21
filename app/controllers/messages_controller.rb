@@ -3,8 +3,8 @@ class MessagesController < ApplicationController
   
   # GET /messages
   def index
-    @outbox = current_user.messages_sent.order("created_at DESC")
-    @inbox  = current_user.messages_received.order("created_at DESC")
+    # @outbox = current_user.messages_sent.order("created_at DESC")
+    # @inbox  = current_user.messages_received.order("created_at DESC")
   end
 
   # GET /messages/:id

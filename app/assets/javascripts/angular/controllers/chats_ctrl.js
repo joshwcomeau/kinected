@@ -12,9 +12,6 @@ function ChatsController($scope, $attrs, $firebase) {
   this.messages = messagesArray;
 }
 
-ChatsController.$inject = ['$scope', '$attrs', '$firebase']
-
-
 ChatsController.prototype.pushMessage = function() {
   this.messages.$add({
     sender:     this.sender,
@@ -29,4 +26,5 @@ ChatsController.prototype.pushMessage = function() {
 
 ChatsController.prototype.fromSelf = function(message) { return message.sender == this.sender; };
 
+ChatsController.$inject = ['$scope', '$attrs', '$firebase'];
 app.controller('ChatsController', ['$scope', '$attrs', '$firebase', ChatsController]);
