@@ -5,13 +5,13 @@ function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, I
   // We're creating a 'master' clone. This clone will only update on SAVED changes. This clone is what's displayed to the user.
   this.master   = angular.copy(this.profile);
   
-  this.isMe     = $attrs['myProfile'] == this.profile.id; // Not using === because attrs is a string, whereas this.profile.id is an int.
+  this.myId     = Number($attrs['myProfile']);
+  this.isMe     = this.myId === this.profile.id;
 
   console.log(this.profile);
 
   this.userFactory      = ProfileDetails;
   this.favoriteFactory  = Favorite;
-  this.isFavorited      = false;
   this.orderBy          = $filter('orderBy');
 
   this.selectedProfileIndex = 0;
@@ -31,13 +31,13 @@ ProfileController.prototype.editSection = function(section) {
   if (this.editing !== section) {
     this.editing = section;
   }
-}
+};
 
 ProfileController.prototype.cancelUpdate = function() {
   // Since we've canceled, let's 'reset' our copy from the master data.
   angular.copy(this.master, this.profile);
   this.editing = null;
-}
+};
 
 ProfileController.prototype.update = function() {
   var user = this;
@@ -49,12 +49,46 @@ ProfileController.prototype.update = function() {
     // Now that we know it's saved, let's update the local copy so the user sees these changes.
     angular.copy(this.profile, this.master);
   });
-}
+};
 
 ProfileController.prototype.favorite = function() {
-  this.isFavorited = !this.isFavorited;
-  console.log(this.isFavorited)
-}
+  // If we aren't currently favoriting them, we're making a call to .create
+  // If we are, we're making a call to .destroy
+  var user = this;
+
+  // We aren't already favoriting this user. Let's add a new favorite.
+  if ( !this.profile.favorited ) {
+    // We need to create the favorite data
+    var favoriteData = {favorite: {
+      user_id:        this.myId,
+      target_user_id: this.profile.id
+    }};
+
+    this.favoriteFactory.create({userId: this.profile.id}, favoriteData).$promise.then(function(response) {
+      // Update our local copy with either 'false' or the new favorite data
+      user.profile.favorited = response.result;
+
+      // Update 
+      angular.copy(user.profile, user.master);
+
+      console.log(user.profile);
+    });
+
+  // We already have a favorite, ergo we're deleting it.
+  } else {
+    this.favoriteFactory.destroy({userId: this.profile.id, id: this.profile.favorited.id}, this.profile.favorited).$promise.then(function(response) {
+      // Update our local copy with either 'false' or the new favorite data
+      user.profile.favorited = response.result;
+
+      // Update 
+      angular.copy(user.profile, user.master);
+
+      console.log(user.profile);
+      
+    });
+  }
+
+};
 
 ProfileController.prototype.orderMatches = function() {
   this.loading = true;

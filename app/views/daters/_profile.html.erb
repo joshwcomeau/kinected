@@ -17,9 +17,9 @@
     </div>
     <div class="title-actions" ng-if="!user.isMe">
       <a class="interaction-icon-button message raleway" href="#message-modal">K</a>
-      <button class="interaction-icon-button favorite" ng-click="user.favorite()" ng-class="{favorited: user.isFavorited}">
-        <span ng-if="user.isFavorited"><%= fa_icon "star" %></span>
-        <span ng-if="!user.isFavorited"><%= fa_icon "star-o" %></span>
+      <button class="interaction-icon-button favorite" ng-click="user.favorite()" ng-class="{favorited: user.profile.favorited}">
+        <span ng-if="user.profile.favorited"><%= fa_icon "star" %></span>
+        <span ng-if="!user.profile.favorited"><%= fa_icon "star-o" %></span>
       </button>
       <button class="interaction-icon-button block"><%= fa_icon "ban" %></button>
     </div>

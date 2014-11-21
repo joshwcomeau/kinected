@@ -15,12 +15,12 @@ class DatersController < ApplicationController
     respond_to do |format|
       format.html do
         @daters = nil
-        @dater = @dater.get_full_match_data
+        @dater = @dater.get_full_match_data(current_user)
         @message = Message.new
         # Go with the implied render
       end
       format.json do
-        render json: @dater.get_full_match_data
+        render json: @dater.get_full_match_data(current_user)
       end
     end
   end

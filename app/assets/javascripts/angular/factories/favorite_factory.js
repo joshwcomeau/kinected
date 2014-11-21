@@ -1,7 +1,7 @@
 app.factory("Favorite", ["$resource", function($resource) {
-  return $resource('/daters/:userId.json', {}, {
-    'update': { method: 'PUT' },
-    query:  { method: 'GET', isArray: false }
+  return $resource('/daters/:userId/favorites/:id', {}, {
+    'create':  { method: 'POST' },
+    'destroy': { method: 'DELETE' }
     
   });
 }]);

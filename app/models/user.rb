@@ -139,11 +139,11 @@ class User < ActiveRecord::Base
 
   def get_first_match
     users = User.matched_daters(get_desired_sex).recently_logged_in
-    users.first.get_full_match_data
+    users.first.get_full_match_data(self)
   end
 
 
-  def get_full_match_data
+  def get_full_match_data(current_user)
     user = self.attributes
     user[:profile_photos]         = self.profile_photos.order("primary_photo DESC")
 
@@ -175,6 +175,9 @@ class User < ActiveRecord::Base
     user[:answers_attributes].shuffle!
 
     user[:unanswered_questions] = Question.all.map(&:body) - self.questions.map(&:body)
+
+
+    user[:favorited] = Favorite.find_by(user_id: current_user.id, target_user_id: id)
 
     user
   end
