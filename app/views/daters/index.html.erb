@@ -23,6 +23,14 @@
     </div>
 
   </div>
-  <%= render partial: 'profile' %>
+
+  <div ng-if="user.profile">
+    <%= render partial: 'profile' %>
+  </div>
+
+  <div class="no-matches" ng-if="!user.profile">
+    <h2>No Matches.</h2>
+    <p>Sorry! We don't have any matches for you just yet. Please check back soon!</p>
+  </div>
 
 </div>

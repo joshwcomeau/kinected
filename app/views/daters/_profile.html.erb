@@ -21,7 +21,7 @@
         <span ng-if="user.profile.favorited"><%= fa_icon "star" %></span>
         <span ng-if="!user.profile.favorited"><%= fa_icon "star-o" %></span>
       </button>
-      <button class="interaction-icon-button block"><%= fa_icon "ban" %></button>
+      <button class="interaction-icon-button block" ng-click="user.block()"><%= fa_icon "ban" %></button>
     </div>
   </header>
 </div>

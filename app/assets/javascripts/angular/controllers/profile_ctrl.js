@@ -1,17 +1,21 @@
-function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, InitialProfileList, InitialProfileDetails, Favorite) {
+function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, InitialProfileList, InitialProfileDetails, Favorite, Block) {
   this.profile  = InitialProfileDetails;
   this.profiles = InitialProfileList;
 
   // We're creating a 'master' clone. This clone will only update on SAVED changes. This clone is what's displayed to the user.
   this.master   = angular.copy(this.profile);
+
+  if (this.profile) {
+    this.isMe     = this.myId === this.profile.id;
+  }
   
   this.myId     = Number($attrs['myProfile']);
-  this.isMe     = this.myId === this.profile.id;
 
-  console.log(this.profile);
+  console.log(this.profiles.length);
 
   this.userFactory      = ProfileDetails;
   this.favoriteFactory  = Favorite;
+  this.blockFactory     = Block;
   this.orderBy          = $filter('orderBy');
 
   this.selectedProfileIndex = 0;
@@ -56,38 +60,39 @@ ProfileController.prototype.favorite = function() {
   // If we are, we're making a call to .destroy
   var user = this;
 
-  // We aren't already favoriting this user. Let's add a new favorite.
   if ( !this.profile.favorited ) {
-    // We need to create the favorite data
     var favoriteData = {favorite: {
       user_id:        this.myId,
       target_user_id: this.profile.id
     }};
 
-    this.favoriteFactory.create({userId: this.profile.id}, favoriteData).$promise.then(function(response) {
-      // Update our local copy with either 'false' or the new favorite data
+    this.favoriteFactory.create({userId: this.profile.id}, favoriteData).$promise
+    .then(function(response) {
       user.profile.favorited = response.result;
-
-      // Update 
       angular.copy(user.profile, user.master);
-
-      console.log(user.profile);
     });
-
-  // We already have a favorite, ergo we're deleting it.
   } else {
-    this.favoriteFactory.destroy({userId: this.profile.id, id: this.profile.favorited.id}, this.profile.favorited).$promise.then(function(response) {
-      // Update our local copy with either 'false' or the new favorite data
+    this.favoriteFactory.destroy({userId: this.profile.id, id: this.profile.favorited.id}, this.profile.favorited).$promise
+    .then(function(response) {
       user.profile.favorited = response.result;
-
-      // Update 
       angular.copy(user.profile, user.master);
-
-      console.log(user.profile);
-      
     });
   }
+};
 
+ProfileController.prototype.block = function() {
+  var user = this;
+
+  this.blockFactory.create({}, {user_id: this.myId, target_user_id: this.profile.id, status: 0}).$promise
+  .then(function(response) {
+    // Remove this profile from the array
+    user.profiles.splice(user.selectedProfileIndex, 1);
+    console.log(user.profiles.length);
+    // We've got a situation now where our selectedProfileIndex is referring to a profile that no longer exists.
+    // Calling goToMatch ought to fix that, by pulling the new profile at this index.
+    user.goToMatch(0);
+
+  });
 };
 
 ProfileController.prototype.orderMatches = function() {
@@ -126,20 +131,24 @@ ProfileController.prototype.goToMatch = function(increment) {
     this.selectedProfileIndex = 0; 
   }
 
-  this.previousProfile   = this.profiles[this.selectedProfileIndex - increment];
-  this.nextProfile       = this.profiles[this.selectedProfileIndex + increment];
-  this.selectedProfileId = this.profiles[this.selectedProfileIndex].id;
-  
-  // Get that user's data from the server
-  var user = this;
-  this.userFactory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
-    user.loading = false;
-    user.profile = result;    
-  });
+  if ( this.profiles.length ) {
+    this.previousProfile   = this.profiles[this.selectedProfileIndex - increment];
+    this.nextProfile       = this.profiles[this.selectedProfileIndex + increment];
+    this.selectedProfileId = this.profiles[this.selectedProfileIndex].id;   
+
+    var user = this;
+    this.userFactory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
+      user.loading = false;
+      user.profile = result;    
+    });
+
+  } else {
+    this.profile = null;
+  }
 };
 
 
-ProfileController.$inject = ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails', 'Favorite']
+ProfileController.$inject = ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails', 'Favorite', 'Block']
 
 var app = angular.module('kinected');
-app.controller('ProfileController', ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails', 'Favorite', ProfileController]);
+app.controller('ProfileController', ['$scope', '$attrs', '$filter', '$interval', 'ProfileDetails', 'InitialProfileList', 'InitialProfileDetails', 'Favorite', 'Block', ProfileController]);

@@ -14,7 +14,10 @@ class PermissionsController < ApplicationController
         redirect_to messages_path
       end
 
-      format.json { render json: { result: @permission.save } }
+      format.json do 
+        
+        render json: { result: @permission.save }
+      end
     end
   end
 

@@ -140,7 +140,9 @@ class User < ActiveRecord::Base
 
   def get_first_match
     users = User.matched_daters(get_desired_sex).not_blocked_by(self).recently_logged_in
-    users.first.get_full_match_data(self)
+    if users.any?
+      users.first.get_full_match_data(self)
+    end
   end
 
 

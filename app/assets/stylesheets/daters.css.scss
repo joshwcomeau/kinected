@@ -126,8 +126,23 @@
   .interaction-icon-button {
     @extend .interaction-button;
     font-size: 1.5em;
+  }
 
 
+  .no-matches {
+    position: relative;
+    padding: 2rem;
+    background: #e9e6dd;
+    border-radius: 0 0 20px 20px;
+
+    h2 {
+      margin-top: 1rem;
+      font-size: 2.2rem;
+      color: $red;
+    }
+    p {
+      font-size: 1.35em;
+    }
   }
 
   .top-strip {
