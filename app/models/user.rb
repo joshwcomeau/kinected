@@ -174,8 +174,7 @@ class User < ActiveRecord::Base
     end
     user[:answers_attributes].shuffle!
 
-    user[:unanswered_questions] = Question.all.map(&:body) - self.questions.map(&:body)
-
+    user[:unanswered_questions] = Question.where.not(body: self.questions.map(&:body)) 
 
     user[:favorited] = Favorite.find_by(user_id: current_user.id, target_user_id: id)
 

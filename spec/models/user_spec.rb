@@ -122,8 +122,51 @@ RSpec.describe User, :type => :model do
 
     describe "#get_full_match_data" do
       before(:all) do
-        @rails_user = create(:user)
-        @user = @rails_user.get_full_match_data
+        @me = create(:user, sex: :male)
+        @q1 = create(:question, body: 'Are you crazy?')
+        @q2 = create(:question, body: 'Are you hungry?')
+        @q3 = create(:question, body: 'Are you bored?')
+        @rails_user = create(:user, sex: :female)
+        @rails_user.answers << Answer.new(question_id: Question.first.id, body: "yessir")
+        @rails_user.answers << Answer.new(question_id: Question.second.id, body: "nossir")
+        @user = @rails_user.get_full_match_data(@me)
+      end
+
+      describe "questions" do
+        subject { @user[:answers_attributes] }
+
+        it "is an array" do
+          expect(subject).to be_a Array
+        end
+
+        it "contains 2 answers" do
+          expect(subject.count).to eq(2)
+        end
+
+        it "contains the right data in a given answer" do
+          expect(subject).to include({body: "yessir", id: @q1.id, question_body: "Are you crazy?"})
+        end
+      end
+
+      describe "unanswered questions" do
+        subject { @user[:unanswered_questions] }
+              
+        it "is an array" do
+          expect(subject).to be_a ActiveRecord::Relation
+        end
+
+        it "contains 1 item" do
+          expect(subject.count).to eq(1)
+        end
+
+        it "contains questions" do
+          expect(subject.first).to be_a Question
+        end
+
+        it "contains the right question" do
+          expect(subject.first).to eq(Question.last)
+        end
+
       end
 
 
@@ -131,7 +174,7 @@ RSpec.describe User, :type => :model do
         subject { @user[:profile_photos] }
         
         it "is an array of photos" do
-          expect(subject).to be_a Array
+          expect(subject).to be_a ActiveRecord::AssociationRelation
         end
 
         it "contains the right number" do
@@ -139,17 +182,17 @@ RSpec.describe User, :type => :model do
         end
 
         it "contains the primary photo first" do
-          expect(subject.first.url).to eq(@rails_user.profile_photos.find_by(primary_photo: true).photo_object.url)
+          expect(subject.first.photo_object.url).to eq(@rails_user.profile_photos.find_by(primary_photo: true).photo_object.url)
         end
 
         it "contains a full URL" do
-          expect(subject.first.url).to be_a String
+          expect(subject.first.photo_object.url).to be_a String
         end
         it "contains a thumb URL" do
-          expect(subject.first.thumb.url).to be_a String
+          expect(subject.first.photo_object.thumb.url).to be_a String
         end
         it "contains a 7thumb URL" do
-          expect(subject.first.blurred_thumb.url).to be_a String
+          expect(subject.first.photo_object.blurred_thumb.url).to be_a String
         end
       end
 
