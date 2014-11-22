@@ -106,11 +106,11 @@ class User < ActiveRecord::Base
 
   # Will return a hash containing two relations (hopefully)
   def messages
-    Message.joins(:permissions)
+    Message
       .where("messages.user_id = :user OR messages.recipient_id = :user", user: id)
       .where.not("messages.recipient_id = :user AND messages.status = :status", user: id, status: 0)
       .where.not("messages.recipient_id = :user AND messages.status = :status", user: id, status: 4)
-      .order("permissions.created_at DESC")
+      .includes(:permissions).order("permissions.created_at DESC")
   end
 
 

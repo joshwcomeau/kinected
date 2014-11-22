@@ -65,12 +65,18 @@
       border-right: 0px;
     }
 
-    tr.unread td {
-      background: tint($teal, 80%);  
-      border-right: 1px dotted tint($teal, 50%);
-    }    
-    tr.unread .message-dir {
-      background: $teal;
+    tr.unread {
+      td {
+        background: tint($teal, 80%);  
+        border-right: 1px dotted tint($teal, 50%);
+      }    
+      .message-dir {
+        background: $teal;
+      }
+
+      .user-name {
+        color: $teal;
+      }
     }
   }
   .message-dir {
@@ -90,18 +96,18 @@
   .message-thumbnail {
     width: $message-thumbnail-size;
     height: $message-thumbnail-size;
-    background-size: cover;
     border-radius: 5px;
   }
 
-  .user_name {
+  .user-name {
     margin: 0;
     font-size: 1.1em;
     font-weight: 400;
-    color: $teal;
+    color: #444;
   }
-  .message_preview {
+  .message-preview {
     font-size: 0.75em;
     margin-top: 0.5rem;
+    margin-bottom: 0;
   }
 }

@@ -310,83 +310,70 @@ end
 
 # Let's make some messages, one of each status for our @user1
 Message.create([
-  # INBOX
-  # Queued. Should not show up
-  {         
-    user_id:      @user3.id,
-    recipient_id: @user1.id,
-    body:         'You should\'t see me, Im queued.',
-    created_at:   2.hours.ago,
-    status:       0
-  },
-  # Sent and unread. Should be green!
-  {
-    user_id:      @user2.id,
-    recipient_id: @user1.id,
-    body:         'Whee I\m new! SHould be green.',
-    created_at:   3.hours.ago,
-    status:       1
-  },
-  # Read, old news, but unresponded
-  {
-    user_id:      @user4.id,
-    recipient_id: @user1.id,
-    body:         'Would you like to chat? Please respond!',
-    created_at:   4.hours.ago,
-    status:       2
-  },
-  # Accepted! Chat link.
-  {
-    user_id:      @filler_user1.id,
-    recipient_id: @user1.id,
-    body:         'I accepted them! Lets chat.',
-    created_at:   5.hours.ago,
-    status:       3
-  },
-  # Rejected, so it should be invisible.
-  {
-    user_id:      @filler_user2.id,
-    recipient_id: @user1.id,
-    body:         'I rejected them! I should not be visible to you.',
-    created_at:   6.hours.ago,
-    status:       4
-  },
-
   # OUTBOX
   {         
     user_id:      @user1.id,
     recipient_id: @user2.id,
-    body:         'I want to talk to you but this msg is still queued =(.',
+    body:         'Hi there. I really like your shoes! Have you ever been to the Shoe Museum??(O-0)',
     created_at:   2.5.hours.ago,
     status:       0
   },
   {
     user_id:      @user1.id,
     recipient_id: @user3.id,
-    body:         'Hopefully this person will see me soon',
+    body:         'Hi wanna chat?(O-1)',
     created_at:   3.5.hours.ago,
     status:       1
   },
   {
     user_id:      @user1.id,
     recipient_id: @user4.id,
-    body:         'They arent responding!',
+    body:         'Heyzz, I think your rly cute. Hit me back babz <3(O-2)',
     created_at:   4.5.hours.ago,
     status:       2
   },
-  {
-    user_id:      @user1.id,
-    recipient_id: @filler_user3.id,
-    body:         'They accepted my request!',
-    created_at:   5.5.hours.ago,
-    status:       3
-  },
+
   {
     user_id:      @user1.id,
     recipient_id: @filler_user1.id,
-    body:         'They rejected me! I shouldnt be able to tell though.',
+    body:         'Why hello there! I dont know what it is but there is just something about brunettes. You look really good and I wanted to say that it was an honor to be on the same site as you.(O-4)',
     created_at:   6.5.hours.ago,
     status:       4
+  },
+
+  # INBOX
+  # Rejected, so it should be invisible.  
+  {
+    user_id:      @filler_user2.id,
+    recipient_id: @user1.id,
+    body:         'Hi.(I-4)',
+    created_at:   6.hours.ago,
+    status:       4
+  },
+
+  # Read, old news, but unresponded
+  {
+    user_id:      @user4.id,
+    recipient_id: @user1.id,
+    body:         'Hey are you in T.dot? I will be visiting 9/25 to 10/11.(I-2)',
+    created_at:   4.hours.ago,
+    status:       2
+  },
+  # Sent and unread. Should be green!
+  {
+    user_id:      @user2.id,
+    recipient_id: @user1.id,
+    body:         'I really like The Notebook too!!! We are soulmates.(I-1)',
+    created_at:   3.hours.ago,
+    status:       1
+  },
+  # Queued. Should not show up
+  {         
+    user_id:      @user3.id,
+    recipient_id: @user1.id,
+    body:         'You should\'t see me, Im queued.(I-0)',
+    created_at:   2.hours.ago,
+    status:       0
   },
 
   # Unrelated, to other users
@@ -396,3 +383,31 @@ Message.create([
     body:         'YOU SHOULDNT SEE ME. I belong to someone else.'
   }
 ])
+
+# Accepted messages need to have the appropriate permission created as well
+@accepted_message_1 = Message.create({
+  user_id:      @user1.id,
+  recipient_id: @filler_user3.id,
+  body:         'Hi babygirl. I heard this song on the radio I think you would like. It\'s called That Girl Is Mine ;)(O-3)',
+  created_at:   5.5.hours.ago,
+  status:       3
+})
+@accepted_message_2 = Message.create({
+  user_id:      @filler_user1.id,
+  recipient_id: @user1.id,
+  body:         'Hey mister, have you ever been with a black girl? I think I could show you a thing or two.(I-3)',
+  created_at:   5.hours.ago,
+  status:       3
+})
+
+@accepted_message_1.permissions.create({
+  user_id: @filler_user3.id,
+  target_user_id: @user1.id,
+  status: 1
+})
+
+@accepted_message_2.permissions.create({
+  user_id: @user1.id,
+  target_user_id: @filler_user1.id,
+  status: 1
+})
