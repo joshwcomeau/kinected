@@ -88,11 +88,13 @@ class User < ActiveRecord::Base
 
   scope :daters,              -> { where(role: 0) }
   scope :matched_daters,      -> (sex) { where(role: 0, sex: sex) }
-  scope :not_blocked,         -> (user) { includes(:permissions).where(permissions: {target_user_id: nil}) }
-  scope :not_blocked_by,      -> (user) { includes(:permissions).where(permissions: {user_id: nil}) }
-  # Scrap these scopes, let's just do it the manual way, with math between several relations.
   scope :between_ages,        -> (min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
   scope :recently_logged_in,  -> { order("last_sign_in_at DESC") }
+
+  scope :not_blocked, -> (user) do 
+    includes(:permissions).where("permissions.recipient_id = :user AND permissions.status = :status")
+  end
+
 
   # geocoded_by :last_sign_in_ip
   # after_validation :geocode
@@ -141,15 +143,24 @@ class User < ActiveRecord::Base
 
 
   def get_list_of_matches
-    users = User.matched_daters(get_desired_sex).not_blocked(self).not_blocked_by(self).recently_logged_in
+    users = User.matched_daters(get_desired_sex).recently_logged_in - self.blocked_users
     format_user_list_for_angular(users)
   end
 
   def get_first_match
-    users = User.matched_daters(get_desired_sex).not_blocked_by(self).recently_logged_in
+    users = User.matched_daters(get_desired_sex).recently_logged_in
     if users.any?
       users.first.get_full_match_data(self)
     end
+  end
+
+  def blocked_users
+    User.joins(:inverse_permissions)
+      .where("permissions.status  = :status", status: 0)
+      .where("permissions.user_id = :user", user: id) + 
+    User.joins(:permissions)
+      .where("permissions.status  = :status", status: 0)
+      .where("permissions.target_user_id = :user", user: id)
   end
 
 

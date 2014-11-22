@@ -3,9 +3,9 @@ class MessagesController < ApplicationController
   
   # GET /messages
   def index
-    @messages = current_user.messages.joins(:permissions).order("permissions.created_at DESC")
-    @outbox = current_user.messages_sent.joins(:permissions).order("permissions.created_at DESC")
-    @inbox  = current_user.messages_received.joins(:permissions).order("permissions.created_at DESC")
+    @messages = current_user.messages
+    # @outbox = current_user.messages_sent.joins(:permissions).order("permissions.created_at DESC")
+    # @inbox  = current_user.messages_received.joins(:permissions).order("permissions.created_at DESC")
   end
 
   # GET /messages/:id

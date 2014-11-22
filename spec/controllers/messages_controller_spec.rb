@@ -18,7 +18,7 @@ RSpec.describe MessagesController, :type => :controller do
       @user.messages_sent     << @message2
       
     end    
-    xcontext "when not logged in" do
+    context "when not logged in" do
       it "doesn't let us" do
 
         get :index 
@@ -26,7 +26,7 @@ RSpec.describe MessagesController, :type => :controller do
       end   
     end
     
-    xcontext "when logged in" do
+    context "when logged in" do
       before(:each) do 
         sign_in :user, @user
         get :index 
@@ -38,14 +38,6 @@ RSpec.describe MessagesController, :type => :controller do
 
       it "returns 200 OK status" do
         expect(response.status).to eq(200)
-      end
-
-      it "returns the message sent to me" do
-        expect(assigns[:inbox].first).to eq(@message1)
-      end
-
-      it "returns the message I sent to another user" do
-        expect(assigns[:outbox].first).to eq(@message2)
       end
 
       it "assigns the @messages instance variable to a relation" do
@@ -107,7 +99,7 @@ RSpec.describe MessagesController, :type => :controller do
     end
   end
 
-  xdescribe "POST :create" do
+  describe "POST :create" do
     context "when requesting JSON" do
       before(:all) do
         Message.destroy_all

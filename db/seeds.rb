@@ -248,8 +248,41 @@ Question.create([
 @filler_user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
 
-# Let's make it interesting. Let's say that our primary user has blocked filler_user2, and filler_user3 has blocked our primary user.
+# Let's add some blocked users.
+@i_blocked_user1 = User.create({
+  first_name:     'I blocked',
+  last_name:      'you',
+  display_name:   'I blocked you',
+  email:          "ibu1@gmail.com",
+  password:       'wootage1',
+  sex:            'female',
+  role:           'dater',
+  birthdate:      31.years.ago,
+  country:        'Canada',
+  city:           'Toronto',
+  state:          'Ontario',
+  postal_code:    'M1W 2T0',
+  self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+})
 
+@user1_blocked_me = User.create({
+  first_name:     'you blocked',
+  last_name:      'me',
+  display_name:   'You blocked me',
+  email:          "u1bm@gmail.com",
+  password:       'wootage1',
+  sex:            'female',
+  role:           'dater',
+  birthdate:      32.years.ago,
+  country:        'Canada',
+  city:           'Toronto',
+  state:          'Ontario',
+  postal_code:    'M1W 2T0',
+  self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.",
+})
+
+@i_blocked_user1.permissions.create(target_user_id: @user1.id, status: 0)
+@user1.permissions.create(target_user_id: @user1_blocked_me.id, status: 0)
 
 
 User.daters.each do |u|
