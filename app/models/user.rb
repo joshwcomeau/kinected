@@ -190,7 +190,7 @@ class User < ActiveRecord::Base
     end
 
     user[:answers_attributes] = []
-    self.answers.each do |a|
+    self.answers.includes(:question).each do |a|
       user[:answers_attributes] << {body: a.body, id: a.id, question_body: a.question.body}
     end
     user[:answers_attributes].shuffle!
