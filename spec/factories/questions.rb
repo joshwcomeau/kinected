@@ -12,5 +12,6 @@
 
 FactoryGirl.define do
   factory :question do
+    body "What would you do in Italy?"
   end
 end

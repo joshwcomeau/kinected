@@ -98,6 +98,10 @@ RSpec.describe User, :type => :model do
         # Let's block an old ex-girlfriend.
         @ex    = create(:user, sex: :female, last_sign_in_at: 2.months.ago)
         @me.permissions.create(target_user_id: @ex.id, status: 0)
+
+        # Let's create another ex that blocks me
+        @ex2   = create(:user, sex: :female, last_sign_in_at: 5.minutes.ago)
+        @ex2.permissions.create(target_user_id: @me.id, status: 0)
       end
 
       subject { @me.get_list_of_matches }
@@ -116,8 +120,12 @@ RSpec.describe User, :type => :model do
         expect(subject.count).to eq(4)
       end
 
-      it "doesn't return our ex-girlfriend" do
+      it "doesn't return the ex-girlfriend I blocked" do
         expect(subject.map {  |s| s[:id]} ).not_to include(@ex.id)
+      end
+
+      it "doesn't return the ex that blocked me" do
+        expect(subject.map {  |s| s[:id]} ).not_to include(@ex2.id)
       end
 
       it "orders the results, by default, by their last sign_in date" do

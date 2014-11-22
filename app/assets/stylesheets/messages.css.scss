@@ -53,19 +53,37 @@
   }
   table {
     width: 100%;
-    background: #EEE;    
+    background: #EEE;
 
     td {
       background: #FFF;
-      padding: 6px;
+      padding: 5px;
       border-right: 1px dotted #CCC;
       border-bottom: 2px solid #EEE;
     }
     td:last-of-type {
       border-right: 0px;
     }
-  }
 
+    tr.unread td {
+      background: tint($teal, 80%);  
+      border-right: 1px dotted tint($teal, 50%);
+    }    
+    tr.unread .message-dir {
+      background: $teal;
+    }
+  }
+  .message-dir {
+    width: 40px;
+    text-align: center;
+    background: #BEBEBE;
+    
+    i {
+      font-size: 1em;
+      opacity: 0.8;
+      color: #FFF;
+    }
+  }
   .message-thumbnail-cell {
     width: $message-thumbnail-size;
   }

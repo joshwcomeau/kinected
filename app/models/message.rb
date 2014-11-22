@@ -24,10 +24,11 @@ class Message < ActiveRecord::Base
 
   after_create :set_sender_permission
 
-  enum status: [ :pending, :sent, :read, :accepted, :rejected ]
-  # 'Pending' means the man has submitted the message, but it's in the woman's queue.
+  enum status: [ :queued, :sent, :read, :accepted, :rejected ]
+  # 'Queued'  means the man has submitted the message, but it's in the woman's queue.
   # 'Sent'    means it's made it to the woman's inbox, but she hasn't seen it yet.
   # 'Read'    means she's seen it, but hasn't responded.
+
 
 
   def has_been_accepted?

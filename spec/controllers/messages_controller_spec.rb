@@ -18,7 +18,7 @@ RSpec.describe MessagesController, :type => :controller do
       @user.messages_sent     << @message2
       
     end    
-    context "when not logged in" do
+    xcontext "when not logged in" do
       it "doesn't let us" do
 
         get :index 
@@ -26,7 +26,7 @@ RSpec.describe MessagesController, :type => :controller do
       end   
     end
     
-    context "when logged in" do
+    xcontext "when logged in" do
       before(:each) do 
         sign_in :user, @user
         get :index 
@@ -56,9 +56,28 @@ RSpec.describe MessagesController, :type => :controller do
         expect(assigns[:messages].count).to eq(2)
       end      
     end
+
+    describe "blocked messages" do
+      before(:all) do
+        @blocked_perm = Permission.create(user_id: @user.id, target_user_id: @other_user.id, message_id: @message1.id, status: 0)
+      end
+      before(:each) do 
+        sign_in :user, @user
+        get :index 
+      end
+
+      it "no longer show up in the index" do
+        binding.pry
+        expect(assigns[:messages].count).to eq(1)
+      end
+
+      after(:all) do
+        @blocked_perm.destroy
+      end
+    end
   end
 
-  describe "POST :create" do
+  xdescribe "POST :create" do
     context "when requesting JSON" do
       before(:all) do
         Message.destroy_all
