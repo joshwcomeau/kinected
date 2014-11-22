@@ -248,6 +248,9 @@ Question.create([
 @filler_user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
 
+# Let's make it interesting. Let's say that our primary user has blocked filler_user2, and filler_user3 has blocked our primary user.
+
+
 
 User.daters.each do |u|
   [1,3].sample.times do
@@ -272,26 +275,91 @@ end
 
 @concierge1.profile_photos << ProfilePhoto.create
 
-# Let's make some messages
+# Let's make some messages, one of each status for our @user1
 Message.create([
-  {
+  # INBOX
+  # Queued. Should not show up
+  {         
     user_id:      @user3.id,
     recipient_id: @user1.id,
-    body:         'Howdy Partner.'
+    body:         'You should\'t see me, Im queued.',
+    created_at:   2.hours.ago,
+    status:       0
   },
+  # Sent and unread. Should be green!
   {
-    user_id:      @user1.id,
-    recipient_id: @user2.id,
-    body:         'Hi TIna, I loved you on that TV show.'
+    user_id:      @user2.id,
+    recipient_id: @user1.id,
+    body:         'Whee I\m new! SHould be green.',
+    created_at:   3.hours.ago,
+    status:       1
   },
+  # Read, old news, but unresponded
   {
     user_id:      @user4.id,
     recipient_id: @user1.id,
-    body:         'No Parla Englesia'
+    body:         'Would you like to chat? Please respond!',
+    created_at:   4.hours.ago,
+    status:       2
   },
+  # Accepted! Chat link.
+  {
+    user_id:      @filler_user1.id,
+    recipient_id: @user1.id,
+    body:         'I accepted them! Lets chat.',
+    created_at:   5.hours.ago,
+    status:       3
+  },
+  # Rejected, so it should be invisible.
+  {
+    user_id:      @filler_user2.id,
+    recipient_id: @user1.id,
+    body:         'I rejected them! I should not be visible to you.',
+    created_at:   6.hours.ago,
+    status:       4
+  },
+
+  # OUTBOX
+  {         
+    user_id:      @user1.id,
+    recipient_id: @user2.id,
+    body:         'I want to talk to you but this msg is still queued =(.',
+    created_at:   2.5.hours.ago,
+    status:       0
+  },
+  {
+    user_id:      @user1.id,
+    recipient_id: @user3.id,
+    body:         'Hopefully this person will see me soon',
+    created_at:   3.5.hours.ago,
+    status:       1
+  },
+  {
+    user_id:      @user1.id,
+    recipient_id: @user4.id,
+    body:         'They arent responding!',
+    created_at:   4.5.hours.ago,
+    status:       2
+  },
+  {
+    user_id:      @user1.id,
+    recipient_id: @filler_user3.id,
+    body:         'They accepted my request!',
+    created_at:   5.5.hours.ago,
+    status:       3
+  },
+  {
+    user_id:      @user1.id,
+    recipient_id: @filler_user1.id,
+    body:         'They rejected me! I shouldnt be able to tell though.',
+    created_at:   6.5.hours.ago,
+    status:       4
+  },
+
+  # Unrelated, to other users
   {
     user_id:      @user3.id,
     recipient_id: @user4.id,
-    body:         'Salutationa'
+    body:         'YOU SHOULDNT SEE ME. I belong to someone else.'
   }
 ])

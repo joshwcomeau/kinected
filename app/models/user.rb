@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  has_and_belongs_to_many :ethnicities
+  has_and_belongs_to_many :ethnicities, dependent: :destroy
   has_many :profile_photos, dependent: :destroy
 
   # PERMISSIONS. The relationships that dictate who can chat with who.
@@ -104,8 +104,13 @@ class User < ActiveRecord::Base
 
   # Will return a hash containing two relations (hopefully)
   def messages
-    Message.where("user_id = :user or recipient_id = :user", user: id)
+    Message.joins(:permissions)
+      .where("messages.user_id = :user OR messages.recipient_id = :user", user: id)
+      .where.not("messages.recipient_id = :user AND messages.status = :status", user: id, status: 0)
+      .where.not("messages.recipient_id = :user AND messages.status = :status", user: id, status: 4)
+      .order("permissions.created_at DESC")
   end
+
 
   def primary_profile_photo
     self.profile_photos.find_by(primary_photo: true).try(:photo_object) || ProfilePhoto.new.photo_object

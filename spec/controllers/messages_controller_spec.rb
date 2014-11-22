@@ -11,9 +11,9 @@ RSpec.describe MessagesController, :type => :controller do
       @other_user = create(:user)
 
       # Create some messages
-      @message1 = create(:message)
-      @message2 = create(:message)
-      @message3 = create(:message)
+      @message1 = create(:message, status: 1)
+      @message2 = create(:message, status: 1)
+      @message3 = create(:message, status: 1)
       @user.messages_received << @message1
       @user.messages_sent     << @message2
       
@@ -57,22 +57,52 @@ RSpec.describe MessagesController, :type => :controller do
       end      
     end
 
-    describe "blocked messages" do
+    # Let's set both messages equal to 'rejected'. I should still see the message I received, but not the one I sent.
+    describe "rejected message" do
       before(:all) do
-        @blocked_perm = Permission.create(user_id: @user.id, target_user_id: @other_user.id, message_id: @message1.id, status: 0)
+        @message1.update(status: 4)
+        @message2.update(status: 4)
       end
       before(:each) do 
         sign_in :user, @user
         get :index 
       end
 
-      it "no longer show up in the index" do
-        binding.pry
-        expect(assigns[:messages].count).to eq(1)
+      it "that I received doesn't show up" do
+        expect(assigns[:messages]).not_to include(@message1)
+      end
+
+      it "that I sent does show up" do
+        expect(assigns[:messages]).to include(@message2)
       end
 
       after(:all) do
-        @blocked_perm.destroy
+        @message1.update(status: 1)
+        @message2.update(status: 1)
+      end
+    end
+
+    describe "queued message" do
+      before(:all) do
+        @message1.update(status: 4)
+        @message2.update(status: 4)
+      end
+      before(:each) do 
+        sign_in :user, @user
+        get :index 
+      end
+
+      it "that I received doesn't show up" do
+        expect(assigns[:messages]).not_to include(@message1)
+      end
+
+      it "that I sent does show up" do
+        expect(assigns[:messages]).to include(@message2)
+      end
+
+      after(:all) do
+        @message1.update(status: 1)
+        @message2.update(status: 1)
       end
     end
   end

@@ -21,4 +21,10 @@ class Permission < ActiveRecord::Base
   validates :status, presence: true
 
   enum status: [:blocked, :allowed]
+
+
+  # Returns all messages that have a 'blocked' status attached to them
+  def self.blocked_messages
+    self.where(status: 0).map(&:messages)
+  end
 end
