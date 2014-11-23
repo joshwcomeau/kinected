@@ -4,14 +4,11 @@ function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, I
 
   // We're creating a 'master' clone. This clone will only update on SAVED changes. This clone is what's displayed to the user.
   this.master   = angular.copy(this.profile);
-
+  
+  this.myId     = Number($attrs['myProfile']);
   if (this.profile) {
     this.isMe     = this.myId === this.profile.id;
   }
-  
-  this.myId     = Number($attrs['myProfile']);
-
-  console.log(this.profiles.length);
 
   this.userFactory      = ProfileDetails;
   this.favoriteFactory  = Favorite;
@@ -51,7 +48,8 @@ ProfileController.prototype.update = function() {
     user.editing = null;
     user.saving  = null;
     // Now that we know it's saved, let's update the local copy so the user sees these changes.
-    angular.copy(this.profile, this.master);
+    angular.copy(user.profile, user.master);
+
   });
 };
 

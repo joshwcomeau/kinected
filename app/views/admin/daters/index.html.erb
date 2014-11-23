@@ -1,18 +1,22 @@
-<div class="content-wrapper">
+<div class="content-wrapper" ng-controller="AdminDaterController as dater">
   <div class="title"><h2>Pending Daters</h2></div>
-  <div class="content-box no-padding">
+  <div class="content-box no-padding modal">
+  
     <table class="table">
       <tr>
         <th>User Info</th>
         <th>Contact Info</th>
         <th>Social Link</th>
-        <th style="width: 125px;">Action</th>
+        <th>Concierge Code</th>
+        <th>Action</th>
       </tr>
       <% @trial_daters.each do |d| %>
         <tr>
           <td>
             Name: <%= "#{d.first_name} #{d.last_name}" %><br>
-            Age:  <%= d.age %>
+            Age:  <%= d.age %><br>
+            <br>
+            Started trial: <%= d.created_at.strftime("%A, %B %d, %Y") %>
           </td>
           <td>
             Email: <%= d.email %><br>
@@ -23,12 +27,28 @@
             <a href="http://www.twitter.com/theman">http://www.twitter.com/theman</a>
           </td>
           <td>
-            <button class="interaction-request-button accept"><%= fa_icon("check") %></button><button class="interaction-request-button block"><%= fa_icon("remove") %></button>
-
+            <%= d.concierge.try(:display_name) %>
+          </td>
+          <td style="width: 130px;">
+            <label for="modal-1"><div class="interaction-request-button accept"><%= fa_icon("check") %></div></label><button class="interaction-request-button block"><%= fa_icon("remove") %></button>
           </td>
         </tr>
       <% end %>
     </table>
+    <!-- Concierge selection modal -->
+    
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal-window">
+      <div class="modal-inner">
+        <label class="modal-close" for="modal-1"></label>
+        <h1>Modal Title</h1>
+        <p class="intro">Intro text lorem ipsum dolor sit ametm, quas, eaque facilis aliquid cupiditate tempora cumque ipsum accusantium illo modi commodi  minima.</p>
+        <p class="body">Body text lorem ipsum dolor ipsum dolor sit sit possimus amet, consectetur adipisicing elit. Itaque, placeat, explicabo, veniam quos aperiam molestias eriam molestias molestiae suscipit ipsum enim quasi sit possimus quod atque nobis voluptas earum odit accusamus quibusdam.</p>
+      </div>
+    </div>
   </div>
-  
+</div>
+
+
+<div class="modal">
 </div>
