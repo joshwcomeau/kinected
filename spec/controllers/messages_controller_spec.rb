@@ -5,7 +5,7 @@ RSpec.describe MessagesController, :type => :controller do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
-  xdescribe "GET :index" do
+  describe "GET :index" do
     before(:all) do
       @user = create(:user)
       @other_user = create(:user)
@@ -132,7 +132,11 @@ RSpec.describe MessagesController, :type => :controller do
         expect(json).to be_a Hash
         expect(json["result"]).to eq(true)
       end
-    end
+
+      it "should create an activity feed notification for the recipient" do
+        expect(@other_user.activities.last.trackable_id).to eq(Message.last.id)
+      end
+    end 
 
     describe "limitations" do
       before(:all) { Message.create(user_id: @user.id, recipient_id: @third_user.id, body: 'hey sexy') }
@@ -160,6 +164,10 @@ RSpec.describe MessagesController, :type => :controller do
       it "returns an error message as part of the response" do
         json = JSON.parse(response.body)
         expect(json["message"]).to eq(I18n.t("messages.create.exceeded_limit"))
+      end
+
+      it "doesn't create an activity feed notification" do
+        expect(Activity.count).to eq(0)
       end
 
       after(:all) { @user.messages.destroy_all }

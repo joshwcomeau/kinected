@@ -21,6 +21,10 @@ class MessagesController < ApplicationController
       response = { result: false, message: I18n.t("messages.create.exceeded_limit") }
     end
 
+    # Create activity notification!
+    track_activity @message, params[:action], @message.recipient if @message.persisted?
+    
+
     respond_to do |format|
       format.html { redirect_to messages_path }
       format.json { render json: response  }
