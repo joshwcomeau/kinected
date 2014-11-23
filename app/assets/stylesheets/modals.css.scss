@@ -1,0 +1,80 @@
+@import 'variables';
+
+.modal {
+  $modal-padding: 1.5rem;
+  $modal-background: #EEE;
+
+  $modal-close-color: #AAA;
+
+  .modal-window { // overlay
+    @include transition(opacity .25s ease);
+    @include position(fixed, 0px 0px 0px 0px);
+    background: rgba(0,0,0, .85);
+    opacity: 0;
+    text-align: left;
+    visibility: hidden;
+    z-index: 99999999999;
+  }
+
+  .modal-close {
+    @include position(absolute, 1rem 1rem null null);
+    @include size(1.5em);
+    cursor: pointer;
+
+    &:after,
+    &:before {
+      @include position(absolute, 3px 3px 0 50%);
+      @include transform(rotate(45deg));
+      @include size(.15em 1.5em);
+      background: $modal-close-color;
+      content: '';
+      display: block;
+      margin: -3px 0 0 -1px;
+    }
+
+    &:hover:after,
+    &:hover:before {
+      background: darken($modal-close-color, 10);
+    }
+
+    &:before {
+      @include transform(rotate(-45deg));
+    }
+  }
+
+  .modal-inner {
+    transition: 0.5s;
+    border-radius: 1rem;
+    background: $modal-background;
+    margin: auto;
+    max-height: 95%;
+    position: relative;
+    overflow: auto;
+    width: 95%;
+    padding: $modal-padding /2;
+    margin-top: .6em;
+    top: -5rem;
+
+    @include media(40em) {
+      padding: $modal-padding;
+      width: 70%;
+      max-height: 70%;
+      margin-top: 10em;
+    }
+
+    @include media(53.75em) {
+      width: 60%;
+      margin-top: 10em;
+    }
+  }
+  // .modal-state:checked + .modal-window {
+  //   opacity: 1;
+  //   visibility: visible;
+  // }
+
+  // .modal-state:checked + .modal-window .modal-inner {
+  //   top: 0;
+  // }
+}
+
+// Based on code by Kasper Mikiewicz
