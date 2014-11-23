@@ -16,7 +16,7 @@
     background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
     text-decoration: none;
     transition: 0.5s;
-    &.message, &.save {
+    &.message, &.accept, &.save {
       background-color: $green;
       text-shadow: 1px 1px 0px darken($green, 20%);
       border-bottom: 3px solid darken($green, 21%);
@@ -55,10 +55,24 @@
   }
   .interaction-text-button {
     @extend .interaction-button;
-    font-size: 1.2em;
+    font-size: 1.2rem;
   }
   .interaction-icon-button {
     @extend .interaction-button;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     width: 75px;
+  }
+
+  .interaction-request-button {
+    @extend .interaction-button;
+    padding: 0.35rem 0.95rem;
+    margin-right: 0;
+    font-size: 1.3rem;
+
+    &.accept {
+      border-radius: 3px 0 0 3px;
+    }
+    &.block {
+      border-radius: 0 3px 3px 0;
+    }
   }

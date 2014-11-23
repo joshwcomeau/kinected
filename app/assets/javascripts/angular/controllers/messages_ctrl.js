@@ -1,10 +1,10 @@
-function MessagesController($scope, $attrs, Message) {
-  this.messageFactory = Message;
+function MessagesController($scope, $attrs) {
+  this.viewing = "received"
 }
 
 
 MessagesController.prototype.fun = function() {
 };
 
-ChatsController.$inject = ['$scope', '$attrs', 'Message'];
-app.controller('ChatsController', ['$scope', '$attrs', '$firebase', 'Message', MessagesController]);
+MessagesController.$inject = ['$scope', '$attrs'];
+app.controller('MessagesController', ['$scope', '$attrs', MessagesController]);

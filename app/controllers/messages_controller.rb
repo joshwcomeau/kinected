@@ -22,7 +22,10 @@ class MessagesController < ApplicationController
   end
 
   # PATCH /messages/:id
-  def update; end
+  def update
+    response = params[:message][:status] == 4 ? @message.rejected! : false
+    render json: { result: response }
+  end
 
   # DELETE /messages/:id
   def destroy; end
@@ -32,5 +35,9 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:user_id, :recipient_id, :body)
+  end
+
+  def reject_params
+    params.require(:message).permit(:status)
   end
 end

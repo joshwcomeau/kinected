@@ -15,4 +15,8 @@ module MessagesHelper
     outbound?(m) && unread?(m)
   end
 
+  def direction(m)
+    inbound?(m) ? "received" : "sent"
+  end
+
 end

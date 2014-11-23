@@ -43,11 +43,15 @@
       padding: 0.7rem 1.25rem;
       margin-bottom: -3px;
       cursor: pointer;
+      transition: 0.5s;
+      border-bottom: 3px solid darken($teal, 12%);
+
 
       &.selected {
         background: $green;
         border-bottom: 3px solid darken($green, 12%);
         text-shadow: 1px 1px 1px darken($green, 12%);
+        transition: 0.5s;
       }
     }
   }
@@ -109,5 +113,10 @@
     font-size: 0.75em;
     margin-top: 0.5rem;
     margin-bottom: 0;
+  }
+  .message-actions {
+    width: 130px;
+    font-size: 0.8em;
+    color: #444;
   }
 }
