@@ -80,6 +80,8 @@ class User < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   has_many :questions, through: :answers
 
+  has_many :activities
+
   accepts_nested_attributes_for :answers
 
 
