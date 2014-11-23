@@ -1,78 +1,161 @@
-  .interaction-button {
-    display: inline-block;
-    font-weight: 700;
+.table {
+  width: 100%;
+  border-bottom: 4px solid $teal;
+
+  th {
+    background: $teal;
     color: #FFF;
-    border-radius: 3px;
-    border: 0;
-    cursor: pointer;
-    vertical-align: middle;
-    outline: 0;
-    padding: 0.5rem 1.5rem;
-    margin-right: 0.5rem;
-    text-align: center;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0)),to(rgba(0,0,0,.1)));
-    background-image: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
-    background-image: -moz-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
-    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
-    text-decoration: none;
-    transition: 0.5s;
-    &.message, &.accept, &.save {
-      background-color: $green;
-      text-shadow: 1px 1px 0px darken($green, 20%);
-      border-bottom: 3px solid darken($green, 21%);
-
-      &:hover {
-        background-color: lighten($green, 5%);
-        border-bottom: 3px solid darken($green, 11%);
-        transition: 0.2s;
-      }
-    }
-    &.favorite {
-      background-color: darken($gold, 25%);
-      text-shadow: 1px 1px 0px darken($gold, 35%);
-      border-bottom: 3px solid darken($gold, 45%);
-      
-      &:hover {
-        background-color: #ffb031;
-        border-bottom: 3px solid darken($gold, 40%);
-        transition: 0.2s;
-      }
-      &.favorited {
-        color: $gold;
-      }
-    } 
-    &.block {
-      background-color: $red;
-      text-shadow: 1px 1px 0px darken($red, 15%);
-      border-bottom: 3px solid darken($red, 20%);
-      
-      &:hover {
-        background-color: #ec482d;
-        border-bottom: 3px solid darken($red, 11%);
-        transition: 0.2s;
-      }
-    }
-  }
-  .interaction-text-button {
-    @extend .interaction-button;
-    font-size: 1.2rem;
-  }
-  .interaction-icon-button {
-    @extend .interaction-button;
-    font-size: 1.5rem;
-    width: 75px;
+    font-weight: 400;
+    padding: 0.75rem;
+    border-bottom: 3px solid darken($teal, 12%);
+    text-align: left;
   }
 
-  .interaction-request-button {
-    @extend .interaction-button;
-    padding: 0.35rem 0.95rem;
-    margin-right: 0;
-    font-size: 1.3rem;
-
-    &.accept {
-      border-radius: 3px 0 0 3px;
-    }
-    &.block {
-      border-radius: 0 3px 3px 0;
+  tr {
+    border-bottom: 1px dotted #AAA;
+    &:last-of-type {
+      border-bottom: none;
     }
   }
+
+  td {
+    vertical-align: top;
+    padding: 0.75rem;
+    font-weight: 300;
+    border-right: 1px dotted #CCC;
+
+    &:last-of-type {
+      border-right: 0px;
+    }
+  }
+  .none {
+    opacity: 0.55;
+  }
+
+}
+
+.card {
+  background: #FFF;
+  border-radius: 0.75rem;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+  display: inline-block;
+  padding: 1rem;
+
+  h4 {
+    margin-top: 0;
+  }
+}
+
+.content-wrapper {
+  position: relative;
+  max-width: 1200px;
+
+  & > .title {
+    position: relative;
+    background: $navy;
+    border-top: 2px solid lighten($navy, 15%);
+    border-radius: 0.8rem 0.8rem 0 0;
+    text-shadow: 1px 1px 0px darken($navy, 10%), 2px 2px 0px darken($navy, 10%);
+
+    h2 {
+      margin: 0;
+      padding: 0.5rem;
+      font-size: 2.3em;
+      line-height: 60px;
+      height: 76px;
+      text-align: center;
+      color: #FFF;
+    }
+  }
+
+  .content-box {
+    background: $beige;
+    padding: 1rem;
+    border-bottom: 5px solid darken($beige, 40%);
+    border-radius: 0 0 6px 6px;
+
+    &.no-padding {
+      padding: 0;
+    }
+  }
+}
+
+.interaction-button {
+  display: inline-block;
+  font-weight: 700;
+  color: #FFF;
+  border-radius: 3px;
+  border: 0;
+  cursor: pointer;
+  vertical-align: middle;
+  outline: 0;
+  padding: 0.5rem 1.5rem;
+  margin-right: 0.5rem;
+  text-align: center;
+  background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0)),to(rgba(0,0,0,.1)));
+  background-image: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
+  background-image: -moz-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
+  background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.1));
+  text-decoration: none;
+  transition: 0.5s;
+  &.message, &.accept, &.save {
+    background-color: $green;
+    text-shadow: 1px 1px 0px darken($green, 20%);
+    border-bottom: 3px solid darken($green, 21%);
+
+    &:hover {
+      background-color: lighten($green, 5%);
+      border-bottom: 3px solid darken($green, 11%);
+      transition: 0.2s;
+    }
+  }
+  &.favorite {
+    background-color: darken($gold, 25%);
+    text-shadow: 1px 1px 0px darken($gold, 35%);
+    border-bottom: 3px solid darken($gold, 45%);
+    
+    &:hover {
+      background-color: #ffb031;
+      border-bottom: 3px solid darken($gold, 40%);
+      transition: 0.2s;
+    }
+    &.favorited {
+      color: $gold;
+    }
+  } 
+  &.block {
+    background-color: $red;
+    text-shadow: 1px 1px 0px darken($red, 15%);
+    border-bottom: 3px solid darken($red, 20%);
+    
+    &:hover {
+      background-color: #ec482d;
+      border-bottom: 3px solid darken($red, 11%);
+      transition: 0.2s;
+    }
+  }
+}
+.interaction-text-button {
+  @extend .interaction-button;
+  font-size: 1.2rem;
+}
+.interaction-icon-button {
+  @extend .interaction-button;
+  font-size: 1.5rem;
+  width: 75px;
+}
+
+.interaction-request-button {
+  @extend .interaction-button;
+  padding: 0.35rem 0.95rem;
+  margin-right: 0;
+  font-size: 1.3rem;
+
+  &.accept {
+    border-radius: 3px 0 0 3px;
+  }
+  &.block {
+    border-radius: 0 3px 3px 0;
+  }
+}

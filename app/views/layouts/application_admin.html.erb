@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kinected</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+<!--   <link href='http://fonts.googleapis.com/css?family=Lato|Raleway:700' rel='stylesheet' type='text/css'>
+ -->
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="wrapper with-sidebar">
+
+  <%= render partial: 'layouts/sidebar_admin' %>
+
+  <section>
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
+
+    <%= yield %>
+    
+
+    <%= render partial: 'layouts/footer' %>
+    
+  </section>
+</div>
+<%= javascript_include_tag 'application' %>
+</body>
+</html>

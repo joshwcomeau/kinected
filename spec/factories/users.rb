@@ -40,6 +40,7 @@
 #  display_name           :string(255)
 #  city                   :string(255)
 #  state                  :string(255)
+#  concierge_id           :integer
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

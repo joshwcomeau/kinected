@@ -1,3 +1,6 @@
+@import 'variables';
+@import 'mixins';
+
 // Convenience classes
 .no-top-margin {
   margin-top: 0px !important;
@@ -44,6 +47,9 @@
 
 .light-gray {
   color: #BBB;
+}
+.green {
+  color: $green;
 }
 .full-width {
   width: 100%;

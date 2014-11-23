@@ -1,0 +1,34 @@
+<div class="content-wrapper">
+  <div class="title"><h2>Pending Daters</h2></div>
+  <div class="content-box no-padding">
+    <table class="table">
+      <tr>
+        <th>User Info</th>
+        <th>Contact Info</th>
+        <th>Social Link</th>
+        <th style="width: 125px;">Action</th>
+      </tr>
+      <% @trial_daters.each do |d| %>
+        <tr>
+          <td>
+            Name: <%= "#{d.first_name} #{d.last_name}" %><br>
+            Age:  <%= d.age %>
+          </td>
+          <td>
+            Email: <%= d.email %><br>
+            Phone: 416.777.5757<br>
+            Skype: <span class="none">Not Provided</span>
+          </td>
+          <td>
+            <a href="http://www.twitter.com/theman">http://www.twitter.com/theman</a>
+          </td>
+          <td>
+            <button class="interaction-request-button accept"><%= fa_icon("check") %></button><button class="interaction-request-button block"><%= fa_icon("remove") %></button>
+
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  
+</div>

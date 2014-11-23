@@ -305,8 +305,18 @@ end
   sex:        'female',
   role:       'concierge'
 })
+@concierge1.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
 
-@concierge1.profile_photos << ProfilePhoto.create
+
+@admin = User.create({
+  first_name: 'Admin',
+  last_name:  'Istrator',
+  display_name: 'Administrator',
+  email:      'admin@gmail.com',
+  password:   'wootage1',
+  sex:        'male',
+  role:       'admin'
+})
 
 # Let's make some messages, one of each status for our @user1
 Message.create([

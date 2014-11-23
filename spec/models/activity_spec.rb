@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: activities
+#
+#  id             :integer          not null, primary key
+#  action         :string(255)
+#  seen           :boolean
+#  trackable_id   :integer
+#  trackable_type :string(255)
+#  user_id        :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 require 'rails_helper'
 
 RSpec.describe Activity, :type => :model do

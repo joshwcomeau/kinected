@@ -40,6 +40,7 @@
 #  display_name           :string(255)
 #  city                   :string(255)
 #  state                  :string(255)
+#  concierge_id           :integer
 #
 
 class User < ActiveRecord::Base
@@ -93,9 +94,13 @@ class User < ActiveRecord::Base
 
   enum role:          [ :dater, :concierge, :admin ]
   enum sex:           [ :female, :male ]
+  enum status:        [ :trial, :active, :deleted ]
 
   scope :daters,              -> { where(role: 0) }
   scope :matched_daters,      -> (sex) { where(role: 0, sex: sex) }
+  scope :paying,              -> { where(status: 1) }
+  scope :free_trial,          -> { where(status: 0) }
+  scope :concierges,          -> { where(role: 1) }
   scope :between_ages,        -> (min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
   scope :recently_logged_in,  -> { order("last_sign_in_at DESC") }
 
@@ -111,6 +116,13 @@ class User < ActiveRecord::Base
   def can_chat_with(user)
 
   end
+
+  def age
+    if self.birthdate
+      now = Time.now.utc.to_date
+      now.year - birthdate.year - ((now.month > birthdate.month || (now.month == birthdate.month && now.day >= birthdate.day)) ? 0 : 1)
+    end
+  end  
 
   # Will return a hash containing two relations (hopefully)
   def messages
