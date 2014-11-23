@@ -1,6 +1,6 @@
 class Admin::ApplicationController < ApplicationController
   before_action :require_admin
-
+  layout 'application_admin'
   private
 
   def require_admin
