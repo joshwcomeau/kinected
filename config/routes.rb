@@ -17,7 +17,11 @@ Rails.application.routes.draw do
   end
 
   # Singular resource
+  resources :concierges, except: [:show]
   resource :concierge, only: [:show]
+
+
+
 
 
   # Browse path for finding filtered users
