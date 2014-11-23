@@ -13,11 +13,17 @@ class MessagesController < ApplicationController
 
   # POST /messages
   def create
-    response = @message.save
+    num_sent_today = current_user.messages_sent.where("created_at >= ?", Time.now.beginning_of_day).count
+
+    if num_sent_today < Message::LIMIT
+      response = { result: @message.save }
+    else
+      response = { result: false, message: I18n.t("messages.create.exceeded_limit") }
+    end
 
     respond_to do |format|
       format.html { redirect_to messages_path }
-      format.json { render json: {result: response}  }
+      format.json { render json: response  }
     end
   end
 

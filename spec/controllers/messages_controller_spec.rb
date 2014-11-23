@@ -5,7 +5,7 @@ RSpec.describe MessagesController, :type => :controller do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
-  describe "GET :index" do
+  xdescribe "GET :index" do
     before(:all) do
       @user = create(:user)
       @other_user = create(:user)
@@ -15,9 +15,9 @@ RSpec.describe MessagesController, :type => :controller do
       @message2 = create(:message, status: 1)
       @message3 = create(:message, status: 1)
       @user.messages_received << @message1
-      @user.messages_sent     << @message2
-      
+      @user.messages_sent     << @message2  
     end    
+
     context "when not logged in" do
       it "doesn't let us" do
 
@@ -97,18 +97,23 @@ RSpec.describe MessagesController, :type => :controller do
         @message2.update(status: 1)
       end
     end
+
+    after(:all) do
+      Message.destroy_all
+      Permission.destroy_all
+      User.destroy_all
+    end    
+
   end
 
   describe "POST :create" do
+    before(:all) do
+      @user = create(:user)
+      @other_user = create(:user)
+      @third_user = create(:user)
+    end    
+  
     context "when requesting JSON" do
-      before(:all) do
-        Message.destroy_all
-        Permission.destroy_all
-        User.destroy_all
-        @user = create(:user)
-        @other_user = create(:user)
-      end
-
       before(:each) do
         sign_in :user, @user 
         xhr :post, :create, { message: {
@@ -127,7 +132,37 @@ RSpec.describe MessagesController, :type => :controller do
         expect(json).to be_a Hash
         expect(json["result"]).to eq(true)
       end
+    end
 
+    describe "limitations" do
+      before(:all) { Message.create(user_id: @user.id, recipient_id: @third_user.id, body: 'hey sexy') }
+
+      before(:each) do
+        sign_in :user, @user 
+        xhr :post, :create, { message: {
+          user_id:      @user.id,
+          recipient_id: @other_user.id,
+          body:         'Why hello there!'
+        }, format: "json" }
+      end      
+
+      it "won't persist additional messages" do
+        expect(@user.messages.count).to eq(1)
+        expect(@user.messages.first.body).to eq('hey sexy')
+      end
+
+      it "returns 'false' via JSON" do
+        json = JSON.parse(response.body)
+        expect(json).to be_a Hash
+        expect(json["result"]).to eq(false)
+      end
+
+      it "returns an error message as part of the response" do
+        json = JSON.parse(response.body)
+        expect(json["message"]).to eq(I18n.t("messages.create.exceeded_limit"))
+      end
+
+      after(:all) { @user.messages.destroy_all }
     end
   end
 

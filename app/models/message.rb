@@ -13,6 +13,8 @@
 
 class Message < ActiveRecord::Base
 
+  LIMIT = 1     # number of messages a user may send per day
+
   belongs_to :user
   belongs_to :recipient, class_name: 'User'
 
@@ -33,12 +35,8 @@ class Message < ActiveRecord::Base
 
   def has_been_accepted?
     self.permissions.count == 2 && self.permissions.first.status == 'allowed' && self.permissions.last.status == 'allowed'
-    
   end
-
-  def has_been_rejected?
-
-  end
+  
 
   private
 
