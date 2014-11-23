@@ -17,9 +17,16 @@ Rails.application.routes.draw do
   end
 
   # Singular resource
-  resources :concierges, except: [:show]
   resource :concierge, only: [:show]
 
+
+  namespace :concierge do
+    resources :dashboard, only: :index
+  end
+
+  namespace :admin do
+    resources :dashboard, only: :index
+  end
 
 
 

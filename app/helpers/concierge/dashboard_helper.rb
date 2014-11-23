@@ -1,0 +1,2 @@
+module Concierge::DashboardHelper
+end

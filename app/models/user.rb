@@ -82,6 +82,12 @@ class User < ActiveRecord::Base
 
   has_many :activities
 
+  # Association between daters and concierges
+  has_many :managed_daters, -> { where(role: 0) }, foreign_key: 'concierge_id', class_name: "User"
+  belongs_to :concierge, -> { where(role: 1) }, foreign_key: 'concierge_id', class_name: "User"
+
+
+
   accepts_nested_attributes_for :answers
 
 
