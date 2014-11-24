@@ -1,4 +1,5 @@
 function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, InitialProfileList, InitialProfileDetails, Favorite, Block) {
+  var user = this;
   this.profile  = InitialProfileDetails;
   this.profiles = InitialProfileList;
 
@@ -23,6 +24,17 @@ function ProfileController($scope, $attrs, $filter, $interval, ProfileDetails, I
   this.editing = null;
   this.saving  = null;
   this.loading = null;  
+
+
+  this.msgModalShown  = false;
+  this.imgModalShown  = false;
+  this.toggleMsgModal = function() { user.msgModalShown = !user.msgModalShown }
+  this.toggleImgModal = function(photo) { 
+    console.log(photo);
+    user.selectedPhoto = photo;
+    user.imgModalShown = !user.imgModalShown 
+  }
+
 
   if ( this.profiles ) this.nextProfile = this.profiles[1]; 
 }

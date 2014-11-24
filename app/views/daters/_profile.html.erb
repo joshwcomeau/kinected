@@ -4,7 +4,7 @@
 
 <div class="first-row">
   <div class="profile-photo-container">
-    <a href="#image-modal" ng-repeat="photo in user.profile.profile_photos"><img ng-src="{{photo.photo_object.rectangle_thumb.url}}" ng-click="user.selectedPhoto = photo"></a><%= image_tag "default_profile_photo_rect_dark.png" %><%= image_tag "default_profile_photo_rect_dark.png" %><%= image_tag "default_profile_photo_rect_dark.png" %>
+    <a ng-repeat="photo in user.profile.profile_photos"><img ng-src="{{photo.photo_object.rectangle_thumb.url}}" ng-click="user.toggleImgModal(photo)"></a><%= image_tag "default_profile_photo_rect_dark.png" %><%= image_tag "default_profile_photo_rect_dark.png" %><%= image_tag "default_profile_photo_rect_dark.png" %>
   </div>
 
 
@@ -100,17 +100,22 @@
 </section>
 
 <!-- Image Modal -->
-<section class="modal--show image-modal" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+<modal-dialog show='user.imgModalShown'>
+  <img ng-src="{{user.selectedPhoto.photo_object.url}}" alt="">
+  <p class="selected-photo-caption">{{user.selectedPhoto.caption}}</p>
+</modal-dialog>
+
+
+<!-- <section class="modal--show image-modal" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
   <div class="modal-inner">
     <div class="modal-content">
-      <img ng-src="{{user.selectedPhoto.photo_object.url}}" alt="">
-      <p class="selected-photo-caption">{{user.selectedPhoto.caption}}</p>
+      
     </div>
   </div>
 
   <a href="#!" class="modal-close" title="Return to Profile" data-close="Close" data-dismiss="modal">?</a>
 </section>
-
+ -->
 <script>
   // These two factories get loaded to manage users.
   <%= render "initial_profile_details.js.erb" %>
