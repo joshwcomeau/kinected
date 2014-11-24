@@ -22,10 +22,17 @@
 
   </div>
 
-  <div class="chat-send">
-    <form ng-submit="chat.pushMessage()" style="clear: both;">
-      <textarea id="chat-message-input" ng-model="chat.current_input" placeholder="Type a message"></textarea>
-      <input type="submit">
+  <div class="chat-send" id="chat-send">
+    <form ng-submit="chat.pushMessage()">
+      <div class="flex-inputs">
+        <div class="textarea-holder">
+          <textarea id="chat-message-input" ng-model="chat.current_input" placeholder="Type a message"></textarea>
+        </div>
+        <div class="submit-holder">
+          <input type="submit" value="Send" class="interaction-text-button message">
+        </div>
+      </div>
+      <p><%= render partial: 'layouts/copyright_notice' %></p>
     </form>
   </div>
 </div>

@@ -8,5 +8,5 @@
       <%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
     </ul>
   </div>
-  <p class="line-2 light-gray">Copyright © <%= Date.today.year %> Kinected. All Rights Reserved.</p>
+  <p class="line-2 light-gray"><%= render partial: 'layouts/copyright_notice' %></p>
 </footer>

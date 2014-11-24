@@ -4,6 +4,9 @@
   $chat-blue : #5ca4ce;
   $arrow-size: 12px;
 
+  $send-message-size: 7.5rem;
+  $chat-header-size : 8rem;
+
   position: absolute;
   overflow: hidden;
   width: 100%;
@@ -12,7 +15,7 @@
   background: $gray-teal;
 
   .chat-header {
-    height: 8rem;
+    height: $chat-header-size;
     border-bottom: 3px solid #FFF;
     padding: 3rem 2rem 0 8.5rem;
 
@@ -54,7 +57,7 @@
   }
   .chat-contents {
     height: 77%; // Backup for <= IE8
-    // height: calc(100% - 13rem);
+    height: calc(100% - 14.5rem);
     overflow: scroll;
 
     .chat-bottom-spacer {
@@ -139,16 +142,57 @@
   .chat-send {
     position: fixed;
     z-index: 100;
-    width: 100%;
     max-width: $max-width;
     bottom: 0;
-    height: 6rem;
+    left: $sidebar-width;
+    right: 0;
+    height: $send-message-size;
     padding: 1.5rem 1.5rem 1rem 1.5rem;
-    background: $navy;
+    background: $verydarkgrey;
 
-    textarea {
-      width: 100%;
-      height: 3rem;
+
+    .flex-inputs {
+      display: flex;
+    }
+
+    .submit-holder {
+      flex-basis: 94px;
+
+      .interaction-text-button {
+        height: 3rem;
+        margin: 0;
+        border-radius: 0 3px 3px 0;
+      }
+    }
+    .textarea-holder {
+      flex: 1;
+      position: relative;
+
+      textarea {
+        width: 100%;
+        height: 3rem;
+        padding: 12px;
+        border: 0;
+        border-radius: 4px 0 0 4px;
+        border-bottom: 3px solid #777;
+        outline: none;
+
+        &:focus {
+          background: tint($green, 86%);
+          border-bottom: 3px solid darken($green, 21%);
+
+        }
+
+      }
+    }
+
+
+    p {
+      color: #FFF;
+      opacity: 0.5;
+      margin: 0.75rem 0 0 0;
+      font-size: 0.75em;
+      font-weight: 300;
     }
   }
 }

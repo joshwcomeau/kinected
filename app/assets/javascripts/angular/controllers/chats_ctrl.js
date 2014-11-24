@@ -1,4 +1,4 @@
-function ChatsController($scope, $attrs, $firebase) {
+function ChatsController($scope, $attrs, $firebase, $timeout) {
   this.sender     = $attrs.sender;
   this.receiver   = $attrs.receiver;
   this.roomID     = $attrs.roomId;
@@ -10,6 +10,14 @@ function ChatsController($scope, $attrs, $firebase) {
 
   var messagesArray = sync.$asArray();
   this.messages = messagesArray;
+
+  // Callback when a message is added
+  this.messages.$watch(function() {
+    // Wait a few milliseconds for the DOM to update
+    $timeout(function() {
+      $(".chat-contents").scrollTop($(".chat-contents")[0].scrollHeight);  
+    }, 50);
+  });
 }
 
 ChatsController.prototype.pushMessage = function() {
@@ -22,9 +30,10 @@ ChatsController.prototype.pushMessage = function() {
   });
   // Clear the input
   this.current_input = '';
+  
 };
 
 ChatsController.prototype.fromSelf = function(message) { return message.sender == this.sender; };
 
-ChatsController.$inject = ['$scope', '$attrs', '$firebase'];
-app.controller('ChatsController', ['$scope', '$attrs', '$firebase', ChatsController]);
+ChatsController.$inject = ['$scope', '$attrs', '$firebase', '$timeout'];
+app.controller('ChatsController', ['$scope', '$attrs', '$firebase', '$timeout', ChatsController]);
