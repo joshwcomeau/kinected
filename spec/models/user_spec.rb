@@ -86,7 +86,71 @@ RSpec.describe User, :type => :model do
     expect(user.ethnicities.count).to eq(2)
   end
 
-  describe "match functions" do
+
+  # Should return a list of all the users I have blocked AND all the users who have blocked me. Either/or.
+  describe "#get_blocked_users" do
+    before(:all) do
+      @me    = create(:user, sex: :male)
+      @lady1 = create(:user, sex: :female)
+      @lady2 = create(:user, sex: :female)
+      @lady3 = create(:user, sex: :female)
+      @lady4 = create(:user, sex: :female)
+
+      @me.permissions.create(target_user_id: @lady1.id, status: 0)
+      @lady3.permissions.create(target_user_id: @me.id, status: 0)
+
+      @lady4.permissions.create(target_user_id: @me.id, status: 1)      
+    end
+
+    subject { @me.get_blocked_users }
+
+    it { is_expected.to be_a Array }
+    it { is_expected.to include(@lady1) }
+    it { is_expected.to include(@lady3) }
+    it { is_expected.not_to include(@lady4) }
+
+    it "contains exactly 2 users (no duplicates or extras)" do
+      expect(subject.count).to eq(2)
+    end
+  end
+
+  # Should return a list of all the users that have bi-directional positive permissions. Needs both.
+  describe "#get_contacts" do
+    before(:all) do
+      @me    = create(:user, sex: :male)
+      @lady1 = create(:user, sex: :female)
+      @lady2 = create(:user, sex: :female)
+      @lady3 = create(:user, sex: :female)
+      @lady4 = create(:user, sex: :female)
+
+      # Me and Lady 1 are contacts
+      @me.permissions.create(target_user_id: @lady1.id, status: 1)
+      @lady1.permissions.create(target_user_id: @me.id, status: 1)
+
+      # Lady 2 likes me but I despise her
+      @lady2.permissions.create(target_user_id: @me.id, status: 1)
+
+      # Lady 3 is hot but she dont want no scrubs
+      @me.permissions.create(target_user_id: @lady3.id, status: 1)
+
+      # Lady 4 just hates me
+      @lady4.permissions.create(target_user_id: @me.id, status: 0)      
+    end
+
+    subject { @me.get_contacts }
+
+    it { is_expected.to be_a Array }
+    it { is_expected.to include(@lady1) }
+    it { is_expected.not_to include(@lady2) }
+    it { is_expected.not_to include(@lady3) }
+    it { is_expected.not_to include(@lady4) }
+
+    it "contains exactly 1 user (no duplicates or extras)" do
+      expect(subject.count).to eq(1)
+    end
+  end  
+
+  xdescribe "match functions" do
     describe "#get_list_of_matches" do
       before(:all) do
         @me    = create(:user, sex: :male)

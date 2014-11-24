@@ -4,6 +4,7 @@ class ChatsController < ApplicationController
 
   def show
     @other_user = User.find(params[:id])
+    @contacts = current_user.get_contacts
 
     # Check if I've blocked or never accepted them
     my_perm = Permission.find_by({

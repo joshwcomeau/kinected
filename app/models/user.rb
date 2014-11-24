@@ -163,7 +163,7 @@ class User < ActiveRecord::Base
 
 
   def get_list_of_matches
-    users = User.matched_daters(get_desired_sex).recently_logged_in - self.blocked_users
+    users = User.matched_daters(get_desired_sex).recently_logged_in - self.get_blocked_users
     format_user_list_for_angular(users)
   end
 
@@ -174,7 +174,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def blocked_users
+  def get_contacts
+    User.joins(:inverse_permissions)
+      .where("permissions.status  = :status", status: 1)
+      .where("permissions.user_id = :user", user: id) &
+    User.joins(:permissions)
+      .where("permissions.status  = :status", status: 1)
+      .where("permissions.target_user_id = :user", user: id)
+  end
+
+  def get_blocked_users
     User.joins(:inverse_permissions)
       .where("permissions.status  = :status", status: 0)
       .where("permissions.user_id = :user", user: id) + 

@@ -6,7 +6,7 @@
       <% end %>
     </div>
     <h4>Chat with <%= link_to @other_user.display_name, dater_path(@other_user) %></h4>
-    <h5>4 messages.</h5>
+    <h5>{{chat.messages.length}} messages.</h5>
   </div>
 
   <div class="chat-contents">
@@ -33,5 +33,17 @@
         </div>
       </div>
     </form>
+  </div>
+
+  <div class="contact-list-wrapper">
+    <h3>Contacts</h3> 
+    <ul>
+      <% @contacts.each do |c| %>
+        <li>
+          <%= image_tag c.primary_profile_photo_thumb.url %>
+          <h4><%= c.display_name %></h4>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

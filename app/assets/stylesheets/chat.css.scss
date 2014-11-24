@@ -1,5 +1,5 @@
 .full-chat-wrapper {
-  $max-width : 1200px;
+  $max-width : 1080px;
   $chat-green: #50b55d;
   $chat-blue : #5ca4ce;
   $arrow-size: 12px;
@@ -57,7 +57,7 @@
   }
   .chat-contents {
     height: 77%; // Backup for <= IE8
-    height: calc(100% - 14.5rem);
+    height: calc(100% - 13rem);
     overflow: scroll;
 
     .chat-bottom-spacer {
@@ -148,7 +148,7 @@
     right: 0;
     height: $send-message-size;
     padding: 1.5rem 1.5rem 1rem 1.5rem;
-    background: $verydarkgrey;
+    background: #3C3C3C;
 
 
     .flex-inputs {
@@ -185,13 +185,47 @@
       }
     }
 
-
     p {
       color: #FFF;
       opacity: 0.5;
       margin: 0.75rem 0 0 0;
       font-size: 0.75em;
       font-weight: 300;
+    }
+  }
+
+  .contact-list-wrapper {
+    position: fixed;
+    overflow: scroll;
+    top: 0;
+    right: 0;
+    left: 1280px;
+    max-width: 300px;
+    height: 100%;
+    background: #222;
+
+    h3 {
+      text-align: center;
+      color: #DDD;
+      font-family: 'Raleway';
+    }
+
+    h4 {
+
+    }
+
+    li {
+      display: block;
+      border-bottom: 1px dashed #555;
+      padding: 1rem;
+    }
+
+    img {
+      height: 3.5rem;
+      width: 3.5rem;
+      border-radius: 100%;
+      border: 2px solid $chat-green;
+      float: left;
     }
   }
 }
