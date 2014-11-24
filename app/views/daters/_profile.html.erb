@@ -16,7 +16,7 @@
       <h3>{{user.profile.birthdate | dateToAge}} year-old {{user.profile.work_industry}} from {{user.profile.city}}, {{user.profile.state}}</h3>
     </div>
     <div class="title-actions" ng-if="!user.isMe">
-      <a class="interaction-icon-button message raleway" href="#message-modal">K</a>
+      <a class="interaction-icon-button message raleway" ng-click="user.toggleMsgModal()">K</a>
       <button class="interaction-icon-button favorite" ng-click="user.favorite()" ng-class="{favorited: user.profile.favorited}">
         <span ng-if="user.profile.favorited"><%= fa_icon "star" %></span>
         <span ng-if="!user.profile.favorited"><%= fa_icon "star-o" %></span>
@@ -67,37 +67,20 @@
   </div>
 </div>
 
-<!-- <div class="photo-row" ng-show="user.viewingPhotos">
-  <div class="photo-header">
-    <h2>{{user.profile.display_name}}'s Photos</h2>
-    <p><a class="return-to-profile" ng-click="user.togglePhotos()"><%= fa_icon 'angle-left' %>&nbsp;&nbsp;&nbsp;Return to Profile</a></p>
-  </div>
-  <ul>
-    <li ng-repeat="photo in user.profile.profile_photos | orderBy:reverse">
-      <img ng-src="{{photo.photo_object.url}}" class="full-profile-photo">
-      <p ng-if="photo.caption">{{photo.caption}}</p>
-    </li>
-  </ul>
-</div>
- -->
-<section class="modal--show message-modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+<!-- Message modal -->
+<modal-dialog show='user.msgModalShown' width="700">
   <%= form_for @message do |m| %>
-    <div class="modal-inner">
-      <header id="modal-label"><h3>Send a Message</h3></header>
-      <div class="modal-content">
-        <%= m.text_area :body, placeholder: 'Send this user a message', "ng-model" => "profile.message.input", maxlength: 200 %>
-      </div>
-      <footer>
-        <div class="character-count">{{200-profile.message.input.length}}</div>
-        <%= m.hidden_field :user_id, value: current_user.id %>
-        <%= m.hidden_field :recipient_id, value: "{{user.profile.id}}" %>
-        <%= m.submit "Send" %>
-      </footer>
-    </div>
+    <h3>Request to Kinect with {{user.profile.display_name}}</h3>
+    <%= m.text_area :body, placeholder: 'Send this user a message', "ng-model" => "profile.message.input", maxlength: 200 %>
+    <footer>
+      <div class="character-count">{{200-profile.message.input.length}}</div>
+      <%= m.hidden_field :user_id, value: current_user.id %>
+      <%= m.hidden_field :recipient_id, value: "{{user.profile.id}}" %>
+      <%= m.submit "Send" %>
+    </footer>
 
-    <a href="#!" class="modal-close" title="Return to Profile" data-close="Close" data-dismiss="modal">?</a>
   <% end %>
-</section>
+</modal-dialog>
 
 <!-- Image Modal -->
 <modal-dialog show='user.imgModalShown'>
@@ -106,16 +89,6 @@
 </modal-dialog>
 
 
-<!-- <section class="modal--show image-modal" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
-  <div class="modal-inner">
-    <div class="modal-content">
-      
-    </div>
-  </div>
-
-  <a href="#!" class="modal-close" title="Return to Profile" data-close="Close" data-dismiss="modal">?</a>
-</section>
- -->
 <script>
   // These two factories get loaded to manage users.
   <%= render "initial_profile_details.js.erb" %>
