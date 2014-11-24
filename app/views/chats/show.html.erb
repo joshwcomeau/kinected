@@ -14,7 +14,7 @@
       <li class="chat-message" ng-repeat="msg in chat.messages" ng-class="[chat.fromSelf(msg) ? 'mine' : 'theirs']">
         <div class="message-sender">{{msg.sender}}</div>
         <div class="message-time">{{ msg.created_at | date:'h:mma, MMMM d yyyy' }}</div>
-        <div class="arrow"></div><div class="chat-message-box">{{msg.message}}</div>
+        <div class="arrow"></div><div class="chat-message-box pre-wrap">{{msg.message}}</div>
       </li>
 
       <li class="chat-bottom-spacer"></li>
@@ -26,13 +26,12 @@
     <form ng-submit="chat.pushMessage()">
       <div class="flex-inputs">
         <div class="textarea-holder">
-          <textarea id="chat-message-input" ng-model="chat.current_input" placeholder="Type a message"></textarea>
+          <textarea id="chat-message-input" ng-model="chat.current_input" placeholder="Type a message" ng-enter-to-send="chat.hi()"></textarea>
         </div>
         <div class="submit-holder">
           <input type="submit" value="Send" class="interaction-text-button message">
         </div>
       </div>
-      <p><%= render partial: 'layouts/copyright_notice' %></p>
     </form>
   </div>
 </div>

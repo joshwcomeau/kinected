@@ -4,7 +4,7 @@
   $chat-blue : #5ca4ce;
   $arrow-size: 12px;
 
-  $send-message-size: 7.5rem;
+  $send-message-size: 6rem;
   $chat-header-size : 8rem;
 
   position: absolute;
@@ -178,7 +178,6 @@
         outline: none;
 
         &:focus {
-          background: tint($green, 86%);
           border-bottom: 3px solid darken($green, 21%);
 
         }

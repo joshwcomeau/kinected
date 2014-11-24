@@ -11,6 +11,8 @@ function ChatsController($scope, $attrs, $firebase, $timeout) {
   var messagesArray = sync.$asArray();
   this.messages = messagesArray;
 
+  this.hi = function() { console.log("hi"); }
+
   // Callback when a message is added
   this.messages.$watch(function() {
     // Wait a few milliseconds for the DOM to update
@@ -21,16 +23,18 @@ function ChatsController($scope, $attrs, $firebase, $timeout) {
 }
 
 ChatsController.prototype.pushMessage = function() {
-  this.messages.$add({
-    sender:     this.sender,
-    receiver:   this.receiver,
-    thumbnail:  this.thumbnail,
-    message:    this.current_input,
-    created_at: Firebase.ServerValue.TIMESTAMP
-  });
-  // Clear the input
-  this.current_input = '';
-  
+  // Don't do anything on blank inputs
+  if ( this.current_input ) {
+    this.messages.$add({
+      sender:     this.sender,
+      receiver:   this.receiver,
+      thumbnail:  this.thumbnail,
+      message:    this.current_input,
+      created_at: Firebase.ServerValue.TIMESTAMP
+    });
+    // Clear the input
+    this.current_input = '';
+  }
 };
 
 ChatsController.prototype.fromSelf = function(message) { return message.sender == this.sender; };
