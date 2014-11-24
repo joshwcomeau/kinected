@@ -16,17 +16,33 @@
     /* A centered div above the overlay with a box shadow. */
     z-index:10000;
     position: fixed;
-    top: 50%;
+    top: 1rem;
     left: 50%;
+    border-radius: 5px;
+    width: 95%;
 
     /* Center the dialog */
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
 
     background-color: #fff;
     box-shadow: 4px 4px 80px #000;
-    transition: 25s;
+    
+    padding: 1rem;
+
+    @include media(40em) {
+      width: auto;
+      max-width: 75%;
+      max-height: 70%;
+      margin-top: 4rem;
+    }
+
+    @include media(53.75em) {
+      width: auto;
+      max-width: 60%;
+    }
+
   }
 
   .big-image {
@@ -40,7 +56,6 @@
   }
 
   .ng-modal-dialog-content {
-    padding: 1rem;
     text-align: left;
   }
   .ng-modal-close {
