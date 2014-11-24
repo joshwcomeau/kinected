@@ -285,17 +285,6 @@ Question.create([
 @user1.permissions.create(target_user_id: @user1_blocked_me.id, status: 0)
 
 
-User.daters.each do |u|
-  [1,3].sample.times do
-    u.ethnicities << Ethnicity.all.sample
-  end
-  u.answers.create(question_id: Question.first.id,  body: 'I would spend time with the people most important to me.')
-  u.answers.create(question_id: Question.second.id, body: "go fishing. my dad would always go but he wouldnt take me")
-  u.answers.create(question_id: Question.third.id,  body: "I have always wanted to visit Paris.")
-  u.answers.create(question_id: Question.fourth.id, body: "I'm the best pingpong player youve eer heard of. Won 15 straight matches in little pingpong league.")
-  u.answers.create(question_id: Question.fifth.id,  body: "I have no faults, I am a perfect specimen.")
-end
-
 @concierge1 = User.create({
   first_name: 'Miss',
   last_name:  'Manager',
@@ -306,6 +295,21 @@ end
   role:       'concierge'
 })
 @concierge1.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
+
+
+
+User.daters.each do |u|
+  [1,3].sample.times do
+    u.ethnicities << Ethnicity.all.sample
+  end
+  u.answers.create(question_id: Question.first.id,  body: 'I would spend time with the people most important to me.')
+  u.answers.create(question_id: Question.second.id, body: "go fishing. my dad would always go but he wouldnt take me")
+  u.answers.create(question_id: Question.third.id,  body: "I have always wanted to visit Paris.")
+  u.answers.create(question_id: Question.fourth.id, body: "I'm the best pingpong player youve eer heard of. Won 15 straight matches in little pingpong league.")
+  u.answers.create(question_id: Question.fifth.id,  body: "I have no faults, I am a perfect specimen.")
+
+  u.update(concierge_id: @concierge1.id)
+end
 
 
 @admin = User.create({

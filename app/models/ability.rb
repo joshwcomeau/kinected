@@ -14,6 +14,8 @@ class Ability
 
       # Permissions. A dater can block or allow any other user to message them.
       can :manage, Permission, user_id: user.id
+      can :read, Permission, target_user_id: user.id
+      
 
       # Favorites. They can create or destroy as many as they want for other users.
       can :manage, Favorite, user_id: user.id

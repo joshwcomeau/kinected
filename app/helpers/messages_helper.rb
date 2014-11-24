@@ -19,4 +19,9 @@ module MessagesHelper
     inbound?(m) ? "received" : "sent"
   end
 
+  def get_other_user(m)
+    return m.recipient if m.user == current_user
+    return m.user if m.recipient == current_user
+  end
+
 end

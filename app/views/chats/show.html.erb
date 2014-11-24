@@ -1,18 +1,31 @@
-<h2>Chat</h2>
-<p>Between <%= current_user.display_name %> and <%= @other_user.display_name %></p>
+<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>" data-room-id="<%= get_room_id(current_user, @other_user) %>" ng-cloak>
+  <div class="chat-header">
+    <div class="chat-thumbnail">
+      <%= link_to dater_path(@other_user) do %>
+        <%= image_tag @other_user.primary_profile_photo_thumb.url %>
+      <% end %>
+    </div>
+    <h4>Chat with <%= link_to @other_user.display_name, dater_path(@other_user) %></h4>
+    <h5>4 messages.</h5>
+  </div>
 
-<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>" data-room-id="<%= get_room_id(current_user, @other_user) %>">
-  <ul>
-    <li class="chat-message" ng-repeat="msg in chat.messages" ng-class="[chat.fromSelf(msg) ? 'right' : 'left']">
-      <img ng-src="{{msg.thumbnail}}" alt="{{msg.sender}}'s photo" class="chat-thumbnail">
-      <h4>{{msg.message}}</h4>
-      <p>From {{msg.sender}}</p>
-      <p style="opacity: 0.7" class="small-and-light">{{ msg.created_at | date:'h:mma, MMMM d yyyy' }}</p>
-    </li>
-  </ul>
+  <div class="chat-contents">
+    <ul>
+      <li class="chat-message" ng-repeat="msg in chat.messages" ng-class="[chat.fromSelf(msg) ? 'mine' : 'theirs']">
+        <div class="message-sender">{{msg.sender}}</div>
+        <div class="message-time">{{ msg.created_at | date:'h:mma, MMMM d yyyy' }}</div>
+        <div class="arrow"></div><div class="chat-message-box">{{msg.message}}</div>
+      </li>
 
-  <form ng-submit="chat.pushMessage()" style="clear: both;">
-    <input type="text" id="chat-message-input" ng-model="chat.current_input" placeholder="Type a message">
-    <input type="submit">
-  </form>
+      <li class="chat-bottom-spacer"></li>
+    </ul>
+
+  </div>
+
+  <div class="chat-send">
+    <form ng-submit="chat.pushMessage()" style="clear: both;">
+      <textarea id="chat-message-input" ng-model="chat.current_input" placeholder="Type a message"></textarea>
+      <input type="submit">
+    </form>
+  </div>
 </div>

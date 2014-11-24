@@ -1,6 +1,7 @@
 class ChatsController < ApplicationController
   before_filter :authenticate_user!
-  
+  layout 'application_chat'
+
   def show
     @other_user = User.find(params[:id])
 

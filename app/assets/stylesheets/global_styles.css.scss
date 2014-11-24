@@ -166,8 +166,13 @@ html, body {
   & > section {
     position: relative;
     background: #222;
-    padding: 30px;
+    padding: 2rem;
     min-height: 100%;
+
+    &.chat-section {
+      padding: 0;
+      background: #f3f5f9;
+    }
   }
 
 

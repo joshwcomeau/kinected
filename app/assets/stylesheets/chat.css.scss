@@ -1,31 +1,154 @@
-.bottom-chat-wrapper {
-  position: fixed;
-  z-index: 20;
-  bottom: 0;
-  right: 1rem;
-}
-
 .full-chat-wrapper {
-  .chat-message {
-    display: block;
-    background: #FFF;
-    box-shadow: 1px 1px 1px rgba(0,0,0,0.25);
-    padding: 0.4rem;
-    margin: 0.4rem;
-    width: 80%;
+  $max-width : 1200px;
+  $chat-green: #50b55d;
+  $chat-blue : #5ca4ce;
+  $arrow-size: 12px;
 
-    &.right {
-      float: right;
-      .chat-thumbnail { float: right; }
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  max-width: $max-width;
+  height: 100%;
+  background: $gray-teal;
+
+  .chat-header {
+    height: 8rem;
+    border-bottom: 3px solid #FFF;
+    padding: 3rem 2rem 0 8.5rem;
+
+    h4 {
+      margin: 0;
+      font-family: 'Raleway';
     }
-    &.left {
-      float: left;
-      .chat-thumbnail { float: left; }
+    h5 {
+      margin-top: 0.25rem;
+      line-height: 1rem;
+      font-weight: 400;
+    }
+
+    a {
+      color: $navy;
+      text-decoration: none;
+      transition: 0.2s;
+
+      &:hover {
+        text-decoration: underline;
+        color: lighten($navy, 20%);
+        transition: 0.2s;
+      }
     }
 
     .chat-thumbnail {
-      width: 55px;
-      height: 55px;
+      position: absolute;
+      top: 1.5rem;
+      left: 2rem;
+      height:5rem;
+      width:5rem;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 100%;
+        border: 3px solid $chat-green;
+      }
+    }
+  }
+  .chat-contents {
+    height: 77%; // Backup for <= IE8
+    // height: calc(100% - 13rem);
+    overflow: scroll;
+
+    .chat-bottom-spacer {
+      height: 7rem; // footer height + 1rem for a bit of padding.
+      width: 100%;
+    }
+    ul {
+      position: relative;
+      height: 100%
+    }
+    .chat-message {
+      display: block;
+      padding: 0.4rem;
+      margin: 0.4rem;
+      width: 80%;
+
+      .arrow {
+        clear: both;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        width: 0; 
+        height: 0; 
+        border-left: $arrow-size solid transparent;
+        border-right: $arrow-size solid transparent;
+      }
+
+      .chat-message-box {
+        clear: both;      
+        color: #FFF;
+        padding: 1.5rem;
+        border-radius: 4px;
+      }
+
+      .message-sender, .message-time {
+        padding: 0.6rem;
+        line-height: 1rem;
+      }
+
+      .message-sender {
+        font-family: 'Raleway';
+      }
+      .message-time {
+        opacity: 0.4;
+        font-size: 0.75em;
+      }
+
+      &.mine {
+        float: right;
+
+        .arrow {
+          border-bottom: $arrow-size solid $chat-blue;
+          float: right;
+          margin-right: 1rem;
+        }
+        .chat-message-box {
+          background: $chat-blue;
+        }
+        .message-sender, .message-time {
+          float: right;
+        }
+
+      }
+
+      &.theirs {
+        float: left;
+
+        .arrow {
+          border-bottom: $arrow-size solid $chat-green;
+          left: 1rem;
+        }
+        .chat-message-box {
+          background: $chat-green;
+        }
+        .message-sender, .message-time {
+          float: left;
+        }
+       
+      }
+    }
+  }
+  .chat-send {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    max-width: $max-width;
+    bottom: 0;
+    height: 6rem;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    background: $navy;
+
+    textarea {
+      width: 100%;
+      height: 3rem;
     }
   }
 }

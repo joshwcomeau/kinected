@@ -41,7 +41,7 @@
           <td class="message-actions">
             <!-- I'm pretty sick of nested 'if' statements, so I'm doing this in a more verbose way -->
             <% if m.has_been_accepted? %>
-              <%= link_to fa_icon("comments-o"), chat_path(m.user), class: 'interaction-request-button message' %>
+              <%= link_to fa_icon("comments-o"), chat_path(get_other_user(m)), class: 'interaction-request-button message' %>
             <% elsif outbound?(m) && m.queued? %>
               Message is Queued.
             <% elsif outbound?(m) %>
