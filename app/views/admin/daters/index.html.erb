@@ -30,25 +30,21 @@
             <%= d.concierge.try(:display_name) %>
           </td>
           <td style="width: 130px;">
-            <label for="modal-1"><div class="interaction-request-button accept"><%= fa_icon("check") %></div></label><button class="interaction-request-button block"><%= fa_icon("remove") %></button>
+            <button class="interaction-request-button accept" ng-click="dater.approveModalToggle('<%= d.display_name %>')"><%= fa_icon("check") %></button><button class="interaction-request-button block"><%= fa_icon("remove") %></button>
           </td>
         </tr>
       <% end %>
     </table>
-    <!-- Concierge selection modal -->
+
+  <!-- Approval & Concierge selection modal -->
+  <modal-dialog show='dater.approveModalShown'>
     
-    <input class="modal-state" id="modal-1" type="checkbox" />
-    <div class="modal-window">
-      <div class="modal-inner">
-        <label class="modal-close" for="modal-1"></label>
-        <h1>Modal Title</h1>
-        <p class="intro">Intro text lorem ipsum dolor sit ametm, quas, eaque facilis aliquid cupiditate tempora cumque ipsum accusantium illo modi commodi  minima.</p>
-        <p class="body">Body text lorem ipsum dolor ipsum dolor sit sit possimus amet, consectetur adipisicing elit. Itaque, placeat, explicabo, veniam quos aperiam molestias eriam molestias molestiae suscipit ipsum enim quasi sit possimus quod atque nobis voluptas earum odit accusamus quibusdam.</p>
-      </div>
-    </div>
-  </div>
+    <h3>Approve {{dater.selectedDater}}</h3>
+    <p>Body text lorem ipsum dolor ipsum dolor sit sit possimus amet, consectetur adipisicing elit. Itaque, placeat, explicabo, veniam quos aperiam molestias eriam molestias molestiae suscipit ipsum enim quasi sit possimus quod atque nobis voluptas earum odit accusamus quibusdam.
+    </p>
+
+  </modal-dialog>
+
 </div>
 
 
-<div class="modal">
-</div>

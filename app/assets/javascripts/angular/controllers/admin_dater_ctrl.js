@@ -1,5 +1,13 @@
 function AdminDaterController($scope, $attrs) {
-  
+  var dater = this;
+
+  this.selectedDater = null;
+  this.approveModalShown = false;
+  this.approveModalToggle = function(clickedDater) { 
+    dater.approveModalShown = !dater.approveModalShown;
+    dater.selectedDater = clickedDater;
+    console.log(dater.approveModalShown);
+  };
 }
 
 AdminDaterController.prototype.pushMessage = function() {
