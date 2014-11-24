@@ -167,7 +167,10 @@
       width: 100%;
       overflow: hidden;
       white-space: nowrap;
-
+      
+      a {
+        cursor: pointer;
+      }
       img {
         width: 33.334%;
       }
