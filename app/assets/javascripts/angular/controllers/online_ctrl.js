@@ -1,12 +1,18 @@
 function OnlineController($scope, $attrs, $firebase) {
-  this.userId   = $attrs.userId;
-  this.curTime  = $attrs.currentTime;
+  this.userId       = $attrs.userId;
+  this.curTime      = $attrs.currentTime;
+  this.displayName  = $attrs.displayName;
+  this.thumb        = $attrs.thumb;
 
   var ref  = new Firebase("https://kinected.firebaseio.com/online");
   var sync = $firebase(ref);
 
   var updated_info = {};
-  updated_info[this.userId] = this.curTime
+  updated_info[this.userId] = {
+    last_seen:    this.curTime,
+    display_name: this.displayName,
+    thumb:        this.thumb
+  }
 
   sync.$update(updated_info);
 }

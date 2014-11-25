@@ -1,4 +1,4 @@
-<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>" data-room-id="<%= get_room_id(current_user, @other_user) %>" ng-cloak>
+<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>" data-room-id="<%= get_room_id(current_user, @other_user) %>" data-contacts="<%= current_user.get_contacts.map(&:id) %>" ng-cloak>
   <div class="chat-header">
     <div class="chat-thumbnail">
       <%= link_to dater_path(@other_user) do %>
@@ -38,12 +38,13 @@
   <div class="contact-list-wrapper">
     <h3>Contacts</h3> 
     <ul>
-      <% @contacts.each do |c| %>
-        <li>
-          <%= image_tag c.primary_profile_photo_thumb.url %>
-          <h4><%= c.display_name %></h4>
-        </li>
-      <% end %>
+      <li ng-repeat="contact in chat.contacts" ng-class="{selected: contact.$id === chat.receiver}">
+        <a ng-href="/chats/{{contact.$id}}">
+          <img ng-src="{{contact.thumb}}" alt="">
+          <h4>{{contact.display_name}}</h4>
+          <p>Last Online: 12 minutes ago</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>

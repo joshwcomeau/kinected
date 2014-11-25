@@ -162,6 +162,8 @@
         height: 3rem;
         margin: 0;
         border-radius: 0 3px 3px 0;
+        background: $chat-green;
+        border-bottom: 3px solid darken($chat-green, 12%);
       }
     }
     .textarea-holder {
@@ -176,12 +178,12 @@
         border-radius: 4px 0 0 4px;
         border-bottom: 3px solid #777;
         outline: none;
+        color: #777;
 
         &:focus {
-          border-bottom: 3px solid darken($green, 21%);
-
+          color: #000;
+          border-bottom: 3px solid darken($chat-green, 12%);
         }
-
       }
     }
 
@@ -200,7 +202,7 @@
     top: 0;
     right: 0;
     left: 1280px;
-    max-width: 300px;
+    max-width: 360px;
     height: 100%;
     background: #222;
 
@@ -211,13 +213,41 @@
     }
 
     h4 {
+      margin: 6px 0 0 0;
+    }
+    p {
+      padding: 0.25rem;
+      margin: 0;
+      color: #888;
+      font-size: 0.75em;
+    }
 
+    a {
+      display: block;
+      text-decoration: none;
+      padding: 1rem;
+      color: #DDD;
+
+      &.selected {
+        color: #FFF;
+        background: $chat-green !important;
+        text-shadow: 1px 1px 0px darken($chat-green, 12%);
+
+        p {
+          color: shade($chat-green, 33%);
+          text-shadow: none !important;
+        }
+      }
+
+      &:hover {
+        background: #333;
+      }
     }
 
     li {
+      padding: 0;
+      border-bottom: 1px solid #333;
       display: block;
-      border-bottom: 1px dashed #555;
-      padding: 1rem;
     }
 
     img {
@@ -226,6 +256,7 @@
       border-radius: 100%;
       border: 2px solid $chat-green;
       float: left;
+      margin-right: 0.5rem;
     }
   }
 }

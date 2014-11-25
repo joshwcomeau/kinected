@@ -1,3 +1,4 @@
-<div ng-controller="OnlineController as online" data-user-id="<%= current_user.id %>" data-current-time="<%= Time.now.to_i %>">
+<div ng-controller="OnlineController as online" data-user-id="<%= current_user.id %>" data-display-name="<%= current_user.display_name%>" 
+  data-current-time="<%= Time.now.to_i %>" data-thumb="<%= current_user.primary_profile_photo_thumb %>">
   
 </div>

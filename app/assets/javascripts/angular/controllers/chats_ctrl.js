@@ -1,17 +1,35 @@
 function ChatsController($scope, $attrs, $firebase, $timeout) {
+  var chat = this;
   this.sender     = $attrs.sender;
   this.receiver   = $attrs.receiver;
   this.roomID     = $attrs.roomId;
   this.thumbnail  = $attrs.thumbnail; 
+  this.contactIds = eval($attrs.contacts);
+  
+  var chatRef     = new Firebase("https://kinected.firebaseio.com/chats/"+this.roomID);
+  this.messages   = $firebase(chatRef).$asArray();
 
-  var firebase_string = "https://kinected.firebaseio.com/chats/"+this.roomID;
-  var ref = new Firebase(firebase_string);
-  var sync = $firebase(ref);
+  var contactRef  = new Firebase("https://kinected.firebaseio.com/online");
+  var allContacts = $firebase(contactRef).$asArray();
+  this.contacts   = [];
 
-  var messagesArray = sync.$asArray();
-  this.messages = messagesArray;
 
-  this.hi = function() { console.log("hi"); }
+  // Right now, allContacts contains ALL site contacts. Need to restrict this to applicable ones.
+  allContacts.$loaded().then(function(contactArr) {
+    chat.contacts = _.filter(contactArr, function(c) {
+      return _.indexOf(chat.contactIds, Number(c.$id)) !== -1;
+    });
+
+    console.log(chat.contacts);
+  });
+  //   var current_time = (new Date).getTime() / 1000;
+
+    // chat.onlineContacts = _.filter(contactArr, function(c) {
+    //   console.log((current_time - c.$value < 720));
+    //   return _.indexOf(chat.contacts, Number(c.$id)) !== -1 && (current_time - c.$value < 720);
+    // });
+  //   console.log(chat.onlineContacts);
+  // });
 
   // Callback when a message is added
   this.messages.$watch(function() {
