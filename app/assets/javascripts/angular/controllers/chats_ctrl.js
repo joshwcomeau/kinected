@@ -56,6 +56,16 @@ ChatsController.prototype.pushMessage = function() {
     });
     // Clear the input
     this.current_input = '';
+    // Update the user's last_seen
+    var updated_info = {};
+    updated_info[this.userId] = {
+      last_seen:    this.curTime,
+      display_name: this.displayName,
+      thumb:        this.thumb
+    }
+
+    sync.$update(updated_info);
+
   }
 };
 

@@ -1,16 +1,16 @@
+$contact-list-width: 300px;
+$max-width : 1080px;
+$chat-green: #50b55d;
+$chat-blue : #5ca4ce;
+$arrow-size: 12px;
+
+$send-message-size: 6rem;
+$chat-header-size : 8rem;
+
 .full-chat-wrapper {
-  $max-width : 1080px;
-  $chat-green: #50b55d;
-  $chat-blue : #5ca4ce;
-  $arrow-size: 12px;
-
-  $send-message-size: 6rem;
-  $chat-header-size : 8rem;
-
   position: absolute;
   overflow: hidden;
   width: 100%;
-  max-width: $max-width;
   height: 100%;
   background: $gray-teal;
 
@@ -152,7 +152,7 @@
   .chat-send {
     position: fixed;
     z-index: 100;
-    max-width: $max-width;
+    
     bottom: 0;
     left: $sidebar-width;
     right: 0;
@@ -207,12 +207,12 @@
   }
 
   .contact-list-wrapper {
+    display: none;
     position: fixed;
-    overflow: scroll;
+    overflow-y: scroll;
     top: 0;
     right: 0;
-    left: 1280px;
-    max-width: 360px;
+    width: $contact-list-width;
     height: 100%;
     background: #222;
 
@@ -272,6 +272,23 @@
         border: 2px solid $chat-green;
         box-shadow: 1px 1px 5px rgba(0,0,0,0.26);
       }
+    }
+  }
+}
+
+@media screen and (min-width: 1260px) {
+
+
+  .full-chat-wrapper {
+    width: auto;
+    left: 0;
+    right: $contact-list-width;
+    
+    .chat-send {
+      right: $contact-list-width;
+    }
+    .contact-list-wrapper {
+      display: block;
     }
   }
 }
