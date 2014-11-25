@@ -1,12 +1,14 @@
-<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>" data-room-id="<%= get_room_id(current_user, @other_user) %>" data-contacts="<%= current_user.get_contacts.map(&:id) %>" ng-cloak>
+<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>" data-room-id="<%= get_room_id(current_user, @other_user) %>" data-contacts="<%= current_user.get_contacts.map(&:id) %>" data-other-user-id="<%= @other_user.id %>" ng-cloak>
   <div class="chat-header">
-    <div class="chat-thumbnail">
-      <%= link_to dater_path(@other_user) do %>
-        <%= image_tag @other_user.primary_profile_photo_thumb.url %>
-      <% end %>
+    <div ng-if="chat.selectedContact">
+      <div class="chat-thumbnail">
+        <%= link_to dater_path(@other_user) do %>
+          <img ng-src="{{chat.selectedContact.thumb}}" ng-class="{online: chat.onlineNow(chat.selectedContact)}">
+        <% end %>
+      </div>
+      <h4>Chat with <%= link_to @other_user.display_name, dater_path(@other_user) %></h4>
+      <h5><span am-time-ago="chat.selectedContact.last_seen"></span>&nbsp;&nbsp;•&nbsp;&nbsp;{{chat.messages.length}} messages.</h5>
     </div>
-    <h4>Chat with <%= link_to @other_user.display_name, dater_path(@other_user) %></h4>
-    <h5>{{chat.messages.length}} messages.</h5>
   </div>
 
   <div class="chat-contents">
@@ -38,11 +40,11 @@
   <div class="contact-list-wrapper">
     <h3>Contacts</h3> 
     <ul>
-      <li ng-repeat="contact in chat.contacts" ng-class="{selected: contact.$id === chat.receiver}">
-        <a ng-href="/chats/{{contact.$id}}">
-          <img ng-src="{{contact.thumb}}" alt="">
+      <li ng-repeat="contact in chat.contacts">
+        <a ng-href="/chats/{{contact.$id}}" ng-class="contact.$id == chat.otherUserId ? 'selected' : ''">
+          <img ng-src="{{contact.thumb}}" alt="" ng-class="{online: chat.onlineNow(contact)}">
           <h4>{{contact.display_name}}</h4>
-          <p>Last Online: 12 minutes ago</p>
+          <p am-time-ago="contact.last_seen"></p>
         </a>
       </li>
     </ul>

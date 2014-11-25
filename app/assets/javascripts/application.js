@@ -13,10 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
+//= require moment.min
 //= require angular
 //= require angular-animate
 //= require angular-resource
 //= require firebase
 //= require angularfire.min
+//= require angular-moment-modified
 //= require modal
 //= require_tree .

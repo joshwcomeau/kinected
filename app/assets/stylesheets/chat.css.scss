@@ -51,7 +51,17 @@
         height: 100%;
         width: 100%;
         border-radius: 100%;
-        border: 3px solid $chat-green;
+        border: 3px solid #333;
+        transition: 1s;
+
+        &.online {
+          border: 3px solid $chat-green !important;
+          transition: 1s;
+        }
+        &.offline {
+          border: 3px solid $red !important;
+          transition: 1s;
+        }
       }
     }
   }
@@ -230,11 +240,11 @@
 
       &.selected {
         color: #FFF;
-        background: $chat-green !important;
-        text-shadow: 1px 1px 0px darken($chat-green, 12%);
+        background: $chat-blue !important;
+        text-shadow: 1px 1px 0px darken($chat-blue, 12%);
 
         p {
-          color: shade($chat-green, 33%);
+          color: shade($chat-blue, 33%);
           text-shadow: none !important;
         }
       }
@@ -254,9 +264,14 @@
       height: 3.5rem;
       width: 3.5rem;
       border-radius: 100%;
-      border: 2px solid $chat-green;
+      border: 2px solid #111;
       float: left;
       margin-right: 0.5rem;
+
+      &.online {
+        border: 2px solid $chat-green;
+        box-shadow: 1px 1px 5px rgba(0,0,0,0.26);
+      }
     }
   }
 }
