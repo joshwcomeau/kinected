@@ -20,6 +20,17 @@ class ChatsController < ApplicationController
       status:         1
     })
 
+    @sender = {
+      id: current_user.id,
+      displayName: current_user.display_name,
+      thumg: current_user.primary_profile_photo_thumb
+    }
+    @receiver = {
+      id: @other_user.id,
+      displayName: @other_user.display_name,
+      thumg: @other_user.primary_profile_photo_thumb
+    }
+
     if my_perm && !their_perm
       redirect_to root_url, alert: I18n.t("flash_messages.chats.show.missing_their_permission")
     elsif their_perm && !my_perm

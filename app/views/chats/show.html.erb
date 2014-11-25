@@ -1,4 +1,13 @@
-<div class="full-chat-wrapper" ng-controller="ChatsController as chat" data-sender="<%= current_user.display_name %>" data-receiver="<%= @other_user.display_name %>" data-thumbnail="<%= current_user.primary_profile_photo_thumb %>" data-room-id="<%= get_room_id(current_user, @other_user) %>" data-contacts="<%= current_user.get_contacts.map(&:id) %>" data-other-user-id="<%= @other_user.id %>" ng-cloak>
+<div class="full-chat-wrapper" ng-controller="ChatsController as chat" 
+  data-sender-id="<%= current_user.id %>" 
+  data-sender-name="<%= current_user.display_name %>" 
+  data-sender-thumb="<%= current_user.primary_profile_photo_thumb.url %>"
+  data-receiver-id="<%= @other_user.id %>" 
+  data-receiver-name="<%= @other_user.display_name %>"   
+  data-receiver-thumb="<%= @other_user.primary_profile_photo_thumb.url %>"
+  data-room-id="<%= get_room_id(current_user, @other_user) %>" 
+  data-contacts="<%= current_user.get_contacts.map(&:id) %>" 
+  ng-cloak>
   <div class="chat-header">
     <div ng-if="chat.selectedContact">
       <div class="chat-thumbnail">

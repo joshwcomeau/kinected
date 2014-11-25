@@ -1,18 +1,23 @@
 function ChatsController($scope, $attrs, $firebase, $timeout) {
   var chat = this;
-  this.sender      = $attrs.sender;
-  this.receiver    = $attrs.receiver;
-  this.otherUserId = $attrs.otherUserId;
-  this.roomID      = $attrs.roomId;
-  this.thumbnail   = $attrs.thumbnail; 
-  this.contactIds  = eval($attrs.contacts);
+  this.sender         = $attrs.senderName;
+  this.receiver       = $attrs.receiverName;
+  this.senderId       = $attrs.senderId;
+  this.receiverId     = $attrs.receiverId;
+  this.senderThumb    = $attrs.senderThumb;
+  this.receiverThumb  = $attrs.receiverThumb;
+  this.roomID         = $attrs.roomId;
+  this.thumbnail      = $attrs.thumbnail; 
+  this.contactIds     = eval($attrs.contacts);
   
-  var chatRef      = new Firebase("https://kinected.firebaseio.com/chats/"+this.roomID);
-  this.messages    = $firebase(chatRef).$asArray();
+  var chatRef         = new Firebase("https://kinected.firebaseio.com/chats/"+this.roomID);
+  this.messages       = $firebase(chatRef).$asArray();
 
-  var contactRef   = new Firebase("https://kinected.firebaseio.com/online");
-  var allContacts  = $firebase(contactRef).$asArray();
-  this.contacts    = [];
+  var contactRef      = new Firebase("https://kinected.firebaseio.com/online");
+  this.onlineRef      = $firebase(contactRef);
+  var allContacts     = this.onlineRef.$asArray();
+  
+  this.contacts       = [];
 
   this.selectedContact = null;
   this.selectedContactIsOffline = false;
@@ -22,12 +27,10 @@ function ChatsController($scope, $attrs, $firebase, $timeout) {
   allContacts.$loaded().then(function(contactArr) {
     chat.contacts = _.filter(contactArr, function(c) {
       // Let's also assign the selectedContact while we're here
-      if ( Number(c.$id) == chat.otherUserId ) { 
+      if ( Number(c.$id) == chat.receiverId ) { 
         chat.selectedContact = c; 
         chat.selectedContactIsOnline = chat.onlineNow(c);
         chat.selectedContactIsOffline = !chat.onlineNow(c);
-
-        console.log(chat.onlineNow(c));
       }
       return _.indexOf(chat.contactIds, Number(c.$id)) !== -1;
     });
@@ -50,7 +53,6 @@ ChatsController.prototype.pushMessage = function() {
     this.messages.$add({
       sender:     this.sender,
       receiver:   this.receiver,
-      thumbnail:  this.thumbnail,
       message:    this.current_input,
       created_at: Firebase.ServerValue.TIMESTAMP
     });
@@ -58,13 +60,13 @@ ChatsController.prototype.pushMessage = function() {
     this.current_input = '';
     // Update the user's last_seen
     var updated_info = {};
-    updated_info[this.userId] = {
-      last_seen:    this.curTime,
-      display_name: this.displayName,
-      thumb:        this.thumb
+    updated_info[this.senderId] = {
+      last_seen:    new Date().getTime(),
+      display_name: this.sender,
+      thumb:        this.senderThumb
     }
 
-    sync.$update(updated_info);
+    this.onlineRef.$update(updated_info);
 
   }
 };
