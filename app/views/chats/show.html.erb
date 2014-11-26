@@ -50,7 +50,7 @@
     <h3>Contacts</h3> 
     <ul>
       <li ng-repeat="contact in chat.contacts">
-        <a ng-href="/chats/{{contact.$id}}" ng-class="contact.$id == chat.otherUserId ? 'selected' : ''">
+        <a ng-href="/chats/{{contact.$id}}" ng-class="contact.$id == chat.receiverId ? 'selected' : ''">
           <img ng-src="{{contact.thumb}}" alt="" ng-class="{online: chat.onlineNow(contact)}">
           <h4>{{contact.display_name}}</h4>
           <p am-time-ago="contact.last_seen"></p>

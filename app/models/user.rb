@@ -104,6 +104,17 @@ class User < ActiveRecord::Base
   scope :between_ages,        -> (min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
   scope :recently_logged_in,  -> { order("last_sign_in_at DESC") }
 
+  def get_blocked_users
+    User.joins(:inverse_permissions)
+      .where("permissions.status  = :status", status: 0)
+      .where("permissions.user_id = :user", user: id) + 
+    User.joins(:permissions)
+      .where("permissions.status  = :status", status: 0)
+      .where("permissions.target_user_id = :user", user: id)
+  end
+
+
+
   scope :not_blocked, -> (user) do 
     includes(:permissions).where("permissions.recipient_id = :user AND permissions.status = :status")
   end
@@ -160,15 +171,16 @@ class User < ActiveRecord::Base
   # We're returning a JSON object that contains the minimal data needed to sort and retrieve matches.
   # We need their id, age, last login time, created_at time, etc. 
 
-
+  def match_query
+    User.matched_daters(get_desired_sex).recently_logged_in - self.with_history
+  end
 
   def get_list_of_matches
-    users = User.matched_daters(get_desired_sex).recently_logged_in - self.get_blocked_users
-    format_user_list_for_angular(users)
+    format_user_list_for_angular(self.match_query)
   end
 
   def get_first_match
-    users = User.matched_daters(get_desired_sex).recently_logged_in
+    users = self.match_query
     if users.any?
       users.first.get_full_match_data(self)
     end
@@ -192,6 +204,10 @@ class User < ActiveRecord::Base
       .where("permissions.target_user_id = :user", user: id)
   end
 
+  def with_history
+    User.joins(:permissions).where("permissions.target_user_id = :user", user: id) + 
+    User.joins(:inverse_permissions).where("permissions.user_id = :user", user: id)
+  end
 
   def get_full_match_data(current_user)
     user = self.attributes

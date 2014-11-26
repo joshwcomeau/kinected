@@ -7,6 +7,7 @@ class DatersController < ApplicationController
     # Let's overwrite the default loaded daters with an array of hashes that Angular can use, without unneeded overhead.
     @daters = current_user.get_list_of_matches
     @dater = current_user.get_first_match
+    
     @message = Message.new
   end
 

@@ -88,7 +88,7 @@ RSpec.describe User, :type => :model do
 
 
   # Should return a list of all the users I have blocked AND all the users who have blocked me. Either/or.
-  describe "#get_blocked_users" do
+  xdescribe "#get_blocked_users" do
     before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female)
@@ -115,7 +115,7 @@ RSpec.describe User, :type => :model do
   end
 
   # Should return a list of all the users that have bi-directional positive permissions. Needs both.
-  describe "#get_contacts" do
+  xdescribe "#get_contacts" do
     before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female)
@@ -150,7 +150,7 @@ RSpec.describe User, :type => :model do
     end
   end  
 
-  xdescribe "match functions" do
+  describe "match functions" do
     describe "#get_list_of_matches" do
       before(:all) do
         @me    = create(:user, sex: :male)
@@ -163,10 +163,20 @@ RSpec.describe User, :type => :model do
         # Let's block an old ex-girlfriend.
         @ex    = create(:user, sex: :female, last_sign_in_at: 2.months.ago)
         @me.permissions.create(target_user_id: @ex.id, status: 0)
-
         # Let's create another ex that blocks me
         @ex2   = create(:user, sex: :female, last_sign_in_at: 5.minutes.ago)
         @ex2.permissions.create(target_user_id: @me.id, status: 0)
+
+        # Let's create a cute girl that I've messaged
+        @cutegirl1 = create(:user, sex: :female)
+        @me.permissions.create(target_user_id: @cutegirl1.id, status: 1)
+        # Let's create another cute girl that messaged me
+        @cutegirl2 = create(:user, sex: :female)
+        @cutegirl2.permissions.create(target_user_id: @me.id, status: 1)
+        # Let's include a third cute girl I'm having conversations with.
+        @cutegirl3 = create(:user, sex: :female)
+        @me.permissions.create(target_user_id: @cutegirl3.id, status: 1)
+        @cutegirl3.permissions.create(target_user_id: @me.id, status: 1)
       end
 
       subject { @me.get_list_of_matches }
@@ -193,6 +203,12 @@ RSpec.describe User, :type => :model do
         expect(subject.map {  |s| s[:id]} ).not_to include(@ex2.id)
       end
 
+      it "doesn't return any of the cute girls I have permissions with" do
+        expect(subject.map {  |s| s[:id]} ).not_to include(@cutegirl1.id)
+        expect(subject.map {  |s| s[:id]} ).not_to include(@cutegirl2.id)
+        expect(subject.map {  |s| s[:id]} ).not_to include(@cutegirl3.id)
+      end
+
       it "orders the results, by default, by their last sign_in date" do
         expect(subject.first[:id]).to eq(@lady2.id)
         expect(subject.last[:id]).to  eq(@lady4.id)
@@ -201,7 +217,7 @@ RSpec.describe User, :type => :model do
 
     end  
 
-    describe "#get_full_match_data" do
+    xdescribe "#get_full_match_data" do
       before(:all) do
         @me = create(:user, sex: :male)
         @q1 = create(:question, body: 'Are you crazy?')

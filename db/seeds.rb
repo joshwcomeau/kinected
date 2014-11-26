@@ -165,7 +165,7 @@ Question.create([
 @user4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
 
-@filler_user1 = User.create({
+@user5 = User.create({
   first_name:     'Lorraine',
   last_name:      'L',
   display_name:   'Strawbessa Bella Fontaine',
@@ -189,11 +189,11 @@ Question.create([
   work_industry:  "University",
   wants_kids:     "Maybe"
 })
-@filler_user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
-@filler_user1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user5.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user5.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
 
-@filler_user2 = User.create({
+@user6 = User.create({
   first_name:     'Lorraine',
   last_name:      'L',
   display_name:   'xXx_FemmeFatale_xXx',
@@ -217,10 +217,10 @@ Question.create([
   work_industry:  "University",
   wants_kids:     "Maybe"
 })
-@filler_user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
-@filler_user2.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user6.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user6.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
-@filler_user3 = User.create({
+@user7 = User.create({
   first_name:     'Lorraine',
   last_name:      'L',
   display_name:   'CandyWires',
@@ -244,9 +244,23 @@ Question.create([
   work_industry:  "University",
   wants_kids:     "Maybe"
 })
-@filler_user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
-@filler_user3.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user7.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@user7.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
 
+
+# Filler users. No permissions or anything, just used for 'browse'
+@filleruser1 = User.create({
+  first_name:     'Thomas', last_name:      'Bangalter', display_name:   'DaftMan1337', email:          "tb@gmail.com", password:       'wootage1', sex:            'male', role:           'dater', birthdate:      24.years.ago, country:        'Canada', city:           'Toronto', state:          'Ontario', postal_code:    'M1W 2T0', self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.", height:         190, num_of_kids:    0, body_type:      "Voluptuous", smoking:        "Never", drinking:       "Never", religion:       "Christian", education:      "Some College", work_industry:  "University", wants_kids:     "Maybe"
+})
+@filleruser2 = User.create({
+  first_name:     'Jeanine', last_name:      'Marosnes', display_name:   'Sw33tch33kz', email:          "jm@gmail.com", password:       'wootage1', sex:            'female', role:           'dater', birthdate:      19.years.ago, country:        'Canada', city:           'Toronto', state:          'Ontario', postal_code:    'M1W 2T0', self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.", height:         142, num_of_kids:    0, body_type:      "Thin", smoking:        "Never", drinking:       "Never", religion:       "Christian", education:      "Some College", work_industry:  "University", wants_kids:     "Maybe"
+})
+@filleruser3 = User.create({
+  first_name:     'Susanne', last_name:      'DeMorres', display_name:    'CouponClip', email:          "sd@gmail.com", password:       'wootage1', sex:            'female', role:           'dater', birthdate:      51.years.ago, country:        'Canada', city:           'Toronto', state:          'Ontario', postal_code:    'M1W 2T0', self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.", height:         114, num_of_kids:    0, body_type:      "Voluptuous", smoking:        "Never", drinking:       "Never", religion:       "Christian", education:      "Some College", work_industry:  "University", wants_kids:     "Maybe"
+})
+@filleruser4 = User.create({
+  first_name:     'Elizabeth', last_name:      'IV', display_name:   'QueenPrincess', email:          "eiv@gmail.com", password:       'wootage1', sex:            'female', role:           'dater', birthdate:      38.years.ago, country:        'Canada', city:           'Toronto', state:          'Ontario', postal_code:    'M1W 2T0', self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.", height:         144, num_of_kids:    0, body_type:      "Average", smoking:        "Never", drinking:       "Never", religion:       "Christian", education:      "Some College", work_industry:  "University", wants_kids:     "Maybe"
+})
 
 # Let's add some blocked users.
 @i_blocked_user1 = User.create({
@@ -297,16 +311,23 @@ Question.create([
 @concierge1.profile_photos << ProfilePhoto.new(photo_object: @images.sample)
 
 
+answers = [
+  "I would spend time with the people most important to me.", 
+  "go fishing. my dad would always go but he wouldnt take me",
+  "I have always wanted to visit Paris.",
+  "I'm the best pingpong player youve eer heard of. Won 15 straight matches in little pingpong league.",
+  "I have no faults, I am a perfect specimen."
+]
 
 User.daters.each do |u|
   [1,3].sample.times do
     u.ethnicities << Ethnicity.all.sample
   end
-  u.answers.create(question_id: Question.first.id,  body: 'I would spend time with the people most important to me.')
-  u.answers.create(question_id: Question.second.id, body: "go fishing. my dad would always go but he wouldnt take me")
-  u.answers.create(question_id: Question.third.id,  body: "I have always wanted to visit Paris.")
-  u.answers.create(question_id: Question.fourth.id, body: "I'm the best pingpong player youve eer heard of. Won 15 straight matches in little pingpong league.")
-  u.answers.create(question_id: Question.fifth.id,  body: "I have no faults, I am a perfect specimen.")
+  u.answers.create(question_id: Question.first.id,  body: answers.sample)
+  u.answers.create(question_id: Question.second.id, body: answers.sample)
+  u.answers.create(question_id: Question.third.id,  body: answers.sample)
+  u.answers.create(question_id: Question.fourth.id, body: answers.sample)
+  u.answers.create(question_id: Question.fifth.id,  body: answers.sample)
 
   u.update(concierge_id: @concierge1.id)
 end
@@ -349,7 +370,7 @@ Message.create([
 
   {
     user_id:      @user1.id,
-    recipient_id: @filler_user1.id,
+    recipient_id: @user5.id,
     body:         'Why hello there! I dont know what it is but there is just something about brunettes. You look really good and I wanted to say that it was an honor to be on the same site as you.(O-4)',
     created_at:   6.5.hours.ago,
     status:       4
@@ -358,7 +379,7 @@ Message.create([
   # INBOX
   # Rejected, so it should be invisible.  
   {
-    user_id:      @filler_user2.id,
+    user_id:      @user6.id,
     recipient_id: @user1.id,
     body:         'Hi.(I-4)',
     created_at:   6.hours.ago,
@@ -401,13 +422,13 @@ Message.create([
 # Accepted messages need to have the appropriate permission created as well
 @accepted_message_1 = Message.create({
   user_id:      @user1.id,
-  recipient_id: @filler_user3.id,
+  recipient_id: @user7.id,
   body:         'Hi babygirl. I heard this song on the radio I think you would like. It\'s called That Girl Is Mine ;)(O-3)',
   created_at:   5.5.hours.ago,
   status:       3
 })
 @accepted_message_2 = Message.create({
-  user_id:      @filler_user1.id,
+  user_id:      @user5.id,
   recipient_id: @user1.id,
   body:         'Hey mister, have you ever been with a black girl? I think I could show you a thing or two.(I-3)',
   created_at:   5.hours.ago,
@@ -415,13 +436,13 @@ Message.create([
 })
 
 @accepted_message_1.permissions.create({
-  user_id: @filler_user3.id,
+  user_id: @user7.id,
   target_user_id: @user1.id,
   status: 1
 })
 
 @accepted_message_2.permissions.create({
   user_id: @user1.id,
-  target_user_id: @filler_user1.id,
+  target_user_id: @user5.id,
   status: 1
 })
