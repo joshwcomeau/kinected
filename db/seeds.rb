@@ -1,10 +1,21 @@
 # Destroy everything
 
 unless Rails.env.production?
-  User.destroy_all
+  
+  
+  Activity.destroy_all
+  Answer.destroy_all
   Ethnicity.destroy_all
+  Favorite.destroy_all
   Message.destroy_all
+  Permission.destroy_all
+  ProfilePhoto.destroy_all
   Question.destroy_all
+  User.destroy_all
+
+  # Reset all the IDs so we aren't perpetually climbing up, and some firebase data can persist between seedings.
+  ActiveRecord::Base.connection.tables.each { |t| ActiveRecord::Base.connection.reset_pk_sequence!(t) }
+
 end
 
 IMG_LOCATION = Rails.env.production? ? '/home/app/app/current/app/assets/images/samples/' : '/users/Shared/'
@@ -261,6 +272,21 @@ Question.create([
 @filleruser4 = User.create({
   first_name:     'Elizabeth', last_name:      'IV', display_name:   'QueenPrincess', email:          "eiv@gmail.com", password:       'wootage1', sex:            'female', role:           'dater', birthdate:      38.years.ago, country:        'Canada', city:           'Toronto', state:          'Ontario', postal_code:    'M1W 2T0', self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.", height:         144, num_of_kids:    0, body_type:      "Average", smoking:        "Never", drinking:       "Never", religion:       "Christian", education:      "Some College", work_industry:  "University", wants_kids:     "Maybe"
 })
+@filleruser1.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filleruser2.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filleruser2.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filleruser2.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filleruser3.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filleruser4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filleruser4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filleruser4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+@filleruser4.profile_photos << ProfilePhoto.new(photo_object: @images.sample, caption: 'This was Halloween 2027, right before the Thoraxians invaded ;) ^_^;;;')
+
+# Add a user with no photos, she shouldnt show up anywhere.
+@nophotogirl = User.create({
+  first_name:     'Elizabeth', last_name:      'IV', display_name:   'NoPhotoGirl', email:          "npg@gmail.com", password:       'wootage1', sex:            'female', role:           'dater', birthdate:      38.years.ago, country:        'Canada', city:           'Toronto', state:          'Ontario', postal_code:    'M1W 2T0', self_summary:   "Chronologically, Metroid Prime 2: Echoes takes place fourth in the Metroid fictional universe. The story follows bounty hunter Samus Aran after she is sent to rescue Galactic Federation Marines from a ship near Aether, a planet inhabited by a race known as the Luminoth. There, she discovers that the troops were slaughtered by the Ing, a race that came from an alternate dimension of Aether. \n\nSamus must travel to three temples to ensure the destruction of the Ing, while battling Space Pirates and her mysterious doppelgänger called Dark Samus.", height:         144, num_of_kids:    0, body_type:      "Average", smoking:        "Never", drinking:       "Never", religion:       "Christian", education:      "Some College", work_industry:  "University", wants_kids:     "Maybe"
+})
+
 
 # Let's add some blocked users.
 @i_blocked_user1 = User.create({

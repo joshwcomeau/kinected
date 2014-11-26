@@ -3,7 +3,7 @@
 
 .message-wrapper {
   overflow: auto;
-  max-width: 1200px;
+  max-width: $content-max-width;
   
   .messages-title-bar {
     position: relative;

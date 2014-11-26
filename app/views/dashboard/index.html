@@ -1,1 +1,45 @@
-<h2>Dashboard Index</h2>
+<div class="dashboard-wrapper">
+  <div class="first-row">
+    <section class="concierge">
+      <header>Your Concierge</header>
+      <div class="content-box concierge-box">
+        <%= image_tag @concierge.primary_profile_photo_thumb %>
+        <h3><%= @concierge.display_name %></h3>
+        <h5><%= @concierge.age %> • <%= @concierge.sex[0].upcase %> • <%= @concierge.city %></h5>
+        <p>Your concierge is here to help! Whether you want help choosing your profile pictures or want to receive suggested matches, you can reach out here:</p>
+        <button>Chat with Concierge</button>
+      </div>
+    </section>
+    <section class="notifications">
+      <header>Notifications</header>
+      <div class="content-box">
+        
+      </div>    
+    </section>
+  </div>
+
+  <div class="second-row">
+    <section class="favorites">
+      <header>Your Favorites</header>
+      <div class="content-box">
+        
+      </div>
+    </section>
+  </div>
+
+  <div class="third-row">
+    <section class="events">
+      <header>Nearby Events</header>
+      <div class="content-box">
+        
+      </div>
+    </section>
+    <section class="blog">
+      <header>From the Kinected Blog</header>
+      <div class="content-box">
+        
+      </div>    
+    </section>
+  </div>
+  
+</div>

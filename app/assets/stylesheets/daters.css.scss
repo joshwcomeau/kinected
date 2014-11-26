@@ -1,7 +1,7 @@
 .dater-profile-wrapper {
   position: relative;
   background: #f3f5f9;
-  max-width: 1200px;
+  max-width: $content-max-width;
   border-radius: $profile-radius;
   border-bottom: 5px solid #111;
 
@@ -447,14 +447,16 @@
 
 // Non-mobile styles
 @media screen and (min-width: 481px) {
-  .second-row {
-    display: flex;
+  .dater-profile-wrapper {
+    .second-row {
+      display: flex;
 
-    .dater-questions {
-      flex: 1;
-    }
-    .quick-stats {
-      flex-basis: 300px;
+      .dater-questions {
+        flex: 1;
+      }
+      .quick-stats {
+        flex-basis: 300px;
+      }
     }
   }
 }

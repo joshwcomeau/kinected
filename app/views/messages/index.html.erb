@@ -46,8 +46,6 @@
               Message is Queued.
             <% elsif outbound?(m) %>
               Awaiting Reply.
-            <% elsif inbound?(m) && m.accepted? %>
-              Go To Chat
             <% elsif inbound?(m) %>
               <div style="display: inline-block; margin: 0;"> 
                 <%= form_for Permission.new do |p| %>

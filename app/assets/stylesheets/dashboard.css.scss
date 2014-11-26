@@ -1,0 +1,81 @@
+.dashboard-wrapper {
+  position: relative;
+  max-width: $content-max-width;
+
+  .first-row {
+    overflow: auto;
+  }
+
+  section {
+    margin-bottom: 20px;
+
+    & > header {
+      position: relative;
+      background: $navy;
+      border-top: 2px solid lighten($navy, 15%);
+      border-radius: 0.8rem 0.8rem 0 0;
+      text-shadow: 1px 1px 0px darken($navy, 10%), 2px 2px 0px darken($navy, 10%);
+      margin: 0;
+      padding: 0.5rem 1rem;
+      font-size: 1.5em;
+      color: #FFF;
+    }
+  }
+
+
+  section.concierge {
+    
+
+    .concierge-box {
+      overflow: auto;
+      
+      img {
+        float: left;
+        width: 40%;
+        margin-right: 20px;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  section.notifications {
+  }
+
+  section.favorites {
+
+  }
+
+  section.events {
+  }
+
+  section.blog {
+  }
+
+}
+
+// Breakpoint for the dashboard grid
+@media screen and (min-width: 900px) {
+  .dashboard-wrapper {
+    section.concierge {
+      float: left;
+      width: 48%;
+      margin-right: 2%;
+    }
+
+    section.notifications {
+      float: left;
+      width: 50%;
+    }
+
+    section.events {
+      float: left;
+      width: 31%;
+      margin-right: 2%;
+    }
+
+    section.blog {
+      float: left;
+      width: 67%;
+    }
+  }
+}
