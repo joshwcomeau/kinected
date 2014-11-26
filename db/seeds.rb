@@ -332,6 +332,8 @@ Question.create([
   email:      'concierge@gmail.com',
   password:   'wootage1',
   sex:        'female',
+  city:       'Toronto',
+  birthdate:  23.years.ago,
   role:       'concierge'
 })
 @concierge1.profile_photos << ProfilePhoto.new(photo_object: @images.sample)

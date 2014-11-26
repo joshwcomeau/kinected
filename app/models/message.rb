@@ -26,6 +26,8 @@ class Message < ActiveRecord::Base
 
   after_create :set_sender_permission
 
+  after_save :set_recipient_permission
+
   enum status: [ :queued, :sent, :read, :accepted, :rejected ]
   # 'Queued'  means the man has submitted the message, but it's in the woman's queue.
   # 'Sent'    means it's made it to the woman's inbox, but she hasn't seen it yet.
@@ -48,5 +50,12 @@ class Message < ActiveRecord::Base
       target_user_id: recipient_id,
       status:         1
     })
+  end
+
+  # If the recipient accepts the message, we create a positive permission.
+  def set_recipient_permission
+    if self.accepted? && self.permissions.find_by(user_id: recipient_id, target_user_id: user_id).nil?
+      self.permissions.create(user_id: recipient_id, target_user_id: user_id, status: 1)
+    end
   end
 end

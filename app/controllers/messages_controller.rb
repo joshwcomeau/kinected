@@ -33,7 +33,11 @@ class MessagesController < ApplicationController
 
   # PATCH /messages/:id
   def update
-    response = params[:message][:status] == 4 ? @message.rejected! : false
+    if params[:message][:status] == "accept"
+      response = @message.accepted!
+    elsif params[:message][:status] == "reject"
+      response = @message.rejected!
+    end
     render json: { result: response }
   end
 

@@ -47,21 +47,13 @@
             <% elsif outbound?(m) %>
               Awaiting Reply.
             <% elsif inbound?(m) %>
-              <div style="display: inline-block; margin: 0;"> 
-                <%= form_for Permission.new do |p| %>
-                  <%= p.hidden_field :user_id, value: current_user.id %>
-                  <%= p.hidden_field :target_user_id, value: m.user.id %>
-                  <%= p.hidden_field :message_id, value: m.id %>
-                  <%= p.hidden_field :status, value: 'allowed' %>
-                  <button class="interaction-request-button accept"><%= fa_icon("check") %></button>
-                  
-                <% end %>
-              </div><div style="display: inline-block"> 
-                <%= form_for m, remote: true do |msg| %>
-                  <%= msg.hidden_field :status, value: 'rejected' %>
-                  <button class="interaction-request-button block"><%= fa_icon("remove") %></button>
-                <% end %>
-              </div>
+              <%= form_for m, remote: true do |m| %>
+                <div style="display: inline-block; margin: 0;">
+                  <button name="message[status]" value="accept" class="interaction-request-button accept"><%= fa_icon("check") %></button>
+                </div><div style="display: inline-block"> 
+                  <button name="message[status]" value="reject" class="interaction-request-button block"><%= fa_icon("remove") %></button>
+                </div>
+              <% end %>
             <% end %>
           </td>
         </tr>

@@ -6,13 +6,15 @@
         <%= image_tag @concierge.primary_profile_photo_thumb %>
         <h3><%= @concierge.display_name %></h3>
         <h5><%= @concierge.age %> • <%= @concierge.sex[0].upcase %> • <%= @concierge.city %></h5>
-        <p>Your concierge is here to help! Whether you want help choosing your profile pictures or want to receive suggested matches, you can reach out here:</p>
-        <button>Chat with Concierge</button>
+        <p><%= fetch_content(:concierge_description) %></p>
+        <div class="center">
+          <button><%= fetch_content(:concierge_button_text) %></button>
+        </div>
       </div>
     </section>
     <section class="notifications">
       <header>Notifications</header>
-      <div class="content-box">
+      <div class="content-box notifications-box">
         
       </div>    
     </section>
@@ -43,3 +45,13 @@
   </div>
   
 </div>
+
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  $(window).on("load resize", function() {
+    var conciergeHeight = $(".concierge-box").height();
+
+    $(".notifications-box").height(conciergeHeight);
+  });
+});
+</script>

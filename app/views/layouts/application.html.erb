@@ -15,7 +15,7 @@
   <%= render partial: 'layouts/sidebar' %>
 
   <section>
-    <% if notice %>
+    <% if notice && !notice.blank? %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
     <% if alert %>

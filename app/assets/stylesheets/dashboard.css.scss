@@ -7,7 +7,7 @@
   }
 
   section {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
     & > header {
       position: relative;
@@ -28,7 +28,30 @@
 
     .concierge-box {
       overflow: auto;
-      
+
+      h3 {
+        margin-top: 0;
+        margin-bottom: 0.2rem;
+      }
+      h5 {
+        margin: 0;
+        color: $teal;
+      }
+
+      p {
+        font-size: 0.8em;
+      }
+
+      button {
+        position: relative;
+        color: #FFF;
+        padding: 0.4rem 0.8rem;
+        border: 0;
+        border-radius: 4px;
+        margin: 0.5rem auto 0 auto;
+        background: darken($green, 5%);
+      }
+
       img {
         float: left;
         width: 40%;
@@ -59,23 +82,23 @@
     section.concierge {
       float: left;
       width: 48%;
-      margin-right: 2%;
+      margin-right: 3%;
     }
 
     section.notifications {
       float: left;
-      width: 50%;
+      width: 49%;
     }
 
     section.events {
       float: left;
       width: 31%;
-      margin-right: 2%;
+      margin-right: 3%;
     }
 
     section.blog {
       float: left;
-      width: 67%;
+      width: 66%;
     }
   }
 }

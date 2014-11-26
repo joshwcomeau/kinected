@@ -23,18 +23,6 @@ RSpec.describe Message, :type => :model do
     expect(@msg.recipient).to be_a(User)
   end
 
-  it "creates a Permission afterwards" do
-    expect(@msg.permissions.count).to eq(1)
-  end
-
-  it "permission has the right attributes" do
-    permission = @msg.permissions.first
-    expect(permission.user_id).to         eq(@msg.user_id)
-    expect(permission.target_user_id).to  eq(@msg.recipient_id)
-    expect(permission.status).to          eq("allowed")
-    expect(permission.message_id).to      eq(@msg.id)
-  end
-
   describe ".has_been_accepted?" do
     before(:all) do
       @me   = create(:user)
@@ -48,6 +36,53 @@ RSpec.describe Message, :type => :model do
 
     it "returns true when the user accepts the message" do
       @msg.permissions.create(user_id: @them.id, target_user_id: @me.id, status: 1)
+    end
+  end
+
+  # Callback called after_create
+  describe ".set_sender_permission" do
+    before(:all) do
+      @me   = create(:user)
+      @them = create(:user)
+      @msg  = create(:message, user_id: @me.id, recipient_id: @them.id)
+    end 
+
+    subject { @msg.permissions.first }
+
+    it { is_expected.to be_a Permission }
+    it { is_expected.to be_persisted }
+
+    it "sets the user to the sender and the target_user to the recipient" do
+      expect(subject.user).to eq(@me)
+      expect(subject.target_user).to eq(@them)
+    end
+
+    it "sets the permission to 'allowed'" do
+      expect(subject.status).to eq("allowed")
+    end
+  end
+
+  # Callback called after_save
+  describe ".set_recipient_permission" do
+    context "when accepting the message" do
+      before(:all) do 
+        @me   = create(:user)
+        @them = create(:user)
+        @msg  = create(:message, user_id: @me.id, recipient_id: @them.id)
+        @msg.update(status: 3) 
+      end
+      
+      it "creates a second permission" do
+        expect(@msg.permissions.count).to eq(2)
+      end
+
+      it "has the right user and target_user" do
+        expect(@msg.permissions.find_by(user_id: @them.id, target_user_id: @me.id)).not_to be_nil
+      end
+
+      it "has the right status" do
+        expect(@msg.permissions.find_by(user_id: @them.id, target_user_id: @me.id).allowed?).to eq(true)
+      end
     end
   end
 end
