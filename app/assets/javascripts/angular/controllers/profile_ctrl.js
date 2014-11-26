@@ -149,11 +149,11 @@ ProfileController.prototype.goToMatch = function(increment) {
     var user = this;
     this.userFactory.get({userId: this.selectedProfileId}).$promise.then(function(result) {
       user.loading = false;
-      user.profile = result;    
+      user.profile = user.master = result;    
     });
 
   } else {
-    this.profile = null;
+    this.profile = this.master = null;
   }
 };
 
