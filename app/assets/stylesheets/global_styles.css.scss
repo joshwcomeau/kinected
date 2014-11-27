@@ -315,10 +315,9 @@ li {
   position: fixed;
   min-height: 54px;
   top: 0;
-  left: 0;
+  left: $sidebar-width;
+  right: 0;
   z-index: 10000;
-  width: 100%;
-  border-radius: 1px 1px 2px 2px;
   padding: 1rem;
   margin: 0 0 1.5rem 0;
   font-weight: 400;
@@ -328,9 +327,15 @@ li {
 
   .close {
     position: absolute;
-    height: 22px;
-    top: 1rem;
-    right: 1rem;
+    height: 100%;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 1rem;
+
+    &:hover {
+      background: rgba(0,0,0,0.2);
+    }
   }
 }
 
@@ -359,6 +364,10 @@ display: none !important;
 // Resolutions under 1024px
 @media screen and (max-width: 1024px) {
   .wrapper {
+    .alert {
+      left: $mobile-sidebar-width;
+
+    }
     &.with-sidebar {
       padding-left: $mobile-sidebar-width;
     }
@@ -399,6 +408,10 @@ display: none !important;
 // Phone resolutions (480px and under)
 @media screen and (max-width: 480px) {
   .wrapper {
+    .alert {
+      top: 56px;
+      left: 0;
+    }
     &.with-sidebar {
       padding-left: 0;
     }
@@ -416,8 +429,5 @@ display: none !important;
     left: 0 !important;
   }
 
-  .alert {
-    top: 56px;
-    left: 0;
-  }
+
 }
