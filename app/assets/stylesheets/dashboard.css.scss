@@ -62,6 +62,30 @@
   }
 
   section.notifications {
+    .notification-row {
+      display: block;
+      border-bottom: 1px solid darken($beige, 12%);
+      overflow: auto;
+      padding: 0.5rem 0;
+
+      &:first-of-type {
+        padding-top: 0;
+      }
+      &:last-of-type {
+        border: 0;
+        padding-bottom: 0;
+      }
+    }
+
+
+    .actions {
+      padding-left: 1rem;
+    }
+    .timestamp {
+    }
+    .message {
+      padding-right: 1rem;
+    }
   }
 
   section.favorites {

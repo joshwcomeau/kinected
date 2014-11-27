@@ -31,6 +31,9 @@ class DatersController < ApplicationController
     render json: {result: !!@dater.update(dater_params)}
   end
 
+  def edit
+    
+  end
 
   private
 

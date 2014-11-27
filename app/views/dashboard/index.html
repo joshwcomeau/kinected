@@ -15,7 +15,30 @@
     <section class="notifications">
       <header>Notifications</header>
       <div class="content-box notifications-box">
-        
+        <ul>
+          <% @notifications.each do |n| %>
+            <li class="notification-row">
+              <div class="right actions"><%= fa_icon 'close' %></div>
+              <div class="right timestamp"><%= time_ago_in_words n.created_at %></div>
+              <div class="message"><%= render partial: "activities/#{ n.trackable_type.downcase.pluralize}/#{n.action.downcase}", locals: { n: n } %></div>
+            </li>
+            <li class="notification-row">
+              <div class="right actions"><%= fa_icon 'close' %></div>
+              <div class="right timestamp"><%= time_ago_in_words n.created_at %></div>
+              <div class="message"><%= render partial: "activities/#{ n.trackable_type.downcase.pluralize}/#{n.action.downcase}", locals: { n: n } %></div>
+            </li>
+            <li class="notification-row">
+              <div class="right actions"><%= fa_icon 'close' %></div>
+              <div class="right timestamp"><%= time_ago_in_words n.created_at %></div>
+              <div class="message"><%= render partial: "activities/#{ n.trackable_type.downcase.pluralize}/#{n.action.downcase}", locals: { n: n } %></div>
+            </li>
+            <li class="notification-row">
+              <div class="right actions"><%= fa_icon 'close' %></div>
+              <div class="right timestamp"><%= time_ago_in_words n.created_at %></div>
+              <div class="message"><%= render partial: "activities/#{ n.trackable_type.downcase.pluralize}/#{n.action.downcase}", locals: { n: n } %></div>
+            </li>
+          <% end %> 
+        </ul>
       </div>    
     </section>
   </div>
