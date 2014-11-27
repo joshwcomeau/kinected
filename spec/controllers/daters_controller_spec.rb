@@ -46,7 +46,7 @@ RSpec.describe DatersController, :type => :controller do
     end
   end
 
-  xdescribe "GET :index" do
+  describe "GET :index" do
     before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female, last_sign_in_at: 6.days.ago)
@@ -95,7 +95,70 @@ RSpec.describe DatersController, :type => :controller do
     end
   end
 
-  xdescribe "GET :show" do
+  describe "GET :edit" do
+    before(:all) do
+      @me    = create(:user, sex: :male)
+      @other = create(:user, sex: :female)
+    end
+
+    describe "without being logged in" do
+      before(:each) { get :edit, id: @me.id }
+      it "doesn't let us" do
+        expect(flash[:alert]).to eq("You are not authorized to access this page.")
+      end   
+      it "responds with a 302 REDIRECT status" do
+        expect(response.status).to eq(302)
+      end      
+      it "redirects us to the homepage" do
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    describe "while signed in" do
+      before(:each) { sign_in @me }
+
+      describe "allows me to edit my own settings" do
+        before(:each) do    
+          get :edit, id: @me.id
+        end
+
+        it "assigns the @user variable" do
+          expect(assigns[:dater]).to be_a User
+        end
+
+        it "creates a hash with the right user's data" do
+          expect(assigns[:dater]["id"]).to eq(@me.id)
+        end
+
+        it "renders the edit view" do
+          expect(response).to render_template(:edit)
+        end
+
+        it "returns 200 OK status" do
+          expect(response.status).to eq(200)
+        end
+      end
+
+      describe "doesn't allow me to view someone else's edit page" do
+        before(:each) do
+          get :edit, id: @other.id
+        end
+
+        it "Shows a flash error" do
+          expect(flash[:alert]).to eq("You are not authorized to access this page.")
+        end
+        it "responds with a 302 REDIRECT status" do
+          expect(response.status).to eq(302)
+        end      
+        it "redirects us to the homepage" do
+          expect(response).to redirect_to(root_path)
+        end
+
+      end
+    end
+  end
+
+  describe "GET :show" do
     before(:all) do
       @me   = create(:user, sex: :male)
       @them = create(:user, sex: :female)
