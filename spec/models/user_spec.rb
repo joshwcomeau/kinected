@@ -88,7 +88,7 @@ RSpec.describe User, :type => :model do
 
 
   # Should return a list of all the users I have blocked AND all the users who have blocked me. Either/or.
-  xdescribe "#get_blocked_users" do
+  describe "#get_blocked_users" do
     before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female)
@@ -115,7 +115,7 @@ RSpec.describe User, :type => :model do
   end
 
   # Should return a list of all the users that have bi-directional positive permissions. Needs both.
-  xdescribe "#get_contacts" do
+  describe "#get_contacts" do
     before(:all) do
       @me    = create(:user, sex: :male)
       @lady1 = create(:user, sex: :female)
@@ -217,7 +217,7 @@ RSpec.describe User, :type => :model do
 
     end  
 
-    xdescribe "#get_full_match_data" do
+    describe "#get_full_match_data" do
       before(:all) do
         @me = create(:user, sex: :male)
         @q1 = create(:question, body: 'Are you crazy?')

@@ -13,7 +13,7 @@ feature 'Browse Section. ' do
   end
 
 
-  xscenario "Filter profiles by most recent login and newest users" do
+  scenario "Filter profiles by most recent login and newest users" do
     log_into_site('john@doe.com', '12345678')
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
     expect(current_path).to eq("/")
@@ -37,7 +37,7 @@ feature 'Browse Section. ' do
     expect(page).to have_content("janiceee")
   end
 
-  xscenario "Making sure appropriate actions do/dont exist" do
+  scenario "Making sure appropriate actions do/dont exist" do
     log_into_site('john@doe.com', '12345678')
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
     expect(current_path).to eq("/")
@@ -45,7 +45,7 @@ feature 'Browse Section. ' do
     expect(current_path).to eq(daters_path)
   end
 
-  xscenario "Test photo view" do
+  scenario "Test photo view" do
     log_into_site('john@doe.com', '12345678')
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
     expect(current_path).to eq("/")
