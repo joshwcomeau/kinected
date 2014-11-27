@@ -39,6 +39,19 @@ html, body {
     li.selected {
       background: rgba(0,0,0,0.2);
     }
+
+    a {
+      position: relative;
+    }
+
+    span.unread {
+      position: absolute;
+      top: 0;
+      left: -8px;
+      height: 39px;
+      width: 8px;
+      background: $green;
+    }
     header {
       margin: 0;
       font-family: 'Raleway';

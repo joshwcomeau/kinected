@@ -15,19 +15,13 @@ class MessagesController < ApplicationController
   def create
     num_sent_today = current_user.messages_sent.where("created_at >= ?", Time.now.beginning_of_day).count
 
-    if num_sent_today < Message::LIMIT
-      response = { result: @message.save }
+    @message.save if num_sent_today < Message::LIMIT
+
+    if @message.persisted?
+      track_activity @message, params[:action], @message.recipient 
+      redirect_to root_path, notice: I18n.t("messages.create.sent")
     else
-      response = { result: false, message: I18n.t("messages.create.exceeded_limit") }
-    end
-
-    # Create activity notification!
-    track_activity @message, params[:action], @message.recipient if @message.persisted?
-    
-
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: I18n.t("messages.create.sent") }
-      format.json { render json: response  }
+      redirect_to root_path, alert: I18n.t("messages.create.exceeded_limit")
     end
   end
 

@@ -4,8 +4,8 @@ feature 'Browse Section. ' do
   include Capybara::Angular::DSL
 
   before(:all) do
-    Capybara.current_driver = :selenium # Slow, visual driver
-    # Capybara.current_driver = :webkit   # Quick, headless driver
+    # Capybara.current_driver = :selenium # Slow, visual driver
+    Capybara.current_driver = :webkit   # Quick, headless driver
 
     @user  = create(:user, sex: :male, email: 'john@doe.com')
     @conc  = create(:user, role: :concierge, sex: :female, email: 'concierge@gmail.com')
@@ -45,10 +45,11 @@ feature 'Browse Section. ' do
     expect(page).to have_content("janiceee")
   end
 
-  scenario "Sending a message, verifying its reception" do
+  scenario "Sending a message, verifying its reception with notifications" do
     log_into_site('john@doe.com', '12345678')
     expect(page).to have_content(I18n.t ("devise.sessions.signed_in"))
     expect(current_path).to eq("/")
+    expect(page).not_to have_css(".unread")
     find("#sidebar-browse-link").click
 
     expect(current_path).to eq(daters_path)
@@ -80,9 +81,7 @@ feature 'Browse Section. ' do
     expect(page).to have_content(I18n.t 'notifications.messages.create', sender: @user.display_name)
     
     # Check for sidebar notification
-    expect(page).to have_css("")
-
-
+    expect(page).to have_css(".unread")
   end
 
 

@@ -3,4 +3,11 @@ module ApplicationHelper
     @string = "#{params[:controller]}.#{params[:action]}.#{key.to_s}"
     format == :raw ? raw(t(@string)) : t(@string)
   end
+
+  def unread_messages?
+    if current_user && current_user.dater?
+      @unread_messages = current_user.activities.where(trackable_type: 'Message', action: 'create').count
+      return @unread_messages > 0
+    end
+  end
 end
