@@ -16,13 +16,23 @@
 
   <section>
     <% if notice && !notice.blank? %>
-      <p class="alert alert-success"><%= notice %></p>
+      <div class="alert alert-success">
+        <div class="close"><%= fa_icon "close" %></div>
+        <%= notice %>
+      </div>
+      <div class="alert-spacer" size-spacer-by-alert alert=".alert-success"></div>
     <% end %>
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <div class="alert alert-danger">
+        <div class="close"><%= fa_icon "close" %></div>
+        <%= alert %>
+      </div>
+      <div class="alert-spacer" size-spacer-by-alert alert=".alert-danger"></div>
     <% end %>
-
-
+<!-- testing alerts
+      <div class="alert alert-success"><div class="close"><%= fa_icon "close" %></div>You have successfully logged in!</div>
+      <div class="alert-spacer" size-spacer-by-alert alert=".alert-success"></div>
+ -->
     <%= yield %>
     
 
@@ -33,6 +43,7 @@
 <!-- Render this partial everywhere on signed-in pages. -->
 <%= render partial: 'layouts/update_seen_count' %>
 <%= javascript_include_tag 'application' %>
+
 
 </body>
 </html>

@@ -312,12 +312,26 @@ li {
 }
 
 .alert {
-  position: relative;
+  position: fixed;
+  min-height: 54px;
+  top: 0;
+  left: 0;
+  z-index: 10000;
   width: 100%;
   border-radius: 1px 1px 2px 2px;
-  padding: 0.5rem;
+  padding: 1rem;
   margin: 0 0 1.5rem 0;
   font-weight: 400;
+  font-size: 1.1em;
+  color: #FFF;
+  text-align: center;
+
+  .close {
+    position: absolute;
+    height: 22px;
+    top: 1rem;
+    right: 1rem;
+  }
 }
 
 .alert-success {
@@ -400,5 +414,10 @@ display: none !important;
 
   #chat-send {
     left: 0 !important;
+  }
+
+  .alert {
+    top: 56px;
+    left: 0;
   }
 }
