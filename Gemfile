@@ -39,6 +39,7 @@ end
 group :test do 
   gem 'capybara'                    # Used for feature (browser-based) tests.
   gem 'capybara-webkit'             # Allows feature tests to run in a headless webkit state. Faster, but you can't see the magic.
+  gem 'capybara-angular'            # Allows feature tests to work with Angular
   gem 'database_cleaner'            # Wipes the database between tests.
   gem 'guard-rspec'                 # Watches files for automated test running.
   gem 'launchy'                     # Launches a browser to show the state of a feature test. Useful for debugging

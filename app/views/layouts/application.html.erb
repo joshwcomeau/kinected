@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="kinected">
 <head>
   <title>Kinected</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -15,24 +15,8 @@
   <%= render partial: 'layouts/sidebar' %>
 
   <section>
-    <% if notice && !notice.blank? %>
-      <div class="alert alert-success">
-        <div class="close"><%= fa_icon "close" %></div>
-        <%= notice %>
-      </div>
-      <div class="alert-spacer" size-spacer-by-alert alert=".alert-success"></div>
-    <% end %>
-    <% if alert %>
-      <div class="alert alert-danger">
-        <div class="close"><%= fa_icon "close" %></div>
-        <%= alert %>
-      </div>
-      <div class="alert-spacer" size-spacer-by-alert alert=".alert-danger"></div>
-    <% end %>
-<!-- testing alerts
-      <div class="alert alert-success"><div class="close"><%= fa_icon "close" %></div>You have successfully logged in!</div>
-      <div class="alert-spacer" size-spacer-by-alert alert=".alert-success"></div>
- -->
+    <%= render partial: 'layouts/flash_messages' %>
+    
     <%= yield %>
     
 

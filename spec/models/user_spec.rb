@@ -213,9 +213,49 @@ RSpec.describe User, :type => :model do
         expect(subject.first[:id]).to eq(@lady2.id)
         expect(subject.last[:id]).to  eq(@lady4.id)
       end
-
-
     end  
+
+    describe ".can_view_profile?" do
+      before(:all) do
+        @me = create(:user, sex: :male)
+        @valid_1 = create(:user, sex: :female)
+
+        # No profile photos
+        @invalid_1 = create(:user, sex: :female)
+        @invalid_1.profile_photos.destroy_all
+
+        # Same sex
+        @invalid_2 = create(:user, sex: :male)
+
+        # Concierge
+        @invalid_3 = create(:user, sex: :female, role: :concierge)
+
+        # Admin
+        @invalid_4 = create(:user, sex: :female, role: :admin)
+      end
+
+      it "passes on valid_1" do
+        expect(@me.can_view_profile?(@valid_1)).to eq(true)
+      end
+
+      it "fails on invalid_1" do
+        expect(@me.can_view_profile?(@invalid_1)).to eq(false)
+      end
+      it "fails on invalid_2" do
+        expect(@me.can_view_profile?(@invalid_2)).to eq(false)
+      end
+      it "fails on invalid_3" do
+        expect(@me.can_view_profile?(@invalid_3)).to eq(false)
+      end
+      it "fails on invalid_4" do
+        expect(@me.can_view_profile?(@invalid_4)).to eq(false)
+      end
+
+      after(:all) do
+        User.destroy_all
+      end
+
+    end
 
     describe "#get_full_match_data" do
       before(:all) do

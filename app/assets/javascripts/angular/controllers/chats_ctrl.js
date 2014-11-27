@@ -23,6 +23,8 @@ function ChatsController($scope, $attrs, $firebase, $timeout) {
   this.selectedContactIsOffline = false;
   this.selectedContactIsOnline = false;
 
+  console.log("loaded")
+
   // Right now, allContacts contains ALL site contacts. Need to restrict this to applicable ones.
   allContacts.$loaded().then(function(contactArr) {
     chat.contacts = _.filter(contactArr, function(c) {

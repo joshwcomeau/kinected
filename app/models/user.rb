@@ -103,6 +103,7 @@ class User < ActiveRecord::Base
   scope :concierges,          -> { where(role: 1) }
   scope :between_ages,        -> (min_age, max_age) { where("birthdate between ? and ?", max_age.years.ago, min_age.years.ago) }
   scope :recently_logged_in,  -> { order("last_sign_in_at DESC") }
+  scope :with_photos,         -> { joins(:profile_photos).where("profile_photos.id IS NOT NULL").uniq }
 
   def get_blocked_users
     User.joins(:inverse_permissions)
@@ -135,7 +136,7 @@ class User < ActiveRecord::Base
     end
   end  
 
-  # Will return a hash containing two relations (hopefully)
+  # Will return a hash containing two relations
   def messages
     Message
       .where("messages.user_id = :user OR messages.recipient_id = :user", user: id)
@@ -158,21 +159,8 @@ class User < ActiveRecord::Base
   end
 
 
-
-  # --> OUTDATED <--
-  # def find_next_user(num=0, options={})
-  #   desired_sex = sex == 'male' ? 1 : 0
-  #   min_age = options[:min_age] || 18
-  #   max_age = options[:max_age] || 99
-  #   valid_users = User.matched_daters(desired_sex).between_ages(min_age, max_age).recently_logged_in
-  #   valid_users[num]
-  # end
-
-  # We're returning a JSON object that contains the minimal data needed to sort and retrieve matches.
-  # We need their id, age, last login time, created_at time, etc. 
-
   def match_query
-    User.matched_daters(get_desired_sex).recently_logged_in - self.with_history
+    User.matched_daters(get_desired_sex).with_photos.recently_logged_in - self.with_history
   end
 
   def get_list_of_matches
@@ -185,6 +173,20 @@ class User < ActiveRecord::Base
       users.first.get_full_match_data(self)
     end
   end
+
+  def can_view_profile?(u)
+    # The criteria are as follows. They must be:
+    # - opposite sex
+    # - a dater (not a concierge or admin)
+    # - not blocked or having blocked me
+    # - have at least 1 profile photo
+
+    sex != u.sex &&
+    u.role == "dater" &&
+    u.permissions.find_by("status = :status AND (user_id = :user OR target_user_id = :user)", status: 0, user: id).nil? &&
+    u.profile_photos.any?
+  end
+
 
   def get_contacts
     User.joins(:inverse_permissions)

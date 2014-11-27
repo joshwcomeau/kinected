@@ -1,0 +1,14 @@
+<% if notice && !notice.blank? %>
+  <div class="alert alert-success">
+    <div class="close"><%= fa_icon "close" %></div>
+    <%= notice %>
+  </div>
+  <div class="alert-spacer" size-spacer-by-alert alert=".alert-success"></div>
+<% end %>
+<% if alert && !alert.blank? %>
+  <div class="alert alert-danger">
+    <div class="close"><%= fa_icon "close" %></div>
+    <%= alert %>
+  </div>
+  <div class="alert-spacer" size-spacer-by-alert alert=".alert-danger"></div>
+<% end %>

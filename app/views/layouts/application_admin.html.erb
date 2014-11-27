@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="kinected">
 <head>
   <title>Kinected</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -13,12 +13,7 @@
   <%= render partial: 'layouts/sidebar_admin' %>
 
   <section>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
+    <%= render partial: 'layouts/flash_messages' %>
 
 
     <%= yield %>

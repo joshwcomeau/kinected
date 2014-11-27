@@ -24,8 +24,7 @@ class Ability
       # Daters. They can edit themselves, and view members of the opposite sex.
       can :manage, User, id: user.id
       can :read, User do |u|
-        u.role == :dater
-        u.sex != user.sex
+        user.can_view_profile?(u)
       end
 
 

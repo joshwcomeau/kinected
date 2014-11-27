@@ -24,17 +24,15 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
-  # Use FactoryGirl
   config.include FactoryGirl::Syntax::Methods
 
-  # Fix Devise (maybe it stubs methods? Not sure, but its necessary)
+  config.include Capybara::Angular::DSL
+
   config.include Devise::TestHelpers, type: :controller
 
   # Custom support modules
   config.include FeatureHelpers, :type => :feature
+
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
