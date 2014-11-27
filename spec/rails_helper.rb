@@ -26,8 +26,6 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
 
-  config.include Capybara::Angular::DSL
-
   config.include Devise::TestHelpers, type: :controller
 
   # Custom support modules

@@ -2,10 +2,10 @@
 <footer class="main-footer">
   <div class="line-1">
     <ul>
-      <li><%= link_to "About Kinected" %></li><li>
-      <%= link_to "Our Blog" %></li><li>
-      <%= link_to "Contact Us" %></li><li>
-      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+      <li><%= link_to "About Kinected", id: 'footer-about-link' %></li><li>
+      <%= link_to "Our Blog", id: 'footer-blog-link' %></li><li>
+      <%= link_to "Contact Us", id: 'footer-contact-link' %></li><li>
+      <%= link_to "Sign Out", destroy_user_session_path, id: 'footer-signout-link', method: :delete %></li>
     </ul>
   </div>
   <p class="line-2 light-gray"><%= render partial: 'layouts/copyright_notice' %></p>

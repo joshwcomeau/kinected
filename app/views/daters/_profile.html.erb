@@ -16,7 +16,7 @@
       <h3>{{user.profile.birthdate | dateToAge}} year-old {{user.profile.work_industry}} from {{user.profile.city}}, {{user.profile.state}}</h3>
     </div>
     <div class="title-actions" ng-if="!user.isMe">
-      <a class="interaction-icon-button message raleway" ng-click="user.toggleMsgModal()">K</a>
+      <a class="interaction-icon-button message raleway" id="message-button" ng-click="user.toggleMsgModal()">K</a>
       <button class="interaction-icon-button favorite" ng-click="user.favorite()" ng-class="{favorited: user.profile.favorited}">
         <span ng-if="user.profile.favorited"><%= fa_icon "star" %></span>
         <span ng-if="!user.profile.favorited"><%= fa_icon "star-o" %></span>
@@ -68,7 +68,7 @@
 </div>
 
 <!-- Message modal -->
-<modal-dialog show='user.msgModalShown' width="700">
+<modal-dialog show='user.msgModalShown' width="700" id="message-modal">
   <%= form_for @message do |m| %>
     <h3>Request to Kinect with {{user.profile.display_name}}</h3>
     <%= m.text_area :body, placeholder: 'Send this user a message', "ng-model" => "profile.message.input", maxlength: 200 %>
@@ -76,14 +76,14 @@
       <div class="character-count">{{200-profile.message.input.length}}</div>
       <%= m.hidden_field :user_id, value: current_user.id %>
       <%= m.hidden_field :recipient_id, value: "{{user.profile.id}}" %>
-      <%= m.submit "Send" %>
+      <%= m.submit "Send", id: 'send-message' %>
     </footer>
 
   <% end %>
 </modal-dialog>
 
 <!-- Image Modal -->
-<modal-dialog show='user.imgModalShown'>
+<modal-dialog show='user.imgModalShown' id="image-modal">
   <img ng-src="{{user.selectedPhoto.photo_object.url}}" alt="" class="big-image">
   <p class="selected-photo-caption">{{user.selectedPhoto.caption}}</p>
 </modal-dialog>

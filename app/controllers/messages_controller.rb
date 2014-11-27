@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
     
 
     respond_to do |format|
-      format.html { redirect_to messages_path }
+      format.html { redirect_to root_path, notice: I18n.t("messages.create.sent") }
       format.json { render json: response  }
     end
   end

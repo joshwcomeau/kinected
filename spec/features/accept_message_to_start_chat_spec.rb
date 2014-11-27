@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'Accept message' do
+  include Capybara::Angular::DSL
   before(:all) do
     # Capybara.current_driver = :selenium # Slow, visual driver
     Capybara.current_driver = :webkit   # Quick, headless driver

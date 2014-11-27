@@ -4,6 +4,8 @@
 require 'rails_helper'
 
 feature 'User registrations' do
+  include Capybara::Angular::DSL
+  
   before(:all) do
     # Capybara.current_driver = :selenium # Slow, visual driver
     Capybara.current_driver = :webkit   # Quick, headless driver

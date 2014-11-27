@@ -52,7 +52,12 @@ en:
   messages:
     create:
       exceeded_limit: "Sorry, you cannot send any more messages today. Please try again tomorrow."
+      sent:   "Your message has been sent!"
   dashboard:
     index:
       concierge_description: "Your concierge is here to help! Whether you want help choosing your profile pictures or want to receive suggested matches, you can reach out here:"
       concierge_button_text: "Chat with Concierge"
+
+  notifications:
+    messages:
+      create: "%{sender} would like to Kinect with you!"

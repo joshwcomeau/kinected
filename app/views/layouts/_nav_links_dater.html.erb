@@ -1,21 +1,21 @@
 
-<li>
-  <%= link_to daters_path, id: 'sidebar-browse-link' do %>
-    <span class="nav-text-link">Browse</span><%= fa_icon 'users' %>
+<li class="<%= "selected" if current_page?(controller: 'daters', action: 'index') || (params[:action] == 'show' && params['controller'] == 'daters') %>">
+  <%= link_to daters_path, id: "#{"mobile-" if mobile}sidebar-browse-link" do %>
+    <span class="nav-text-link">Browse</span><%= fa_icon "users" %>
   <% end %>
 </li>
-<li>
-  <%= link_to messages_path, id: 'sidebar-messages-link' do %>
-    <span class="nav-text-link">Messages</span><%= fa_icon 'paper-plane' %>
+<li class="<%= "selected" if current_page?(controller: 'messages', action: 'index') %>">
+  <%= link_to messages_path, id: "#{"mobile-" if mobile}sidebar-messages-link" do %>
+    <span class="nav-text-link">Messages</span><%= fa_icon "paper-plane" %>
   <% end %>
 </li>      
-<li>
-  <%= link_to concierge_path, id: 'sidebar-concierge-link' do %>
-    <span class="nav-text-link">Concierge</span><%= fa_icon 'bell' %>
+<li class="<%= "selected" if current_page?(controller: 'concierges', action: 'show') %>">
+  <%= link_to concierge_path, id: "#{"mobile-" if mobile}sidebar-concierge-link" do %>
+    <span class="nav-text-link">Concierge</span><%= fa_icon "bell" %>
   <% end %>
 </li>  
-<li>
-  <%= link_to edit_dater_path(current_user), id: 'sidebar-settings-link' do %>
-    <span class="nav-text-link">Settings</span><%= fa_icon 'gear' %>
+<li class="<%= "selected" if current_page?(controller: 'daters', action: 'edit', id: current_user.id) %>">
+  <%= link_to edit_dater_path(current_user), id: "#{"mobile-" if mobile}sidebar-settings-link" do %>
+    <span class="nav-text-link">Settings</span><%= fa_icon "gear" %>
   <% end %>
 </li>       
