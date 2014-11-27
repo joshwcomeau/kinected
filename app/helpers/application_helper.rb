@@ -10,4 +10,12 @@ module ApplicationHelper
       return @unread_messages > 0
     end
   end
+
+  def get_chatting_partner_id
+    if params[:controller] == 'chats' && params[:action] == 'show'
+      return params[:id]
+    else
+      return nil
+    end
+  end
 end

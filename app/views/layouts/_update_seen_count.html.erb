@@ -1,4 +1,8 @@
-<div ng-controller="OnlineController as online" data-user-id="<%= current_user.id %>" data-display-name="<%= current_user.display_name%>" 
-  data-current-time="<%= Time.now.to_i * 1000 %>" data-thumb="<%= current_user.primary_profile_photo_thumb %>">
+<div ng-controller="OnlineController as online" 
+  data-user-id="<%= current_user.id %>" 
+  data-display-name="<%= current_user.display_name%>" 
+  data-current-time="<%= Time.now.to_i * 1000 %>" 
+  data-thumb="<%= current_user.primary_profile_photo_thumb %>" 
+  data-chatting-with="<%= get_chatting_partner_id %>">
   
 </div>

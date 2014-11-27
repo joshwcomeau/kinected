@@ -11,7 +11,8 @@ function ChatsController($scope, $attrs, $firebase, $timeout) {
   this.contactIds     = eval($attrs.contacts);
   
   var chatRef         = new Firebase("https://kinected.firebaseio.com/chats/"+this.roomID);
-  this.messages       = $firebase(chatRef).$asArray();
+  this.messagesSync   = $firebase(chatRef)
+  this.messages       = this.messagesSync.$asArray();
 
   var contactRef      = new Firebase("https://kinected.firebaseio.com/online");
   this.onlineRef      = $firebase(contactRef);
@@ -39,13 +40,24 @@ function ChatsController($scope, $attrs, $firebase, $timeout) {
 
 
   // Callback when a message is added
-  this.messages.$watch(function() {
+  this.messages.$watch(function(e) {
+    var last_message = chat.messages[chat.messages.length-1];
+
     // Wait a few milliseconds for the DOM to update
     $timeout(function() {
       $(".chat-contents").scrollTop($(".chat-contents")[0].scrollHeight);  
     }, 50);
+
+    // Mark the message as read IF I'm the recipient
+    if (last_message.receiver == chat.sender) {
+      chat.messagesSync.$update(e.key, {read: true});
+    }
   });
 }
+
+ChatsController.prototype.markAsRead = function() {
+
+};
 
 ChatsController.prototype.pushMessage = function() {
   // Don't do anything on blank inputs
@@ -54,6 +66,7 @@ ChatsController.prototype.pushMessage = function() {
       sender:     this.sender,
       receiver:   this.receiver,
       message:    this.current_input,
+      read:       false,
       created_at: Firebase.ServerValue.TIMESTAMP
     });
     // Clear the input
