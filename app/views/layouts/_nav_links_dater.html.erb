@@ -6,7 +6,7 @@
 </li>
 <li class="<%= "selected" if current_page?(controller: 'messages', action: 'index') %>">
   <%= link_to messages_path, id: "#{"mobile-" if mobile}sidebar-messages-link" do %>
-    <% if unread_messages? %>
+    <% if true %>
       <span class="unread"></span>
     <% end %>
     <span class="nav-text-link">Messages</span><%= fa_icon "paper-plane" %>

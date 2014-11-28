@@ -37,21 +37,23 @@ html, body {
     // box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
 
     li.selected {
-      background: rgba(0,0,0,0.2);
+      background: rgba(0,0,0,0.1);
+
+      &::before {
+        content: "";
+        float: left;
+        
+        margin-left: -8px;
+        height: 39px;
+        width: 8px;
+        background: $green;
+      }
     }
 
     a {
       position: relative;
     }
 
-    span.unread {
-      position: absolute;
-      top: 0;
-      left: -8px;
-      height: 39px;
-      width: 8px;
-      background: $green;
-    }
     header {
       margin: 0;
       font-family: 'Raleway';
@@ -327,7 +329,7 @@ li {
   padding: 0 0.5rem;
 }
 
-.alert {
+.flash {
   position: fixed;
   min-height: 54px;
   top: 0;
@@ -341,8 +343,31 @@ li {
   color: #FFF;
   text-align: center;
 
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    &.notice {
+      background-color: shade($green, 5%);
+      border-bottom: 3px solid shade($green, 40%);
+    }
+
+    &.alert {
+      background-color: shade($red, 15%);
+      border-bottom: 3px solid shade($red, 50%);
+    }
+  }
+
+  .message {
+    position: relative;
+    z-index: 1;
+  }
   .close {
     position: absolute;
+    z-index: 2;
     height: 100%;
     top: 0;
     right: 0;
@@ -353,18 +378,16 @@ li {
       background: rgba(0,0,0,0.2);
     }
   }
+  &.notice {
+    text-shadow: 1px 1px 0px shade($green, 15%);
+  }
+  &.alert {
+    background-color: shade($red, 15%);
+    text-shadow: 1px 1px 0px shade($red, 25%);
+  }
 }
 
-.alert-success {
-  background: shade($green, 5%);
-  border-bottom: 1px solid shade($green, 40%);
-  text-shadow: 1px 1px 0px shade($green, 15%);
-}
-.alert-danger {
-  background: shade($red, 15%);
-  border-bottom: 1px solid shade($red, 50%);
-  text-shadow: 1px 1px 0px shade($red, 25%);
-}
+
 
 .tooltip {
   font-size: 0.7em;

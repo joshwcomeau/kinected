@@ -55,9 +55,6 @@ function ChatsController($scope, $attrs, $firebase, $timeout) {
   });
 }
 
-ChatsController.prototype.markAsRead = function() {
-
-};
 
 ChatsController.prototype.pushMessage = function() {
   // Don't do anything on blank inputs

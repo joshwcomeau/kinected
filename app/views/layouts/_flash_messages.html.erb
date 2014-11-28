@@ -1,17 +1,13 @@
-<div ng-controller="FlashNoticesController as flash">
-  
-  <% if notice && !notice.blank? %>
-    <div class="alert alert-success" ng-show="flash.notice">
-      <div class="close" ng-click="flash.notice = false"><%= fa_icon "close" %></div>
-      <%= notice %>
-    </div>
-    <div class="alert-spacer" size-spacer-by-alert alert=".alert-success" ng-show="flash.notice"></div>
-  <% end %>
-  <% if alert && !alert.blank? %>
-    <div class="alert alert-danger" ng-show="flash.danger">
-      <div class="close" ng-click="flash.danger = false"><%= fa_icon "close" %></div>
-      <%= alert %>
-    </div>
-    <div class="alert-spacer" size-spacer-by-alert alert=".alert-danger" ng-show="flash.danger"></div>
-  <% end %>
+<div ng-controller="FlashNoticesController as flash" ng-cloak>
+  <div class="flash" ng-show="flash.show">
+    <div class="close" ng-click="flash.show = false"><%= fa_icon "close" %></div>
+    <div class="message">{{flash.message}}</div>
+    <div class="background notice" ng-show="flash.show === 'notice'"></div>
+    <div class="background alert" ng-show="flash.show === 'alert'"></div>
+  </div>
+  <div class="flash-spacer" size-spacer-by-flash></div>
 </div>
+
+<script type="text/javascript">
+  <%= render partial: 'layouts/flash_messages_factory.js.erb' %>  
+</script>
