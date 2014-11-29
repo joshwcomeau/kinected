@@ -1,7 +1,0 @@
-document.addEventListener("DOMContentLoaded", function(event) { 
-  var app = angular.module('kinected');
-
-  app.factory('FlashMessages', function(){
-    return <%= flash.to_json.html_safe %>;
-  });
-});
